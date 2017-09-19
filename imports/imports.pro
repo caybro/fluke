@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS = TaskManager Session
+SUBDIRS = TaskManager Session Power

@@ -29,11 +29,10 @@ Pane {
         // TODO keyboard switcher
         // TODO network/wifi
         // TODO sound
-        // TODO power
 
-        Indicators.DateTime {
-            id: indicatorDateTime
-        }
+        Indicators.Power {}
+
+        Indicators.DateTime {}
 
         Indicators.Session {
             onLogout: panel.logout()

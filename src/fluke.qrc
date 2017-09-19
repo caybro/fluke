@@ -11,5 +11,6 @@
         <file>qml/Indicators/DateTime.qml</file>
         <file>qml/Indicators/Session.qml</file>
         <file>fonts/FontAwesome.otf</file>
+        <file>qml/Indicators/Power.qml</file>
     </qresource>
 </RCC>
