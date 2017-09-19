@@ -1,0 +1,3 @@
+module org.fluke.TaskManager
+plugin taskmanagerplugin
+classname TaskManagerPlugin
