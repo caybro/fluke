@@ -7,7 +7,8 @@ SOURCES += main.cpp
 
 OTHER_FILES = \
     qml/* \
-    images/background.jpg \
+    qml/Indicators/*.qml \
+    images/background.jpg
 
 RESOURCES += fluke.qrc
 
