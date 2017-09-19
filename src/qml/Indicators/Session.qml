@@ -6,8 +6,9 @@ import org.fluke.Session 1.0
 
 ToolButton {
     id: indicatorSession
+    font.pointSize: 14
     hoverEnabled: true
-    text: "\uf013"
+    text: Platform.chassis == "laptop" ? "\uf109" : "\uf108"
 
     ToolTip.text: qsTr("Session")
     ToolTip.visible: hovered && (!popupLoader.item || !popupLoader.item.visible)
