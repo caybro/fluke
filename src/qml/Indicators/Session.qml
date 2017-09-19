@@ -38,7 +38,7 @@ ToolButton {
             }
 
             MenuItem {
-                text: "\uf021\t" + qsTr("Reboot")
+                text: "\uf021\t" + qsTr("Restart")
                 onClicked: indicatorSession.reboot()
                 enabled: Session.canReboot()
             }

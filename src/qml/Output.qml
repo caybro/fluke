@@ -32,22 +32,26 @@ WaylandOutput {
         header: Panel  {
             id: panel
             onLogout: {
+                systemDialog.title = qsTr("Log Out");
                 systemDialog.text = qsTr("Do you really want to logout?");
                 systemDialog.acceptedFunctionCallback = function() { Qt.quit() }
                 systemDialog.open();
             }
             onSuspend: {
-                systemDialog.text = qsTr("Do you really want to suspend?");
+                systemDialog.title = qsTr("Suspend");
+                systemDialog.text = qsTr("Do you really want to suspend the computer?");
                 systemDialog.acceptedFunctionCallback = function() { Session.suspend() }
                 systemDialog.open();
             }
             onReboot: {
-                systemDialog.text = qsTr("Do you really want to reboot?");
+                systemDialog.title = qsTr("Restart");
+                systemDialog.text = qsTr("Do you really want to restart the computer?");
                 systemDialog.acceptedFunctionCallback = function() { Session.reboot() }
                 systemDialog.open();
             }
             onShutdown: {
-                systemDialog.text = qsTr("Do you really want to suspend?");
+                systemDialog.title = qsTr("Shutdown");
+                systemDialog.text = qsTr("Do you really want to turn off the computer?");
                 systemDialog.acceptedFunctionCallback = function() { Session.shutdown() }
                 systemDialog.open();
             }
@@ -106,7 +110,6 @@ WaylandOutput {
 
         Dialog {
             id: systemDialog
-            title: qsTr("Log Out")
             x: (parent.width - width) / 2
             y: (parent.height - height) / 2
             modal: true
