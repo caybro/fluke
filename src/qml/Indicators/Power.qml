@@ -6,19 +6,10 @@ import org.fluke.Power 1.0
 
 ToolButton {
     id: indicatorPower
-    font.pointSize: 12
-    hoverEnabled: true
     text: indicatorCaption()
 
     ToolTip.text: indicatorTooltip()
-    ToolTip.visible: Power.isPresent && hovered /*&& (!popupLoader.item || !popupLoader.item.visible)*/
-
-//    Connections {
-//        target: Power
-//        onPercentageChanged: {
-//            indicatorPower.text = indicatorCaption();
-//        }
-//    }
+    ToolTip.visible: Power.isPresent && hovered && !popup.visible
 
     function indicatorCaption() {
         if (!Power.isPresent) {
@@ -54,49 +45,40 @@ ToolButton {
         return qsTr("Battery not charging or discharging");
     }
 
-//    Loader {
-//        id: popupLoader
-//        active: false
-//        focus: visible
-//        y: parent.height
+    Popup {
+        id: popup
+        focus: visible
+        x: parent.width - implicitWidth
+        y: parent.height
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
-//        sourceComponent: Menu {
-//            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+        ColumnLayout {
+            anchors.fill: parent
+            RowLayout {
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-//            MenuItem {
-//                text: "\uf137\t" + qsTr("Logout")
-//                onClicked: indicatorSession.logout()
-//            }
+                ToolButton {
+                    text: "\uf185"
+                    onClicked: brightnessSlider.value = 0
+                }
 
-//            MenuItem {
-//                text: "\uf236\t" + qsTr("Sleep")
-//                onClicked: indicatorSession.suspend()
-//                enabled: Session.canSuspend()
-//            }
+                Slider {
+                    Layout.fillWidth: true
+                    id: brightnessSlider
+                    value: 0.8
+                    stepSize: 0.1
+                    ToolTip.visible: hovered
+                    ToolTip.text: "%1%".arg(Math.round(value * 100))
+                }
+            }
+        }
+    }
 
-//            MenuItem {
-//                text: "\uf021\t" + qsTr("Reboot")
-//                onClicked: indicatorSession.reboot()
-//                enabled: Session.canReboot()
-//            }
-
-//            MenuItem {
-//                text: "\uf011\t" + qsTr("Shutdown")
-//                onClicked: indicatorSession.shutdown()
-//                enabled: Session.canShutdown()
-//            }
-//        }
-//    }
-
-//    onClicked: {
-//        if (!popupLoader.item) {
-//            popupLoader.active = true;
-//        }
-
-//        if (popupLoader.item.visible) {
-//            popupLoader.item.close();
-//        } else {
-//            popupLoader.item.open();
-//        }
-//    }
+    onClicked: {
+        if (popup.visible)
+            popup.close()
+        else
+            popup.open()
+    }
 }

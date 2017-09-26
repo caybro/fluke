@@ -6,7 +6,6 @@ import QtQuick.Controls.Material 2.2
 
 ToolButton {
     id: indicatorDateTime
-    font.pointSize: 12
 
     Timer {
         id: timer

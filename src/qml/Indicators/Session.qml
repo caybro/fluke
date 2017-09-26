@@ -7,7 +7,6 @@ import org.fluke.Session 1.0
 ToolButton {
     id: indicatorSession
     font.pointSize: 14
-    hoverEnabled: true
     text: Platform.chassis == "laptop" ? "\uf109" : "\uf108"
 
     ToolTip.text: qsTr("Session")
@@ -33,7 +32,7 @@ ToolButton {
             }
 
             MenuItem {
-                text: "\uf236\t" + qsTr("Sleep")
+                text: "\uf186\t" + qsTr("Sleep")
                 onClicked: indicatorSession.suspend()
                 enabled: Session.canSuspend()
             }
