@@ -17,6 +17,8 @@ Pane {
     signal reboot()
     signal shutdown()
 
+    readonly property var soundIndicator: soundIndicatorLoader.item ? soundIndicatorLoader.item : null
+
     RowLayout {
         id: layout
         anchors.fill: parent
@@ -32,6 +34,7 @@ Pane {
         // TODO network/wifi
 
         Loader {
+            id: soundIndicatorLoader
             active: Sound.available
             sourceComponent: Indicators.Sound {}
         }

@@ -103,9 +103,26 @@ WaylandOutput {
             sequence: "Ctrl+Alt+T"
             context: Qt.ApplicationShortcut
             onActivated: {
-                console.info("!!! terminal");
                 Runner.runCommand("konsole");
             }
+        }
+
+        Shortcut {
+            sequence: Qt.Key_VolumeMute
+            context: Qt.ApplicationShortcut
+            onActivated: panel.soundIndicator ? panel.soundIndicator.toggleMute() : undefined
+        }
+
+        Shortcut {
+            sequence: Qt.Key_VolumeUp
+            context: Qt.ApplicationShortcut
+            onActivated: panel.soundIndicator ? panel.soundIndicator.increaseVolume() : undefined
+        }
+
+        Shortcut {
+            sequence: Qt.Key_VolumeDown
+            context: Qt.ApplicationShortcut
+            onActivated: panel.soundIndicator ? panel.soundIndicator.decreaseVolume() : undefined
         }
 
         Dialog {
