@@ -32,6 +32,30 @@ ToolButton {
         }
     }
 
+    function toggleMute() {
+        Sound.muted = !Sound.muted;
+    }
+
+    function increaseVolume() {
+        Sound.volume = Math.min(Sound.volume + 1, 100);
+    }
+
+    function decreaseVolume() {
+        Sound.volume = Math.max(Sound.volume - 1, 0);
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.MiddleButton
+        onClicked: {
+            toggleMute();
+        }
+        onWheel: {
+            wheel.angleDelta.y > 0 ? increaseVolume() : decreaseVolume();
+            wheel.accepted = true;
+        }
+    }
+
     Popup {
         id: popup
         focus: visible
@@ -49,7 +73,7 @@ ToolButton {
                     text: "<font color='#F44336'>\uf026</font>"
                     checkable: true
                     checked: Sound.muted
-                    onToggled: Sound.muted = !Sound.muted
+                    onToggled: toggleMute()
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("Toggle mute")
                 }

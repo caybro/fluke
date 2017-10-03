@@ -5,6 +5,8 @@ import QtQuick.Controls.Material 2.2
 
 import "Indicators" as Indicators
 
+import org.fluke.Sound 1.0
+
 Pane {
     id: panel
     implicitHeight: contentHeight
@@ -29,7 +31,10 @@ Pane {
         // TODO keyboard switcher
         // TODO network/wifi
 
-        Indicators.Sound {}
+        Loader {
+            active: Sound.available
+            sourceComponent: Indicators.Sound {}
+        }
 
         Indicators.Power {}
 
