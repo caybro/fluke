@@ -39,6 +39,7 @@ WaylandCompositor {
     XdgShellV5 {
         onXdgSurfaceCreated: {
             console.info("Xdg5 shell surface created:", xdgSurface)
+            console.info("Window type:", xdgSurface.windowType)
             var item = chromeComponent.createObject(defaultOutput.surfaceArea, { "shellSurface": xdgSurface,
                                                         "workspace": defaultOutput.surfaceArea, "focus": true } );
             viewsBySurface[xdgSurface.surface] = item;

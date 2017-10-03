@@ -47,7 +47,7 @@ ShellSurfaceItem {
         onAppIdChanged: {
             if (!priv.className) {
                 priv.className = shellSurface.appId;
-                console.info("!!! Got app id:", priv.className)
+                console.info("!!! Assigned app id:", priv.className)
             }
         }
         onSetMaximized: {

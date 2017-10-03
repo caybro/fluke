@@ -28,7 +28,8 @@ Pane {
 
         // TODO keyboard switcher
         // TODO network/wifi
-        // TODO sound
+
+        Indicators.Sound {}
 
         Indicators.Power {}
 
