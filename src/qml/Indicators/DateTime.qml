@@ -6,6 +6,7 @@ import QtQuick.Controls.Material 2.2
 
 ToolButton {
     id: indicatorDateTime
+    font.weight: Font.DemiBold
 
     Timer {
         id: timer
@@ -24,7 +25,7 @@ ToolButton {
         id: popup
         focus: visible
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-        x: parent.width - implicitWidth
+        x: (parent.width - implicitWidth) / 2
         y: parent.height
 
         Column {

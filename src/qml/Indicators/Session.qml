@@ -1,12 +1,15 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtQuick.Window 2.2
+import QtQuick.Controls.Material 2.2
 
 import org.fluke.Session 1.0
 
 ToolButton {
     id: indicatorSession
     font.pointSize: 14
+    font.weight: Font.DemiBold
     text: Platform.chassis == "laptop" ? "\uf109" : "\uf108"
 
     ToolTip.text: qsTr("Session")
@@ -25,6 +28,17 @@ ToolButton {
 
         sourceComponent: Menu {
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+
+            MenuItem {
+                checkable: true
+                checked: window.Material.theme === Material.Dark
+                onToggled: {
+                    window.Material.theme = checked ? Material.Dark : Material.Light
+                }
+                text: qsTr("Dark Theme")
+            }
+
+            MenuSeparator {}
 
             MenuItem {
                 text: "\uf08b\t" + qsTr("Logout")

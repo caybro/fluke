@@ -20,34 +20,37 @@ Pane {
     readonly property var soundIndicator: soundIndicatorLoader.item ? soundIndicatorLoader.item : null
 
     RowLayout {
-        id: layout
         anchors.fill: parent
         anchors.leftMargin: 5
         anchors.rightMargin: 5
 
-        Item {
-            id: spacer
-            Layout.fillWidth: true
+        Indicators.DateTime {
+            anchors.centerIn: parent
         }
 
-        // TODO keyboard switcher
-        // TODO network/wifi
+        RowLayout {
+            id: rightSection
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
 
-        Loader {
-            id: soundIndicatorLoader
-            active: Sound.available
-            sourceComponent: Indicators.Sound {}
-        }
+            // TODO keyboard switcher
+            // TODO network/wifi
 
-        Indicators.Power {}
+            Loader {
+                id: soundIndicatorLoader
+                active: Sound.available
+                sourceComponent: Indicators.Sound {}
+            }
 
-        Indicators.DateTime {}
+            Indicators.Power {}
 
-        Indicators.Session {
-            onLogout: panel.logout()
-            onSuspend: panel.suspend()
-            onReboot: panel.reboot()
-            onShutdown: panel.shutdown()
+            Indicators.Session {
+                onLogout: panel.logout()
+                onSuspend: panel.suspend()
+                onReboot: panel.reboot()
+                onShutdown: panel.shutdown()
+            }
         }
     }
 }

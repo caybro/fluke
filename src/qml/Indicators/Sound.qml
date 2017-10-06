@@ -7,6 +7,7 @@ import org.fluke.Sound 1.0
 ToolButton {
     id: indicatorSound
     text: indicatorCaption()
+    font.weight: Font.DemiBold
     font.pointSize: 14
 
     ToolTip.text: indicatorTooltip()

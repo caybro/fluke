@@ -6,6 +6,8 @@ import org.fluke.Power 1.0
 
 ToolButton {
     id: indicatorPower
+    font.weight: Font.DemiBold
+
     text: indicatorCaption()
 
     ToolTip.text: indicatorTooltip()

@@ -46,6 +46,7 @@ WaylandCompositor {
         }
         onXdgPopupCreated: {
             console.info("Xdg5 popup surface created:", xdgPopup)
+            console.info("Popup type:", xdgPopup.windowType)
             var parentView = viewsBySurface[xdgPopup.parentSurface];
             var item = chromeComponent.createObject(parentView, { "shellSurface": xdgPopup,
                                                         "workspace": defaultOutput.surfaceArea } );

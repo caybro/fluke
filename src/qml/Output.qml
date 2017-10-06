@@ -31,6 +31,7 @@ WaylandOutput {
 
         header: Panel  {
             id: panel
+            opacity: 0.8
             onLogout: {
                 systemDialog.title = qsTr("Log Out");
                 systemDialog.text = qsTr("Do you really want to logout?");
@@ -65,7 +66,7 @@ WaylandOutput {
         WaylandMouseTracker {
             id: mouseTracker
             anchors.fill: parent
-            z: 1000
+            z: output.window.overlay.z + 1
 
             Item {
                 id: workspace
