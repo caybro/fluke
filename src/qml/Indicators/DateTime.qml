@@ -50,8 +50,9 @@ ToolButton {
                     Layout.fillWidth: true
                     text: "\uf073 " + calendar.title
                     onClicked: {
-                        calendar.month = new Date().getMonth()
-                        calendar.year = new Date().getFullYear()
+                        var today = new Date();
+                        calendar.month = today.getMonth()
+                        calendar.year = today.getFullYear()
                     }
                     font.pointSize: 10
                     ToolTip.visible: hovered
