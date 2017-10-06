@@ -107,7 +107,7 @@ ToolButton {
                         verticalAlignment: Text.AlignVCenter
                         opacity: model.month === calendar.month ? 1 : 0.3
                         text: model.day
-                        font.bold: model.today
+                        font.bold: model.date.getDay() == 6 || model.date.getDay() == 0
                         color: model.today ? Material.accent : Material.foreground
                     }
                 }
