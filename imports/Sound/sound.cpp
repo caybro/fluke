@@ -53,15 +53,17 @@ void Sound::init()
 {
     try {
         m_pulse = new Pulseaudio("fluke");
-        m_available = true;
-        Q_EMIT availableChanged(true);
     }
     catch (const char* message) {
         qWarning() << qUtf8Printable(message);
+        return;
     }
     catch (const std::exception& e) {
         qWarning() << e.what();
+        return;
     }
+    m_available = true;
+    Q_EMIT availableChanged(true);
 }
 
 Device Sound::get_selected_device(bool source) const
