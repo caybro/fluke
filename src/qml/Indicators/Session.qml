@@ -27,7 +27,7 @@ ToolButton {
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
             MenuItem {
-                text: "\uf137\t" + qsTr("Logout")
+                text: "\uf08b\t" + qsTr("Logout")
                 onClicked: indicatorSession.logout()
             }
 
