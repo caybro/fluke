@@ -5,5 +5,5 @@ Pane {
     id: dock
     width: parent.width * 0.85
     implicitHeight: contentHeight
-    opacity: 0.75
+    opacity: 0.9
 }

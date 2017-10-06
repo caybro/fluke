@@ -18,9 +18,8 @@ WaylandOutput {
         height: 768 // Qt.application.screens[0].height
         visible: true
 
-        // TODO make configurable
         Material.theme: Material.Dark
-        Material.accent: Material.Blue
+        Material.accent: Material.Cyan
 
         background: Image {
             id: background
@@ -31,7 +30,7 @@ WaylandOutput {
 
         header: Panel  {
             id: panel
-            opacity: 0.8
+            opacity: 0.9
             onLogout: {
                 systemDialog.title = qsTr("Log Out");
                 systemDialog.text = qsTr("Do you really want to logout?");
