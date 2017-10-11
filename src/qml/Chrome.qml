@@ -13,7 +13,7 @@ ShellSurfaceItem {
 //    }
 
     Component.onCompleted: {
-        takeFocus(compositor.defaultSeat);
+        takeFocus();
         raise();
     }
 

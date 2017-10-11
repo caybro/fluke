@@ -7,10 +7,11 @@ import "Indicators" as Indicators
 
 import org.fluke.Sound 1.0
 
-Pane {
+Rectangle {
     id: panel
-    implicitHeight: contentHeight
-    padding: 0
+    opacity: 0.9
+    implicitHeight: layout.childrenRect.height
+    color: Material.background
 
     signal logout()
     signal suspend()
@@ -20,6 +21,7 @@ Pane {
     readonly property var soundIndicator: soundIndicatorLoader.item ? soundIndicatorLoader.item : null
 
     RowLayout {
+        id: layout
         anchors.fill: parent
         anchors.leftMargin: 5
         anchors.rightMargin: 5
@@ -31,8 +33,7 @@ Pane {
         RowLayout {
             id: rightSection
             anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            anchors.verticalCenter: parent.verticalCenter
 
             // TODO keyboard switcher
             // TODO network/wifi

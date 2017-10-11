@@ -22,60 +22,73 @@ WaylandOutput {
         Material.accent: Material.Cyan
 
         background: Image {
-            id: background
             fillMode: Image.Tile
             asynchronous: true
             source: "qrc:/images/background.jpg"
         }
 
-        header: Panel  {
-            id: panel
-            opacity: 0.9
-            onLogout: {
-                systemDialog.title = qsTr("Log Out");
-                systemDialog.text = qsTr("Do you really want to logout?");
-                systemDialog.acceptedFunctionCallback = function() { Qt.quit() }
-                systemDialog.open();
+        onActiveChanged: {
+            if (!active) {
+                console.warn("Lost focus!!!")
+            } else {
+                console.info("Got focus");
             }
-            onSuspend: {
-                systemDialog.title = qsTr("Suspend");
-                systemDialog.text = qsTr("Do you really want to suspend the computer?");
-                systemDialog.acceptedFunctionCallback = function() { Session.suspend() }
-                systemDialog.open();
-            }
-            onReboot: {
-                systemDialog.title = qsTr("Restart");
-                systemDialog.text = qsTr("Do you really want to restart the computer?");
-                systemDialog.acceptedFunctionCallback = function() { Session.reboot() }
-                systemDialog.open();
-            }
-            onShutdown: {
-                systemDialog.title = qsTr("Shutdown");
-                systemDialog.text = qsTr("Do you really want to turn off the computer?");
-                systemDialog.acceptedFunctionCallback = function() { Session.shutdown() }
-                systemDialog.open();
-            }
-        }
-
-        footer: Dock {
-            id: dock
-            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         WaylandMouseTracker {
             id: mouseTracker
             anchors.fill: parent
-            z: output.window.overlay.z + 1
+            windowSystemCursorEnabled: false
+
+            Panel  {
+                id: panel
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                onLogout: {
+                    systemDialog.title = qsTr("Log Out");
+                    systemDialog.text = qsTr("Do you really want to logout?");
+                    systemDialog.acceptedFunctionCallback = function() { Qt.quit() }
+                    systemDialog.open();
+                }
+                onSuspend: {
+                    systemDialog.title = qsTr("Suspend");
+                    systemDialog.text = qsTr("Do you really want to suspend the computer?");
+                    systemDialog.acceptedFunctionCallback = function() { Session.suspend() }
+                    systemDialog.open();
+                }
+                onReboot: {
+                    systemDialog.title = qsTr("Restart");
+                    systemDialog.text = qsTr("Do you really want to restart the computer?");
+                    systemDialog.acceptedFunctionCallback = function() { Session.reboot() }
+                    systemDialog.open();
+                }
+                onShutdown: {
+                    systemDialog.title = qsTr("Shutdown");
+                    systemDialog.text = qsTr("Do you really want to turn off the computer?");
+                    systemDialog.acceptedFunctionCallback = function() { Session.shutdown() }
+                    systemDialog.open();
+                }
+            }
 
             Item {
                 id: workspace
-                anchors.fill: parent
+                anchors.top: panel.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: dock.top
             }
 
-            Loader {
-                anchors.fill: parent
-                source: "Keyboard.qml"
+            Dock {
+                id: dock
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
             }
+
+//            Loader {
+//                anchors.fill: parent
+//                source: "Keyboard.qml"
+//            }
 
             WaylandCursorItem {
                 id: cursor

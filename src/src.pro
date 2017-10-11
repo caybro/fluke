@@ -2,6 +2,7 @@ TEMPLATE = app
 TARGET = fluke
 
 QT += gui qml waylandcompositor
+CONFIG += qtquickcompiler
 
 SOURCES += main.cpp
 

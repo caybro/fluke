@@ -49,13 +49,12 @@ ToolButton {
 
                 ToolButton {
                     Layout.fillWidth: true
-                    text: "\uf073 " + calendar.title
+                    text: calendar.title
                     onClicked: {
                         var today = new Date();
                         calendar.month = today.getMonth()
                         calendar.year = today.getFullYear()
                     }
-                    font.pointSize: 10
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("Go to today's date")
                 }
