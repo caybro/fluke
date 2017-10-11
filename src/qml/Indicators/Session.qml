@@ -10,7 +10,11 @@ ToolButton {
     id: indicatorSession
     font.pointSize: 14
     font.weight: Font.DemiBold
-    text: Platform.chassis == "laptop" ? "\uf109" : "\uf108"
+    text: "\uf013"
+
+    Component.onCompleted: {
+        indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
+    }
 
     ToolTip.text: qsTr("Session")
     ToolTip.visible: hovered && (!popupLoader.item || !popupLoader.item.visible)
@@ -28,6 +32,15 @@ ToolButton {
 
         sourceComponent: Menu {
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+
+            MenuItem {
+                checkable: true
+                checked: window.visibility == Window.FullScreen
+                onToggled: {
+                    window.visibility = checked ? Window.FullScreen : Window.Windowed
+                }
+                text: qsTr("Fullscreen")
+            }
 
             MenuItem {
                 checkable: true
