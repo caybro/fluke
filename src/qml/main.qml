@@ -1,19 +1,20 @@
 import QtQuick 2.9
+import QtQml 2.2
 import QtWayland.Compositor 1.0
 
 WaylandCompositor {
     id: comp
     useHardwareIntegrationExtension: true
 
-    property var viewsBySurface: ({})
-
-    onSurfaceAboutToBeDestroyed: {
-        delete viewsBySurface[surface];
-        //defaultSeat.setKeyboardFocus(Object.keys(viewsBySurface)[0])
-    }
-
-    Output {
-        compositor: comp
+    Instantiator {
+        id: screens
+        model: Qt.application.screens
+        delegate: Output {
+            compositor: comp
+            screen: modelData
+            Component.onCompleted: if (!comp.defaultOutput) comp.defaultOutput = this
+            position: Qt.point(virtualX, virtualY)
+        }
     }
 
     Component {
@@ -22,8 +23,12 @@ WaylandCompositor {
     }
 
     Component {
-        id: surfaceComponent
-        WaylandSurface {}
+        id: moveItemComponent
+        Item {}
+    }
+
+    Item {
+        id: rootItem
     }
 
     QtWindowManager {
@@ -33,42 +38,41 @@ WaylandCompositor {
     }
 
     WlShell {
-        onWlShellSurfaceCreated: {
-            console.info("Wl shell surface created:", shellSurface)
-            var item = chromeComponent.createObject(defaultOutput.surfaceArea, { "shellSurface": shellSurface,
-                                                        "workspace": defaultOutput.surfaceArea } );
-            viewsBySurface[shellSurface.surface] = item;
-        }
+        onWlShellSurfaceCreated: handleShellSurfaceCreated(shellSurface)
     }
 
     XdgShellV5 {
-        onXdgSurfaceCreated: {
-            console.info("Xdg5 shell surface created:", xdgSurface)
-            console.info("Window type:", xdgSurface.windowType)
-            var item = chromeComponent.createObject(defaultOutput.surfaceArea, { "shellSurface": xdgSurface,
-                                                        "workspace": defaultOutput.surfaceArea, "focus": true } );
-            viewsBySurface[xdgSurface.surface] = item;
-        }
-        onXdgPopupCreated: {
-            console.info("Xdg5 popup surface created:", xdgPopup)
-            console.info("Popup type:", xdgPopup.windowType)
-            var parentView = viewsBySurface[xdgPopup.parentSurface];
-            var item = chromeComponent.createObject(parentView, { "shellSurface": xdgPopup,
-                                                        "workspace": defaultOutput.surfaceArea } );
-            viewsBySurface[xdgPopup.surface] = item;
-        }
+        onXdgSurfaceCreated: handleShellSurfaceCreated(xdgSurface)
+        onXdgPopupCreated: handleShellSurfaceCreated(xdgPopup)
     }
 
     TextInputManager {}
 
-    onSurfaceRequested: {
-        var surface = surfaceComponent.createObject(comp, {} );
-        surface.initialize(comp, client, id, version);
+    function createShellSurfaceItem(shellSurface, moveItem, output) {
+        var parentSurfaceItem = output.viewsBySurface[shellSurface.parentSurface];
+        var parent = parentSurfaceItem || output.surfaceArea;
+        var item = chromeComponent.createObject(parent, {
+            "shellSurface": shellSurface,
+            //"moveItem": moveItem, // FIXME
+            "output": output,
+            "workspace": output.surfaceArea
+        });
+        if (parentSurfaceItem) {
+            item.x += output.position.x;
+            item.y += output.position.y;
+        }
+        output.viewsBySurface[shellSurface.surface] = item;
     }
 
-    Component.onCompleted: {
-        // TODO make the keymap configurable
-        defaultSeat.keymap.layout = "cz";
-        defaultSeat.keymap.variant = "qwerty";
+    function handleShellSurfaceCreated(shellSurface) {
+        var moveItem = moveItemComponent.createObject(rootItem, {
+            "x": screens.objectAt(0).position.x,
+            "y": screens.objectAt(0).position.y,
+            "width": Qt.binding(function() { return shellSurface.surface.width; }),
+            "height": Qt.binding(function() { return shellSurface.surface.height; })
+        });
+        for (var i = 0; i < screens.count; ++i) {
+            createShellSurfaceItem(shellSurface, moveItem, screens.objectAt(i));
+        }
     }
 }

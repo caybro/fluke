@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import QtQuick.Window 2.2
+import QtQuick.Window 2.3
 import QtWayland.Compositor 1.0
 import QtQuick.Controls.Material 2.2
 
@@ -11,9 +11,27 @@ WaylandOutput {
     id: output
     sizeFollowsWindow: true
 
+    property alias screen: win.screen
     readonly property alias surfaceArea: workspace
+    property var viewsBySurface: ({})
+
+    Component.onCompleted: {
+        compositor.defaultSeat.keymap.layout = "cz";
+        compositor.defaultSeat.keymap.variant = "qwerty";
+    }
+
+    readonly property Connections _conn: Connections {
+        target: compositor
+        onSurfaceAboutToBeDestroyed: {
+            delete viewsBySurface[surface];
+            //compositor.defaultSeat.setKeyboardFocus(Object.keys(viewsBySurface)[0])
+        }
+    }
 
     window: ApplicationWindow {
+        id: win
+        x: Screen.virtualX
+        y: Screen.virtualY
         width: 1024 // Qt.application.screens[0].width
         height: 768 // Qt.application.screens[0].height
         visible: true
@@ -97,7 +115,7 @@ WaylandOutput {
                 y: mouseTracker.mouseY
 
                 seat: output.compositor.defaultSeat
-                visible: true
+                visible: mouseTracker.containsMouse
             }
         }
 

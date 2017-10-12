@@ -52,9 +52,8 @@ ShellSurfaceItem {
         }
         onSetMaximized: {
             console.info("Set maximized to:", rootChrome.workspace)
-            // TODO enable the maximizeAnimation after having a custom window decoration and handling the events manually
-//            rootChrome.bufferLocked = true;
-//            maximizeAnimation.start();
+            rootChrome.bufferLocked = true;
+            maximizeAnimation.start();
         }
         onUnsetMaximized: {
             // TODO
