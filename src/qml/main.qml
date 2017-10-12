@@ -8,16 +8,8 @@ WaylandCompositor {
     property var viewsBySurface: ({})
 
     onSurfaceAboutToBeDestroyed: {
-        console.info("Surface", surface, "about to be destroyed")
-        console.info("Before:", Object.keys(viewsBySurface));
         delete viewsBySurface[surface];
         //defaultSeat.setKeyboardFocus(Object.keys(viewsBySurface)[0])
-        console.info("AFTER:")
-        Object.keys(viewsBySurface).forEach(function(key) {
-            // `prop` is the property name
-            // `data[prop]` is the property value
-            console.info("surface:", key, ", view:", viewsBySurface[key]);
-        });
     }
 
     Output {
