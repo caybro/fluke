@@ -47,17 +47,16 @@ ShellSurfaceItem {
         onAppIdChanged: {
             if (!priv.className) {
                 priv.className = shellSurface.appId;
-                console.info("!!! Assigned app id:", priv.className)
+                console.info("!!! Assigned app id:", priv.className, ", PID:", priv.pid)
             }
         }
         onSetMaximized: {
-            console.info("Set maximized to:", rootChrome.workspace)
             rootChrome.bufferLocked = true;
             maximizeAnimation.start();
         }
         onUnsetMaximized: {
-            // TODO
-            console.info("Set unmaximized to:", shellSurface.windowGeometry)
+            rootChrome.bufferLocked = true;
+            unmaximizeAnimation.start();
         }
         onSetMinimized: {
             // TODO implement minimize
@@ -95,6 +94,16 @@ ShellSurfaceItem {
             PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; to: 0 }
             PropertyAnimation { target: rootChrome; property: "width"; duration: 80; to: rootChrome.workspace.width }
             PropertyAnimation { target: rootChrome; property: "height"; duration: 80; to: rootChrome.workspace.height }
+        }
+        ScriptAction { script: { rootChrome.bufferLocked = false; } }
+    }
+
+    SequentialAnimation {
+        id: unmaximizeAnimation
+        ParallelAnimation {
+            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; from: 0 }
+            PropertyAnimation { target: rootChrome; property: "width"; duration: 80; from: rootChrome.workspace.width }
+            PropertyAnimation { target: rootChrome; property: "height"; duration: 80; from: rootChrome.workspace.height }
         }
         ScriptAction { script: { rootChrome.bufferLocked = false; } }
     }
