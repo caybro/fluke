@@ -48,12 +48,11 @@ WaylandCompositor {
 
     TextInputManager {}
 
-    function createShellSurfaceItem(shellSurface, moveItem, output) {
+    function createShellSurfaceItem(shellSurface, output) {
         var parentSurfaceItem = output.viewsBySurface[shellSurface.parentSurface];
         var parent = parentSurfaceItem || output.surfaceArea;
         var item = chromeComponent.createObject(parent, {
             "shellSurface": shellSurface,
-            //"moveItem": moveItem, // FIXME
             "output": output,
             "workspace": output.surfaceArea
         });
@@ -65,14 +64,8 @@ WaylandCompositor {
     }
 
     function handleShellSurfaceCreated(shellSurface) {
-        var moveItem = moveItemComponent.createObject(rootItem, {
-            "x": screens.objectAt(0).position.x,
-            "y": screens.objectAt(0).position.y,
-            "width": Qt.binding(function() { return shellSurface.surface.width; }),
-            "height": Qt.binding(function() { return shellSurface.surface.height; })
-        });
         for (var i = 0; i < screens.count; ++i) {
-            createShellSurfaceItem(shellSurface, moveItem, screens.objectAt(i));
+            createShellSurfaceItem(shellSurface, screens.objectAt(i));
         }
     }
 }
