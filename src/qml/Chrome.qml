@@ -91,7 +91,6 @@ ShellSurfaceItem {
 
     SequentialAnimation {
         id: maximizeAnimation
-
         ParallelAnimation {
             PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; to: 0 }
             PropertyAnimation { target: rootChrome; property: "width"; duration: 80; to: rootChrome.workspace.width }

@@ -24,7 +24,6 @@ WaylandOutput {
         target: compositor
         onSurfaceAboutToBeDestroyed: {
             delete viewsBySurface[surface];
-            //compositor.defaultSeat.setKeyboardFocus(Object.keys(viewsBySurface)[0])
         }
     }
 
@@ -32,8 +31,8 @@ WaylandOutput {
         id: win
         x: Screen.virtualX
         y: Screen.virtualY
-        width: 1024 // Qt.application.screens[0].width
-        height: 768 // Qt.application.screens[0].height
+        width: 1024 // screen.width
+        height: 768 // screen.height
         visible: true
 
         Material.theme: Material.Dark
