@@ -43,18 +43,19 @@ WaylandCompositor {
 
     XdgShellV5 {
         onXdgSurfaceCreated: handleShellSurfaceCreated(xdgSurface)
-        onXdgPopupCreated: handleShellSurfaceCreated(xdgPopup)
+        onXdgPopupCreated: handleShellSurfaceCreated(xdgPopup, true)
     }
 
     TextInputManager {}
 
-    function createShellSurfaceItem(shellSurface, output) {
+    function createShellSurfaceItem(shellSurface, output, isPopup) {
         var parentSurfaceItem = output.viewsBySurface[shellSurface.parentSurface];
         var parent = parentSurfaceItem || output.surfaceArea;
         var item = chromeComponent.createObject(parent, {
             "shellSurface": shellSurface,
             "output": output,
-            "workspace": output.surfaceArea
+            "workspace": output.surfaceArea,
+            "isPopup": isPopup
         });
         if (parentSurfaceItem) {
             item.x += output.position.x;
@@ -63,9 +64,9 @@ WaylandCompositor {
         output.viewsBySurface[shellSurface.surface] = item;
     }
 
-    function handleShellSurfaceCreated(shellSurface) {
+    function handleShellSurfaceCreated(shellSurface, isPopup) {
         for (var i = 0; i < screens.count; ++i) {
-            createShellSurfaceItem(shellSurface, screens.objectAt(i));
+            createShellSurfaceItem(shellSurface, screens.objectAt(i), isPopup);
         }
     }
 }

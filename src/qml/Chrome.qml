@@ -5,12 +5,9 @@ ShellSurfaceItem {
     id: rootChrome
 
     readonly property bool isChild: parent.shellSurface !== undefined
-    property Item workspace
 
-    // TODO window decoration
-//    moveItem: WindowDecoration {
-//        width: rootChrome.width
-//    }
+    property bool isPopup: false
+    property Item workspace
 
     Component.onCompleted: {
         takeFocus();
@@ -24,8 +21,12 @@ ShellSurfaceItem {
     }
 
     onSurfaceDestroyed: {
-        bufferLocked = true;
-        destroyAnimation.start();
+        if (isPopup) {
+            rootChrome.destroy();
+        } else {
+            bufferLocked = true;
+            destroyAnimation.start();
+        }
     }
 
     Connections {
