@@ -28,11 +28,12 @@ ToolButton {
         x: (parent.width - implicitWidth) / 2
         y: parent.height
 
-        Column {
+        ColumnLayout {
             anchors.fill: parent
 
             // calendar navigation
             RowLayout {
+                Layout.fillWidth: true
                 anchors.left: parent.left
                 anchors.right: parent.right
                 spacing: 0
