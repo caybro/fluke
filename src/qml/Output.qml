@@ -27,6 +27,10 @@ WaylandOutput {
         }
     }
 
+    readonly property SystemPalette _pal: SystemPalette {
+        colorGroup: SystemPalette.Active
+    }
+
     window: ApplicationWindow {
         id: win
         x: Screen.virtualX
@@ -36,7 +40,7 @@ WaylandOutput {
         visible: true
 
         Material.theme: Material.Dark
-        Material.accent: Material.Cyan
+        Material.accent: _pal.highlight
 
         background: Image {
             fillMode: Image.Tile
