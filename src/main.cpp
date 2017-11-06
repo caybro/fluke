@@ -4,6 +4,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
+#include <QTranslator>
+#include <QLibraryInfo>
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +23,14 @@ int main(int argc, char *argv[])
     qputenv("QT_WAYLAND_SHELL_INTEGRATION", "xdg-shell-v5");
     qputenv("QT_QPA_PLATFORM", "wayland");
     //qputenv("GDK_BACKEND", "wayland");
+
+    QTranslator qtTranslator;
+    qtTranslator.load(QLocale::system(), QStringLiteral("qt_"), QString(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    app.installTranslator(&qtTranslator);
+
+    QTranslator appTrans;
+    appTrans.load(QStringLiteral(":/translations/fluke_") + QLocale::system().name());
+    app.installTranslator(&appTrans);
 
     QFontDatabase fd;
     if (!fd.families().contains(QLatin1String("FontAwesome"))) {
