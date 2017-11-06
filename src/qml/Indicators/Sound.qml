@@ -108,9 +108,6 @@ ToolButton {
     }
 
     onClicked: {
-        if (popup.visible)
-            popup.close()
-        else
-            popup.open()
+        popup.visible = !popup.visible;
     }
 }
