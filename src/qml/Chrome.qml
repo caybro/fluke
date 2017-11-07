@@ -9,6 +9,8 @@ ShellSurfaceItem {
     property bool isPopup: false
     property Item workspace
 
+    visible: !priv.minimized
+
     Component.onCompleted: {
         takeFocus();
         raise();
@@ -18,6 +20,7 @@ ShellSurfaceItem {
         id: priv
         readonly property int pid: shellSurface.surface.client.processId
         property string className
+        property bool minimized: false
     }
 
     onSurfaceDestroyed: {
@@ -60,8 +63,7 @@ ShellSurfaceItem {
             unmaximizeAnimation.start();
         }
         onSetMinimized: {
-            // TODO implement minimize
-            console.info("Set minimized")
+            priv.minimized = true;
         }
         onShowWindowMenu: {
             console.info("Window menu:", seat, localSurfacePosition)
