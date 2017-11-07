@@ -2,6 +2,8 @@
 #include <QtQml>
 
 #include "runner.h"
+#include "applicationsmodel.h"
+#include "applicationitem.h"
 
 class TaskManagerPlugin : public QQmlExtensionPlugin
 {
@@ -14,6 +16,9 @@ public:
 
         qmlRegisterSingletonType<Runner>(uri, 1, 0, "Runner", [](QQmlEngine*, QJSEngine*)
                 -> QObject* { return new Runner; });
+        qmlRegisterSingletonType<ApplicationsModel>(uri, 1, 0, "Applications", [](QQmlEngine*, QJSEngine*)
+                -> QObject* { return new ApplicationsModel; });
+        qmlRegisterUncreatableType<ApplicationItem>(uri, 1, 0, "ApplicationItem", "Cannot create ApplicationItem in QML");
     }
 };
 
