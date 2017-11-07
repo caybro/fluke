@@ -48,13 +48,13 @@ WaylandOutput {
             source: "qrc:/images/background.jpg"
         }
 
-        onActiveChanged: {
-            if (!active) {
-                console.warn("Lost focus!!!")
-            } else {
-                console.info("Got focus");
-            }
-        }
+//        onActiveChanged: {
+//            if (!active) {
+//                console.warn("Lost focus!!!")
+//            } else {
+//                console.info("Got focus");
+//            }
+//        }
 
         WaylandMouseTracker {
             id: mouseTracker

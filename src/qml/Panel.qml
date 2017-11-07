@@ -6,12 +6,14 @@ import QtQuick.Controls.Material 2.2
 import "Indicators" as Indicators
 
 import org.fluke.Sound 1.0
+import org.fluke.TaskManager 1.0
 
-Rectangle {
+ToolBar {
     id: panel
     opacity: 0.9
-    implicitHeight: layout.childrenRect.height
-    color: Material.background
+    background: Rectangle {
+        color: Material.background
+    }
 
     signal logout()
     signal suspend()
@@ -25,6 +27,11 @@ Rectangle {
         anchors.fill: parent
         anchors.leftMargin: 5
         anchors.rightMargin: 5
+
+        ToolButton {
+            text: "\uf120"
+            onClicked: Runner.runCommand("konsole");
+        }
 
         Indicators.DateTime {
             anchors.centerIn: parent
