@@ -32,7 +32,12 @@ ToolButton {
         } else {
             iconName = "\uf240";
         }
-        return "%1 %2%".arg(iconName).arg(Math.floor(perc)); // we're being a bit pessimistic here ;)
+        var result = "%1 %2%".arg(iconName).arg(Math.floor(perc)); // we're being a bit pessimistic here ;)
+        if (Power.state == Power.Charging || Power.state == Power.Discharging) {
+            result += ", %1".arg(Power.remainingTime);
+        }
+
+        return result;
     }
 
     function indicatorTooltip() {
