@@ -19,7 +19,7 @@ ToolButton {
         }
 
         var iconName;
-        var perc = Power.percentage;
+        var perc = Power.state == Power.FullyCharged ? 100.0 : Power.percentage;
 
         if (perc <= 10) {
             iconName = "<font color='#F44336'>\uf244</font>";
