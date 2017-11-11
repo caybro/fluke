@@ -9,7 +9,7 @@ ShellSurfaceItem {
     property bool isPopup: false
     property Item workspace
 
-    visible: !priv.minimized
+    visible: !priv.minimized && !workspace.appLauncherVisible
 
     Component.onCompleted: {
         takeFocus();

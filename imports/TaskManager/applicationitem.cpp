@@ -24,6 +24,11 @@ QString ApplicationItem::appId() const
     return m_appId;
 }
 
+QString ApplicationItem::name() const
+{
+    return m_desktopFile->name();
+}
+
 XdgDesktopFile *ApplicationItem::desktopFile() const
 {
     return m_desktopFile;

@@ -6,23 +6,26 @@
 #include <QFontDatabase>
 #include <QTranslator>
 #include <QLibraryInfo>
+#include <QIcon>
 
 int main(int argc, char *argv[])
 {
-    //qputenv("QT_IM_MODULE", "qtvirtualkeyboard");
-    qputenv("QT_XCB_GL_INTEGRATION", "xcb_egl");
-    //qputenv("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1"); // TODO own window decoration
-    qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
+    //qputenv("QT_IM_MODULE", QByteArrayLiteral("qtvirtualkeyboard"));
+    qputenv("QT_XCB_GL_INTEGRATION", QByteArrayLiteral("xcb_egl"));
+    //qputenv("QT_WAYLAND_DISABLE_WINDOWDECORATION", QByteArrayLiteral("1")); // TODO own window decoration
+    qputenv("QT_QUICK_CONTROLS_STYLE", QByteArrayLiteral("Material"));
 
-    //QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
-    app.setOrganizationName("caybro");
-    app.setApplicationDisplayName("Fluke");
-    app.setApplicationVersion("0.0.1");
+    app.setOrganizationName(QStringLiteral("caybro"));
+    app.setApplicationDisplayName(QStringLiteral("Fluke"));
+    app.setApplicationVersion(QStringLiteral("0.0.1"));
 
-    qputenv("QT_WAYLAND_SHELL_INTEGRATION", "xdg-shell-v5");
-    qputenv("QT_QPA_PLATFORM", "wayland");
-    //qputenv("GDK_BACKEND", "wayland");
+    qputenv("QT_WAYLAND_SHELL_INTEGRATION", QByteArrayLiteral("xdg-shell-v5"));
+    qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("wayland"));
+    //qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
+
+    QIcon::setThemeName("breeze");
 
     QTranslator qtTranslator;
     qtTranslator.load(QLocale::system(), QStringLiteral("qt_"), QString(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
@@ -34,12 +37,12 @@ int main(int argc, char *argv[])
 
     QFontDatabase fd;
     if (!fd.families().contains(QLatin1String("FontAwesome"))) {
-        if (QFontDatabase::addApplicationFont(":/fonts/FontAwesome.otf") == -1) {
+        if (QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/FontAwesome.otf")) == -1) {
             qWarning("Failed to load FontAwesome from resources");
         }
     }
 
-    QQmlApplicationEngine appEngine(QUrl("qrc:///qml/main.qml"));
+    QQmlApplicationEngine appEngine(QUrl(QStringLiteral("qrc:///qml/main.qml")));
 
     return app.exec();
 }

@@ -27,10 +27,6 @@ WaylandCompositor {
         Item {}
     }
 
-    Item {
-        id: rootItem
-    }
-
     QtWindowManager {
         id: qtWindowManager
         onShowIsFullScreenChanged: console.log("Show is fullscreen hint for Qt applications:", showIsFullScreen)

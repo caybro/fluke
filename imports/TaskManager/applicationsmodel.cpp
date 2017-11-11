@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include "applicationsmodel.h"
 
 ApplicationsModel::ApplicationsModel(QObject *parent)
@@ -62,6 +64,11 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
     return m_roleNames;
 }
 
+int ApplicationsModel::count() const
+{
+    return m_items.count();
+}
+
 ApplicationItem *ApplicationsModel::get(int i) const
 {
     if (i >= 0 && i < m_items.count()) {
@@ -70,12 +77,24 @@ ApplicationItem *ApplicationsModel::get(int i) const
     return nullptr;
 }
 
+void ApplicationsModel::runApplication(int i)
+{
+    auto item = get(i);
+    if (item) {
+        item->launch();
+    }
+}
+
 void ApplicationsModel::init()
 {
     beginResetModel();
     for(XdgDesktopFile * desktopFile: XdgDesktopFileCache::getAllFiles()) {
-        if (desktopFile->type() == XdgDesktopFile::ApplicationType) {
+        if (desktopFile->type() == XdgDesktopFile::ApplicationType
+                && desktopFile->isValid()
+                && !desktopFile->value(QStringLiteral("NoDisplay")).toBool()) {
             m_items.append(new ApplicationItem(desktopFile));
+            qDebug() << "!!! Inserted application item" << m_items.last()->appId() << m_items.last()->desktopFile()->name() <<
+                        m_items.last()->desktopFile()->iconName();
         }
     }
     endResetModel();

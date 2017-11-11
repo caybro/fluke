@@ -6,11 +6,12 @@ import QtQuick.Controls.Material 2.2
 import "Indicators" as Indicators
 
 import org.fluke.Sound 1.0
-import org.fluke.TaskManager 1.0
 
 ToolBar {
     id: panel
-    opacity: 0.9
+    opacity: appLauncherVisible ? 0.9 : 1.0
+    Behavior on opacity { NumberAnimation { duration: 200 } }
+
     background: Rectangle {
         color: Material.background
     }
@@ -19,7 +20,9 @@ ToolBar {
     signal suspend()
     signal reboot()
     signal shutdown()
+    signal showLauncher()
 
+    property bool appLauncherVisible: false
     readonly property var soundIndicator: soundIndicatorLoader.item ? soundIndicatorLoader.item : null
 
     RowLayout {
@@ -29,8 +32,10 @@ ToolBar {
         anchors.rightMargin: 5
 
         ToolButton {
-            text: "\uf120"
-            onClicked: Runner.runCommand("konsole");
+            text: appLauncherVisible ? "\uf060" : "\uf0c9"
+            ToolTip.text: appLauncherVisible ? qsTr("Back") : qsTr("Menu")
+            ToolTip.visible: hovered
+            onClicked: panel.showLauncher()
         }
 
         Indicators.DateTime {

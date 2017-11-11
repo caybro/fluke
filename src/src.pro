@@ -25,3 +25,6 @@ sources.files = $$SOURCES $$HEADERS $$RESOURCES $$FORMS fluke.pro
 sources.path = $$[QT_INSTALL_EXAMPLES]/wayland/fluke
 
 INSTALLS += target
+
+DISTFILES += \
+    qml/ApplicationLauncher.qml

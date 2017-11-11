@@ -23,9 +23,10 @@ public:
     virtual ~ApplicationItem() = default;
 
     QString appId() const;
+    QString name() const;
     XdgDesktopFile * desktopFile() const;
 
-    Q_INVOKABLE void launch(const QStringList &urls);
+    Q_INVOKABLE void launch(const QStringList &urls = {});
 
 private:
     QString m_appId;

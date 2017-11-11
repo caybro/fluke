@@ -48,13 +48,13 @@ WaylandOutput {
             source: "qrc:/images/background.jpg"
         }
 
-//        onActiveChanged: {
-//            if (!active) {
-//                console.warn("Lost focus!!!")
-//            } else {
-//                console.info("Got focus");
-//            }
-//        }
+        //        onActiveChanged: {
+        //            if (!active) {
+        //                console.warn("Lost focus!!!")
+        //            } else {
+        //                console.info("Got focus");
+        //            }
+        //        }
 
         WaylandMouseTracker {
             id: mouseTracker
@@ -66,6 +66,7 @@ WaylandOutput {
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.right: parent.right
+                appLauncherVisible: appLauncher.visible
                 onLogout: {
                     systemDialog.title = qsTr("Log Out");
                     systemDialog.text = qsTr("Do you really want to logout?");
@@ -90,14 +91,23 @@ WaylandOutput {
                     systemDialog.acceptedFunctionCallback = function() { Session.shutdown() }
                     systemDialog.open();
                 }
+                onShowLauncher: appLauncher.visible ? appLauncher.hide() : appLauncher.show()
             }
 
             Item {
                 id: workspace
+                focus: true
+                readonly property bool appLauncherVisible: appLauncher.visible
                 anchors.top: panel.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: dock.top
+            }
+
+            ApplicationLauncher {
+                id: appLauncher
+                anchors.fill: workspace
+                opacity: 0.0
             }
 
             Dock {
@@ -106,10 +116,10 @@ WaylandOutput {
                 anchors.bottom: parent.bottom
             }
 
-//            Loader {
-//                anchors.fill: parent
-//                source: "Keyboard.qml"
-//            }
+            //            Loader {
+            //                anchors.fill: parent
+            //                source: "Keyboard.qml"
+            //            }
 
             WaylandCursorItem {
                 id: cursor
@@ -121,11 +131,6 @@ WaylandOutput {
                 visible: mouseTracker.containsMouse
             }
         }
-
-//        Shortcut {
-//            sequence: "Meta+F"
-//            onActivated: qtWindowManager.showIsFullScreen = !qtWindowManager.showIsFullScreen
-//        }
 
         Shortcut {
             sequence: "Ctrl+Alt+Backspace"
