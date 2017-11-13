@@ -5,6 +5,8 @@ import QtQuick.Controls.Material 2.2
 
 import org.fluke.TaskManager 1.0
 
+import org.kde.kquickcontrolsaddons 2.0
+
 Pane {
     id: root
     visible: opacity > 0.0
@@ -27,10 +29,29 @@ Pane {
         id: appItemComponent
         ItemDelegate {
             id: appDelegate
-            text: model.name
             width: GridView.view.cellWidth
-            ToolTip.text: model.comment
-            ToolTip.visible: hovered && text
+            height: GridView.view.cellHeight
+
+            contentItem: ColumnLayout {
+                QIconItem {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    icon: model.icon
+                    width: 48
+                    height: width
+                }
+                Label {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    text: model.name
+                    elide: Text.ElideRight
+                    maximumLineCount: 1
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                ToolTip.text: model.comment
+                ToolTip.visible: appDelegate.hovered && model.comment
+            }
+
             onClicked: {
                 Applications.runApplication(index);
                 hide();
