@@ -64,24 +64,13 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
     return m_roleNames;
 }
 
-int ApplicationsModel::count() const
+void ApplicationsModel::runApplication(const QString &appId)
 {
-    return m_items.count();
-}
-
-ApplicationItem *ApplicationsModel::get(int i) const
-{
-    if (i >= 0 && i < m_items.count()) {
-        return m_items.at(i);
-    }
-    return nullptr;
-}
-
-void ApplicationsModel::runApplication(int i)
-{
-    auto item = get(i);
-    if (item) {
-        item->launch();
+    auto it = std::find_if(m_items.constBegin(), m_items.constEnd(), [appId](ApplicationItem *appItem) {
+        return appItem->appId() == appId;
+    });
+    if (it != m_items.constEnd()) {
+        (*it)->launch();
     }
 }
 

@@ -11,11 +11,13 @@ SOURCES += \
     plugin.cpp \
     runner.cpp \
     applicationsmodel.cpp \
-    applicationitem.cpp
+    applicationitem.cpp \
+    applicationsfilteredmodel.cpp
 
 HEADERS += runner.h \
     applicationsmodel.h \
-    applicationitem.h
+    applicationitem.h \
+    applicationsfilteredmodel.h
 
 target.path = $$[QT_INSTALL_QML]/org/fluke/TaskManager
 pluginfiles.files += $$_PRO_FILE_PWD_/qmldir

@@ -2,6 +2,7 @@ TEMPLATE = app
 TARGET = fluke
 
 QT += gui qml waylandcompositor
+QT -= widgets
 CONFIG += qtquickcompiler
 
 SOURCES += main.cpp
@@ -26,5 +27,3 @@ sources.path = $$[QT_INSTALL_EXAMPLES]/wayland/fluke
 
 INSTALLS += target
 
-DISTFILES += \
-    qml/ApplicationLauncher.qml

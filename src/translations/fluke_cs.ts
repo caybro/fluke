@@ -4,17 +4,17 @@
 <context>
     <name>ApplicationLauncher</name>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="51"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="89"/>
         <source>Type to search...</source>
         <translation>Vyhledávejte psaním...</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="69"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="141"/>
         <source>All</source>
         <translation>Všechny</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="72"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="144"/>
         <source>Favorite</source>
         <translation>Oblíbené</translation>
     </message>
