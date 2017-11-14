@@ -172,6 +172,7 @@ WaylandOutput {
             focus: visible
             visible: false
             standardButtons: Dialog.Ok | Dialog.Cancel
+            onOpened: forceActiveFocus(Qt.PopupFocusReason)
             onAccepted: acceptedFunctionCallback()
             onClosed: acceptedFunctionCallback = function() {} // reset
             property alias text: label.text
