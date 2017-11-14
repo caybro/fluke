@@ -7,12 +7,12 @@ ApplicationsModel::ApplicationsModel(QObject *parent)
 {
     m_roleNames = {
         {ApplicationItem::RoleAppId, QByteArrayLiteral("appId")},
-        {ApplicationItem::RoleName, "name"},
-        {ApplicationItem::RoleComment, "comment"},
-        {ApplicationItem::RoleIcon, "icon"},
-        {ApplicationItem::RoleKeywords, "keywords"},
-        {ApplicationItem::RoleRunning, "running"},
-        {ApplicationItem::RoleFavorite, "favorite"}
+        {ApplicationItem::RoleName, QByteArrayLiteral("name")},
+        {ApplicationItem::RoleComment, QByteArrayLiteral("comment")},
+        {ApplicationItem::RoleIcon, QByteArrayLiteral("icon")},
+        {ApplicationItem::RoleKeywords, QByteArrayLiteral("keywords")},
+        {ApplicationItem::RoleRunning, QByteArrayLiteral("running")},
+        {ApplicationItem::RoleFavorite, QByteArrayLiteral("favorite")}
     };
     init();
 }
