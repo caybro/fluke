@@ -29,6 +29,8 @@ Pane {
     Behavior on opacity { NumberAnimation { duration: 200 } }
 
     Keys.onEscapePressed: hide()
+    Keys.enabled: true
+    Keys.forwardTo: searchField
 
     onVisibleChanged: {
         if (visible) {
@@ -90,6 +92,7 @@ Pane {
             activeFocusOnTab: true
             onAccepted: {
                 if (gridView.count > 0) {
+                    event.accepted = true;
                     launchApp(gridView.currentItem.appId);
                 }
             }
@@ -127,8 +130,14 @@ Pane {
             ScrollBar.vertical: ScrollBar { }
 
             Keys.onPressed: {
-                if (gridView.currentItem && (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)) {
-                    launchApp(gridView.currentItem.appId);
+                if (gridView.currentItem) {
+                    if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+                        launchApp(gridView.currentItem.appId);
+                    } else if (event.key === Qt.Key_Home) {
+                        gridView.currentIndex = 0;
+                    } else if (event.key === Qt.Key_End) {
+                        gridView.currentIndex = gridView.count - 1;
+                    }
                 }
             }
         }
