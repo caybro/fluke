@@ -30,7 +30,7 @@ Pane {
 
     Keys.onEscapePressed: hide()
     Keys.enabled: true
-    Keys.forwardTo: searchField
+    Keys.forwardTo: searchField.activeFocus ? null : searchField
 
     onVisibleChanged: {
         if (visible) {
@@ -92,7 +92,6 @@ Pane {
             activeFocusOnTab: true
             onAccepted: {
                 if (gridView.count > 0) {
-                    event.accepted = true;
                     launchApp(gridView.currentItem.appId);
                 }
             }
@@ -119,7 +118,7 @@ Pane {
             cellWidth: parent.width / 5
             clip: true
             currentIndex: 0
-            highlight: gridView.activeFocus ? highlightComponent : undefined
+            highlight: gridView.activeFocus ? highlightComponent : null
             activeFocusOnTab: true
 
             displaced: Transition {
@@ -127,11 +126,12 @@ Pane {
             }
             moveDisplaced: displaced
 
-            ScrollBar.vertical: ScrollBar { }
+            ScrollBar.vertical: ScrollBar {}
 
             Keys.onPressed: {
                 if (gridView.currentItem) {
                     if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+                        event.accepted = true;
                         launchApp(gridView.currentItem.appId);
                     } else if (event.key === Qt.Key_Home) {
                         gridView.currentIndex = 0;
