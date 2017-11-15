@@ -50,7 +50,7 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
                 }
                 case ApplicationItem::RoleIcon: return item->desktopFile()->iconName();
                 case ApplicationItem::RoleKeywords: return item->desktopFile()->localizedValue(QStringLiteral("Keywords")).toStringList();
-                case ApplicationItem::RoleRunning: return false; // TODO
+                case ApplicationItem::RoleRunning: return item->isRunning();
                 case ApplicationItem::RoleFavorite: return false; // TODO
                 }
             }
@@ -64,13 +64,35 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
     return m_roleNames;
 }
 
-void ApplicationsModel::runApplication(const QString &appId)
+void ApplicationsModel::setSurfaceAppeared(const QString &appId)
 {
-    auto it = std::find_if(m_items.constBegin(), m_items.constEnd(), [appId](ApplicationItem *appItem) {
-        return appItem->appId() == appId;
-    });
-    if (it != m_items.constEnd()) {
-        (*it)->launch();
+    qInfo() << "!!! Surface appeared" << appId;
+    if (appId.isEmpty())
+        return;
+
+    auto appItem = findAppItem(appId);
+    if (appItem) {
+        appItem->incrementSurfaceCount();
+    }
+}
+
+void ApplicationsModel::setSurfaceVanished(const QString &appId)
+{
+    qInfo() << "!!! Surface vanished" << appId;
+    if (appId.isEmpty())
+        return;
+
+    auto appItem = findAppItem(appId);
+    if (appItem) {
+        appItem->decrementSurfaceCount();
+    }
+}
+
+void ApplicationsModel::runApplication(const QString &appId, const QStringList &urls)
+{
+    auto item = findAppItem(appId);
+    if (item) {
+        item->launch(urls);
     }
 }
 
@@ -81,10 +103,27 @@ void ApplicationsModel::init()
         if (desktopFile->type() == XdgDesktopFile::ApplicationType
                 && desktopFile->isValid()
                 && !desktopFile->value(QStringLiteral("NoDisplay")).toBool()) {
-            m_items.append(new ApplicationItem(desktopFile));
-            qDebug() << "!!! Inserted application item" << m_items.last()->appId() << m_items.last()->desktopFile()->name() <<
+            auto item = new ApplicationItem(desktopFile);
+            m_items.append(item);
+            connect(item, &ApplicationItem::surfaceCountChanged, [this, item]() {
+                const QModelIndex idx = index(m_items.indexOf(item));
+                Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleRunning});
+            });
+
+            qInfo() << "!!! Inserted application item" << m_items.last()->appId() << m_items.last()->desktopFile()->name() <<
                         m_items.last()->desktopFile()->iconName();
         }
     }
     endResetModel();
+}
+
+ApplicationItem *ApplicationsModel::findAppItem(const QString &appId) const
+{
+    const auto it = std::find_if(m_items.constBegin(), m_items.constEnd(), [appId](ApplicationItem *appItem) {
+        return appItem->appId() == appId;
+    });
+    if (it != m_items.constEnd()) {
+        return (*it);
+    }
+    return nullptr;
 }

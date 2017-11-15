@@ -42,6 +42,7 @@ Pane {
         id: filterModel
         sourceModel: Applications
         filterString: searchField.text
+        showRunning: tabRunning.checked
     }
 
     Component {
@@ -115,7 +116,7 @@ Pane {
             Layout.fillWidth: true
             model: filterModel
             delegate: appItemComponent
-            cellWidth: parent.width / 5
+            cellWidth: parent.width / 6
             clip: true
             currentIndex: 0
             highlight: gridView.activeFocus ? highlightComponent : null
@@ -146,10 +147,17 @@ Pane {
             Layout.preferredWidth: parent.width / 3
             anchors.horizontalCenter: parent.horizontalCenter
             activeFocusOnTab: true
+            onCurrentIndexChanged: searchField.clear()
             TabButton {
+                id: tabAll
                 text: qsTr("All")
             }
             TabButton {
+                id: tabRunning
+                text: qsTr("Running")
+            }
+            TabButton {
+                id: tabFavorite
                 text: qsTr("Favorite")
             }
         }

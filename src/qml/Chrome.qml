@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtWayland.Compositor 1.0
 
+import org.fluke.TaskManager 1.0
+
 ShellSurfaceItem {
     id: rootChrome
 
@@ -24,6 +26,7 @@ ShellSurfaceItem {
     }
 
     onSurfaceDestroyed: {
+        Applications.setSurfaceVanished(priv.className);
         if (isPopup) {
             rootChrome.destroy();
         } else {
@@ -51,7 +54,7 @@ ShellSurfaceItem {
         onAppIdChanged: {
             if (!priv.className) {
                 priv.className = shellSurface.appId;
-                console.info("!!! Assigned app id:", priv.className, ", PID:", priv.pid)
+                Applications.setSurfaceAppeared(priv.className);
             }
         }
         onSetMaximized: {
