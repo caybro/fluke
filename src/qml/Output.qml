@@ -9,11 +9,10 @@ import org.fluke.Session 1.0
 
 WaylandOutput {
     id: output
-    sizeFollowsWindow: true
 
     property alias screen: win.screen
     readonly property alias surfaceArea: workspace
-    property var viewsBySurface: ({})
+    property var viewsBySurface: ({}) // QWaylandSurface -> QWaylandView
 
     Component.onCompleted: {
         compositor.defaultSeat.keymap.layout = "cz";
@@ -35,7 +34,7 @@ WaylandOutput {
         id: win
         x: Screen.virtualX
         y: Screen.virtualY
-        width: 1024 // screen.width
+        width: 1024 // screen.width // FIXME enable when running in a real session
         height: 768 // screen.height
         visible: true
 
@@ -47,14 +46,6 @@ WaylandOutput {
             asynchronous: true
             source: "qrc:/images/background.jpg"
         }
-
-        //        onActiveChanged: {
-        //            if (!active) {
-        //                console.warn("Lost focus!!!")
-        //            } else {
-        //                console.info("Got focus");
-        //            }
-        //        }
 
         WaylandMouseTracker {
             id: mouseTracker
