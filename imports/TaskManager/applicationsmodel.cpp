@@ -64,35 +64,44 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
     return m_roleNames;
 }
 
-void ApplicationsModel::setSurfaceAppeared(const QString &appId)
+void ApplicationsModel::setSurfaceAppeared(const QString &appId, QWaylandSurface *surface)
 {
-    qInfo() << "!!! Surface appeared" << appId;
+    qInfo() << "!!! Surface appeared" << appId << surface;
     if (appId.isEmpty())
         return;
 
     auto appItem = findAppItem(appId);
     if (appItem) {
-        appItem->incrementSurfaceCount();
+        appItem->incrementSurfaceCount(surface);
     }
 }
 
-void ApplicationsModel::setSurfaceVanished(const QString &appId)
+void ApplicationsModel::setSurfaceVanished(const QString &appId, QWaylandSurface *surface)
 {
-    qInfo() << "!!! Surface vanished" << appId;
+    qInfo() << "!!! Surface vanished" << appId << surface;
     if (appId.isEmpty())
         return;
 
     auto appItem = findAppItem(appId);
     if (appItem) {
-        appItem->decrementSurfaceCount();
+        appItem->decrementSurfaceCount(surface);
     }
 }
 
-void ApplicationsModel::runApplication(const QString &appId, const QStringList &urls)
+void ApplicationsModel::startApplication(const QString &appId, const QStringList &urls)
 {
     auto item = findAppItem(appId);
     if (item) {
         item->launch(urls);
+    }
+}
+
+void ApplicationsModel::stopApplication(const QString &appId)
+{
+    auto item = findAppItem(appId);
+    if (item) {
+        qInfo() << Q_FUNC_INFO;
+        item->stop();
     }
 }
 
@@ -110,7 +119,7 @@ void ApplicationsModel::init()
                 Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleRunning});
             });
 
-            qInfo() << "!!! Inserted application item" << m_items.last()->appId() << m_items.last()->desktopFile()->name() <<
+            qDebug() << "!!! Inserted application item" << m_items.last()->appId() << m_items.last()->desktopFile()->name() <<
                         m_items.last()->desktopFile()->iconName();
         }
     }

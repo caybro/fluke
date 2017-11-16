@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QAbstractListModel>
+#include <QWaylandSurface>
 
 #include "applicationitem.h"
 
@@ -17,9 +18,10 @@ protected:
     QHash<int, QByteArray> roleNames() const override;
 
 public Q_SLOTS:
-    void runApplication(const QString &appId, const QStringList &urls = {});
-    void setSurfaceAppeared(const QString &appId);
-    void setSurfaceVanished(const QString &appId);
+    void startApplication(const QString &appId, const QStringList &urls = {});
+    void stopApplication(const QString &appId);
+    void setSurfaceAppeared(const QString &appId, QWaylandSurface *surface);
+    void setSurfaceVanished(const QString &appId, QWaylandSurface *surface);
 
 private:
     void init();

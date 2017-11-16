@@ -22,7 +22,7 @@ Pane {
     }
 
     function launchApp(appId) {
-        Applications.runApplication(appId);
+        Applications.startApplication(appId);
         hide();
     }
 
@@ -34,7 +34,7 @@ Pane {
 
     onVisibleChanged: {
         if (visible) {
-            searchField.selectAll()
+            searchField.selectAll();
         }
     }
 
@@ -72,9 +72,40 @@ Pane {
                 }
                 ToolTip.text: model.comment
                 ToolTip.visible: appDelegate.hovered && model.comment
+                MouseArea {
+                    anchors.fill: parent
+                    enabled: model.running
+                    visible: enabled
+                    acceptedButtons: Qt.RightButton | Qt.LeftButton
+                    onPressed: {
+                        if (mouse.buttons == Qt.RightButton) {
+                            contextMenu.currentItem = appDelegate;
+                            contextMenu.open();
+                            mouse.accepted = true;
+                        } else {
+                            mouse.accepted = false;
+                        }
+                    }
+                }
             }
+            onClicked: {
+                launchApp(appId);
+            }
+        }
+    }
 
-            onClicked: launchApp(appId)
+    Menu {
+        id: contextMenu
+        property var currentItem
+
+        parent: currentItem ? currentItem : null
+        y: currentItem ? currentItem.height : 0
+
+        MenuItem {
+            text: qsTr("Quit")
+            onClicked: {
+                Applications.stopApplication(contextMenu.currentItem.appId);
+            }
         }
     }
 

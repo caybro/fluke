@@ -21,17 +21,26 @@ ShellSurfaceItem {
     QtObject {
         id: priv
         readonly property int pid: shellSurface.surface.client.processId
-        property string className
+        property string appId
         property bool minimized: false
     }
 
     onSurfaceDestroyed: {
-        Applications.setSurfaceVanished(priv.className);
         if (isPopup) {
             rootChrome.destroy();
         } else {
             bufferLocked = true;
             destroyAnimation.start();
+        }
+    }
+
+    Connections {
+        target: compositor
+        ignoreUnknownSignals: true
+        onSurfaceAboutToBeDestroyed: {
+            if (!isPopup) {
+                Applications.setSurfaceVanished(priv.appId, surface);
+            }
         }
     }
 
@@ -42,7 +51,7 @@ ShellSurfaceItem {
         ignoreUnknownSignals: true
 
         onClassNameChanged: {
-            priv.className = shellSurface.className;
+            priv.appId = shellSurface.className;
         }
 
         // xdg_shell only
@@ -52,9 +61,11 @@ ShellSurfaceItem {
             }
         }
         onAppIdChanged: {
-            if (!priv.className) {
-                priv.className = shellSurface.appId;
-                Applications.setSurfaceAppeared(priv.className);
+            if (!priv.appId) {
+                priv.appId = shellSurface.appId;
+                if (!rootChrome.isPopup) {
+                    Applications.setSurfaceAppeared(priv.appId, shellSurface.surface);
+                }
             }
         }
         onSetMaximized: {

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QObject>
+#include <QWaylandSurface>
+
 #include <XdgDesktopFile>
 
 class ApplicationItem: public QObject
@@ -29,10 +31,11 @@ public:
     XdgDesktopFile * desktopFile() const;
     int surfaceCount() const;
     bool isRunning() const;
-    void incrementSurfaceCount();
-    void decrementSurfaceCount();
+    void incrementSurfaceCount(QWaylandSurface *surface);
+    void decrementSurfaceCount(QWaylandSurface *surface);
 
     Q_INVOKABLE void launch(const QStringList &urls = {});
+    Q_INVOKABLE void stop();
 
 Q_SIGNALS:
     void surfaceCountChanged(int count);
@@ -40,5 +43,5 @@ Q_SIGNALS:
 private:
     QString m_appId;
     XdgDesktopFile *m_desktopFile{nullptr};
-    int m_surfaceCount{0};
+    QVector<QWaylandSurface *> m_surfaces;
 };

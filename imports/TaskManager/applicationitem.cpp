@@ -1,6 +1,8 @@
 #include <QDebug>
 #include <QFileInfo>
 
+#include <QWaylandClient>
+
 #include "applicationitem.h"
 
 ApplicationItem::ApplicationItem(const QString &appId, QObject *parent)
@@ -38,7 +40,7 @@ XdgDesktopFile *ApplicationItem::desktopFile() const
 
 int ApplicationItem::surfaceCount() const
 {
-    return m_surfaceCount;
+    return m_surfaces.count();
 }
 
 void ApplicationItem::launch(const QStringList &urls)
@@ -48,19 +50,26 @@ void ApplicationItem::launch(const QStringList &urls)
     }
 }
 
+void ApplicationItem::stop()
+{
+    if (!m_surfaces.isEmpty()) {
+        m_surfaces.last()->client()->close();
+    }
+}
+
 bool ApplicationItem::isRunning() const
 {
-    return m_surfaceCount > 0;
+    return !m_surfaces.isEmpty();
 }
 
-void ApplicationItem::incrementSurfaceCount()
+void ApplicationItem::incrementSurfaceCount(QWaylandSurface *surface)
 {
-    m_surfaceCount++;
-    Q_EMIT surfaceCountChanged(m_surfaceCount);
+    m_surfaces.append(surface);
+    Q_EMIT surfaceCountChanged(surfaceCount());
 }
 
-void ApplicationItem::decrementSurfaceCount()
+void ApplicationItem::decrementSurfaceCount(QWaylandSurface *surface)
 {
-    m_surfaceCount--;
-    Q_EMIT surfaceCountChanged(m_surfaceCount);
+    m_surfaces.removeAll(surface);
+    Q_EMIT surfaceCountChanged(surfaceCount());
 }
