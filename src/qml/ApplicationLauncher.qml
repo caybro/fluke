@@ -55,6 +55,7 @@ Pane {
             readonly property string appId: model.appId
 
             contentItem: ColumnLayout {
+                spacing: 0
                 QIconItem {
                     anchors.horizontalCenter: parent.horizontalCenter
                     icon: model.icon
@@ -70,24 +71,33 @@ Pane {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
-                ToolTip.text: model.comment
-                ToolTip.visible: appDelegate.hovered && model.comment
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: model.running
-                    visible: enabled
-                    acceptedButtons: Qt.RightButton | Qt.LeftButton
-                    onPressed: {
-                        if (mouse.buttons == Qt.RightButton) {
-                            contextMenu.currentItem = appDelegate;
-                            contextMenu.open();
-                            mouse.accepted = true;
-                        } else {
-                            mouse.accepted = false;
-                        }
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "\uf111"
+                    color: Material.accent
+                    visible: model.running && !filterModel.showRunning
+                    font.pixelSize: 8
+                }
+            }
+
+            ToolTip.text: model.comment
+            ToolTip.visible: hovered && model.comment
+            MouseArea {
+                anchors.fill: parent
+                enabled: model.running
+                visible: enabled
+                acceptedButtons: Qt.RightButton | Qt.LeftButton
+                onPressed: {
+                    if (mouse.buttons == Qt.RightButton) {
+                        contextMenu.currentItem = appDelegate;
+                        contextMenu.open();
+                        mouse.accepted = true;
+                    } else {
+                        mouse.accepted = false;
                     }
                 }
             }
+
             onClicked: {
                 launchApp(appId);
             }
@@ -133,7 +143,7 @@ Pane {
             id: highlightComponent
             Rectangle {
                 width: GridView.view.cellWidth; height: GridView.view.cellHeight
-                color: Material.primary; radius: 5
+                color: Material.accent; radius: 5
                 x: GridView.view.currentItem.x
                 y: GridView.view.currentItem.y
                 Behavior on x { SpringAnimation { spring: 3; damping: 0.2 } }

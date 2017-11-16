@@ -97,7 +97,7 @@ WaylandOutput {
             Item {
                 id: workspace
                 focus: true
-                readonly property bool appLauncherVisible: appLauncher.visible
+                readonly property alias appLauncherVisible: appLauncher.visible
                 anchors.top: panel.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right

@@ -100,7 +100,6 @@ void ApplicationsModel::stopApplication(const QString &appId)
 {
     auto item = findAppItem(appId);
     if (item) {
-        qInfo() << Q_FUNC_INFO;
         item->stop();
     }
 }
