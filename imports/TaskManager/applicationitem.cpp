@@ -57,6 +57,15 @@ void ApplicationItem::stop()
     }
 }
 
+int ApplicationItem::instanceCount() const
+{
+    QSet<QWaylandClient *> clients;
+    for(QWaylandSurface *surface: qAsConst(m_surfaces)) {
+        clients.insert(surface->client());
+    }
+    return clients.count();
+}
+
 bool ApplicationItem::isRunning() const
 {
     return !m_surfaces.isEmpty();

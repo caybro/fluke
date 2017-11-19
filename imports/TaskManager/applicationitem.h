@@ -18,6 +18,7 @@ public:
         RoleIcon,
         RoleKeywords,
         RoleRunning,
+        RoleInstanceCount,
         RoleFavorite
     };
     Q_ENUM(RoleEnum)
@@ -30,6 +31,7 @@ public:
     QString name() const;
     XdgDesktopFile * desktopFile() const;
     int surfaceCount() const;
+    int instanceCount() const;
     bool isRunning() const;
     void incrementSurfaceCount(QWaylandSurface *surface);
     void decrementSurfaceCount(QWaylandSurface *surface);

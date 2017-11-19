@@ -12,7 +12,8 @@ ApplicationsModel::ApplicationsModel(QObject *parent)
         {ApplicationItem::RoleIcon, QByteArrayLiteral("icon")},
         {ApplicationItem::RoleKeywords, QByteArrayLiteral("keywords")},
         {ApplicationItem::RoleRunning, QByteArrayLiteral("running")},
-        {ApplicationItem::RoleFavorite, QByteArrayLiteral("favorite")}
+        {ApplicationItem::RoleFavorite, QByteArrayLiteral("favorite")},
+        {ApplicationItem::RoleFavorite, QByteArrayLiteral("instanceCount")}
     };
     init();
 }
@@ -36,10 +37,11 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
             const auto item = m_items.at(row);
             if (item) {
                 switch (role) {
-                case ApplicationItem::RoleAppId: return item->appId();
+                case ApplicationItem::RoleAppId:
+                    return item->appId();
                 case ApplicationItem::RoleName:
                 case Qt::DisplayRole:
-                    return item->desktopFile()->name();
+                    return item->name();
                 case ApplicationItem::RoleComment:
                 case Qt::ToolTipRole: {
                     const QString comment = item->desktopFile()->comment();
@@ -52,6 +54,7 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
                 case ApplicationItem::RoleKeywords: return item->desktopFile()->localizedValue(QStringLiteral("Keywords")).toStringList();
                 case ApplicationItem::RoleRunning: return item->isRunning();
                 case ApplicationItem::RoleFavorite: return false; // TODO
+                case ApplicationItem::RoleInstanceCount: return item->instanceCount();
                 }
             }
         }
@@ -115,7 +118,7 @@ void ApplicationsModel::init()
             m_items.append(item);
             connect(item, &ApplicationItem::surfaceCountChanged, [this, item]() {
                 const QModelIndex idx = index(m_items.indexOf(item));
-                Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleRunning});
+                Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleRunning, ApplicationItem::RoleInstanceCount});
             });
 
             qDebug() << "!!! Inserted application item" << m_items.last()->appId() << m_items.last()->desktopFile()->name() <<
