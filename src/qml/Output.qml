@@ -9,6 +9,7 @@ import org.fluke.Session 1.0
 
 WaylandOutput {
     id: output
+    sizeFollowsWindow: true
 
     property alias screen: win.screen
     readonly property alias surfaceArea: workspace
