@@ -13,7 +13,7 @@ ApplicationsModel::ApplicationsModel(QObject *parent)
         {ApplicationItem::RoleKeywords, QByteArrayLiteral("keywords")},
         {ApplicationItem::RoleRunning, QByteArrayLiteral("running")},
         {ApplicationItem::RoleFavorite, QByteArrayLiteral("favorite")},
-        {ApplicationItem::RoleFavorite, QByteArrayLiteral("instanceCount")}
+        {ApplicationItem::RoleInstanceCount, QByteArrayLiteral("instanceCount")}
     };
     init();
 }
