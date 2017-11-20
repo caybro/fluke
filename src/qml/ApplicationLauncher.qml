@@ -1,8 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
-
 import org.fluke.TaskManager 1.0
 
 import org.kde.kquickcontrolsaddons 2.0
@@ -52,6 +50,7 @@ Pane {
             id: appDelegate
             width: GridView.view.cellWidth
             height: GridView.view.cellHeight
+            highlighted: GridView.isCurrentItem
 
             readonly property string appId: model.appId
             readonly property bool favorite: model.favorite
@@ -80,7 +79,7 @@ Pane {
                     text: Array(Math.min(model.instanceCount+1, 4)).join("\uf111\u2009") // up to 3 dots + small space
                     color: Material.accent
                     visible: model.running && !filterModel.showRunning
-                    font.pixelSize: 8
+                    font.pixelSize: 7
                 }
             }
 
@@ -106,15 +105,6 @@ Pane {
         }
     }
 
-    MenuItem {
-        id: quitItem
-        text: qsTr("Quit")
-        visible: contextMenu.visible && contextMenu.currentItem && contextMenu.currentItem.running
-        onClicked: {
-            Applications.stopApplication(contextMenu.currentItem.appId);
-        }
-    }
-
     Menu {
         id: contextMenu
         property var currentItem: null
@@ -129,6 +119,15 @@ Pane {
             checked: contextMenu.currentItem && contextMenu.currentItem.favorite
             onClicked: {
                 Applications.setApplicationFavorite(contextMenu.currentItem.appId, !contextMenu.currentItem.favorite)
+            }
+        }
+
+        MenuItem {
+            id: quitItem
+            text: qsTr("Quit")
+            visible: contextMenu.visible && contextMenu.currentItem && contextMenu.currentItem.running
+            onClicked: {
+                Applications.stopApplication(contextMenu.currentItem.appId);
             }
         }
 
@@ -161,18 +160,6 @@ Pane {
             }
         }
 
-        Component {
-            id: highlightComponent
-            Rectangle {
-                width: GridView.view.cellWidth; height: GridView.view.cellHeight
-                color: Material.accent; radius: 5
-                x: GridView.view.currentItem.x
-                y: GridView.view.currentItem.y
-                Behavior on x { SpringAnimation { spring: 3; damping: 0.3 } }
-                Behavior on y { SpringAnimation { spring: 3; damping: 0.3 } }
-            }
-        }
-
         GridView {
             id: gridView
             Layout.fillHeight: true
@@ -182,7 +169,6 @@ Pane {
             cellWidth: parent.width / 6
             clip: true
             currentIndex: 0
-            highlight: gridView.activeFocus ? highlightComponent : null
             activeFocusOnTab: true
 
             displaced: Transition {
