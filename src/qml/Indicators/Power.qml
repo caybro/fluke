@@ -18,19 +18,23 @@ ToolButton {
             return "\uf1e6"; // plug icon, no battery present
         }
 
-        var iconName;
+        var iconName = "";
         var perc = Power.state == Power.FullyCharged ? 100.0 : Power.percentage;
 
+        if (Power.state == Power.Charging) {
+            iconName = "\uf0e7\u2009"; // bolt icon + small space
+        }
+
         if (perc <= 10) {
-            iconName = "<font color='#F44336'>\uf244</font>";
+            iconName += "<font color='#F44336'>\uf244</font>";
         } else if (perc <= 25) {
-            iconName = "\uf243";
+            iconName += "\uf243";
         } else if (perc <= 50) {
-            iconName = "\uf242";
+            iconName += "\uf242";
         } else if (perc <= 75) {
-            iconName = "\uf241";
+            iconName += "\uf241";
         } else {
-            iconName = "\uf240";
+            iconName += "\uf240";
         }
         var result = "%1 %2%".arg(iconName).arg(Math.floor(perc)); // we're being a bit pessimistic here ;)
         if (Power.state == Power.Charging || Power.state == Power.Discharging) {
