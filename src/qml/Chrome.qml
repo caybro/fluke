@@ -7,6 +7,7 @@ ShellSurfaceItem {
     id: rootChrome
 
     readonly property bool isChild: parent.shellSurface !== undefined
+    readonly property alias appId: priv.appId
 
     property bool isPopup: false
     property Item workspace
@@ -57,6 +58,7 @@ ShellSurfaceItem {
         // xdg_shell only
         onActivatedChanged: {
             if (shellSurface.activated) {
+                workspace.activated(rootChrome.appId);
                 receivedFocusAnimation.start();
             }
         }

@@ -15,6 +15,9 @@ Pane {
     activeFocusOnTab: false
 
     readonly property alias count: view.count
+    property string activeApp
+
+    signal activateApplication(string appId)
 
     ContextMenu {
         id: contextMenu
@@ -30,6 +33,7 @@ Pane {
         }
         delegate: ItemDelegate {
             id: appDelegate
+            highlighted: appId == dock.activeApp
 
             readonly property string appId: model.appId
             readonly property bool favorite: model.favorite
@@ -72,7 +76,7 @@ Pane {
                 if (!running) {
                     Applications.startApplication(appId);
                 } else {
-                    // TODO activate the app
+                    dock.activateApplication(appId)
                 }
             }
         }

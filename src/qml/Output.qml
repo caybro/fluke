@@ -31,6 +31,18 @@ WaylandOutput {
         colorGroup: SystemPalette.Active
     }
 
+    function activateApplication(appId) {
+        var surfaces = Object.keys(viewsBySurface);
+        for (var i = surfaces.length - 1; i >= 0; i--) {
+            var view = viewsBySurface[surfaces[i]];
+            if (view.appId === appId) {
+                view.takeFocus();
+                view.raise();
+                return;
+            }
+        }
+    }
+
     window: ApplicationWindow {
         id: win
         x: Screen.virtualX
@@ -94,6 +106,12 @@ WaylandOutput {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: appLauncher.visible ? parent.bottom : dock.top
+
+                signal activated(string appId)
+
+                onActivated: {
+                    dock.activeApp = appId;
+                }
             }
 
             ApplicationLauncher {
@@ -107,6 +125,9 @@ WaylandOutput {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
                 visible: !appLauncher.visible && count > 0
+                onActivateApplication: {
+                    output.activateApplication(appId);
+                }
             }
 
             //            Loader {
