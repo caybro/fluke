@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
+
 import org.fluke.TaskManager 1.0
 
 import org.kde.kquickcontrolsaddons 2.0

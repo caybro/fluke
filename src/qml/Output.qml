@@ -89,11 +89,11 @@ WaylandOutput {
             Item {
                 id: workspace
                 focus: true
-                readonly property alias appLauncherVisible: appLauncher.visible
+                readonly property alias appLauncherVisible: appLauncher.visible // used in Chrome.qml
                 anchors.top: panel.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.bottom: dock.top
+                anchors.bottom: appLauncher.visible ? parent.bottom : dock.top
             }
 
             ApplicationLauncher {
@@ -106,6 +106,7 @@ WaylandOutput {
                 id: dock
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
+                visible: !appLauncher.visible
             }
 
             //            Loader {

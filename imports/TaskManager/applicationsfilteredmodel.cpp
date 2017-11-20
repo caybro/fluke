@@ -61,6 +61,21 @@ void ApplicationsFilteredModel::setShowFavorite(bool showFavorite)
     Q_EMIT showFavoriteChanged(m_showFavorite);
 }
 
+bool ApplicationsFilteredModel::showFavoriteAndRunning() const
+{
+    return m_showFavoriteAndRunning;
+}
+
+void ApplicationsFilteredModel::setShowFavoriteAndRunning(bool showFavoriteAndRunning)
+{
+    if (m_showFavoriteAndRunning == showFavoriteAndRunning)
+        return;
+
+    m_showFavoriteAndRunning = showFavoriteAndRunning;
+    invalidateFilter();
+    Q_EMIT showFavoriteAndRunningChanged(m_showFavoriteAndRunning);
+}
+
 bool ApplicationsFilteredModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
     if (sourceParent.isValid()) {
@@ -75,13 +90,16 @@ bool ApplicationsFilteredModel::filterAcceptsRow(int sourceRow, const QModelInde
     const bool favorite = sourceIndex.data(ApplicationItem::RoleFavorite).toBool();
     const bool showOnlyFavorite = m_showFavorite ? m_showFavorite && favorite : true;
 
+    const bool favoriteAndRunning = running || favorite;
+    const bool showFavoriteAndRunning = m_showFavoriteAndRunning ? m_showFavoriteAndRunning && favoriteAndRunning : true;
+
     const QString &appId = sourceIndex.data(ApplicationItem::RoleAppId).toString();
     const QString &appName = sourceIndex.data(ApplicationItem::RoleName).toString();
     const QString &comment = sourceIndex.data(ApplicationItem::RoleComment).toString();
     const QStringList &keywords = sourceIndex.data(ApplicationItem::RoleKeywords).toStringList();
 
     // filter by search string
-    return showOnlyRunning && showOnlyFavorite &&
+    return showOnlyRunning && showOnlyFavorite && showFavoriteAndRunning &&
             (appId.contains(m_filterString, filterCaseSensitivity()) ||
              appName.contains(m_filterString, filterCaseSensitivity()) ||
              comment.contains(m_filterString, filterCaseSensitivity()) ||
