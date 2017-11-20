@@ -14,6 +14,12 @@ Pane {
     padding: 3
     activeFocusOnTab: false
 
+    readonly property alias count: view.count
+
+    ContextMenu {
+        id: contextMenu
+    }
+
     ListView {
         id: view
         implicitWidth: childrenRect.width
@@ -63,8 +69,16 @@ Pane {
             }
 
             onClicked: {
-                Applications.startApplication(appId);
+                if (!running) {
+                    Applications.startApplication(appId);
+                } else {
+                    // TODO activate the app
+                }
             }
         }
+        addDisplaced: Transition {
+            NumberAnimation { properties: "x,y"; duration: 200 }
+        }
+        removeDisplaced: addDisplaced
     }
 }

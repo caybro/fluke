@@ -106,7 +106,7 @@ WaylandOutput {
                 id: dock
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: parent.bottom
-                visible: !appLauncher.visible
+                visible: !appLauncher.visible && count > 0
             }
 
             //            Loader {

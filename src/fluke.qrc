@@ -14,5 +14,6 @@
         <file>qml/Indicators/Sound.qml</file>
         <file>translations/fluke_cs.qm</file>
         <file>qml/ApplicationLauncher.qml</file>
+        <file>qml/ContextMenu.qml</file>
     </qresource>
 </RCC>
