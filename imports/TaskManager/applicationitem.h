@@ -10,6 +10,7 @@ class ApplicationItem: public QObject
     Q_OBJECT
     Q_PROPERTY(bool running READ isRunning NOTIFY surfaceCountChanged)
     Q_PROPERTY(int surfaceCount READ surfaceCount NOTIFY surfaceCountChanged)
+    Q_PROPERTY(bool favorite READ isFavorite WRITE setFavorite NOTIFY isFavoriteChanged)
 public:
     enum RoleEnum {
         RoleAppId = Qt::UserRole + 1,
@@ -33,6 +34,9 @@ public:
     int surfaceCount() const;
     int instanceCount() const;
     bool isRunning() const;
+    bool isFavorite() const;
+    void setFavorite(bool favorite);
+
     void incrementSurfaceCount(QWaylandSurface *surface);
     void decrementSurfaceCount(QWaylandSurface *surface);
 
@@ -41,9 +45,11 @@ public:
 
 Q_SIGNALS:
     void surfaceCountChanged(int count);
+    void isFavoriteChanged(bool favorite);
 
 private:
     QString m_appId;
     XdgDesktopFile *m_desktopFile{nullptr};
     QVector<QWaylandSurface *> m_surfaces;
+    bool m_favorite{false};
 };

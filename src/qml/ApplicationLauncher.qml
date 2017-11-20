@@ -43,6 +43,7 @@ Pane {
         sourceModel: Applications
         filterString: searchField.text
         showRunning: tabRunning.checked
+        showFavorite: tabFavorite.checked
     }
 
     Component {
@@ -53,6 +54,8 @@ Pane {
             height: GridView.view.cellHeight
 
             readonly property string appId: model.appId
+            readonly property bool favorite: model.favorite
+            readonly property bool running: model.running
 
             contentItem: ColumnLayout {
                 spacing: 0
@@ -85,8 +88,6 @@ Pane {
             ToolTip.visible: hovered && model.comment
             MouseArea {
                 anchors.fill: parent
-                enabled: model.running
-                visible: enabled
                 acceptedButtons: Qt.RightButton | Qt.LeftButton
                 onPressed: {
                     if (mouse.buttons == Qt.RightButton) {
@@ -105,17 +106,37 @@ Pane {
         }
     }
 
+    MenuItem {
+        id: quitItem
+        text: qsTr("Quit")
+        visible: contextMenu.visible && contextMenu.currentItem && contextMenu.currentItem.running
+        onClicked: {
+            Applications.stopApplication(contextMenu.currentItem.appId);
+        }
+    }
+
     Menu {
         id: contextMenu
-        property var currentItem
+        property var currentItem: null
 
         parent: currentItem ? currentItem : null
         y: currentItem ? currentItem.height : 0
 
         MenuItem {
-            text: qsTr("Quit")
+            visible: contextMenu.currentItem
+            text: qsTr("Favorite", "favorite application")
+            checkable: true
+            checked: contextMenu.currentItem && contextMenu.currentItem.favorite
             onClicked: {
-                Applications.stopApplication(contextMenu.currentItem.appId);
+                Applications.setApplicationFavorite(contextMenu.currentItem.appId, !contextMenu.currentItem.favorite)
+            }
+        }
+
+        onAboutToShow: {
+            if (currentItem.running) {
+                addItem(quitItem);
+            } else {
+                removeItem(contextMenu.contentChildren.length - 1);
             }
         }
     }
@@ -147,8 +168,8 @@ Pane {
                 color: Material.accent; radius: 5
                 x: GridView.view.currentItem.x
                 y: GridView.view.currentItem.y
-                Behavior on x { SpringAnimation { spring: 3; damping: 0.2 } }
-                Behavior on y { SpringAnimation { spring: 3; damping: 0.2 } }
+                Behavior on x { SpringAnimation { spring: 3; damping: 0.3 } }
+                Behavior on y { SpringAnimation { spring: 3; damping: 0.3 } }
             }
         }
 
@@ -192,15 +213,15 @@ Pane {
             onCurrentIndexChanged: searchField.clear()
             TabButton {
                 id: tabAll
-                text: qsTr("All")
+                text: qsTr("All", "all applications")
             }
             TabButton {
                 id: tabRunning
-                text: qsTr("Running")
+                text: qsTr("Running", "running applications")
             }
             TabButton {
                 id: tabFavorite
-                text: qsTr("Favorite")
+                text: qsTr("Favorite", "favorite applications")
             }
         }
     }

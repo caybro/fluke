@@ -4,19 +4,58 @@
 <context>
     <name>ApplicationLauncher</name>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="89"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="111"/>
+        <source>Quit</source>
+        <translation>Ukončit</translation>
+    </message>
+    <message>
+        <source>Unset Favorite</source>
+        <translation type="vanished">Odebrat z oblíbených</translation>
+    </message>
+    <message>
+        <source>Add to Favorites</source>
+        <translation type="vanished">Přidat do oblíbených</translation>
+    </message>
+    <message>
+        <location filename="../qml/ApplicationLauncher.qml" line="127"/>
+        <source>Favorite</source>
+        <comment>favorite application</comment>
+        <translation>Oblíbená</translation>
+    </message>
+    <message>
+        <location filename="../qml/ApplicationLauncher.qml" line="155"/>
         <source>Type to search...</source>
         <translation>Vyhledávejte psaním...</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="141"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="216"/>
         <source>All</source>
+        <comment>all applications</comment>
         <translation>Všechny</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="144"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="220"/>
+        <source>Running</source>
+        <comment>running applications</comment>
+        <translation>Spuštěné</translation>
+    </message>
+    <message>
+        <location filename="../qml/ApplicationLauncher.qml" line="224"/>
         <source>Favorite</source>
+        <comment>favorite applications</comment>
         <translation>Oblíbené</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="vanished">Všechny</translation>
+    </message>
+    <message>
+        <source>Running</source>
+        <translation type="vanished">Spuštěné</translation>
+    </message>
+    <message>
+        <source>Favorite</source>
+        <translation type="vanished">Oblíbené</translation>
     </message>
 </context>
 <context>
@@ -40,42 +79,42 @@
 <context>
     <name>Output</name>
     <message>
-        <location filename="../qml/Output.qml" line="71"/>
+        <location filename="../qml/Output.qml" line="63"/>
         <source>Log Out</source>
         <translation>Odhlásit se</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="72"/>
+        <location filename="../qml/Output.qml" line="64"/>
         <source>Do you really want to logout?</source>
         <translation>Opravdu se chcete odhlásit?</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="77"/>
+        <location filename="../qml/Output.qml" line="69"/>
         <source>Suspend</source>
         <translation>Uspat</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="78"/>
+        <location filename="../qml/Output.qml" line="70"/>
         <source>Do you really want to suspend the computer?</source>
         <translation>Opravdu chcete počítač uspat?</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="83"/>
+        <location filename="../qml/Output.qml" line="75"/>
         <source>Restart</source>
         <translation>Restartovat</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="84"/>
+        <location filename="../qml/Output.qml" line="76"/>
         <source>Do you really want to restart the computer?</source>
         <translation>Opravdu chcete počítač restartovat?</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="89"/>
+        <location filename="../qml/Output.qml" line="81"/>
         <source>Shutdown</source>
         <translation>Vypnout</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="90"/>
+        <location filename="../qml/Output.qml" line="82"/>
         <source>Do you really want to turn off the computer?</source>
         <translation>Opravdu chcete počítač vypnout?</translation>
     </message>

@@ -4,6 +4,7 @@
 
 ApplicationsModel::ApplicationsModel(QObject *parent)
     : QAbstractListModel(parent)
+    , m_settings(QStringLiteral("caybro"), QStringLiteral("fluke"))
 {
     m_roleNames = {
         {ApplicationItem::RoleAppId, QByteArrayLiteral("appId")},
@@ -15,11 +16,13 @@ ApplicationsModel::ApplicationsModel(QObject *parent)
         {ApplicationItem::RoleFavorite, QByteArrayLiteral("favorite")},
         {ApplicationItem::RoleInstanceCount, QByteArrayLiteral("instanceCount")}
     };
+    loadSettings();
     init();
 }
 
 ApplicationsModel::~ApplicationsModel()
 {
+    saveSettings();
     qDeleteAll(m_items);
     m_items.clear();
 }
@@ -53,13 +56,26 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
                 case ApplicationItem::RoleIcon: return item->desktopFile()->iconName();
                 case ApplicationItem::RoleKeywords: return item->desktopFile()->localizedValue(QStringLiteral("Keywords")).toStringList();
                 case ApplicationItem::RoleRunning: return item->isRunning();
-                case ApplicationItem::RoleFavorite: return false; // TODO
+                case ApplicationItem::RoleFavorite: return item->isFavorite();
                 case ApplicationItem::RoleInstanceCount: return item->instanceCount();
                 }
             }
         }
     }
     return QVariant();
+}
+
+bool ApplicationsModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (index.isValid() && role == ApplicationItem::RoleFavorite) {
+        const int row = index.row();
+        if (row >= 0 && row < m_items.count()) {
+            const auto item = m_items.at(row);
+            item->setFavorite(value.toBool());
+            return true;
+        }
+    }
+    return QAbstractListModel::setData(index, value, role);
 }
 
 QHash<int, QByteArray> ApplicationsModel::roleNames() const
@@ -88,6 +104,20 @@ void ApplicationsModel::setSurfaceVanished(const QString &appId, QWaylandSurface
     auto appItem = findAppItem(appId);
     if (appItem) {
         appItem->decrementSurfaceCount(surface);
+    }
+}
+
+void ApplicationsModel::setApplicationFavorite(const QString &appId, bool favorite)
+{
+    auto item = findAppItem(appId);
+    if (item) {
+        item->setFavorite(favorite);
+
+        if (favorite) {
+            m_favoriteAppIds.append(appId);
+        } else {
+            m_favoriteAppIds.removeAll(appId);
+        }
     }
 }
 
@@ -120,6 +150,11 @@ void ApplicationsModel::init()
                 const QModelIndex idx = index(m_items.indexOf(item));
                 Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleRunning, ApplicationItem::RoleInstanceCount});
             });
+            connect(item, &ApplicationItem::isFavoriteChanged, [this, item]() {
+                const QModelIndex idx = index(m_items.indexOf(item));
+                Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleFavorite});
+            });
+            item->setFavorite(m_favoriteAppIds.contains(item->appId()));
 
             qDebug() << "!!! Inserted application item" << m_items.last()->appId() << m_items.last()->desktopFile()->name() <<
                         m_items.last()->desktopFile()->iconName();
@@ -137,4 +172,15 @@ ApplicationItem *ApplicationsModel::findAppItem(const QString &appId) const
         return (*it);
     }
     return nullptr;
+}
+
+void ApplicationsModel::loadSettings()
+{
+    m_favoriteAppIds = m_settings.value(QStringLiteral("Favorites")).toStringList();
+}
+
+void ApplicationsModel::saveSettings()
+{
+    m_favoriteAppIds.removeDuplicates();
+    m_settings.setValue(QStringLiteral("Favorites"), QVariant(m_favoriteAppIds));
 }

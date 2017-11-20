@@ -57,6 +57,20 @@ void ApplicationItem::stop()
     }
 }
 
+void ApplicationItem::setFavorite(bool favorite)
+{
+    if (m_favorite == favorite)
+        return;
+
+    m_favorite = favorite;
+    Q_EMIT isFavoriteChanged(m_favorite);
+}
+
+bool ApplicationItem::isFavorite() const
+{
+    return m_favorite;
+}
+
 int ApplicationItem::instanceCount() const
 {
     QSet<QWaylandClient *> clients;

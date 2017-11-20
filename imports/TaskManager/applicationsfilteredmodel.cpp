@@ -46,6 +46,21 @@ void ApplicationsFilteredModel::setShowRunning(bool showRunning)
     Q_EMIT showRunningChanged(m_showRunning);
 }
 
+bool ApplicationsFilteredModel::showFavorite() const
+{
+    return m_showFavorite;
+}
+
+void ApplicationsFilteredModel::setShowFavorite(bool showFavorite)
+{
+    if (m_showFavorite == showFavorite)
+        return;
+
+    m_showFavorite = showFavorite;
+    invalidateFilter();
+    Q_EMIT showFavoriteChanged(m_showFavorite);
+}
+
 bool ApplicationsFilteredModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
     if (sourceParent.isValid()) {
@@ -54,12 +69,11 @@ bool ApplicationsFilteredModel::filterAcceptsRow(int sourceRow, const QModelInde
 
     const QModelIndex &sourceIndex = sourceModel()->index(sourceRow, 0);
 
-    bool running = sourceIndex.data(ApplicationItem::RoleRunning).toBool();
+    const bool running = sourceIndex.data(ApplicationItem::RoleRunning).toBool();
     const bool showOnlyRunning = m_showRunning ? m_showRunning && running : true;
 
-    if (m_filterString.isEmpty()) {
-        return showOnlyRunning;
-    }
+    const bool favorite = sourceIndex.data(ApplicationItem::RoleFavorite).toBool();
+    const bool showOnlyFavorite = m_showFavorite ? m_showFavorite && favorite : true;
 
     const QString &appId = sourceIndex.data(ApplicationItem::RoleAppId).toString();
     const QString &appName = sourceIndex.data(ApplicationItem::RoleName).toString();
@@ -67,8 +81,9 @@ bool ApplicationsFilteredModel::filterAcceptsRow(int sourceRow, const QModelInde
     const QStringList &keywords = sourceIndex.data(ApplicationItem::RoleKeywords).toStringList();
 
     // filter by search string
-    return showOnlyRunning && (appId.contains(m_filterString, filterCaseSensitivity()) ||
-                               appName.contains(m_filterString, filterCaseSensitivity()) ||
-                               comment.contains(m_filterString, filterCaseSensitivity()) ||
-                               !keywords.filter(m_filterString, filterCaseSensitivity()).isEmpty());
+    return showOnlyRunning && showOnlyFavorite &&
+            (appId.contains(m_filterString, filterCaseSensitivity()) ||
+             appName.contains(m_filterString, filterCaseSensitivity()) ||
+             comment.contains(m_filterString, filterCaseSensitivity()) ||
+             !keywords.filter(m_filterString, filterCaseSensitivity()).isEmpty());
 }
