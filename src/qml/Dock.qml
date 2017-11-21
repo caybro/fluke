@@ -19,6 +19,8 @@ Pane {
 
     signal activateApplication(string appId)
 
+    enabled: visible
+
     ContextMenu {
         id: contextMenu
     }
@@ -76,7 +78,7 @@ Pane {
                 if (!running) {
                     Applications.startApplication(appId);
                 } else {
-                    dock.activateApplication(appId)
+                    dock.activateApplication(appId);
                 }
             }
         }

@@ -76,6 +76,15 @@ WaylandOutput {
             anchors.fill: parent
             windowSystemCursorEnabled: false
 
+            onMouseYChanged: {
+                if (!dock.visible && mouseY >= win.height - 5) {
+                    dock.show();
+                } else if (dock.visible && !dock.contains(mapToItem(dock, mouseX, mouseY)) &&
+                           mouseY < win.height - dock.height) {
+                    dock.hide();
+                }
+            }
+
             Panel  {
                 id: panel
                 anchors.top: parent.top
@@ -134,8 +143,19 @@ WaylandOutput {
             Dock {
                 id: dock
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                visible: !appLauncher.visible && count > 0
+                y: win.height
+                visible: y < win.height && !appLauncher.visible && count > 0
+
+                function show() {
+                    dock.y = win.height - dock.height;
+                }
+
+                function hide() {
+                    dock.y = win.height;
+                }
+
+                Behavior on y { NumberAnimation { duration: 150 } }
+
                 onActivateApplication: {
                     output.activateApplication(appId);
                 }
