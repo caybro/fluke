@@ -23,6 +23,7 @@ ToolBar {
     signal showLauncher()
 
     property bool appLauncherVisible: false
+    property alias autohideDock: sessionIndicator.autohideDock
     readonly property var soundIndicator: soundIndicatorLoader.item ? soundIndicatorLoader.item : null
 
     RowLayout {
@@ -59,6 +60,7 @@ ToolBar {
             Indicators.Power {}
 
             Indicators.Session {
+                id: sessionIndicator
                 onLogout: panel.logout()
                 onSuspend: panel.suspend()
                 onReboot: panel.reboot()

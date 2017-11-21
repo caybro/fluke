@@ -4,6 +4,8 @@ import QtQuick.Window 2.3
 import QtWayland.Compositor 1.0
 import QtQuick.Controls.Material 2.2
 
+import Qt.labs.settings 1.0
+
 import org.fluke.TaskManager 1.0
 import org.fluke.Session 1.0
 
@@ -71,17 +73,24 @@ WaylandOutput {
             source: "qrc:/images/background.jpg"
         }
 
+        Settings {
+            id: settings
+            property alias autohideDock: panel.autohideDock
+        }
+
         WaylandMouseTracker {
             id: mouseTracker
             anchors.fill: parent
             windowSystemCursorEnabled: false
 
             onMouseYChanged: {
-                if (!dock.visible && mouseY >= win.height - 5) {
-                    dock.show();
-                } else if (dock.visible && !dock.contains(mapToItem(dock, mouseX, mouseY)) &&
-                           mouseY < win.height - dock.height) {
-                    dock.hide();
+                if (dock.autohide) {
+                    if (!dock.visible && mouseY >= win.height - 5) {
+                        dock.show();
+                    } else if (dock.visible && !dock.contains(mapToItem(dock, mouseX, mouseY)) &&
+                               mouseY < win.height - dock.height) {
+                        dock.hide();
+                    }
                 }
             }
 
@@ -142,9 +151,13 @@ WaylandOutput {
 
             Dock {
                 id: dock
+                anchors.bottom: !autohide ? parent.bottom : undefined
                 anchors.horizontalCenter: parent.horizontalCenter
-                y: win.height
-                visible: y < win.height && !appLauncher.visible && count > 0
+                y: autohide ? win.height : undefined
+                visible: autohide ? y < win.height && !appLauncher.visible && count > 0
+                                  : !appLauncher.visible && count > 0
+
+                property alias autohide: settings.autohideDock
 
                 function show() {
                     dock.y = win.height - dock.height;

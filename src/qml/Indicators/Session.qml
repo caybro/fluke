@@ -4,6 +4,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.2
 
+import Qt.labs.settings 1.0
+
 import org.fluke.Session 1.0
 
 ToolButton {
@@ -11,6 +13,8 @@ ToolButton {
     font.pointSize: 14
     font.weight: Font.DemiBold
     text: "\uf013"
+
+    property bool autohideDock: false
 
     Component.onCompleted: {
         indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
@@ -49,6 +53,17 @@ ToolButton {
                     window.Material.theme = checked ? Material.Dark : Material.Light
                 }
                 text: qsTr("Dark Theme")
+            }
+
+            MenuItem {
+                id: autohideDockCheckbox
+                checkable: true
+                checked: indicatorSession.autohideDock
+                onToggled: {
+                    indicatorSession.autohideDock = checked
+                }
+
+                text: qsTr("Autohide Dock")
             }
 
             MenuSeparator {}
