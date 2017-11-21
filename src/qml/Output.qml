@@ -30,7 +30,7 @@ WaylandOutput {
     readonly property Connections _appConn: Connections {
         target: Applications
         onApplicationQuit: {
-            if (appId == dock.activeApp) { // TODO activate another app
+            if (appId == dock.activeApp) { // TODO activate another app, also when an app is minimized
                 dock.activeApp = "";
             }
         }
@@ -45,8 +45,10 @@ WaylandOutput {
         for (var i = surfaces.length - 1; i >= 0; i--) {
             var view = viewsBySurface[surfaces[i]];
             if (view.appId === appId) {
+                view.minimized = false;
                 view.takeFocus();
                 view.raise();
+                dock.activeApp = appId;
                 return;
             }
         }

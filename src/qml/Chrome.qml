@@ -10,9 +10,10 @@ ShellSurfaceItem {
     readonly property alias appId: priv.appId
 
     property bool isPopup: false
+    property bool minimized: false
     property Item workspace
 
-    visible: !priv.minimized && !workspace.appLauncherVisible
+    visible: !minimized && !workspace.appLauncherVisible
 
     Component.onCompleted: {
         takeFocus();
@@ -23,7 +24,6 @@ ShellSurfaceItem {
         id: priv
         readonly property int pid: shellSurface.surface.client.processId
         property string appId
-        property bool minimized: false
     }
 
     onSurfaceDestroyed: {
@@ -79,7 +79,8 @@ ShellSurfaceItem {
             unmaximizeAnimation.start();
         }
         onSetMinimized: {
-            priv.minimized = true;
+            rootChrome.minimized = true;
+            workspace.activated("");
         }
         onShowWindowMenu: {
             console.info("Window menu:", seat, localSurfacePosition)
