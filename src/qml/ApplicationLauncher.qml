@@ -87,6 +87,7 @@ Pane {
 
             ToolTip.text: model.comment
             ToolTip.visible: hovered && model.comment
+            ToolTip.delay: 500
             MouseArea {
                 anchors.fill: parent
                 acceptedButtons: Qt.RightButton | Qt.LeftButton
@@ -113,8 +114,8 @@ Pane {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 30
-        spacing: 30
+        anchors.margins: 15
+        spacing: 15
 
         TextField {
             id: searchField
