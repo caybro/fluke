@@ -51,9 +51,8 @@ Pane {
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "\uf111"
+                    text: model.running ? "\uf111" : ""
                     color: Material.accent
-                    visible: model.running
                     font.pixelSize: 7
                 }
             }
