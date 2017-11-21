@@ -57,7 +57,7 @@ ShellSurfaceItem {
 
         // xdg_shell only
         onActivatedChanged: {
-            if (shellSurface.activated) {
+            if (shellSurface.activated && !rootChrome.isPopup) {
                 workspace.activated(rootChrome.appId);
                 receivedFocusAnimation.start();
             }
