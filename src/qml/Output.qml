@@ -20,10 +20,19 @@ WaylandOutput {
         compositor.defaultSeat.keymap.variant = "qwerty";
     }
 
-    readonly property Connections _conn: Connections {
+    readonly property Connections _compConn: Connections {
         target: compositor
         onSurfaceAboutToBeDestroyed: {
             delete viewsBySurface[surface];
+        }
+    }
+
+    readonly property Connections _appConn: Connections {
+        target: Applications
+        onApplicationQuit: {
+            if (appId == dock.activeApp) { // TODO activate another app
+                dock.activeApp = "";
+            }
         }
     }
 

@@ -95,4 +95,7 @@ void ApplicationItem::decrementSurfaceCount(QWaylandSurface *surface)
 {
     m_surfaces.removeAll(surface);
     Q_EMIT surfaceCountChanged(surfaceCount());
+    if (m_surfaces.isEmpty()) {
+        Q_EMIT applicationQuit(m_appId);
+    }
 }

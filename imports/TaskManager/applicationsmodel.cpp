@@ -154,6 +154,7 @@ void ApplicationsModel::init()
                 const QModelIndex idx = index(m_items.indexOf(item));
                 Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleFavorite});
             });
+            connect(item, &ApplicationItem::applicationQuit, this, &ApplicationsModel::applicationQuit);
             item->setFavorite(m_favoriteAppIds.contains(item->appId()));
 
             qDebug() << "!!! Inserted application item" << m_items.last()->appId() << m_items.last()->desktopFile()->name() <<

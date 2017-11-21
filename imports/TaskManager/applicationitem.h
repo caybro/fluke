@@ -46,6 +46,7 @@ public:
 Q_SIGNALS:
     void surfaceCountChanged(int count);
     void isFavoriteChanged(bool favorite);
+    void applicationQuit(const QString &appId);
 
 private:
     QString m_appId;

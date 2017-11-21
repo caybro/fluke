@@ -26,6 +26,9 @@ public Q_SLOTS:
     void setSurfaceVanished(const QString &appId, QWaylandSurface *surface);
     void setApplicationFavorite(const QString &appId, bool favorite);
 
+Q_SIGNALS:
+    void applicationQuit(const QString &appId);
+
 private:
     void init();
     ApplicationItem * findAppItem(const QString &appId) const;
