@@ -56,7 +56,7 @@ Pane {
                 }
             }
 
-            ToolTip.text: model.comment
+            ToolTip.text: "%1 (%2)".arg(model.comment).arg(model.name)
             ToolTip.visible: hovered && model.comment
             MouseArea {
                 anchors.fill: parent
