@@ -21,6 +21,11 @@ Pane {
 
     enabled: visible
 
+    background: Rectangle {
+        color: Material.background
+        radius: 5
+    }
+
     ContextMenu {
         id: contextMenu
     }
@@ -29,6 +34,7 @@ Pane {
         id: view
         implicitWidth: childrenRect.width
         orientation: ListView.Horizontal
+        spacing: 3
         model: ApplicationsFilteredModel {
             sourceModel: Applications
             showFavoriteAndRunning: true

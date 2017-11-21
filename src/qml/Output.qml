@@ -151,16 +151,15 @@ WaylandOutput {
 
             Dock {
                 id: dock
-                anchors.bottom: !autohide ? parent.bottom : undefined
                 anchors.horizontalCenter: parent.horizontalCenter
-                y: autohide ? win.height : undefined
+                y: autohide ? win.height : win.height - dock.height + dock.background.radius
                 visible: autohide ? y < win.height && !appLauncher.visible && count > 0
                                   : !appLauncher.visible && count > 0
 
                 property alias autohide: settings.autohideDock
 
                 function show() {
-                    dock.y = win.height - dock.height;
+                    dock.y = win.height - dock.height + dock.background.radius;
                 }
 
                 function hide() {
