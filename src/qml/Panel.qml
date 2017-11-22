@@ -33,7 +33,7 @@ ToolBar {
         anchors.rightMargin: 5
 
         ToolButton {
-            text: appLauncherVisible ? "\uf060" : "\uf0c9"
+            text: appLauncherVisible ? "\uf060" : "\uf00a"
             ToolTip.text: appLauncherVisible ? qsTr("Back") : qsTr("Menu")
             ToolTip.visible: hovered
             onClicked: panel.showLauncher()
