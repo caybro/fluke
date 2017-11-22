@@ -10,17 +10,16 @@ import org.fluke.TaskManager 1.0
 Pane {
     id: dock
     height: 70
-    opacity: 0.9
+    opacity: visible ? 0.9 : 0.0
     padding: 3
     activeFocusOnTab: false
+    enabled: visible
 
     readonly property int count: view.count + 1
     property string activeApp
 
     signal showLauncher()
     signal activateApplication(string appId)
-
-    enabled: visible
 
     background: Rectangle {
         color: Material.background

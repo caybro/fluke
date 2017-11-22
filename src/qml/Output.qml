@@ -172,6 +172,7 @@ WaylandOutput {
                 }
 
                 Behavior on y { NumberAnimation { duration: 150 } }
+                Behavior on opacity { NumberAnimation { duration: 200 } }
 
                 onActivateApplication: {
                     output.activateApplication(appId);
