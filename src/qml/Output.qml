@@ -157,6 +157,11 @@ WaylandOutput {
                                   : !appLauncher.visible && count > 0
 
                 property alias autohide: settings.autohideDock
+                onAutohideChanged: { // FIXME this shouldn't be necessary
+                    if (!autohide) {
+                        show();
+                    }
+                }
 
                 function show() {
                     dock.y = win.height - dock.height + dock.background.radius;
