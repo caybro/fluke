@@ -14,9 +14,10 @@ Pane {
     padding: 3
     activeFocusOnTab: false
 
-    readonly property alias count: view.count
+    readonly property int count: view.count + 1
     property string activeApp
 
+    signal showLauncher()
     signal activateApplication(string appId)
 
     enabled: visible
@@ -30,66 +31,85 @@ Pane {
         id: contextMenu
     }
 
-    ListView {
-        id: view
-        implicitWidth: childrenRect.width
-        orientation: ListView.Horizontal
+    RowLayout {
+        anchors.fill: parent
         spacing: 3
-        model: ApplicationsFilteredModel {
-            sourceModel: Applications
-            showFavoriteAndRunning: true
-        }
-        delegate: ItemDelegate {
-            id: appDelegate
-            highlighted: appId == dock.activeApp
-
-            readonly property string appId: model.appId
-            readonly property bool favorite: model.favorite
-            readonly property bool running: model.running
-
-            contentItem: ColumnLayout {
-                spacing: 0
-                QIconItem {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    icon: model.icon
-                    width: 32
-                    height: width
-                }
-                Label {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: model.running ? "\uf111" : ""
-                    color: Material.accent
-                    font.pixelSize: 7
-                }
+        ListView {
+            id: view
+            Layout.fillHeight: true
+            implicitWidth: childrenRect.width
+            orientation: ListView.Horizontal
+            spacing: 3
+            model: ApplicationsFilteredModel {
+                sourceModel: Applications
+                showFavoriteAndRunning: true
             }
+            visible: count > 0
+            delegate: ItemDelegate {
+                id: appDelegate
+                highlighted: appId == dock.activeApp
 
-            ToolTip.text: "%1 (%2)".arg(model.comment).arg(model.name)
-            ToolTip.visible: hovered && model.comment
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.RightButton | Qt.LeftButton
-                onPressed: {
-                    if (mouse.buttons == Qt.RightButton) {
-                        contextMenu.currentItem = appDelegate;
-                        contextMenu.open();
-                        mouse.accepted = true;
+                readonly property string appId: model.appId
+                readonly property bool favorite: model.favorite
+                readonly property bool running: model.running
+
+                contentItem: ColumnLayout {
+                    anchors.centerIn: parent
+                    spacing: 0
+                    QIconItem {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        icon: model.icon
+                        width: 32
+                        height: width
+                    }
+                    Label {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: model.running ? "\uf111" : ""
+                        color: Material.accent
+                        font.pixelSize: 7
+                    }
+                }
+
+                ToolTip.text: "%1 (%2)".arg(model.comment).arg(model.name)
+                ToolTip.visible: hovered && model.comment
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.RightButton | Qt.LeftButton
+                    onPressed: {
+                        if (mouse.buttons == Qt.RightButton) {
+                            contextMenu.currentItem = appDelegate;
+                            contextMenu.open();
+                            mouse.accepted = true;
+                        } else {
+                            mouse.accepted = false;
+                        }
+                    }
+                }
+
+                onClicked: {
+                    if (!running) {
+                        Applications.startApplication(appId);
                     } else {
-                        mouse.accepted = false;
+                        dock.activateApplication(appId);
                     }
                 }
             }
-
-            onClicked: {
-                if (!running) {
-                    Applications.startApplication(appId);
-                } else {
-                    dock.activateApplication(appId);
-                }
+            addDisplaced: Transition {
+                NumberAnimation { properties: "x,y"; duration: 200 }
             }
+            removeDisplaced: addDisplaced
         }
-        addDisplaced: Transition {
-            NumberAnimation { properties: "x,y"; duration: 200 }
+
+        Button {
+            Layout.fillHeight: true
+            Layout.topMargin: -12
+            anchors.verticalCenter: parent.verticalCenter
+            flat: true
+            text: "\uf00a"
+            ToolTip.text: qsTr("Applications")
+            ToolTip.visible: hovered
+            font.pixelSize: 24
+            onClicked: dock.showLauncher()
         }
-        removeDisplaced: addDisplaced
     }
 }

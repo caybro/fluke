@@ -21,24 +21,24 @@
         <translation type="vanished">Oblíbená</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="125"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="126"/>
         <source>Type to search...</source>
         <translation>Vyhledávejte psaním...</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="173"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="174"/>
         <source>All</source>
         <comment>all applications</comment>
         <translation>Všechny</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="177"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="178"/>
         <source>Running</source>
         <comment>running applications</comment>
         <translation>Spuštěné</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="181"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="182"/>
         <source>Favorite</source>
         <comment>favorite applications</comment>
         <translation>Oblíbené</translation>
@@ -89,6 +89,14 @@
     </message>
 </context>
 <context>
+    <name>Dock</name>
+    <message>
+        <location filename="../qml/Dock.qml" line="109"/>
+        <source>Applications</source>
+        <translation>Aplikace</translation>
+    </message>
+</context>
+<context>
     <name>Output</name>
     <message>
         <location filename="../qml/Output.qml" line="104"/>
@@ -134,14 +142,13 @@
 <context>
     <name>Panel</name>
     <message>
-        <location filename="../qml/Panel.qml" line="37"/>
+        <location filename="../qml/Panel.qml" line="38"/>
         <source>Back</source>
         <translation>Zpět</translation>
     </message>
     <message>
-        <location filename="../qml/Panel.qml" line="37"/>
         <source>Menu</source>
-        <translation>Nabídka</translation>
+        <translation type="vanished">Nabídka</translation>
     </message>
 </context>
 <context>

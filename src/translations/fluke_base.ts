@@ -4,24 +4,24 @@
 <context>
     <name>ApplicationLauncher</name>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="125"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="126"/>
         <source>Type to search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="173"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="174"/>
         <source>All</source>
         <comment>all applications</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="177"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="178"/>
         <source>Running</source>
         <comment>running applications</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="181"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="182"/>
         <source>Favorite</source>
         <comment>favorite applications</comment>
         <translation type="unfinished"></translation>
@@ -56,6 +56,14 @@
     <message>
         <location filename="../qml/Indicators/DateTime.qml" line="127"/>
         <source>Display seconds in clock</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Dock</name>
+    <message>
+        <location filename="../qml/Dock.qml" line="109"/>
+        <source>Applications</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -105,13 +113,8 @@
 <context>
     <name>Panel</name>
     <message>
-        <location filename="../qml/Panel.qml" line="37"/>
+        <location filename="../qml/Panel.qml" line="38"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Panel.qml" line="37"/>
-        <source>Menu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

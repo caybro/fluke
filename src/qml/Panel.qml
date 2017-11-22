@@ -20,7 +20,7 @@ ToolBar {
     signal suspend()
     signal reboot()
     signal shutdown()
-    signal showLauncher()
+    signal hideLauncher()
 
     property bool appLauncherVisible: false
     property alias autohideDock: sessionIndicator.autohideDock
@@ -33,10 +33,11 @@ ToolBar {
         anchors.rightMargin: 5
 
         ToolButton {
-            text: appLauncherVisible ? "\uf060" : "\uf00a"
-            ToolTip.text: appLauncherVisible ? qsTr("Back") : qsTr("Menu")
+            visible: appLauncherVisible
+            text: "\uf060"
+            ToolTip.text: qsTr("Back")
             ToolTip.visible: hovered
-            onClicked: panel.showLauncher()
+            onClicked: panel.hideLauncher()
         }
 
         Indicators.DateTime {

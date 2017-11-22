@@ -124,7 +124,7 @@ WaylandOutput {
                     systemDialog.acceptedFunctionCallback = function() { Session.shutdown() }
                     systemDialog.open();
                 }
-                onShowLauncher: appLauncher.visible ? appLauncher.hide() : appLauncher.show()
+                onHideLauncher: appLauncher.hide()
             }
 
             Item {
@@ -176,6 +176,7 @@ WaylandOutput {
                 onActivateApplication: {
                     output.activateApplication(appId);
                 }
+                onShowLauncher: appLauncher.show()
             }
 
             //            Loader {
