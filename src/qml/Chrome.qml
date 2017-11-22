@@ -13,7 +13,10 @@ ShellSurfaceItem {
     property bool minimized: false
     property Item workspace
 
-    visible: !minimized && !workspace.appLauncherVisible
+    opacity: !minimized && !workspace.appLauncherVisible ? 1 : 0
+    visible: opacity > 0
+
+    Behavior on opacity { NumberAnimation { duration: 200 } }
 
     Component.onCompleted: {
         takeFocus();
