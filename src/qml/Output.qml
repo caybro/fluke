@@ -68,9 +68,10 @@ WaylandOutput {
         Material.accent: _pal.highlight
 
         background: Image {
-            fillMode: Image.Tile
+            fillMode: Image.PreserveAspectFit
             asynchronous: true
             source: "qrc:/images/background.jpg"
+            sourceSize: Qt.size(win.width, win.height)
         }
 
         Settings {
