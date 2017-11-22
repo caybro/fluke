@@ -14,6 +14,7 @@ ShellSurfaceItem {
     property Item workspace
 
     opacity: !minimized && !workspace.appLauncherVisible ? 1 : 0
+    paintEnabled: !minimized
     visible: opacity > 0
 
     Behavior on opacity { NumberAnimation { duration: 200 } }
