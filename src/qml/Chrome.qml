@@ -83,10 +83,7 @@ ShellSurfaceItem {
         }
         onSetMinimized: {
             rootChrome.minimized = true;
-            workspace.activated("");
-        }
-        onShowWindowMenu: {
-            console.info("Window menu:", seat, localSurfacePosition)
+            workspace.minimized(rootChrome.appId);
         }
     }
 

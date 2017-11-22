@@ -32,9 +32,10 @@ WaylandOutput {
     readonly property Connections _appConn: Connections {
         target: Applications
         onApplicationQuit: {
-            if (appId == dock.activeApp) { // TODO activate another app, also when an app is minimized
+            if (appId == dock.activeApp) {
                 dock.activeApp = "";
             }
+            activateNextApplication();
         }
     }
 
@@ -50,7 +51,20 @@ WaylandOutput {
                 view.minimized = false;
                 view.takeFocus();
                 view.raise();
-                dock.activeApp = appId;
+                dock.activeApp = view.appId;
+                return;
+            }
+        }
+    }
+
+    function activateNextApplication() {
+        var surfaces = Object.keys(viewsBySurface);
+        for (var i = surfaces.length - 1; i >= 0; i--) {
+            var view = viewsBySurface[surfaces[i]];
+            if (!view.minimized) {
+                view.takeFocus();
+                view.raise();
+                dock.activeApp = view.appId;
                 return;
             }
         }
@@ -138,9 +152,13 @@ WaylandOutput {
                 anchors.bottom: appLauncher.visible ? parent.bottom : dock.top
 
                 signal activated(string appId)
+                signal minimized(string appId)
 
                 onActivated: {
                     dock.activeApp = appId;
+                }
+                onMinimized: {
+                    output.activateNextApplication();
                 }
             }
 
