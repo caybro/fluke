@@ -164,11 +164,11 @@ WaylandOutput {
                 }
 
                 function show() {
-                    dock.y = win.height - dock.height + dock.background.radius;
+                    dock.y = Qt.binding(function () { return win.height - dock.height + dock.background.radius; });
                 }
 
                 function hide() {
-                    dock.y = win.height;
+                    dock.y = Qt.binding(function () { return win.height; });
                 }
 
                 Behavior on y { NumberAnimation { duration: 150 } }
