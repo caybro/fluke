@@ -7,6 +7,7 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include <QIcon>
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -42,7 +43,14 @@ int main(int argc, char *argv[])
         }
     }
 
-    QQmlApplicationEngine appEngine(QUrl(QStringLiteral("qrc:///qml/main.qml")));
+    QQmlApplicationEngine appEngine;
+    QQmlContext *context = appEngine.rootContext();
+#ifdef QT_QML_DEBUG
+    context->setContextProperty(QStringLiteral("debugMode"), true);
+#else
+    context->setContextProperty(QStringLiteral("debugMode"), false);
+#endif
+    appEngine.load(QUrl(QStringLiteral("qrc:///qml/main.qml")));
 
     return app.exec();
 }
