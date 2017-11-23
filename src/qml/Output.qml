@@ -99,7 +99,7 @@ WaylandOutput {
             windowSystemCursorEnabled: false
 
             onMouseYChanged: {
-                if (dock.autohide) {
+                if (dock.autohide && !workspace.fullscreenAppId) {
                     if (!dock.visible && mouseY >= win.height - 5) {
                         dock.show();
                     } else if (dock.visible && !dock.contains(mapToItem(dock, mouseX, mouseY)) &&
@@ -115,6 +115,8 @@ WaylandOutput {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 appLauncherVisible: appLauncher.visible
+                visible: !workspace.fullscreenAppId
+                height: !workspace.fullscreenAppId ? implicitHeight : 0
                 onLogout: {
                     systemDialog.title = qsTr("Log Out");
                     systemDialog.text = qsTr("Do you really want to logout?");
@@ -151,14 +153,35 @@ WaylandOutput {
                 anchors.right: parent.right
                 anchors.bottom: appLauncher.visible ? parent.bottom : dock.top
 
+                property string fullscreenAppId
+                onFullscreenAppIdChanged: {
+                    console.info("!!! FSCREEN APPID:", fullscreenAppId)
+                }
+
                 signal activated(string appId)
                 signal minimized(string appId)
+                signal fullscreen(string appId)
+                signal exitFullscreen(string appId)
 
                 onActivated: {
                     dock.activeApp = appId;
                 }
                 onMinimized: {
                     output.activateNextApplication();
+                }
+                onFullscreen: {
+                    if (appId) {
+                        fullscreenAppId = appId;
+                        dock.hide();
+                    }
+                }
+                onExitFullscreen: {
+                    if (fullscreenAppId == appId) {
+                        fullscreenAppId = "";
+                    }
+                    if (fullscreenAppId == "" && !dock.autohide) {
+                        dock.show();
+                    }
                 }
             }
 
@@ -172,8 +195,8 @@ WaylandOutput {
                 id: dock
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: autohide ? win.height : win.height - dock.height + dock.background.radius
-                visible: autohide ? y < win.height && !appLauncher.visible && count > 0
-                                  : !appLauncher.visible && count > 0
+                visible: (autohide ? y < win.height && !appLauncher.visible && count > 0
+                                  : !appLauncher.visible && count > 0) && !workspace.fullscreenAppId
 
                 property alias autohide: settings.autohideDock
                 onAutohideChanged: { // FIXME this shouldn't be necessary

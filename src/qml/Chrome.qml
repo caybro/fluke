@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Window 2.2
 import QtWayland.Compositor 1.0
 
 import org.fluke.TaskManager 1.0
@@ -14,7 +15,6 @@ ShellSurfaceItem {
     property Item workspace
 
     opacity: !minimized && !workspace.appLauncherVisible ? 1 : 0
-    paintEnabled: !minimized
     visible: opacity > 0
 
     Behavior on opacity { NumberAnimation { duration: 200 } }
@@ -43,7 +43,7 @@ ShellSurfaceItem {
         target: compositor
         ignoreUnknownSignals: true
         onSurfaceAboutToBeDestroyed: {
-            if (!isPopup) {
+            if (!rootChrome.isPopup) {
                 Applications.setSurfaceVanished(priv.appId, surface);
             }
         }
@@ -86,6 +86,20 @@ ShellSurfaceItem {
             rootChrome.minimized = true;
             workspace.minimized(rootChrome.appId);
         }
+        onSetFullscreen: {
+            console.info("!!! FULLSCREEN BABY")
+            workspace.fullscreen(rootChrome.appId);
+            rootChrome.bufferLocked = true;
+            rootChrome.shellSurface.sendFullscreen(Qt.size(rootChrome.Window.width, rootChrome.Window.height));
+            fullscreenAnimation.start();
+        }
+        onUnsetFullscreen: {
+            console.info("!!! EXIT FULLSCREEN BABY")
+            workspace.exitFullscreen(rootChrome.appId);
+            rootChrome.bufferLocked = true;
+            rootChrome.shellSurface.sendUnmaximized(); // FIXME sendExitFullscreen() missing in QtWayland
+            exitFullscreenAnimation.start();
+        }
     }
 
     SequentialAnimation {
@@ -125,6 +139,26 @@ ShellSurfaceItem {
             PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; from: 0 }
             PropertyAnimation { target: rootChrome; property: "width"; duration: 80; from: rootChrome.workspace.width }
             PropertyAnimation { target: rootChrome; property: "height"; duration: 80; from: rootChrome.workspace.height }
+        }
+        ScriptAction { script: { rootChrome.bufferLocked = false; } }
+    }
+
+    SequentialAnimation {
+        id: fullscreenAnimation
+        ParallelAnimation {
+            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; to: 0 }
+            PropertyAnimation { target: rootChrome; property: "width"; duration: 80; to: rootChrome.Window.width }
+            PropertyAnimation { target: rootChrome; property: "height"; duration: 80; to: rootChrome.Window.height }
+        }
+        ScriptAction { script: { rootChrome.bufferLocked = false; } }
+    }
+
+    SequentialAnimation {
+        id: exitFullscreenAnimation
+        ParallelAnimation {
+            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; from: 0 }
+            PropertyAnimation { target: rootChrome; property: "width"; duration: 80; from: rootChrome.Window.width }
+            PropertyAnimation { target: rootChrome; property: "height"; duration: 80; from: rootChrome.Window.height }
         }
         ScriptAction { script: { rootChrome.bufferLocked = false; } }
     }
