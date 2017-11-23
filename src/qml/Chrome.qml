@@ -9,6 +9,7 @@ ShellSurfaceItem {
 
     readonly property bool isChild: parent.shellSurface !== undefined
     readonly property alias appId: priv.appId
+    readonly property bool activated: shellSurface.activated
 
     property bool isPopup: false
     property bool minimized: false

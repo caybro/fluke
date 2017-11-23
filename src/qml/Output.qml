@@ -43,15 +43,19 @@ WaylandOutput {
         colorGroup: SystemPalette.Active
     }
 
+    function activateView(view) {
+        view.takeFocus();
+        view.raise();
+        dock.activeApp = view.appId;
+    }
+
     function activateApplication(appId) {
         var surfaces = Object.keys(viewsBySurface);
         for (var i = surfaces.length - 1; i >= 0; i--) {
             var view = viewsBySurface[surfaces[i]];
             if (view.appId === appId) {
                 view.minimized = false;
-                view.takeFocus();
-                view.raise();
-                dock.activeApp = view.appId;
+                activateView(view);
                 return;
             }
         }
@@ -62,21 +66,63 @@ WaylandOutput {
         for (var i = surfaces.length - 1; i >= 0; i--) {
             var view = viewsBySurface[surfaces[i]];
             if (!view.minimized) {
-                view.takeFocus();
-                view.raise();
-                dock.activeApp = view.appId;
+                activateView(view);
                 return;
             }
         }
         dock.activeApp = "";
     }
 
+    function indexOfActivatedSurface() {
+        var surfaces = Object.keys(viewsBySurface);
+        for (var i = 0; i < surfaces.length; i++) {
+            var view = viewsBySurface[surfaces[i]];
+            if (view.activated && !view.minimized) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    function focusNextNonMinimized(startIndex) {
+        var currentIndex = startIndex !== undefined ? startIndex : indexOfActivatedSurface() + 1;
+        var surfaces = Object.keys(viewsBySurface);
+        if (currentIndex >= surfaces.length) {
+            focusNextNonMinimized(0); // try again from the beginning
+        } else if (currentIndex !== -1) {
+            for (var i = currentIndex; i < surfaces.length; i++) {
+                var view = viewsBySurface[surfaces[i]];
+                if (!view.minimized) {
+                    activateView(view);
+                    return;
+                }
+            }
+        }
+    }
+
+    function focusPreviousNonMinimized(startIndex) {
+        var currentIndex = startIndex !== undefined ? startIndex : indexOfActivatedSurface() - 1;
+        var surfaces = Object.keys(viewsBySurface);
+        if (currentIndex < 0) {
+            focusPreviousNonMinimized(surfaces.length - 1); // try again from the end
+        } else if (currentIndex !== -1) {
+            for (var i = currentIndex; i >= 0; i--) {
+                var view = viewsBySurface[surfaces[i]];
+                if (!view.minimized) {
+                    activateView(view);
+                    return;
+                }
+            }
+        }
+    }
+
     window: ApplicationWindow {
         id: win
         x: Screen.virtualX
         y: Screen.virtualY
-        width: 1024 // screen.width // FIXME enable when running in a real session
-        height: 768 // screen.height
+        width: debugMode ? 1024 : screen.width
+        height: debugMode ? 768 : screen.height
+        visibility: debugMode ? Window.Windowed : Window.FullScreen
         visible: true
 
         Material.theme: Material.Dark
@@ -269,6 +315,20 @@ WaylandOutput {
             sequence: Qt.Key_VolumeDown
             context: Qt.ApplicationShortcut
             onActivated: panel.soundIndicator ? panel.soundIndicator.decreaseVolume() : undefined
+        }
+
+        Shortcut {
+            sequence: debugMode ? "Ctrl+Tab" : "Alt+Tab"
+            enabled: dock.activeApp
+            context: Qt.ApplicationShortcut
+            onActivated: focusNextNonMinimized()
+        }
+
+        Shortcut {
+            sequence: debugMode ? "Ctrl+Shift+Tab" : "Alt+Shift+Tab"
+            enabled: dock.activeApp
+            context: Qt.ApplicationShortcut
+            onActivated: focusPreviousNonMinimized()
         }
 
         Dialog {

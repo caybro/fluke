@@ -90,6 +90,12 @@ ToolButton {
                 onClicked: indicatorSession.shutdown()
                 enabled: Session.canShutdown()
             }
+
+            Component.onCompleted: {
+                if (!debugMode) {
+                    removeItem(0); // removes the "Fullscreen" checkbox in production mode
+                }
+            }
         }
     }
 
