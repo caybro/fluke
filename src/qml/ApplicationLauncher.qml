@@ -153,6 +153,7 @@ Pane {
             clip: true
             currentIndex: 0
             activeFocusOnTab: true
+            snapMode: GridView.SnapToRow
 
             displaced: Transition {
                 NumberAnimation { properties: "x,y"; duration: 200 }
