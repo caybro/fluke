@@ -205,11 +205,6 @@ WaylandOutput {
                 anchors.bottom: appLauncher.visible ? parent.bottom : dock.top
 
                 property string fullscreenAppId
-                onFullscreenAppIdChanged: {
-                    if (fullscreenAppId == "" && !dock.autohide) {
-                        dock.show();
-                    }
-                }
 
                 signal activated(string appId)
                 signal minimized(string appId)
