@@ -35,6 +35,10 @@ WaylandOutput {
             if (appId == dock.activeApp) {
                 dock.activeApp = "";
             }
+            if (appId == workspace.fullscreenAppId) {
+                workspace.fullscreenAppId = "";
+            }
+
             activateNextApplication();
         }
     }
@@ -202,7 +206,9 @@ WaylandOutput {
 
                 property string fullscreenAppId
                 onFullscreenAppIdChanged: {
-                    console.info("!!! FSCREEN APPID:", fullscreenAppId)
+                    if (fullscreenAppId == "" && !dock.autohide) {
+                        dock.show();
+                    }
                 }
 
                 signal activated(string appId)
@@ -225,9 +231,6 @@ WaylandOutput {
                 onExitFullscreen: {
                     if (fullscreenAppId == appId) {
                         fullscreenAppId = "";
-                    }
-                    if (fullscreenAppId == "" && !dock.autohide) {
-                        dock.show();
                     }
                 }
             }
