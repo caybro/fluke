@@ -91,15 +91,15 @@ ShellSurfaceItem {
         }
         onSetFullscreen: {
             workspace.fullscreen(rootChrome.appId);
-            rootChrome.bufferLocked = true;
             rootChrome.shellSurface.sendFullscreen(output ? Qt.size(output.geometry.width, output.geometry.height)
                                                           : Qt.size(rootChrome.Window.width, rootChrome.Window.height));
+            rootChrome.bufferLocked = true;
             fullscreenAnimation.start();
         }
         onUnsetFullscreen: {
             workspace.exitFullscreen(rootChrome.appId);
-            rootChrome.bufferLocked = true;
             rootChrome.shellSurface.sendUnmaximized(); // FIXME sendExitFullscreen() missing in QtWayland
+            rootChrome.bufferLocked = true;
             exitFullscreenAnimation.start();
         }
     }

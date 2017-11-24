@@ -195,37 +195,21 @@ WaylandOutput {
                 onHideLauncher: appLauncher.hide()
             }
 
-            Item {
+            Workspace {
                 id: workspace
-                focus: true
-                readonly property alias appLauncherVisible: appLauncher.visible // used in Chrome.qml
-                anchors.top: panel.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.bottom: appLauncher.visible ? parent.bottom : dock.top
+                anchors.top: panel.bottom
+                anchors.bottom: appLauncherVisible ? parent.bottom : dock.top
+                focus: true
 
-                property string fullscreenAppId
-
-                signal activated(string appId)
-                signal minimized(string appId)
-                signal fullscreen(string appId)
-                signal exitFullscreen(string appId)
+                appLauncherVisible: appLauncher.visible // used in Chrome.qml
 
                 onActivated: {
                     dock.activeApp = appId;
                 }
                 onMinimized: {
                     output.activateNextApplication();
-                }
-                onFullscreen: {
-                    if (appId) {
-                        fullscreenAppId = appId;
-                    }
-                }
-                onExitFullscreen: {
-                    if (fullscreenAppId == appId) {
-                        fullscreenAppId = "";
-                    }
                 }
             }
 

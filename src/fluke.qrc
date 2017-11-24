@@ -15,5 +15,6 @@
         <file>translations/fluke_cs.qm</file>
         <file>qml/ApplicationLauncher.qml</file>
         <file>qml/ContextMenu.qml</file>
+        <file>qml/Workspace.qml</file>
     </qresource>
 </RCC>
