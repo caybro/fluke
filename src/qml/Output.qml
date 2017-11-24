@@ -166,8 +166,8 @@ WaylandOutput {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 appLauncherVisible: appLauncher.visible
-                visible: !workspace.fullscreenAppId
-                height: !workspace.fullscreenAppId ? implicitHeight : 0
+                visible: !workspace.fullscreenAppId || dock.activeApp != workspace.fullscreenAppId
+                height: visible ? implicitHeight : 0
                 onLogout: {
                     systemDialog.title = qsTr("Log Out");
                     systemDialog.text = qsTr("Do you really want to logout?");
@@ -225,7 +225,6 @@ WaylandOutput {
                 onFullscreen: {
                     if (appId) {
                         fullscreenAppId = appId;
-                        dock.hide();
                     }
                 }
                 onExitFullscreen: {
@@ -246,7 +245,8 @@ WaylandOutput {
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: autohide ? win.height : win.height - dock.height + dock.background.radius
                 visible: (autohide ? y < win.height && !appLauncher.visible && count > 0
-                                  : !appLauncher.visible && count > 0) && !workspace.fullscreenAppId
+                                  : !appLauncher.visible && count > 0) &&
+                         (!workspace.fullscreenAppId || dock.activeApp != workspace.fullscreenAppId)
 
                 property alias autohide: settings.autohideDock
                 onAutohideChanged: { // FIXME this shouldn't be necessary
