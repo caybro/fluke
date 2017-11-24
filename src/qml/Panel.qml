@@ -9,6 +9,7 @@ import org.fluke.Sound 1.0
 
 ToolBar {
     id: panel
+    padding: -5
     opacity: appLauncherVisible ? 0.9 : 1.0
     Behavior on opacity { NumberAnimation { duration: 200 } }
 

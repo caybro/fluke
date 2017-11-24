@@ -60,7 +60,7 @@ ToolButton {
         id: popup
         focus: visible
         x: parent.width - implicitWidth
-        y: parent.height
+        y: parent.height - parent.bottomPadding
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
         ColumnLayout {

@@ -26,7 +26,7 @@ ToolButton {
         focus: visible
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         x: (parent.width - implicitWidth) / 2
-        y: parent.height
+        y: parent.height - parent.bottomPadding
 
         ColumnLayout {
             anchors.fill: parent
