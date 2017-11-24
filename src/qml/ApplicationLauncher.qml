@@ -32,6 +32,16 @@ Pane {
     Keys.enabled: true
     Keys.forwardTo: searchField.activeFocus ? null : searchField
 
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.BackButton
+        onClicked: {
+            if (mouse.button === Qt.BackButton) {
+                hide();
+            }
+        }
+    }
+
     onVisibleChanged: {
         if (visible) {
             searchField.selectAll();
