@@ -63,6 +63,7 @@ Pane {
             width: GridView.view.cellWidth
             height: GridView.view.cellHeight
             highlighted: GridView.isCurrentItem
+            padding: 0
 
             readonly property string appId: model.appId
             readonly property bool favorite: model.favorite
@@ -73,7 +74,7 @@ Pane {
                 QIconItem {
                     anchors.horizontalCenter: parent.horizontalCenter
                     icon: model.icon
-                    width: 48
+                    width: 64
                     height: width
                 }
                 Label {

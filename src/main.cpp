@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     qputenv("QT_QUICK_CONTROLS_STYLE", QByteArrayLiteral("Material"));
 
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QGuiApplication app(argc, argv);
     app.setOrganizationName(QStringLiteral("caybro"));
     app.setApplicationDisplayName(QStringLiteral("Fluke"));
