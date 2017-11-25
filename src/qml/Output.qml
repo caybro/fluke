@@ -97,6 +97,9 @@ WaylandOutput {
             for (var i = currentIndex; i < surfaces.length; i++) {
                 var view = viewsBySurface[surfaces[i]];
                 if (!view.minimized) {
+                    if (view.fullscreen) {
+                        workspace.fullscreenAppId = view.appId;
+                    }
                     activateView(view);
                     return;
                 }
@@ -113,6 +116,9 @@ WaylandOutput {
             for (var i = currentIndex; i >= 0; i--) {
                 var view = viewsBySurface[surfaces[i]];
                 if (!view.minimized) {
+                    if (view.fullscreen) {
+                        workspace.fullscreenAppId = view.appId;
+                    }
                     activateView(view);
                     return;
                 }
