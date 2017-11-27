@@ -70,42 +70,42 @@
 <context>
     <name>Output</name>
     <message>
-        <location filename="../qml/Output.qml" line="178"/>
+        <location filename="../qml/Output.qml" line="183"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="179"/>
+        <location filename="../qml/Output.qml" line="184"/>
         <source>Do you really want to logout?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="184"/>
+        <location filename="../qml/Output.qml" line="189"/>
         <source>Suspend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="185"/>
+        <location filename="../qml/Output.qml" line="190"/>
         <source>Do you really want to suspend the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="190"/>
+        <location filename="../qml/Output.qml" line="195"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="191"/>
+        <location filename="../qml/Output.qml" line="196"/>
         <source>Do you really want to restart the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="196"/>
+        <location filename="../qml/Output.qml" line="201"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="197"/>
+        <location filename="../qml/Output.qml" line="202"/>
         <source>Do you really want to turn off the computer?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -205,13 +205,28 @@
 <context>
     <name>Workspace</name>
     <message>
-        <location filename="../qml/Workspace.qml" line="43"/>
+        <location filename="../qml/Workspace.qml" line="46"/>
+        <source>Select Wallpaper...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Workspace.qml" line="51"/>
         <source>Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Workspace.qml" line="47"/>
+        <location filename="../qml/Workspace.qml" line="55"/>
         <source>Logout...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Workspace.qml" line="64"/>
+        <source>Change Wallpaper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Workspace.qml" line="65"/>
+        <source>Image files (*.jpg *.png)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

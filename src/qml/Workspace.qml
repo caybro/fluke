@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 
+import Qt.labs.platform 1.0 as Platform
+
 Item {
     id: workspace
 
@@ -12,6 +14,7 @@ Item {
     signal fullscreen(string appId)
     signal exitFullscreen(string appId)
 
+    signal changeWallpaper(url fileUrl)
     signal showLauncher()
     signal logout()
     
@@ -40,12 +43,26 @@ Item {
         id: shellContextMenu
 
         MenuItem {
+            text: qsTr("Select Wallpaper...")
+            onTriggered: wallpaperDialog.open()
+        }
+
+        MenuItem {
             text: qsTr("Open Launcher")
-            onClicked: workspace.showLauncher()
+            onTriggered: workspace.showLauncher()
         }
         MenuItem {
             text: qsTr("Logout...")
-            onClicked: workspace.logout()
+            onTriggered: workspace.logout()
         }
+    }
+
+    Platform.FileDialog {
+        id: wallpaperDialog
+        fileMode: Platform.FileDialog.OpenFile
+        folder: "file:///usr/share/wallpapers" //Platform.StandardPaths.standardLocations(Platform.StandardPaths.PicturesLocation)[0]
+        title: qsTr("Change Wallpaper")
+        nameFilters: qsTr("Image files (*.jpg *.png)")
+        onAccepted: workspace.changeWallpaper(file)
     }
 }

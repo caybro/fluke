@@ -141,13 +141,18 @@ WaylandOutput {
         background: Image {
             fillMode: Image.PreserveAspectFit
             asynchronous: true
-            source: "qrc:/images/background.jpg"
+            source: settings.wallpaper
             sourceSize: Qt.size(win.width, win.height)
+        }
+
+        Component.onDestruction: {
+            settings.wallpaper = background.source;
         }
 
         Settings {
             id: settings
             property alias autohideDock: panel.autohideDock
+            property url wallpaper: "qrc:/images/background.jpg"
         }
 
         WaylandMouseTracker {
@@ -218,6 +223,7 @@ WaylandOutput {
                     output.activateNextApplication();
                 }
 
+                onChangeWallpaper: win.background.source = fileUrl
                 onShowLauncher: appLauncher.show()
                 onLogout: panel.logout()
             }
