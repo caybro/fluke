@@ -69,24 +69,24 @@ ToolButton {
             MenuSeparator {}
 
             MenuItem {
-                text: "\uf08b\t" + qsTr("Logout")
+                text: "\uf08b    " + qsTr("Logout")
                 onClicked: indicatorSession.logout()
             }
 
             MenuItem {
-                text: "\uf186\t" + qsTr("Sleep")
+                text: "\uf186    " + qsTr("Sleep")
                 onClicked: indicatorSession.suspend()
                 enabled: Session.canSuspend()
             }
 
             MenuItem {
-                text: "\uf021\t" + qsTr("Restart")
+                text: "\uf021    " + qsTr("Restart")
                 onClicked: indicatorSession.reboot()
                 enabled: Session.canReboot()
             }
 
             MenuItem {
-                text: "\uf011\t" + qsTr("Shutdown")
+                text: "\uf011    " + qsTr("Shutdown")
                 onClicked: indicatorSession.shutdown()
                 enabled: Session.canShutdown()
             }

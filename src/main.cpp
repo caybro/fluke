@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("wayland"));
     //qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
 
-    QIcon::setThemeName("breeze");
+    //QIcon::setThemeName("breeze");
 
     QTranslator qtTranslator;
     qtTranslator.load(QLocale::system(), QStringLiteral("qt_"), QString(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
