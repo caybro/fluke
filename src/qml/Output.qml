@@ -217,6 +217,9 @@ WaylandOutput {
                 onMinimized: {
                     output.activateNextApplication();
                 }
+
+                onShowLauncher: appLauncher.show()
+                onLogout: panel.logout()
             }
 
             ApplicationLauncher {

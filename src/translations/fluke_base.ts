@@ -4,24 +4,24 @@
 <context>
     <name>ApplicationLauncher</name>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="126"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="137"/>
         <source>Type to search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="174"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="186"/>
         <source>All</source>
         <comment>all applications</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="178"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="190"/>
         <source>Running</source>
         <comment>running applications</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="182"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="194"/>
         <source>Favorite</source>
         <comment>favorite applications</comment>
         <translation type="unfinished"></translation>
@@ -62,7 +62,7 @@
 <context>
     <name>Dock</name>
     <message>
-        <location filename="../qml/Dock.qml" line="109"/>
+        <location filename="../qml/Dock.qml" line="108"/>
         <source>Applications</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70,42 +70,42 @@
 <context>
     <name>Output</name>
     <message>
-        <location filename="../qml/Output.qml" line="104"/>
+        <location filename="../qml/Output.qml" line="178"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="105"/>
+        <location filename="../qml/Output.qml" line="179"/>
         <source>Do you really want to logout?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="110"/>
+        <location filename="../qml/Output.qml" line="184"/>
         <source>Suspend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="111"/>
+        <location filename="../qml/Output.qml" line="185"/>
         <source>Do you really want to suspend the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="116"/>
+        <location filename="../qml/Output.qml" line="190"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="117"/>
+        <location filename="../qml/Output.qml" line="191"/>
         <source>Do you really want to restart the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="122"/>
+        <location filename="../qml/Output.qml" line="196"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="123"/>
+        <location filename="../qml/Output.qml" line="197"/>
         <source>Do you really want to turn off the computer?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -113,7 +113,7 @@
 <context>
     <name>Panel</name>
     <message>
-        <location filename="../qml/Panel.qml" line="38"/>
+        <location filename="../qml/Panel.qml" line="39"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -199,6 +199,19 @@
     <message>
         <location filename="../qml/Indicators/Sound.qml" line="79"/>
         <source>Toggle mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Workspace</name>
+    <message>
+        <location filename="../qml/Workspace.qml" line="43"/>
+        <source>Open Launcher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Workspace.qml" line="47"/>
+        <source>Logout...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
