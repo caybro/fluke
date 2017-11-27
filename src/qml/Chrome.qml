@@ -78,12 +78,10 @@ ShellSurfaceItem {
         }
         onSetMaximized: {
             rootChrome.bufferLocked = true;
-            rootChrome.shellSurface.sendMaximized(Qt.size(workspace.width, workspace.height));
             maximizeAnimation.start();
         }
         onUnsetMaximized: {
             rootChrome.bufferLocked = true;
-            rootChrome.shellSurface.sendUnmaximized();
             unmaximizeAnimation.start();
         }
         onSetMinimized: {
@@ -102,6 +100,15 @@ ShellSurfaceItem {
             rootChrome.shellSurface.sendUnmaximized(); // FIXME sendExitFullscreen() missing in QtWayland
             rootChrome.bufferLocked = true;
             exitFullscreenAnimation.start();
+        }
+        onSetTransient: {
+            console.info("TRANS", isChild)
+        }
+        onSetTopLevel: {
+            console.info("TOPLEVEL", isChild)
+        }
+        onParentSurfaceChanged: {
+            console.info("Parent surface:", shellSurface.parentSurface, isChild)
         }
     }
 
