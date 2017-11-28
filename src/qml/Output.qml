@@ -182,25 +182,34 @@ WaylandOutput {
                 onLogout: {
                     systemDialog.title = qsTr("Log Out");
                     systemDialog.text = qsTr("Do you really want to logout?");
-                    systemDialog.acceptedFunctionCallback = function() { Qt.quit() }
+                    systemDialog.acceptedFunctionCallback = function() { Qt.quit() } // TODO also quit the session
                     systemDialog.open();
                 }
                 onSuspend: {
                     systemDialog.title = qsTr("Suspend");
                     systemDialog.text = qsTr("Do you really want to suspend the computer?");
-                    systemDialog.acceptedFunctionCallback = function() { Session.suspend() }
+                    systemDialog.acceptedFunctionCallback = function() {
+                        // @disable-check M127
+                        debugMode ? console.info("SIMULATION: suspend") : Session.suspend();
+                    }
                     systemDialog.open();
                 }
                 onReboot: {
                     systemDialog.title = qsTr("Restart");
                     systemDialog.text = qsTr("Do you really want to restart the computer?");
-                    systemDialog.acceptedFunctionCallback = function() { Session.reboot() }
+                    systemDialog.acceptedFunctionCallback = function() {
+                        // @disable-check M127
+                        debugMode ? console.info("SIMULATION: restart") : Session.reboot()
+                    }
                     systemDialog.open();
                 }
                 onShutdown: {
                     systemDialog.title = qsTr("Shutdown");
                     systemDialog.text = qsTr("Do you really want to turn off the computer?");
-                    systemDialog.acceptedFunctionCallback = function() { Session.shutdown() }
+                    systemDialog.acceptedFunctionCallback = function() {
+                        // @disable-check M127
+                        debugMode ? console.info("SIMULATION: shutdown") : Session.shutdown()
+                    }
                     systemDialog.open();
                 }
                 onHideLauncher: appLauncher.hide()
