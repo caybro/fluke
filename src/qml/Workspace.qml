@@ -43,16 +43,16 @@ Item {
         id: shellContextMenu
 
         MenuItem {
-            text: qsTr("Select Wallpaper...")
+            text: "\uf03e     " + qsTr("Select Wallpaper...")
             onTriggered: wallpaperDialog.open()
         }
 
         MenuItem {
-            text: qsTr("Open Launcher")
+            text: "\uf00a     " + qsTr("Open Launcher")
             onTriggered: workspace.showLauncher()
         }
         MenuItem {
-            text: qsTr("Logout...")
+            text: "\uf08b     " + qsTr("Logout...")
             onTriggered: workspace.logout()
         }
     }
