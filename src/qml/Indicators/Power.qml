@@ -19,9 +19,10 @@ ToolButton {
         }
 
         var iconName = "";
-        var perc = Power.state == Power.FullyCharged ? 100.0 : Power.percentage;
+        var state = Power.state;
+        var perc = state === Power.FullyCharged ? 100.0 : Power.percentage;
 
-        if (Power.state == Power.Charging) {
+        if (state === Power.Charging) {
             iconName = "\uf0e7\u2009"; // bolt icon + small space
         }
 
@@ -37,7 +38,7 @@ ToolButton {
             iconName += "\uf240";
         }
         var result = "%1 %2%".arg(iconName).arg(Math.floor(perc)); // we're being a bit pessimistic here ;)
-        if (Power.state == Power.Charging || Power.state == Power.Discharging) {
+        if (state === Power.Charging || state === Power.Discharging) {
             result += ", %1".arg(Power.remainingTime);
         }
 
@@ -46,11 +47,11 @@ ToolButton {
 
     function indicatorTooltip() {
         var state = Power.state;
-        if (state == Power.Charging) {
+        if (state === Power.Charging) {
             return qsTr("Time to charge: %1").arg(Power.remainingTime);
-        } else if (state == Power.Discharging) {
+        } else if (state === Power.Discharging) {
             return qsTr("Remaining time: %1").arg(Power.remainingTime);
-        } else if (state == Power.FullyCharged) {
+        } else if (state === Power.FullyCharged) {
             return qsTr("Fully charged");
         }
         return qsTr("Battery not charging or discharging");

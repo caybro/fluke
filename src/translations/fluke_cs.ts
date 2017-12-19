@@ -119,22 +119,22 @@
         <translation>Opravdu chcete počítač uspat?</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="195"/>
+        <location filename="../qml/Output.qml" line="198"/>
         <source>Restart</source>
         <translation>Restartovat</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="196"/>
+        <location filename="../qml/Output.qml" line="199"/>
         <source>Do you really want to restart the computer?</source>
         <translation>Opravdu chcete počítač restartovat?</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="201"/>
+        <location filename="../qml/Output.qml" line="207"/>
         <source>Shutdown</source>
         <translation>Vypnout</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="202"/>
+        <location filename="../qml/Output.qml" line="208"/>
         <source>Do you really want to turn off the computer?</source>
         <translation>Opravdu chcete počítač vypnout?</translation>
     </message>
