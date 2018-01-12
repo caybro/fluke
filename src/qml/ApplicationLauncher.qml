@@ -5,8 +5,6 @@ import QtQuick.Controls.Material 2.2
 
 import org.fluke.TaskManager 1.0
 
-//import org.kde.kquickcontrolsaddons 2.0
-
 Pane {
     id: root
     visible: opacity > 0.0
@@ -71,12 +69,12 @@ Pane {
 
             contentItem: ColumnLayout {
                 spacing: 0
-//                QIconItem {
-//                    anchors.horizontalCenter: parent.horizontalCenter
-//                    icon: model.icon
-//                    width: 64
-//                    height: width
-//                }
+                IconItem {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    icon: model.icon
+                    width: 64
+                    height: width
+                }
                 Label {
                     anchors.left: parent.left
                     anchors.right: parent.right

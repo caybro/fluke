@@ -3,8 +3,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.2
 
-//import org.kde.kquickcontrolsaddons 2.0
-
 import org.fluke.TaskManager 1.0
 
 Pane {
@@ -55,12 +53,12 @@ Pane {
                 contentItem: ColumnLayout {
                     anchors.centerIn: parent
                     spacing: 0
-//                    QIconItem {
-//                        anchors.horizontalCenter: parent.horizontalCenter
-//                        icon: model.icon
-//                        width: 32
-//                        height: width
-//                    }
+                    IconItem {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        icon: model.icon
+                        width: 32
+                        height: width
+                    }
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: model.running ? "\uf111" : ""

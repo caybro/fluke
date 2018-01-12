@@ -12,12 +12,18 @@ SOURCES += \
     runner.cpp \
     applicationsmodel.cpp \
     applicationitem.cpp \
-    applicationsfilteredmodel.cpp
+    applicationsfilteredmodel.cpp \
+    imagetexturescache.cpp \
+    managedtexturenode.cpp \
+    qiconitem.cpp
 
 HEADERS += runner.h \
     applicationsmodel.h \
     applicationitem.h \
-    applicationsfilteredmodel.h
+    applicationsfilteredmodel.h \
+    imagetexturescache.h \
+    managedtexturenode.h \
+    qiconitem.h
 
 target.path = $$[QT_INSTALL_QML]/org/fluke/TaskManager
 pluginfiles.files += $$_PRO_FILE_PWD_/qmldir

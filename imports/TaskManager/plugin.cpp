@@ -5,6 +5,7 @@
 #include "applicationsmodel.h"
 #include "applicationsfilteredmodel.h"
 #include "applicationitem.h"
+#include "qiconitem.h"
 
 class TaskManagerPlugin : public QQmlExtensionPlugin
 {
@@ -20,6 +21,7 @@ public:
         qmlRegisterSingletonType<ApplicationsModel>(uri, 1, 0, "Applications", [](QQmlEngine*, QJSEngine*)
                 -> QObject* { return new ApplicationsModel; });
         qmlRegisterType<ApplicationsFilteredModel>(uri, 1, 0, "ApplicationsFilteredModel");
+        qmlRegisterType<QIconItem>(uri, 1, 0, "IconItem");
         qmlRegisterUncreatableType<ApplicationItem>(uri, 1, 0, "ApplicationItem", "Cannot create ApplicationItem in QML");
     }
 };

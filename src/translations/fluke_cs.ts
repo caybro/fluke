@@ -21,24 +21,24 @@
         <translation type="vanished">Oblíbená</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="137"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="135"/>
         <source>Type to search...</source>
         <translation>Vyhledávejte psaním...</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="186"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="184"/>
         <source>All</source>
         <comment>all applications</comment>
         <translation>Všechny</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="190"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="188"/>
         <source>Running</source>
         <comment>running applications</comment>
         <translation>Spuštěné</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="194"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="192"/>
         <source>Favorite</source>
         <comment>favorite applications</comment>
         <translation>Oblíbené</translation>
@@ -91,7 +91,7 @@
 <context>
     <name>Dock</name>
     <message>
-        <location filename="../qml/Dock.qml" line="108"/>
+        <location filename="../qml/Dock.qml" line="106"/>
         <source>Applications</source>
         <translation>Aplikace</translation>
     </message>
@@ -154,22 +154,22 @@
 <context>
     <name>Power</name>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="50"/>
+        <location filename="../qml/Indicators/Power.qml" line="51"/>
         <source>Time to charge: %1</source>
         <translation>Čas do nabití: %1</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="52"/>
+        <location filename="../qml/Indicators/Power.qml" line="53"/>
         <source>Remaining time: %1</source>
         <translation>Zbývající čas: %1</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="54"/>
+        <location filename="../qml/Indicators/Power.qml" line="55"/>
         <source>Fully charged</source>
         <translation>Plně nabitá</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="56"/>
+        <location filename="../qml/Indicators/Power.qml" line="57"/>
         <source>Battery not charging or discharging</source>
         <translation>Baterie se nenabíjí ani nevybíjí</translation>
     </message>
