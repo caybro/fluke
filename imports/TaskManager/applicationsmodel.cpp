@@ -157,8 +157,8 @@ void ApplicationsModel::init()
             connect(item, &ApplicationItem::applicationQuit, this, &ApplicationsModel::applicationQuit);
             item->setFavorite(m_favoriteAppIds.contains(item->appId()));
 
-            qDebug() << "!!! Inserted application item" << item->appId() << item->desktopFile()->name() <<
-                        item->desktopFile()->iconName();
+//            qDebug() << "!!! Inserted application item" << item->appId() << item->desktopFile()->name() <<
+//                        item->desktopFile()->iconName();
         }
     }
     endResetModel();

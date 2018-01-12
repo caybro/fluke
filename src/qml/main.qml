@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQml 2.2
-import QtWayland.Compositor 1.0
+import QtWayland.Compositor 1.1
 
 WaylandCompositor {
     id: comp
@@ -37,6 +37,12 @@ WaylandCompositor {
         onXdgPopupCreated: handleShellSurfaceCreated(xdgPopup, true)
     }
 
+    XdgShellV6 {
+        onXdgSurfaceCreated: handleShellSurfaceCreated(xdgSurface)
+        onToplevelCreated: handleToplevelCreated(toplevel, xdgSurface)
+        onPopupCreated: handlePopupCreated(popup)
+    }
+
     TextInputManager {}
 
     function createShellSurfaceItem(shellSurface, output, isPopup) {
@@ -55,9 +61,54 @@ WaylandCompositor {
         output.viewsBySurface[shellSurface.surface] = item;
     }
 
+    function createToplevelItem(toplevel, shellSurface, output) {
+        var parentSurfaceItem = output.viewsBySurface[toplevel.parentToplevel];
+        var parent = parentSurfaceItem || output.surfaceArea;
+        var item = chromeComponent.createObject(parent, {
+            "shellSurface": shellSurface,
+            "output": output,
+            "workspace": output.surfaceArea,
+            "isToplevel": true,
+            "xdgSurface": toplevel
+        });
+        if (parentSurfaceItem) { // TODO center around parent
+            item.x += output.position.x;
+            item.y += output.position.y;
+        }
+        output.viewsBySurface[shellSurface.surface] = item;
+    }
+
+    function createPopupItem(popup, output) {
+        var parentSurfaceItem = output.viewsBySurface[popup.parentXdgSurface];
+        var parent = parentSurfaceItem || output.surfaceArea;
+        var item = chromeComponent.createObject(parent, {
+            "shellSurface": popup.xdgSurface,
+            "output": output,
+            "workspace": output.surfaceArea,
+            "isPopup": true
+        });
+        if (parentSurfaceItem) {
+            item.x += output.position.x;
+            item.y += output.position.y;
+        }
+        output.viewsBySurface[popup.xdgSurface.surface] = item;
+    }
+
     function handleShellSurfaceCreated(shellSurface, isPopup) {
         for (var i = 0; i < screens.count; ++i) {
             createShellSurfaceItem(shellSurface, screens.objectAt(i), isPopup);
+        }
+    }
+
+    function handleToplevelCreated(toplevel, shellSurface) {
+        for (var i = 0; i < screens.count; ++i) {
+            createToplevelItem(toplevel, shellSurface, screens.objectAt(i));
+        }
+    }
+
+    function handlePopupCreated(popup) {
+        for (var i = 0; i < screens.count; ++i) {
+            createPopupItem(popup, screens.objectAt(i));
         }
     }
 }

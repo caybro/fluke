@@ -5,7 +5,7 @@ import QtQuick.Controls.Material 2.2
 
 import org.fluke.TaskManager 1.0
 
-import org.kde.kquickcontrolsaddons 2.0
+//import org.kde.kquickcontrolsaddons 2.0
 
 Pane {
     id: root
@@ -71,12 +71,12 @@ Pane {
 
             contentItem: ColumnLayout {
                 spacing: 0
-                QIconItem {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    icon: model.icon
-                    width: 64
-                    height: width
-                }
+//                QIconItem {
+//                    anchors.horizontalCenter: parent.horizontalCenter
+//                    icon: model.icon
+//                    width: 64
+//                    height: width
+//                }
                 Label {
                     anchors.left: parent.left
                     anchors.right: parent.right

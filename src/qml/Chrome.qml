@@ -9,12 +9,15 @@ ShellSurfaceItem {
 
     readonly property bool isChild: parent.shellSurface !== undefined
     readonly property alias appId: priv.appId
-    readonly property bool activated: shellSurface.activated
-    readonly property bool fullscreen: shellSurface.fullscreen
+    readonly property bool activated: xdgSurface && xdgSurface.activated
+    readonly property bool fullscreen: xdgSurface && xdgSurface.fullscreen
 
-    property bool isPopup: false
-    property bool minimized: false
+    property bool isToplevel
+    property bool isPopup
+    property bool minimized
     property Item workspace
+
+    property var xdgSurface: shellSurface
 
     opacity: !minimized && !workspace.appLauncherVisible ? 1 : 0
     visible: opacity > 0
@@ -52,7 +55,7 @@ ShellSurfaceItem {
     }
 
     Connections {
-        target: shellSurface
+        target: rootChrome.xdgSurface
 
         // some signals are not available on wl_shell, so let's ignore them
         ignoreUnknownSignals: true
@@ -63,16 +66,16 @@ ShellSurfaceItem {
 
         // xdg_shell only
         onActivatedChanged: {
-            if (shellSurface.activated) {
+            if (rootChrome.activated) {
                 workspace.activated(rootChrome.appId);
                 receivedFocusAnimation.start();
             }
         }
         onAppIdChanged: {
             if (!priv.appId) {
-                priv.appId = shellSurface.appId;
+                priv.appId = rootChrome.xdgSurface.appId;
                 if (!rootChrome.isPopup) {
-                    Applications.setSurfaceAppeared(priv.appId, shellSurface.surface);
+                    Applications.setSurfaceAppeared(rootChrome.appId, shellSurface.surface);
                 }
             }
         }
@@ -90,22 +93,19 @@ ShellSurfaceItem {
         }
         onSetFullscreen: {
             workspace.fullscreen(rootChrome.appId);
-            rootChrome.shellSurface.sendFullscreen(output ? Qt.size(output.geometry.width, output.geometry.height)
-                                                          : Qt.size(rootChrome.Window.width, rootChrome.Window.height));
+            rootChrome.xdgSurface.sendFullscreen(output ? Qt.size(output.geometry.width, output.geometry.height)
+                                                        : Qt.size(rootChrome.Window.width, rootChrome.Window.height));
             rootChrome.bufferLocked = true;
             fullscreenAnimation.start();
         }
         onUnsetFullscreen: {
             workspace.exitFullscreen(rootChrome.appId);
-            rootChrome.shellSurface.sendUnmaximized(); // FIXME sendExitFullscreen() missing in QtWayland
+            rootChrome.xdgSurface.sendUnmaximized(); // FIXME sendExitFullscreen() missing in QtWayland
             rootChrome.bufferLocked = true;
             exitFullscreenAnimation.start();
         }
         onSetTransient: {
             console.info("TRANS", isChild)
-        }
-        onSetTopLevel: {
-            console.info("TOPLEVEL", isChild)
         }
         onParentSurfaceChanged: {
             console.info("Parent surface:", shellSurface.parentSurface, isChild)

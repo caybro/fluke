@@ -16,14 +16,14 @@ int main(int argc, char *argv[])
     //qputenv("QT_WAYLAND_DISABLE_WINDOWDECORATION", QByteArrayLiteral("1")); // TODO own window decoration
     qputenv("QT_QUICK_CONTROLS_STYLE", QByteArrayLiteral("Material"));
 
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    //QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QGuiApplication app(argc, argv);
     app.setOrganizationName(QStringLiteral("caybro"));
     app.setApplicationDisplayName(QStringLiteral("Fluke"));
     app.setApplicationVersion(QStringLiteral("0.0.1"));
 
-    qputenv("QT_WAYLAND_SHELL_INTEGRATION", QByteArrayLiteral("xdg-shell-v5"));
+    qputenv("QT_WAYLAND_SHELL_INTEGRATION", QByteArrayLiteral("xdg-shell-v5")); // TODO still at v5 so that Qt 5.9 clients can connect
     qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("wayland"));
     //qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
 
