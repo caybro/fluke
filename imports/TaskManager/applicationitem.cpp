@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QFileInfo>
+#include <QProcess>
 
 #include <QWaylandClient>
 
@@ -46,7 +47,8 @@ int ApplicationItem::surfaceCount() const
 void ApplicationItem::launch(const QStringList &urls)
 {
     if (m_desktopFile) {
-        m_desktopFile->startDetached(urls);
+        QStringList execLine = m_desktopFile->expandExecString(urls);
+        QProcess::startDetached(execLine.takeFirst(), execLine);
     }
 }
 
