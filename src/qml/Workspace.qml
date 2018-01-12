@@ -8,7 +8,7 @@ Item {
 
     property bool appLauncherVisible
     property string fullscreenAppId
-    
+
     signal activated(string appId)
     signal minimized(string appId)
     signal fullscreen(string appId)
@@ -17,7 +17,7 @@ Item {
     signal changeWallpaper(url fileUrl)
     signal showLauncher()
     signal logout()
-    
+
     onFullscreen: {
         if (appId) {
             fullscreenAppId = appId;
@@ -62,7 +62,7 @@ Item {
         fileMode: Platform.FileDialog.OpenFile
         folder: "file:///usr/share/wallpapers" //Platform.StandardPaths.standardLocations(Platform.StandardPaths.PicturesLocation)[0]
         title: qsTr("Change Wallpaper")
-        nameFilters: qsTr("Image files (*.jpg *.png)")
+        nameFilters: [qsTr("Image files (*.jpg *.png)")]
         onAccepted: workspace.changeWallpaper(file)
     }
 }
