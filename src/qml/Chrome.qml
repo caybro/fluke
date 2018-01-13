@@ -116,6 +116,7 @@ ShellSurfaceItem {
             var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentToplevel];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parent = parentSurfaceItem;
+                rootChrome.anchors.centerIn = parentSurfaceItem;
             }
         }
     }

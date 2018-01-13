@@ -70,7 +70,7 @@ WaylandCompositor {
             "isToplevel": true,
             "xdgSurface": toplevel
         });
-        if (parentSurfaceItem) { // TODO center around parent
+        if (parentSurfaceItem) {
             item.x += output.position.x;
             item.y += output.position.y;
         }
