@@ -85,7 +85,7 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
 
 void ApplicationsModel::setSurfaceAppeared(const QString &appId, QWaylandSurface *surface)
 {
-    qInfo() << "!!! Surface appeared" << appId << surface << surface->client()->processId();
+    //qDebug() << "!!! Surface appeared" << appId << surface << surface->client()->processId();
     if (appId.isEmpty())
         return;
 
@@ -97,7 +97,7 @@ void ApplicationsModel::setSurfaceAppeared(const QString &appId, QWaylandSurface
 
 void ApplicationsModel::setSurfaceVanished(const QString &appId, QWaylandSurface *surface)
 {
-    qInfo() << "!!! Surface vanished" << appId << surface;
+    //qDebug() << "!!! Surface vanished" << appId << surface;
     if (appId.isEmpty())
         return;
 

@@ -38,7 +38,6 @@ WaylandCompositor {
     }
 
     XdgShellV6 {
-        onXdgSurfaceCreated: handleShellSurfaceCreated(xdgSurface)
         onToplevelCreated: handleToplevelCreated(toplevel, xdgSurface)
         onPopupCreated: handlePopupCreated(popup)
     }
@@ -75,7 +74,7 @@ WaylandCompositor {
             item.x += output.position.x;
             item.y += output.position.y;
         }
-        output.viewsBySurface[shellSurface.surface] = item;
+        output.viewsBySurface[toplevel] = item;
     }
 
     function createPopupItem(popup, output) {

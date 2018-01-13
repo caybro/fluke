@@ -1,13 +1,13 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
-import QtWayland.Compositor 1.0
+import QtWayland.Compositor 1.1
 
 import org.fluke.TaskManager 1.0
 
 ShellSurfaceItem {
     id: rootChrome
 
-    readonly property bool isChild: parent.shellSurface !== undefined
+    readonly property bool isChild: (xdgSurface && xdgSurface.parentSurface) || (xdgSurface && xdgSurface.parentToplevel)
     readonly property alias appId: priv.appId
     readonly property bool activated: xdgSurface && xdgSurface.activated
     readonly property bool fullscreen: xdgSurface && xdgSurface.fullscreen
@@ -15,7 +15,7 @@ ShellSurfaceItem {
     property bool isToplevel
     property bool isPopup
     property bool minimized
-    property Item workspace
+    property Workspace workspace
 
     property var xdgSurface: shellSurface
 
@@ -104,11 +104,19 @@ ShellSurfaceItem {
             rootChrome.bufferLocked = true;
             exitFullscreenAnimation.start();
         }
-        onSetTransient: {
-            console.info("TRANS", isChild)
-        }
         onParentSurfaceChanged: {
-            console.info("Parent surface:", shellSurface.parentSurface, isChild)
+            console.info("!!! Parent surface:", xdgSurface.parentSurface, isChild)
+            var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentSurface];
+            if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
+                rootChrome.parent = parentSurfaceItem;
+            }
+        }
+        onParentToplevelChanged: {
+            console.info("!!! Parent toplevel:", xdgSurface.parentToplevel, isChild)
+            var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentToplevel];
+            if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
+                rootChrome.parent = parentSurfaceItem;
+            }
         }
     }
 
