@@ -258,17 +258,6 @@ WaylandOutput {
                     }
                 }
 
-                function show() {
-                    dock.y = Qt.binding(function () { return win.height - dock.height + dock.background.radius; });
-                }
-
-                function hide() {
-                    dock.y = Qt.binding(function () { return win.height; });
-                }
-
-                Behavior on y { NumberAnimation { duration: 150 } }
-                Behavior on opacity { NumberAnimation { duration: 200 } }
-
                 onActivateApplication: {
                     output.activateApplication(appId);
                 }

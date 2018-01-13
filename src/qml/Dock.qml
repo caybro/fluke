@@ -24,6 +24,17 @@ Pane {
         radius: 5
     }
 
+    Behavior on y { NumberAnimation { duration: 200 } }
+    Behavior on opacity { NumberAnimation { duration: 200 } }
+
+    function show() {
+        dock.y = Qt.binding(function () { return parent.height - dock.height + dock.background.radius; });
+    }
+
+    function hide() {
+        dock.y = Qt.binding(function () { return parent.height; });
+    }
+
     ContextMenu {
         id: contextMenu
     }
