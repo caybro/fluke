@@ -10,7 +10,7 @@ ApplicationItem::ApplicationItem(const QString &appId, QObject *parent)
     : QObject(parent),
       m_appId(appId)
 {
-    m_desktopFile = XdgDesktopFileCache::getFile(appId + ".desktop");
+    m_desktopFile = XdgDesktopFileCache::getFile(appId + QStringLiteral(".desktop"));
     if (!m_desktopFile) {
         qWarning() << "Could not find desktop file with appId:" << appId;
     }

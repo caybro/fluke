@@ -12,10 +12,10 @@ Platform::Platform(QObject *parent)
 
 void Platform::init()
 {
-    QDBusInterface iface("org.freedesktop.hostname1", "/org/freedesktop/hostname1", "org.freedesktop.hostname1",
-                         QDBusConnection::systemBus(), this);
-    QDBusInterface seatIface("org.freedesktop.login1", "/org/freedesktop/login1/seat/self", "org.freedesktop.login1.Seat",
-                             QDBusConnection::systemBus(), this);
+    QDBusInterface iface(QStringLiteral("org.freedesktop.hostname1"), QStringLiteral("/org/freedesktop/hostname1"),
+                         QStringLiteral("org.freedesktop.hostname1"), QDBusConnection::systemBus(), this);
+    QDBusInterface seatIface(QStringLiteral("org.freedesktop.login1"), QStringLiteral("/org/freedesktop/login1/seat/self"),
+                             QStringLiteral("org.freedesktop.login1.Seat"), QDBusConnection::systemBus(), this);
 
     // From the source at https://cgit.freedesktop.org/systemd/systemd/tree/src/hostname/hostnamed.c#n130
     // "vm\0"
@@ -30,7 +30,7 @@ void Platform::init()
     m_chassis = iface.property("Chassis").toString();
 
     // A PC is not a handset, tablet or watch.
-    m_isPC = !QSet<QString>{"handset", "tablet", "watch"}.contains(m_chassis);
+    m_isPC = !QSet<QString>{QStringLiteral("handset"), QStringLiteral("tablet"), QStringLiteral("watch")}.contains(m_chassis);
     m_isMultiSession = seatIface.property("CanMultiSession").toBool() && seatIface.property("CanGraphical").toBool();
 }
 
