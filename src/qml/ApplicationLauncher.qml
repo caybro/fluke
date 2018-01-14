@@ -24,7 +24,7 @@ Pane {
         hide();
     }
 
-    Behavior on opacity { NumberAnimation { duration: 200 } }
+    Behavior on opacity { DefaultAnimation  {} }
 
     Keys.onEscapePressed: hide()
     Keys.enabled: true

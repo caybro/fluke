@@ -24,8 +24,8 @@ Pane {
         radius: 5
     }
 
-    Behavior on y { NumberAnimation { duration: 200 } }
-    Behavior on opacity { NumberAnimation { duration: 200 } }
+    Behavior on y { DefaultAnimation {} }
+    Behavior on opacity { DefaultAnimation {} }
 
     function show() {
         dock.y = Qt.binding(function () { return parent.height - dock.height + dock.background.radius; });

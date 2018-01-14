@@ -30,13 +30,13 @@ Item {
         transitions: [
             Transition {
                 from: "hidden"; to: "active"
-                NumberAnimation { target: inputPanel; property: "y"; duration: 200 }
+                DefaultAnimation { target: inputPanel; property: "y" }
             },
             Transition {
                 from: "active"; to: "hidden"
                 // keep it visible until the trantision finishes
                 PropertyAction { target: inputPanel; property: "visible"; value: true }
-                NumberAnimation { target: inputPanel; property: "y"; duration: 200 }
+                DefaultAnimation { target: inputPanel; property: "y" }
             }
         ]
     }

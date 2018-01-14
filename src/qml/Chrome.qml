@@ -22,7 +22,7 @@ ShellSurfaceItem {
     opacity: !minimized && !workspace.appLauncherVisible ? 1 : 0
     visible: opacity > 0
 
-    Behavior on opacity { NumberAnimation { duration: 200 } }
+    Behavior on opacity { DefaultAnimation {} }
 
     Component.onCompleted: {
         takeFocus();
@@ -109,6 +109,7 @@ ShellSurfaceItem {
             var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentSurface];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parent = parentSurfaceItem;
+                rootChrome.anchors.centerIn = parentSurfaceItem;
             }
         }
         onParentToplevelChanged: {

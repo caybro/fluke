@@ -16,5 +16,6 @@
         <file>qml/ApplicationLauncher.qml</file>
         <file>qml/ContextMenu.qml</file>
         <file>qml/Workspace.qml</file>
+        <file>qml/DefaultAnimation.qml</file>
     </qresource>
 </RCC>

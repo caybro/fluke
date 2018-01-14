@@ -258,9 +258,7 @@ WaylandOutput {
                     }
                 }
 
-                onActivateApplication: {
-                    output.activateApplication(appId);
-                }
+                onActivateApplication: output.activateApplication(appId);
                 onShowLauncher: appLauncher.show()
             }
 
