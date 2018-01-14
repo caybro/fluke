@@ -5,7 +5,6 @@ CONFIG += qt plugin c++11 link_pkgconfig
 PKGCONFIG += libpulse libpulse-mainloop-glib
 
 uri = org.fluke.Sound
-load(qmlplugin)
 
 SOURCES += \
     plugin.cpp \

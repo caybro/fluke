@@ -5,7 +5,6 @@ CONFIG += qt plugin c++11 link_pkgconfig
 PKGCONFIG += Qt5Xdg
 
 uri = org.fluke.TaskManager
-load(qmlplugin)
 
 SOURCES += \
     plugin.cpp \

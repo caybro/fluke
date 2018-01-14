@@ -4,7 +4,6 @@ QT += qml quick dbus
 CONFIG += qt plugin c++11
 
 uri = org.fluke.Session
-load(qmlplugin)
 
 SOURCES += \
     plugin.cpp \
