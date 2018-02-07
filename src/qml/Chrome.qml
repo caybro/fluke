@@ -66,7 +66,7 @@ ShellSurfaceItem {
 
         // xdg_shell only
         onActivatedChanged: {
-            if (rootChrome.activated) {
+            if (rootChrome.activated && !rootChrome.isPopup) {
                 workspace.activated(rootChrome.appId);
                 receivedFocusAnimation.start();
             }
@@ -105,7 +105,6 @@ ShellSurfaceItem {
             exitFullscreenAnimation.start();
         }
         onParentSurfaceChanged: {
-            console.info("!!! Parent surface:", xdgSurface.parentSurface, isChild)
             var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentSurface];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parent = parentSurfaceItem;
@@ -113,7 +112,6 @@ ShellSurfaceItem {
             }
         }
         onParentToplevelChanged: {
-            console.info("!!! Parent toplevel:", xdgSurface.parentToplevel, isChild)
             var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentToplevel];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parent = parentSurfaceItem;

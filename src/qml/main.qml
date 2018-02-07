@@ -84,7 +84,8 @@ WaylandCompositor {
             "shellSurface": popup.xdgSurface,
             "output": output,
             "workspace": output.surfaceArea,
-            "isPopup": true
+            "isPopup": true,
+            "xdgSurface": popup
         });
         if (parentSurfaceItem) {
             item.x += output.position.x;
