@@ -109,6 +109,7 @@ ShellSurfaceItem {
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parent = parentSurfaceItem;
                 rootChrome.anchors.centerIn = parentSurfaceItem;
+                rootChrome.moveItem = parentSurfaceItem.moveItem;
             }
         }
         onParentToplevelChanged: {
@@ -116,6 +117,7 @@ ShellSurfaceItem {
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parent = parentSurfaceItem;
                 rootChrome.anchors.centerIn = parentSurfaceItem;
+                rootChrome.moveItem = parentSurfaceItem.moveItem;
             }
         }
     }
