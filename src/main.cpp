@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
     app.installTranslator(&appTrans);
 
     QFontDatabase fd;
-    if (!fd.families().contains(QLatin1String("FontAwesome"))) {
-        if (QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/FontAwesome.otf")) == -1) {
+    if (!fd.families().contains(QLatin1String("FontAwesomeSolid5"))) {
+        if (QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/FontAwesomeSolid5.otf")) == -1) {
             qWarning("Failed to load FontAwesome from resources");
         }
     }

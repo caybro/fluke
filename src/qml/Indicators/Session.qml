@@ -69,7 +69,7 @@ ToolButton {
             MenuSeparator {}
 
             MenuItem {
-                text: "\uf08b    " + qsTr("Logout")
+                text: "\uf2f5    " + qsTr("Logout")
                 onClicked: indicatorSession.logout()
             }
 

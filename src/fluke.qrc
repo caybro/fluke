@@ -9,7 +9,6 @@
         <file>qml/Dock.qml</file>
         <file>qml/Indicators/DateTime.qml</file>
         <file>qml/Indicators/Session.qml</file>
-        <file>fonts/FontAwesome.otf</file>
         <file>qml/Indicators/Power.qml</file>
         <file>qml/Indicators/Sound.qml</file>
         <file>translations/fluke_cs.qm</file>
@@ -17,5 +16,6 @@
         <file>qml/ContextMenu.qml</file>
         <file>qml/Workspace.qml</file>
         <file>qml/DefaultAnimation.qml</file>
+        <file>fonts/FontAwesomeSolid5.otf</file>
     </qresource>
 </RCC>
