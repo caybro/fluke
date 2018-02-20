@@ -154,9 +154,8 @@ Pane {
             snapMode: GridView.SnapToRow
 
             displaced: Transition {
-                NumberAnimation { properties: "x,y"; duration: 200 }
+                DefaultAnimation { properties: "x,y" }
             }
-            moveDisplaced: displaced
 
             ScrollBar.vertical: ScrollBar {}
 
