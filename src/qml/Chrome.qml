@@ -105,7 +105,7 @@ ShellSurfaceItem {
             exitFullscreenAnimation.start();
         }
         onParentSurfaceChanged: {
-            var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentSurface];
+            var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentSurface.surface];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parent = parentSurfaceItem;
                 rootChrome.anchors.centerIn = parentSurfaceItem;
