@@ -11,7 +11,7 @@ class ApplicationsModel : public QAbstractListModel
     Q_OBJECT
 public:
     ApplicationsModel(QObject *parent = nullptr);
-    ~ApplicationsModel();
+    ~ApplicationsModel() override;
 
 protected:
     int rowCount(const QModelIndex &parent) const override;
@@ -22,8 +22,8 @@ protected:
 public Q_SLOTS:
     void startApplication(const QString &appId, const QStringList &urls = {});
     void stopApplication(const QString &appId);
-    void setSurfaceAppeared(const QString &appId, QWaylandSurface *surface);
-    void setSurfaceVanished(const QString &appId, QWaylandSurface *surface);
+    QString setSurfaceAppeared(qint64 pid, QWaylandSurface *surface);
+    void setSurfaceVanished(qint64 pid, QWaylandSurface *surface);
     void setApplicationFavorite(const QString &appId, bool favorite);
 
 Q_SIGNALS:
@@ -32,6 +32,7 @@ Q_SIGNALS:
 private:
     void init();
     ApplicationItem * findAppItem(const QString &appId) const;
+    ApplicationItem * findAppItem(qint64 pid) const;
     void loadSettings();
     void saveSettings();
     QHash<int, QByteArray> m_roleNames;

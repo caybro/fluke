@@ -83,27 +83,30 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
     return m_roleNames;
 }
 
-void ApplicationsModel::setSurfaceAppeared(const QString &appId, QWaylandSurface *surface)
+QString ApplicationsModel::setSurfaceAppeared(qint64 pid, QWaylandSurface *surface)
 {
-    //qDebug() << "!!! Surface appeared" << appId << surface << surface->client()->processId();
-    if (appId.isEmpty())
-        return;
+    //qDebug() << "!!! Surface appeared" << pid << surface << surface->client()->processId();
+    if (pid == 0)
+        return QString();
 
-    auto appItem = findAppItem(appId);
+    auto appItem = findAppItem(pid);
     if (appItem) {
-        appItem->incrementSurfaceCount(surface);
+        appItem->incrementSurfaceCount(pid, surface);
+        return appItem->appId();
     }
+
+    return QString();
 }
 
-void ApplicationsModel::setSurfaceVanished(const QString &appId, QWaylandSurface *surface)
+void ApplicationsModel::setSurfaceVanished(qint64 pid, QWaylandSurface *surface)
 {
-    //qDebug() << "!!! Surface vanished" << appId << surface;
-    if (appId.isEmpty())
+    //qDebug() << "!!! Surface vanished" << pid << surface;
+    if (pid == 0)
         return;
 
-    auto appItem = findAppItem(appId);
+    auto appItem = findAppItem(pid);
     if (appItem) {
-        appItem->decrementSurfaceCount(surface);
+        appItem->decrementSurfaceCount(pid, surface);
     }
 }
 
@@ -168,6 +171,17 @@ ApplicationItem *ApplicationsModel::findAppItem(const QString &appId) const
 {
     const auto it = std::find_if(m_items.constBegin(), m_items.constEnd(), [appId](ApplicationItem *appItem) {
         return appItem->appId() == appId;
+    });
+    if (it != m_items.constEnd()) {
+        return (*it);
+    }
+    return nullptr;
+}
+
+ApplicationItem *ApplicationsModel::findAppItem(qint64 pid) const
+{
+    const auto it = std::find_if(m_items.constBegin(), m_items.constEnd(), [pid](ApplicationItem *appItem) {
+        return appItem->pids().contains(pid);
     });
     if (it != m_items.constEnd()) {
         return (*it);

@@ -49,12 +49,18 @@ ShellSurfaceItem {
         }
     }
 
+    onShellSurfaceChanged: {
+        if (shellSurface && !rootChrome.isPopup) {
+            priv.appId = Applications.setSurfaceAppeared(priv.pid, shellSurface.surface);
+        }
+    }
+
     Connections {
         target: compositor
         ignoreUnknownSignals: true
         onSurfaceAboutToBeDestroyed: {
             if (!rootChrome.isPopup) {
-                Applications.setSurfaceVanished(priv.appId, surface);
+                Applications.setSurfaceVanished(priv.pid, surface);
             }
         }
     }
@@ -74,14 +80,6 @@ ShellSurfaceItem {
             if (rootChrome.activated && !rootChrome.isPopup) {
                 workspace.activated(rootChrome.appId);
                 receivedFocusAnimation.start();
-            }
-        }
-        onAppIdChanged: {
-            if (!priv.appId) {
-                priv.appId = rootChrome.xdgSurface.appId;
-                if (!rootChrome.isPopup) {
-                    Applications.setSurfaceAppeared(rootChrome.appId, shellSurface.surface);
-                }
             }
         }
         onSetMaximized: {
@@ -119,7 +117,7 @@ ShellSurfaceItem {
             }
         }
         onParentToplevelChanged: {
-            var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentToplevel];
+            var parentSurfaceItem = output.toplevelsBySurface[xdgSurface.parentToplevel];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parentSurfaceItem = parentSurfaceItem;
                 rootChrome.parent = parentSurfaceItem;

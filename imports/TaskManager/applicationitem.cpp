@@ -29,6 +29,11 @@ QString ApplicationItem::appId() const
     return m_appId;
 }
 
+QList<qint64> ApplicationItem::pids() const
+{
+    return m_surfaces.uniqueKeys();
+}
+
 QString ApplicationItem::name() const
 {
     return m_desktopFile->name();
@@ -46,16 +51,28 @@ int ApplicationItem::surfaceCount() const
 
 void ApplicationItem::launch(const QStringList &urls)
 {
-    if (m_desktopFile) {
+    if (Q_LIKELY(m_desktopFile)) {
         QStringList execLine = m_desktopFile->expandExecString(urls);
-        QProcess::startDetached(execLine.takeFirst(), execLine);
+
+        QProcess *proc = new QProcess(this);
+        connect(proc, &QProcess::started, this, [this, proc]() {
+            if (proc->state() == QProcess::Running) {
+                proc->setProperty("pid", proc->processId());
+                m_surfaces.insert(proc->processId(), nullptr);
+            }
+        });
+        connect(proc, qOverload<int, QProcess::ExitStatus>(&QProcess::finished), this, [this, proc]() {
+            m_surfaces.remove(proc->property("pid").toLongLong());
+            Q_EMIT this->surfaceCountChanged(this->surfaceCount());
+        });
+        proc->start(execLine.takeFirst(), execLine);
     }
 }
 
 void ApplicationItem::stop()
 {
     if (!m_surfaces.isEmpty()) {
-        m_surfaces.last()->client()->close();
+        m_surfaces.first()->client()->close();
     }
 }
 
@@ -75,11 +92,7 @@ bool ApplicationItem::isFavorite() const
 
 int ApplicationItem::instanceCount() const
 {
-    QSet<QWaylandClient *> clients;
-    for (QWaylandSurface *surface: qAsConst(m_surfaces)) {
-        clients.insert(surface->client());
-    }
-    return clients.count();
+    return pids().count();
 }
 
 bool ApplicationItem::isRunning() const
@@ -87,17 +100,22 @@ bool ApplicationItem::isRunning() const
     return !m_surfaces.isEmpty();
 }
 
-void ApplicationItem::incrementSurfaceCount(QWaylandSurface *surface)
+void ApplicationItem::incrementSurfaceCount(qint64 pid, QWaylandSurface *surface)
 {
-    m_surfaces.append(surface);
+    if (m_surfaces.contains(pid) && !m_surfaces.value(pid)) {
+        m_surfaces.replace(pid, surface);
+    } else {
+        m_surfaces.insert(pid, surface);
+    }
     Q_EMIT surfaceCountChanged(surfaceCount());
 }
 
-void ApplicationItem::decrementSurfaceCount(QWaylandSurface *surface)
+void ApplicationItem::decrementSurfaceCount(qint64 pid, QWaylandSurface *surface)
 {
-    m_surfaces.removeAll(surface);
+    m_surfaces.remove(pid, surface);
+
     Q_EMIT surfaceCountChanged(surfaceCount());
-    if (m_surfaces.isEmpty()) {
+    if (!m_surfaces.contains(pid)) {
         Q_EMIT applicationQuit(m_appId);
     }
 }

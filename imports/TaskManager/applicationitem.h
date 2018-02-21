@@ -20,15 +20,17 @@ public:
         RoleKeywords,
         RoleRunning,
         RoleInstanceCount,
-        RoleFavorite
+        RoleFavorite,
+        RolePid
     };
     Q_ENUM(RoleEnum)
 
     explicit ApplicationItem(const QString &appId, QObject *parent = nullptr);
     explicit ApplicationItem(XdgDesktopFile * desktopFile, QObject *parent = nullptr);
-    virtual ~ApplicationItem() = default;
+    ~ApplicationItem() = default;
 
     QString appId() const;
+    QList<qint64> pids() const;
     QString name() const;
     XdgDesktopFile * desktopFile() const;
     int surfaceCount() const;
@@ -37,8 +39,8 @@ public:
     bool isFavorite() const;
     void setFavorite(bool favorite);
 
-    void incrementSurfaceCount(QWaylandSurface *surface);
-    void decrementSurfaceCount(QWaylandSurface *surface);
+    void incrementSurfaceCount(qint64 pid, QWaylandSurface *surface);
+    void decrementSurfaceCount(qint64 pid, QWaylandSurface *surface);
 
     Q_INVOKABLE void launch(const QStringList &urls = {});
     Q_INVOKABLE void stop();
@@ -47,10 +49,11 @@ Q_SIGNALS:
     void surfaceCountChanged(int count);
     void isFavoriteChanged(bool favorite);
     void applicationQuit(const QString &appId);
+    void pidsChanged();
 
 private:
     QString m_appId;
     XdgDesktopFile *m_desktopFile{nullptr};
-    QVector<QWaylandSurface *> m_surfaces;
+    QMultiMap<qint64, QWaylandSurface *> m_surfaces;
     bool m_favorite{false};
 };

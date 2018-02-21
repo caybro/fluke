@@ -16,6 +16,7 @@ WaylandOutput {
     property alias screen: win.screen
     readonly property alias surfaceArea: workspace
     property var viewsBySurface: ({}) // QWaylandSurface -> QWaylandView
+    property var toplevelsBySurface: ({}) // QWaylandXdgToplevelV6 -> QWaylandView
 
     Component.onCompleted: {
         // TODO make this configurable
@@ -40,7 +41,7 @@ WaylandOutput {
                 workspace.fullscreenAppId = "";
             }
 
-            activateNextApplication();
+            activateNextApplication(appId);
         }
     }
 
@@ -66,11 +67,11 @@ WaylandOutput {
         }
     }
 
-    function activateNextApplication() {
+    function activateNextApplication(appId) {
         var surfaces = Object.keys(viewsBySurface);
         for (var i = surfaces.length - 1; i >= 0; i--) {
             var view = viewsBySurface[surfaces[i]];
-            if (!view.minimized) {
+            if (!view.minimized && appId !== view.appId) {
                 activateView(view);
                 return;
             }
@@ -230,7 +231,7 @@ WaylandOutput {
                     dock.activeApp = appId;
                 }
                 onMinimized: {
-                    output.activateNextApplication();
+                    output.activateNextApplication(appId);
                 }
                 onActivateView: output.activateView(view)
 

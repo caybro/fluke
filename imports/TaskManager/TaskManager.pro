@@ -1,7 +1,7 @@
 TEMPLATE = lib
 TARGET  = taskmanagerplugin
 QT += qml quick waylandcompositor
-CONFIG += qt plugin c++11 link_pkgconfig
+CONFIG += qt plugin c++14 link_pkgconfig
 PKGCONFIG += Qt5Xdg
 
 uri = org.fluke.TaskManager

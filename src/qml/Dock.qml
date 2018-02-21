@@ -72,9 +72,11 @@ Pane {
                     }
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: model.running ? "\uf111" : ""
+                        // @disable-check M306
+                        text: Array(Math.min(model.instanceCount+1, 4)).join("\uf111\u2009") // up to 3 dots + small space
                         color: Material.accent
                         font.pixelSize: 7
+                        visible: model.running
                     }
                 }
 

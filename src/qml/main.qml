@@ -61,7 +61,7 @@ WaylandCompositor {
     }
 
     function createToplevelItem(toplevel, shellSurface, output) {
-        var parentSurfaceItem = output.viewsBySurface[toplevel.parentToplevel];
+        var parentSurfaceItem = output.toplevelsBySurface[toplevel.parentToplevel];
         var parent = parentSurfaceItem || output.surfaceArea;
         var item = chromeComponent.createObject(parent, {
             "shellSurface": shellSurface,
@@ -74,7 +74,8 @@ WaylandCompositor {
             item.x += output.position.x;
             item.y += output.position.y;
         }
-        output.viewsBySurface[toplevel] = item;
+        output.viewsBySurface[shellSurface.surface] = item;
+        output.toplevelsBySurface[toplevel] = item;
     }
 
     function createPopupItem(popup, output) {
