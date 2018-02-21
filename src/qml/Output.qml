@@ -18,6 +18,7 @@ WaylandOutput {
     property var viewsBySurface: ({}) // QWaylandSurface -> QWaylandView
 
     Component.onCompleted: {
+        // TODO make this configurable
         compositor.defaultSeat.keymap.layout = "cz";
         compositor.defaultSeat.keymap.variant = "qwerty";
     }
@@ -158,7 +159,7 @@ WaylandOutput {
         WaylandMouseTracker {
             id: mouseTracker
             anchors.fill: parent
-            windowSystemCursorEnabled: false
+            //windowSystemCursorEnabled: true
 
             onMouseYChanged: {
                 if (dock.autohide && !workspace.fullscreenAppId) {
@@ -231,6 +232,7 @@ WaylandOutput {
                 onMinimized: {
                     output.activateNextApplication();
                 }
+                onActivateView: output.activateView(view)
 
                 onChangeWallpaper: win.background.source = fileUrl
                 onShowLauncher: appLauncher.show()

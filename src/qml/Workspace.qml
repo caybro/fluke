@@ -13,6 +13,7 @@ Item {
     signal minimized(string appId)
     signal fullscreen(string appId)
     signal exitFullscreen(string appId)
+    signal activateView(var view)
 
     signal changeWallpaper(url fileUrl)
     signal showLauncher()

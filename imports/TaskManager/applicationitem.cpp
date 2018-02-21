@@ -76,7 +76,7 @@ bool ApplicationItem::isFavorite() const
 int ApplicationItem::instanceCount() const
 {
     QSet<QWaylandClient *> clients;
-    for(QWaylandSurface *surface: qAsConst(m_surfaces)) {
+    for (QWaylandSurface *surface: qAsConst(m_surfaces)) {
         clients.insert(surface->client());
     }
     return clients.count();

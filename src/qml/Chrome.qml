@@ -7,7 +7,7 @@ import org.fluke.TaskManager 1.0
 ShellSurfaceItem {
     id: rootChrome
 
-    readonly property bool isChild: (xdgSurface && xdgSurface.parentSurface) || (xdgSurface && xdgSurface.parentToplevel)
+    readonly property bool isChild: !!parentSurfaceItem
     readonly property alias appId: priv.appId
     readonly property bool activated: xdgSurface && xdgSurface.activated
     readonly property bool fullscreen: xdgSurface && xdgSurface.fullscreen
@@ -18,6 +18,7 @@ ShellSurfaceItem {
     property Workspace workspace
 
     property var xdgSurface: shellSurface
+    property var parentSurfaceItem
 
     opacity: !minimized && !workspace.appLauncherVisible ? 1 : 0
     visible: opacity > 0
@@ -36,6 +37,10 @@ ShellSurfaceItem {
     }
 
     onSurfaceDestroyed: {
+        if (isChild) {
+            workspace.activateView(rootChrome.parentSurfaceItem);
+        }
+
         if (isPopup) {
             rootChrome.destroy();
         } else {
@@ -107,6 +112,7 @@ ShellSurfaceItem {
         onParentSurfaceChanged: {
             var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentSurface.surface];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
+                rootChrome.parentSurfaceItem = parentSurfaceItem;
                 rootChrome.parent = parentSurfaceItem;
                 rootChrome.anchors.centerIn = parentSurfaceItem;
                 rootChrome.moveItem = parentSurfaceItem.moveItem;
@@ -115,6 +121,7 @@ ShellSurfaceItem {
         onParentToplevelChanged: {
             var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentToplevel];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
+                rootChrome.parentSurfaceItem = parentSurfaceItem;
                 rootChrome.parent = parentSurfaceItem;
                 rootChrome.anchors.centerIn = parentSurfaceItem;
                 rootChrome.moveItem = parentSurfaceItem.moveItem;
