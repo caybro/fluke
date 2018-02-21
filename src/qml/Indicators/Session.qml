@@ -10,7 +10,6 @@ import org.fluke.Session 1.0
 
 ToolButton {
     id: indicatorSession
-    font.pointSize: 14
     font.weight: Font.DemiBold
     text: "\uf013"
 

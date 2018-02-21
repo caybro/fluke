@@ -8,7 +8,6 @@ ToolButton {
     id: indicatorSound
     text: indicatorCaption()
     font.weight: Font.DemiBold
-    font.pointSize: 14
 
     ToolTip.text: indicatorTooltip()
     ToolTip.visible: hovered && !popup.visible
