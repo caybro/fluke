@@ -102,10 +102,9 @@ Pane {
                     }
                 }
             }
-            addDisplaced: Transition {
-                NumberAnimation { properties: "x,y"; duration: 200 }
+            displaced: Transition {
+                DefaultAnimation { properties: "x,y" }
             }
-            removeDisplaced: addDisplaced
         }
 
         Button {
