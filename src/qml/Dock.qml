@@ -103,6 +103,12 @@ Pane {
                         dock.activateApplication(appId);
                     }
                 }
+
+                ListView.onRemove: SequentialAnimation {
+                    PropertyAction { target: appDelegate; property: "ListView.delayRemove"; value: true }
+                    DefaultAnimation { target: appDelegate; properties: "opacity,scale"; to: 0 }
+                    PropertyAction { target: appDelegate; property: "ListView.delayRemove"; value: false }
+                }
             }
             displaced: Transition {
                 DefaultAnimation { properties: "x,y" }
