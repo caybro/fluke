@@ -24,7 +24,7 @@ Pane {
         hide();
     }
 
-    Behavior on opacity { DefaultAnimation  {} }
+    Behavior on opacity { DefaultAnimation {} }
 
     Keys.onEscapePressed: hide()
     Keys.enabled: true
@@ -113,6 +113,12 @@ Pane {
 
             onClicked: {
                 launchApp(appId);
+            }
+
+            GridView.onRemove: SequentialAnimation {
+                PropertyAction { target: appDelegate; property: "GridView.delayRemove"; value: true }
+                DefaultAnimation { target: appDelegate; properties: "opacity,scale"; to: 0 }
+                PropertyAction { target: appDelegate; property: "GridView.delayRemove"; value: false }
             }
         }
     }

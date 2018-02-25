@@ -41,7 +41,7 @@ ShellSurfaceItem {
             workspace.activateView(rootChrome.parentSurfaceItem);
         }
 
-        if (isPopup) {
+        if (isPopup || workspace.appLauncherVisible) {
             rootChrome.destroy();
         } else {
             bufferLocked = true;
