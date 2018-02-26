@@ -9,12 +9,12 @@ import org.fluke.Sound 1.0
 
 ToolBar {
     id: panel
-    padding: -5
     opacity: appLauncherVisible ? 0.8 : 1.0
     Behavior on opacity { DefaultAnimation {} }
 
     background: Rectangle {
         color: Material.background
+        Behavior on color { ColorAnimation {} }
     }
 
     signal logout()
@@ -35,7 +35,7 @@ ToolBar {
 
         ToolButton {
             visible: appLauncherVisible
-            text: "\uf060"
+            icon.name: "go-previous-symbolic"
             ToolTip.text: qsTr("Back")
             ToolTip.visible: hovered
             onClicked: panel.hideLauncher()

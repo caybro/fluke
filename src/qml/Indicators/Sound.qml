@@ -1,27 +1,30 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 import org.fluke.Sound 1.0
 
 ToolButton {
     id: indicatorSound
-    text: indicatorCaption()
     font.weight: Font.DemiBold
+    down: popup.visible
+
+    icon.name: indicatorIcon()
 
     ToolTip.text: indicatorTooltip()
     ToolTip.visible: hovered && !popup.visible
 
-    function indicatorCaption() {
-        var value = Sound.volume;
+    function indicatorIcon() {
+        var vol = Sound.volume;
 
-        if (value == 0 || Sound.muted) {
-            return "<font color='#F44336'>\uf026</font>";
-        } else if (value < 50) {
-            return "\uf027";
-        } else {
-            return "\uf028";
+        if (vol == 0 || Sound.muted) {
+            return "audio-volume-muted-symbolic";
+        } else if (vol < 33) {
+            return "audio-volume-low-symbolic";
+        } else if (vol < 66) {
+            return "audio-volume-medium-symbolic";
         }
+        return "audio-volume-high-symbolic";
     }
 
     function indicatorTooltip() {
@@ -60,7 +63,7 @@ ToolButton {
         id: popup
         focus: visible
         x: parent.width - implicitWidth
-        y: parent.height - parent.bottomPadding
+        y: parent.height
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
         ColumnLayout {
@@ -70,7 +73,8 @@ ToolButton {
                 anchors.right: parent.right
 
                 ToolButton {
-                    text: "<font color='#F44336'>\uf026</font>"
+                    icon.name: "audio-volume-muted-symbolic"
+                    icon.color: "red"
                     checkable: true
                     checked: Sound.muted
                     onToggled: toggleMute()

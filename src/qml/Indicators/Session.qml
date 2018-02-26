@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.2
@@ -11,13 +11,11 @@ import org.fluke.Session 1.0
 ToolButton {
     id: indicatorSession
     font.weight: Font.DemiBold
-    text: "\uf013"
+    down: popupLoader.item && popupLoader.item.visible
+
+    icon.name: "computer-symbolic"
 
     property bool autohideDock: false
-
-    Component.onCompleted: {
-        indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
-    }
 
     ToolTip.text: qsTr("Session")
     ToolTip.visible: hovered && (!popupLoader.item || !popupLoader.item.visible)
@@ -31,7 +29,7 @@ ToolButton {
         id: popupLoader
         active: false
         focus: visible
-        y: parent.height - parent.bottomPadding
+        y: parent.height
 
         sourceComponent: Menu {
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
@@ -68,24 +66,28 @@ ToolButton {
             MenuSeparator {}
 
             MenuItem {
-                text: "\uf2f5    " + qsTr("Logout")
+                text: qsTr("Logout")
+                icon.name: "application-exit-symbolic"
                 onClicked: indicatorSession.logout()
             }
 
             MenuItem {
-                text: "\uf186    " + qsTr("Sleep")
+                text: qsTr("Sleep")
+                icon.name: "night-light-symbolic"
                 onClicked: indicatorSession.suspend()
                 enabled: Session.canSuspend()
             }
 
             MenuItem {
-                text: "\uf021    " + qsTr("Restart")
+                text: qsTr("Restart")
+                icon.name: "view-refresh-symbolic"
                 onClicked: indicatorSession.reboot()
                 enabled: Session.canReboot()
             }
 
             MenuItem {
-                text: "\uf011    " + qsTr("Shutdown")
+                text: qsTr("Shutdown")
+                icon.name: "system-shutdown-symbolic"
                 onClicked: indicatorSession.shutdown()
                 enabled: Session.canShutdown()
             }

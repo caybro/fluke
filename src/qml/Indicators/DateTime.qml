@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import Qt.labs.calendar 1.0
 import QtQuick.Controls.Material 2.2
@@ -7,6 +7,7 @@ import QtQuick.Controls.Material 2.2
 ToolButton {
     id: indicatorDateTime
     font.weight: Font.DemiBold
+    down: popup.visible
 
     contentItem: Label { // get rid of the stupid UPPERCASE text :/
         text: indicatorDateTime.text
@@ -33,7 +34,7 @@ ToolButton {
         focus: visible
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         x: (parent.width - implicitWidth) / 2
-        y: parent.height - parent.bottomPadding
+        y: parent.height
 
         ColumnLayout {
             anchors.fill: parent
@@ -47,7 +48,7 @@ ToolButton {
 
                 ToolButton {
                     id: btnPrevMonth
-                    text: "\uf060"
+                    icon.name: "go-previous-symbolic"
                     onClicked: {
                         var nextMonth = new Date(calendar.year, calendar.month - 1);
                         calendar.month = nextMonth.getMonth();
@@ -69,7 +70,7 @@ ToolButton {
 
                 ToolButton {
                     id: btnNextMonth
-                    text: "\uf061"
+                    icon.name: "go-next-symbolic"
                     onClicked: {
                         var nextMonth = new Date(calendar.year, calendar.month + 1);
                         calendar.month = nextMonth.getMonth();
@@ -126,13 +127,13 @@ ToolButton {
             Switch {
                 id: dateSwitch
                 text: qsTr("Display date in clock")
-                onCheckedChanged: timer.restart()
+                onToggled: timer.restart()
             }
 
             Switch {
                 id: secondsSwitch
                 text: qsTr("Display seconds in clock")
-                onCheckedChanged: timer.restart()
+                onToggled: timer.restart()
             }
         }
     }

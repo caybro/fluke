@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 
 import org.fluke.Power 1.0
@@ -7,37 +7,19 @@ import org.fluke.Power 1.0
 ToolButton {
     id: indicatorPower
     font.weight: Font.DemiBold
+    down: popup.visible
 
+    icon.name: Power.iconName
     text: indicatorCaption()
 
     ToolTip.text: indicatorTooltip()
     ToolTip.visible: Power.isPresent && hovered && !popup.visible
 
     function indicatorCaption() {
-        if (!Power.isPresent) {
-            return "\uf1e6"; // plug icon, no battery present
-        }
-
-        var iconName = "";
         var state = Power.state;
         var perc = state === Power.FullyCharged ? 100.0 : Power.percentage;
 
-        if (state === Power.Charging) {
-            iconName = "\uf0e7\u2009"; // bolt icon + small space
-        }
-
-        if (perc <= 10) {
-            iconName += "<font color='#F44336'>\uf244</font>";
-        } else if (perc <= 25) {
-            iconName += "\uf243";
-        } else if (perc <= 50) {
-            iconName += "\uf242";
-        } else if (perc <= 75) {
-            iconName += "\uf241";
-        } else {
-            iconName += "\uf240";
-        }
-        var result = "%1 %2%".arg(iconName).arg(Math.floor(perc)); // we're being a bit pessimistic here ;)
+        var result = "%1%".arg(Math.floor(perc)); // we're being a bit pessimistic here ;)
         if (state === Power.Charging || state === Power.Discharging) {
             result += ", %1".arg(Power.remainingTime);
         }
@@ -61,7 +43,7 @@ ToolButton {
         id: popup
         focus: visible
         x: parent.width - implicitWidth
-        y: parent.height - parent.bottomPadding
+        y: parent.height
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
         ColumnLayout {
@@ -71,7 +53,7 @@ ToolButton {
                 anchors.right: parent.right
 
                 ToolButton {
-                    text: "\uf185"
+                    icon.name: "display-brightness-symbolic"
                     onClicked: brightnessSlider.value = 0
                 }
 

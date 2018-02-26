@@ -22,6 +22,7 @@ Pane {
     background: Rectangle {
         color: Material.background
         radius: 5
+        Behavior on color { ColorAnimation {} }
     }
 
     Behavior on y { DefaultAnimation {} }
