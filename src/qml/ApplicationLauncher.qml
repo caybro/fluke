@@ -12,7 +12,7 @@ Pane {
     focus: visible
 
     function show() {
-        opacity = 0.9;
+        opacity = 0.8;
     }
 
     function hide() {
