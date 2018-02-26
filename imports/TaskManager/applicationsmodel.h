@@ -22,7 +22,7 @@ protected:
 public Q_SLOTS:
     void startApplication(const QString &appId, const QStringList &urls = {});
     void stopApplication(const QString &appId);
-    QString setSurfaceAppeared(qint64 pid, QWaylandSurface *surface);
+    QString setSurfaceAppeared(qint64 pid, QWaylandSurface *surface, const QString &fallbackAppId);
     void setSurfaceVanished(qint64 pid, QWaylandSurface *surface);
     void setApplicationFavorite(const QString &appId, bool favorite);
 

@@ -83,7 +83,7 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
     return m_roleNames;
 }
 
-QString ApplicationsModel::setSurfaceAppeared(qint64 pid, QWaylandSurface *surface)
+QString ApplicationsModel::setSurfaceAppeared(qint64 pid, QWaylandSurface *surface, const QString &fallbackAppId)
 {
     //qDebug() << "!!! Surface appeared" << pid << surface << surface->client()->processId();
     if (pid == 0)
@@ -93,6 +93,12 @@ QString ApplicationsModel::setSurfaceAppeared(qint64 pid, QWaylandSurface *surfa
     if (appItem) {
         appItem->incrementSurfaceCount(pid, surface);
         return appItem->appId();
+    } else { // use the fallback, something started not by us
+        appItem = findAppItem(fallbackAppId);
+        if (appItem) {
+            appItem->incrementSurfaceCount(pid, surface);
+            return appItem->appId();
+        }
     }
 
     return QString();

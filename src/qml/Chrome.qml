@@ -51,7 +51,7 @@ ShellSurfaceItem {
 
     onShellSurfaceChanged: {
         if (shellSurface && !rootChrome.isPopup) {
-            priv.appId = Applications.setSurfaceAppeared(priv.pid, shellSurface.surface);
+            priv.appId = Applications.setSurfaceAppeared(priv.pid, shellSurface.surface, priv.appId);
         }
     }
 
@@ -72,6 +72,12 @@ ShellSurfaceItem {
         ignoreUnknownSignals: true
 
         // xdg_shell only
+        onAppIdChanged: {
+            if (!priv.appId) { // fallback, something appeared but not started by us
+                priv.appId = Applications.setSurfaceAppeared(priv.pid, shellSurface.surface, xdgSurface.appId);
+            }
+        }
+
         onActivatedChanged: {
             if (rootChrome.activated && !rootChrome.isPopup) {
                 workspace.activated(rootChrome.appId);
