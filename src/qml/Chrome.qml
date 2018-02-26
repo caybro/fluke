@@ -71,10 +71,6 @@ ShellSurfaceItem {
         // some signals are not available on wl_shell, so let's ignore them
         ignoreUnknownSignals: true
 
-        onClassNameChanged: {
-            priv.appId = shellSurface.className;
-        }
-
         // xdg_shell only
         onActivatedChanged: {
             if (rootChrome.activated && !rootChrome.isPopup) {
