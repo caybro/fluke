@@ -8,6 +8,13 @@ ToolButton {
     id: indicatorDateTime
     font.weight: Font.DemiBold
 
+    contentItem: Label { // get rid of the stupid UPPERCASE text :/
+        text: indicatorDateTime.text
+        font: indicatorDateTime.font
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+    }
+
     Timer {
         id: timer
         interval: 1000
