@@ -9,7 +9,10 @@ ToolButton {
     font.weight: Font.DemiBold
     down: popup.visible
 
-    icon.name: indicatorIcon()
+    icon {
+        name: indicatorIcon()
+        height: 16
+    }
 
     ToolTip.text: indicatorTooltip()
     ToolTip.visible: hovered && !popup.visible
@@ -73,8 +76,12 @@ ToolButton {
                 anchors.right: parent.right
 
                 ToolButton {
-                    icon.name: "audio-volume-muted-symbolic"
-                    icon.color: "red"
+                    icon {
+                        name: "audio-volume-muted-symbolic"
+                        color: "red"
+                        height: 16
+                    }
+
                     checkable: true
                     checked: Sound.muted
                     onToggled: toggleMute()

@@ -13,7 +13,10 @@ ToolButton {
     font.weight: Font.DemiBold
     down: popupLoader.item && popupLoader.item.visible
 
-    icon.name: "computer-symbolic"
+    icon {
+        name: "computer-symbolic"
+        height: 16
+    }
 
     property bool autohideDock: false
 
@@ -68,12 +71,14 @@ ToolButton {
             MenuItem {
                 text: qsTr("Logout")
                 icon.name: "application-exit-symbolic"
+                icon.height: 16
                 onClicked: indicatorSession.logout()
             }
 
             MenuItem {
                 text: qsTr("Sleep")
                 icon.name: "night-light-symbolic"
+                icon.height: 16
                 onClicked: indicatorSession.suspend()
                 enabled: Session.canSuspend()
             }
@@ -81,6 +86,7 @@ ToolButton {
             MenuItem {
                 text: qsTr("Restart")
                 icon.name: "view-refresh-symbolic"
+                icon.height: 16
                 onClicked: indicatorSession.reboot()
                 enabled: Session.canReboot()
             }
@@ -88,6 +94,7 @@ ToolButton {
             MenuItem {
                 text: qsTr("Shutdown")
                 icon.name: "system-shutdown-symbolic"
+                icon.height: 16
                 onClicked: indicatorSession.shutdown()
                 enabled: Session.canShutdown()
             }

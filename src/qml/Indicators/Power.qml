@@ -9,7 +9,10 @@ ToolButton {
     font.weight: Font.DemiBold
     down: popup.visible
 
-    icon.name: Power.iconName
+    icon {
+        name: Power.iconName
+        height: 16
+    }
     text: indicatorCaption()
 
     ToolTip.text: indicatorTooltip()
@@ -53,7 +56,11 @@ ToolButton {
                 anchors.right: parent.right
 
                 ToolButton {
-                    icon.name: "display-brightness-symbolic"
+                    icon {
+                        name: "display-brightness-symbolic"
+                        height: 16
+                    }
+
                     onClicked: brightnessSlider.value = 0
                 }
 

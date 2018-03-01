@@ -44,16 +44,22 @@ Item {
         id: shellContextMenu
 
         MenuItem {
-            text: "\uf03e     " + qsTr("Select Wallpaper...")
+            icon.name: "preferences-desktop-wallpaper-symbolic"
+            icon.height: 16
+            text: qsTr("Select Wallpaper...")
             onTriggered: wallpaperDialog.open()
         }
 
         MenuItem {
-            text: "\uf00a     " + qsTr("Open Launcher")
+            icon.name: "view-app-grid-symbolic"
+            icon.height: 16
+            text: qsTr("Open Launcher")
             onTriggered: workspace.showLauncher()
         }
         MenuItem {
-            text: "\uf08b     " + qsTr("Logout...")
+            icon.name: "application-exit-symbolic"
+            icon.height: 16
+            text: qsTr("Logout...")
             onTriggered: workspace.logout()
         }
     }

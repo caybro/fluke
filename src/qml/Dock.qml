@@ -121,10 +121,10 @@ Pane {
             Layout.topMargin: -12
             anchors.verticalCenter: parent.verticalCenter
             flat: true
-            text: "\uf00a"
+            icon.name: "view-app-grid-symbolic"
+            icon.height: 32
             ToolTip.text: qsTr("Applications")
             ToolTip.visible: hovered
-            font.pixelSize: 24
             onClicked: dock.showLauncher()
         }
     }
