@@ -160,7 +160,7 @@ WaylandOutput {
         WaylandMouseTracker {
             id: mouseTracker
             anchors.fill: parent
-            //windowSystemCursorEnabled: true
+            windowSystemCursorEnabled: false
 
             onMouseYChanged: {
                 if (dock.autohide && !workspace.fullscreenAppId) {
