@@ -143,7 +143,7 @@ ShellSurfaceItem {
 
     SequentialAnimation {
         id: receivedFocusAnimation
-        readonly property int duration: 80
+        readonly property int duration: 50
         NumberAnimation { target: scaleTransform; properties: "xScale,yScale"; to: 1.01; duration: receivedFocusAnimation.duration;
             easing.type: Easing.OutQuad }
         NumberAnimation { target: scaleTransform; properties: "xScale,yScale"; to: 1; duration: receivedFocusAnimation.duration;
@@ -152,20 +152,22 @@ ShellSurfaceItem {
 
     SequentialAnimation {
         id: maximizeAnimation
+        readonly property int duration: 150
         ParallelAnimation {
-            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; to: 0 }
-            PropertyAnimation { target: rootChrome; property: "width"; duration: 80; to: rootChrome.workspace.width }
-            PropertyAnimation { target: rootChrome; property: "height"; duration: 80; to: rootChrome.workspace.height }
+            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: maximizeAnimation.duration; to: 0 }
+            PropertyAnimation { target: rootChrome; property: "width"; duration: maximizeAnimation.duration; to: rootChrome.workspace.width }
+            PropertyAnimation { target: rootChrome; property: "height"; duration: maximizeAnimation.duration; to: rootChrome.workspace.height }
         }
         ScriptAction { script: { rootChrome.bufferLocked = false; } }
     }
 
     SequentialAnimation {
         id: unmaximizeAnimation
+        readonly property int duration: 150
         ParallelAnimation {
-            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; from: 0 }
-            PropertyAnimation { target: rootChrome; property: "width"; duration: 80; from: rootChrome.workspace.width }
-            PropertyAnimation { target: rootChrome; property: "height"; duration: 80; from: rootChrome.workspace.height }
+            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: unmaximizeAnimation.duration; from: 0 }
+            PropertyAnimation { target: rootChrome; property: "width"; duration: unmaximizeAnimation.duration; from: rootChrome.workspace.width }
+            PropertyAnimation { target: rootChrome; property: "height"; duration: unmaximizeAnimation.duration; from: rootChrome.workspace.height }
         }
         ScriptAction { script: { rootChrome.bufferLocked = false; } }
     }
