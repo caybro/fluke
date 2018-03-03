@@ -155,8 +155,8 @@ ShellSurfaceItem {
         readonly property int duration: 150
         ParallelAnimation {
             PropertyAnimation { target: rootChrome; properties: "x,y"; duration: maximizeAnimation.duration; to: 0 }
-            PropertyAnimation { target: rootChrome; property: "width"; duration: maximizeAnimation.duration; to: rootChrome.workspace.width }
-            PropertyAnimation { target: rootChrome; property: "height"; duration: maximizeAnimation.duration; to: rootChrome.workspace.height }
+            PropertyAnimation { target: rootChrome; property: "width"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.width }
+            PropertyAnimation { target: rootChrome; property: "height"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.height }
         }
         ScriptAction { script: { rootChrome.bufferLocked = false; } }
     }
@@ -166,8 +166,8 @@ ShellSurfaceItem {
         readonly property int duration: 150
         ParallelAnimation {
             PropertyAnimation { target: rootChrome; properties: "x,y"; duration: unmaximizeAnimation.duration; from: 0 }
-            PropertyAnimation { target: rootChrome; property: "width"; duration: unmaximizeAnimation.duration; from: rootChrome.workspace.width }
-            PropertyAnimation { target: rootChrome; property: "height"; duration: unmaximizeAnimation.duration; from: rootChrome.workspace.height }
+            PropertyAnimation { target: rootChrome; property: "width"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.width }
+            PropertyAnimation { target: rootChrome; property: "height"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.height }
         }
         ScriptAction { script: { rootChrome.bufferLocked = false; } }
     }

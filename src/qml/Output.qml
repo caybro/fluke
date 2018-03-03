@@ -13,6 +13,9 @@ WaylandOutput {
     id: output
     sizeFollowsWindow: true
 
+    availableGeometry: settings.autohideDock ? Qt.rect(0, panel.height, win.width, win.height - panel.height)
+                                             : Qt.rect(0, panel.height, win.width, win.height - panel.height - dock.height)
+
     property alias screen: win.screen
     readonly property alias surfaceArea: workspace
     property var viewsBySurface: ({}) // QWaylandSurface -> QWaylandView
