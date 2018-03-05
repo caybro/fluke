@@ -38,6 +38,7 @@ ShellSurfaceItem {
 
     onSurfaceDestroyed: {
         if (isChild) {
+            parentSurfaceItem.inputEventsEnabled = true;
             workspace.activateView(rootChrome.parentSurfaceItem);
         }
 
@@ -116,6 +117,7 @@ ShellSurfaceItem {
                 rootChrome.parent = parentSurfaceItem;
                 rootChrome.anchors.centerIn = parentSurfaceItem;
                 rootChrome.moveItem = parentSurfaceItem.moveItem;
+                parentSurfaceItem.inputEventsEnabled = false;
             }
         }
         onParentToplevelChanged: {
@@ -125,6 +127,7 @@ ShellSurfaceItem {
                 rootChrome.parent = parentSurfaceItem;
                 rootChrome.anchors.centerIn = parentSurfaceItem;
                 rootChrome.moveItem = parentSurfaceItem.moveItem;
+                parentSurfaceItem.inputEventsEnabled = false;
             }
         }
     }
