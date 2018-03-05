@@ -11,12 +11,10 @@ import org.fluke.Session 1.0
 ToolButton {
     id: indicatorSession
     font.weight: Font.DemiBold
+    font.pixelSize: 16
     down: popupLoader.item && popupLoader.item.visible
 
-    icon {
-        name: "computer-symbolic"
-        height: 16
-    }
+    text: "\uf013"
 
     property bool autohideDock: false
 
@@ -27,6 +25,10 @@ ToolButton {
     signal suspend()
     signal reboot()
     signal shutdown()
+
+    Component.onCompleted: {
+        indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
+    }
 
     Loader {
         id: popupLoader
