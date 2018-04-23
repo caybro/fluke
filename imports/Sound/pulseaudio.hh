@@ -45,7 +45,7 @@ typedef enum state state_t;
 /**
  * Class to manipulate the pulseaudio server using the asynchronous C library.
  * When the constructor is called, a connection is established to a local pulseaudio server.
- * If the connection fail an exception is raised.
+ * If the connection fails, an exception is raised.
  */
 class Pulseaudio {
 private:

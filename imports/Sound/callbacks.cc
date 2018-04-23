@@ -23,7 +23,7 @@ void state_cb(pa_context* context, void* raw) {
 void sink_list_cb(pa_context * UNUSED(c), const pa_sink_info *i, int eol, void *raw) {
     if (eol != 0) return;
 
-    std::list<Device>* sinks = (std::list<Device>*) raw;
+    std::list<Device>* sinks = static_cast<std::list<Device>*>(raw);
     Device s(i);
     sinks->push_back(s);
 }
@@ -31,13 +31,13 @@ void sink_list_cb(pa_context * UNUSED(c), const pa_sink_info *i, int eol, void *
 void source_list_cb(pa_context * UNUSED(c), const pa_source_info *i, int eol, void *raw) {
     if (eol != 0) return;
 
-    std::list<Device>* sources = (std::list<Device>*) raw;
+    std::list<Device>* sources = static_cast<std::list<Device>*>(raw);
     Device s(i);
     sources->push_back(s);
 }
 
 void server_info_cb(pa_context* UNUSED(context), const pa_server_info* i, void* raw) {
-    ServerInfo* info = (ServerInfo*) raw;
+    ServerInfo* info = static_cast<ServerInfo*>(raw);
     info->default_sink_name = i->default_sink_name;
     info->default_source_name = i->default_source_name;
 }
