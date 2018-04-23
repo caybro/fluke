@@ -1,15 +1,15 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.10
+import QtQuick.Controls 2.3
 
 import org.fluke.TaskManager 1.0
 
 Menu {
     id: contextMenu
     property var currentItem: null
-    
+
     parent: currentItem ? currentItem : null
     y: currentItem ? currentItem.height : 0
-    
+
     MenuItem {
         visible: contextMenu.currentItem
         text: qsTr("Favorite", "favorite application")
@@ -19,7 +19,7 @@ Menu {
             Applications.setApplicationFavorite(contextMenu.currentItem.appId, !contextMenu.currentItem.favorite)
         }
     }
-    
+
     MenuItem {
         id: quitItem
         text: qsTr("Quit")
@@ -28,7 +28,7 @@ Menu {
             Applications.stopApplication(contextMenu.currentItem.appId);
         }
     }
-    
+
     onAboutToShow: {
         if (currentItem.running) {
             addItem(quitItem);

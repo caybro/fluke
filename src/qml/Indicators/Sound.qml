@@ -12,6 +12,7 @@ ToolButton {
     icon {
         name: indicatorIcon()
         height: 16
+        width: 16
     }
 
     ToolTip.text: indicatorTooltip()
@@ -80,6 +81,7 @@ ToolButton {
                         name: "audio-volume-muted-symbolic"
                         color: "red"
                         height: 16
+                        width: 16
                     }
 
                     checkable: true

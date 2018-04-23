@@ -11,6 +11,7 @@ ToolButton {
 
     icon {
         name: Power.iconName
+        width: 16
         height: 16
     }
     text: indicatorCaption()
@@ -59,6 +60,7 @@ ToolButton {
                     icon {
                         name: "display-brightness-symbolic"
                         height: 16
+                        width: 16
                     }
 
                     onClicked: brightnessSlider.value = 0

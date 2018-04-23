@@ -46,6 +46,7 @@ Item {
         MenuItem {
             icon.name: "preferences-desktop-wallpaper-symbolic"
             icon.height: 16
+            icon.width: 16
             text: qsTr("Select Wallpaper...")
             onTriggered: wallpaperDialog.open()
         }
@@ -53,12 +54,14 @@ Item {
         MenuItem {
             icon.name: "view-app-grid-symbolic"
             icon.height: 16
+            icon.width: 16
             text: qsTr("Open Launcher")
             onTriggered: workspace.showLauncher()
         }
         MenuItem {
             icon.name: "application-exit-symbolic"
             icon.height: 16
+            icon.width: 16
             text: qsTr("Logout...")
             onTriggered: workspace.logout()
         }

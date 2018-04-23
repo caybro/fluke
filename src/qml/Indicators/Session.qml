@@ -74,6 +74,7 @@ ToolButton {
                 text: qsTr("Logout")
                 icon.name: "application-exit-symbolic"
                 icon.height: 16
+                icon.width: 16
                 onClicked: indicatorSession.logout()
             }
 
@@ -81,6 +82,7 @@ ToolButton {
                 text: qsTr("Sleep")
                 icon.name: "night-light-symbolic"
                 icon.height: 16
+                icon.width: 16
                 onClicked: indicatorSession.suspend()
                 enabled: Session.canSuspend()
             }
@@ -89,6 +91,7 @@ ToolButton {
                 text: qsTr("Restart")
                 icon.name: "view-refresh-symbolic"
                 icon.height: 16
+                icon.width: 16
                 onClicked: indicatorSession.reboot()
                 enabled: Session.canReboot()
             }
@@ -97,6 +100,7 @@ ToolButton {
                 text: qsTr("Shutdown")
                 icon.name: "system-shutdown-symbolic"
                 icon.height: 16
+                icon.width: 16
                 onClicked: indicatorSession.shutdown()
                 enabled: Session.canShutdown()
             }

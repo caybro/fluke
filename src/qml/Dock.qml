@@ -123,6 +123,7 @@ Pane {
             flat: true
             icon.name: "view-app-grid-symbolic"
             icon.height: 32
+            icon.width: 32
             ToolTip.text: qsTr("Applications")
             ToolTip.visible: hovered
             onClicked: dock.showLauncher()
