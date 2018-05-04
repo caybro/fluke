@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtWayland.Compositor 1.1
 

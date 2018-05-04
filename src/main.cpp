@@ -1,6 +1,5 @@
 #include <QUrl>
 #include <QDebug>
-
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
@@ -16,7 +15,7 @@ int main(int argc, char *argv[])
     //qputenv("QT_WAYLAND_DISABLE_WINDOWDECORATION", QByteArrayLiteral("1")); // TODO own window decoration
     qputenv("QT_QUICK_CONTROLS_STYLE", QByteArrayLiteral("Material"));
 
-    //QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QGuiApplication app(argc, argv);
     app.setOrganizationName(QStringLiteral("caybro"));
