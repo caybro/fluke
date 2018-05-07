@@ -157,6 +157,8 @@ WaylandOutput {
         Settings {
             id: settings
             property alias autohideDock: panel.autohideDock
+            property alias showDate: panel.showDate
+            property alias showSeconds: panel.showSeconds
             property url wallpaper: "qrc:/images/background.jpg"
         }
 

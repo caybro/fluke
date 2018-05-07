@@ -25,6 +25,8 @@ ToolBar {
 
     property bool appLauncherVisible: false
     property alias autohideDock: sessionIndicator.autohideDock
+    property alias showDate: dateIndicator.showDate
+    property alias showSeconds: dateIndicator.showSeconds
     readonly property var soundIndicator: soundIndicatorLoader.item ? soundIndicatorLoader.item : null
 
     RowLayout {
@@ -42,6 +44,7 @@ ToolBar {
         }
 
         Indicators.DateTime {
+            id: dateIndicator
             anchors.centerIn: parent
         }
 

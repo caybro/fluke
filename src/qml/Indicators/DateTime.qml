@@ -9,6 +9,9 @@ ToolButton {
     font.weight: Font.DemiBold
     down: popup.visible
 
+    property bool showDate: false
+    property bool showSeconds: false
+
     contentItem: Label { // get rid of the stupid UPPERCASE text :/
         text: indicatorDateTime.text
         font: indicatorDateTime.font
@@ -127,13 +130,21 @@ ToolButton {
             Switch {
                 id: dateSwitch
                 text: qsTr("Display date in clock")
-                onToggled: timer.restart()
+                checked: indicatorDateTime.showDate
+                onToggled: {
+                    indicatorDateTime.showDate = checked;
+                    timer.restart();
+                }
             }
 
             Switch {
                 id: secondsSwitch
                 text: qsTr("Display seconds in clock")
-                onToggled: timer.restart()
+                checked: indicatorDateTime.showSeconds
+                onToggled: {
+                    indicatorDateTime.showSeconds = checked;
+                    timer.restart();
+                }
             }
         }
     }
