@@ -8,10 +8,12 @@ uri = org.fluke.Session
 SOURCES += \
     plugin.cpp \
     session.cpp \
-    platform.cpp
+    platform.cpp \
+    geolocation.cpp
 
 HEADERS += session.h \
-    platform.h
+    platform.h \
+    geolocation.h
 
 target.path = $$[QT_INSTALL_QML]/org/fluke/Session
 pluginfiles.files += $$_PRO_FILE_PWD_/qmldir
