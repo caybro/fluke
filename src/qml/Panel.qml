@@ -43,9 +43,15 @@ ToolBar {
             onClicked: panel.hideLauncher()
         }
 
-        Indicators.DateTime {
-            id: dateIndicator
+        RowLayout {
+            id: centerSection
             anchors.centerIn: parent
+
+            Indicators.DateTime {
+                id: dateIndicator
+            }
+
+            Indicators.Weather {}
         }
 
         RowLayout {

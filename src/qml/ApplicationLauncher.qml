@@ -163,7 +163,7 @@ Pane {
                 DefaultAnimation { properties: "x,y" }
             }
 
-            ScrollBar.vertical: ScrollBar {}
+            ScrollIndicator.vertical: ScrollIndicator {}
 
             Keys.onPressed: {
                 if (gridView.currentItem) {

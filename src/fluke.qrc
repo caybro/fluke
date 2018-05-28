@@ -17,5 +17,6 @@
         <file>qml/Workspace.qml</file>
         <file>qml/DefaultAnimation.qml</file>
         <file>fonts/FontAwesomeSolid5.otf</file>
+        <file>qml/Indicators/Weather.qml</file>
     </qresource>
 </RCC>
