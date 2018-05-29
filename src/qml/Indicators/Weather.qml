@@ -1,7 +1,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
-import Qt.labs.calendar 1.0
 import QtQuick.Controls.Material 2.3
 import QtQuick.XmlListModel 2.0
 
@@ -9,30 +8,35 @@ import org.fluke.Session 1.0
 
 ToolButton {
     id: root
-    //font.weight: Font.DemiBold
     down: popup.visible
     text: "?"
 
     icon.width: 16
     icon.height: 16
 
-    contentItem: Label { // get rid of the stupid UPPERCASE text :/
-        text: root.text
-        font: root.font
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
+    Timer {
+        id: timer
+        interval: 60 * 1000 * 30 // 30 minutes
+        onTriggered: updateWeather();
+    }
+
+    function updateWeather() {
+        if (GeoLocation.isValid) {
+            console.info("!!! Current GeoLocation:", GeoLocation.latitude, GeoLocation.longitude)
+            priv.lat = GeoLocation.latitude;
+            priv.lon = GeoLocation.longitude;
+            currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=metric&mode=xml"
+            .arg(priv.lat).arg(priv.lon).arg(priv.owmKey);
+        }
     }
 
     Connections {
         target: GeoLocation
         onLocationUpdated: {
-            if (GeoLocation.isValid) {
-                console.info("!!! Current GeoLocation:", GeoLocation.latitude, GeoLocation.longitude)
-                priv.lat = GeoLocation.latitude;
-                priv.lon = GeoLocation.longitude;
-                currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=metric&mode=xml"
-                .arg(priv.lat).arg(priv.lon).arg(priv.owmKey);
+            if (!timer.running) { // update once initially, then start the timer
+                updateWeather();
             }
+            timer.start();
         }
     }
 
@@ -64,15 +68,14 @@ ToolButton {
                 var temperature = Math.round(result.temperature);
 
                 root.icon.source = "http://openweathermap.org/img/w/%1.png".arg(result.iconID);
-                console.info("!!! ICON:", root.icon.source)
 
                 root.text = qsTr("%1°C (%2)").arg(temperature).arg(result.weatherInfo);
 
-                weather.text = qsTr("Weather: %1 °C").arg(temperature);
+                weather.text = qsTr("Temperature: %1 °C").arg(temperature);
                 weather.append(qsTr("Humidity: %1%").arg(result.humidity));
                 weather.append(qsTr("Precipitation: %1").arg(result.precipitation));
                 weather.append(qsTr("Wind: %1").arg(result.wind));
-                weather.append("%1, %2".arg(result.city).arg(result.country));
+                weather.append(qsTr("Location: %1, %2").arg(result.city).arg(result.country));
             } else if (status === XmlListModel.Error) {
                 console.error("Weather model error:", errorString())
                 root.text = "?";
