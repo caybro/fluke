@@ -30,8 +30,9 @@ ToolButton {
             console.info("!!! Current GeoLocation:", GeoLocation.latitude, GeoLocation.longitude)
             priv.lat = GeoLocation.latitude;
             priv.lon = GeoLocation.longitude;
-            currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=metric&mode=xml"
-            .arg(priv.lat).arg(priv.lon).arg(priv.owmKey);
+            currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4&mode=xml"
+            .arg(priv.lat).arg(priv.lon).arg(priv.owmKey)
+            .arg(priv.imperialUnits ? "imperial" : "metric")
             if (currentWeather.status !== XmlListModel.Loading) {
                 currentWeather.reload();
             }
@@ -49,14 +50,13 @@ ToolButton {
     QtObject {
         id: priv
         readonly property string owmKey: "6cb9a165bb3bf6147795a3dfab474b59"
+        readonly property bool imperialUnits: Qt.locale().measurementSystem === Locale.ImperialUSSystem
         property real lat
         property real lon
     }
 
     XmlListModel {
         id: currentWeather
-
-        //source: "http://api.openweathermap.org/data/2.5/weather?q=Olomouc,cz&appid=%1&units=metric&mode=xml".arg(priv.owmKey)
         query: "/current"
 
         XmlRole { name: "city"; query: "city/@name/string()" }
@@ -75,9 +75,9 @@ ToolButton {
 
                 root.icon.source = "http://openweathermap.org/img/w/%1.png".arg(result.iconID);
 
-                root.text = qsTr("%1°C (%2)").arg(temperature).arg(result.weatherInfo);
+                root.text = qsTr("%1°%2 (%3)").arg(temperature).arg(priv.imperialUnits ? "F" : "C").arg(result.weatherInfo);
 
-                weather.text = qsTr("Temperature: %1 °C").arg(temperature);
+                weather.text = qsTr("Temperature: %1 °%2").arg(temperature).arg(priv.imperialUnits ? "F" : "C");
                 weather.append(qsTr("Humidity: %1%").arg(result.humidity));
                 weather.append(qsTr("Precipitation: %1").arg(result.precipitation));
                 weather.append(qsTr("Wind: %1").arg(result.wind));
@@ -85,7 +85,7 @@ ToolButton {
             } else if (status === XmlListModel.Error) {
                 console.error("Weather model error:", errorString())
                 root.text = "?";
-                weather.text = qsTr("Error getting weather info\n%1").arg(errorString())
+                weather.text = qsTr("Error getting weather info\n%1").arg(errorString());
             }
         }
     }
