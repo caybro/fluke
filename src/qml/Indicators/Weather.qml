@@ -9,7 +9,6 @@ import org.fluke.Session 1.0
 ToolButton {
     id: root
     down: popup.visible
-    text: "?"
 
     icon.width: 16
     icon.height: 16
@@ -20,6 +19,12 @@ ToolButton {
         onTriggered: updateWeather();
     }
 
+    BusyIndicator {
+        anchors.fill: parent
+        running: currentWeather.status === XmlListModel.Loading || currentWeather.status === XmlListModel.Null
+        visible: running
+    }
+
     function updateWeather() {
         if (GeoLocation.isValid) {
             console.info("!!! Current GeoLocation:", GeoLocation.latitude, GeoLocation.longitude)
@@ -27,16 +32,17 @@ ToolButton {
             priv.lon = GeoLocation.longitude;
             currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=metric&mode=xml"
             .arg(priv.lat).arg(priv.lon).arg(priv.owmKey);
+            if (currentWeather.status !== XmlListModel.Loading) {
+                currentWeather.reload();
+            }
         }
     }
 
     Connections {
         target: GeoLocation
         onLocationUpdated: {
-            if (!timer.running) { // update once initially, then start the timer
-                updateWeather();
-            }
-            timer.start();
+            updateWeather();
+            timer.restart();
         }
     }
 
