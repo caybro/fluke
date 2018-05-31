@@ -83,7 +83,7 @@ ToolButton {
                 weather.append(qsTr("Wind: %1").arg(result.wind));
                 weather.append(qsTr("Location: %1, %2").arg(result.city).arg(result.country));
             } else if (status === XmlListModel.Error) {
-                console.error("Weather model error:", errorString())
+                console.error("Weather model error:", errorString());
                 root.text = "?";
                 weather.text = qsTr("Error getting weather info\n%1").arg(errorString());
             }

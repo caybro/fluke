@@ -23,6 +23,28 @@ ShellSurfaceItem {
     opacity: !minimized && !workspace.appLauncherVisible ? 1 : 0
     visible: opacity > 0
 
+    x: moveItem.x - output.geometry.x
+    y: moveItem.y - output.geometry.y
+
+    onXChanged: updatePrimary()
+    onYChanged: updatePrimary()
+    function updatePrimary() {
+        var w = rootChrome.width
+        var h = rootChrome.height
+        var area = w * h;
+        var screenW = rootChrome.output.geometry.width;
+        var screenH = rootChrome.output.geometry.height;
+        var x1 = Math.max(0, x);
+        var y1 = Math.max(0, y);
+        var x2 = Math.min(x + w, screenW);
+        var y2 = Math.min(y + h, screenH);
+        var w1 = Math.max(0, x2 - x1);
+        var h1 = Math.max(0, y2 - y1);
+        if (w1 * h1 * 2 > area) {
+            rootChrome.setPrimary();
+        }
+    }
+
     Behavior on opacity { DefaultAnimation {} }
 
     Component.onCompleted: {

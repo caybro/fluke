@@ -22,6 +22,15 @@ WaylandCompositor {
         Chrome {}
     }
 
+    Component {
+        id: moveItemComponent
+        Item {}
+    }
+
+    Item {
+        id: rootItem
+    }
+
     QtWindowManager {
         id: qtWindowManager
         onShowIsFullScreenChanged: console.log("Show is fullscreen hint for Qt applications:", showIsFullScreen)
@@ -44,11 +53,12 @@ WaylandCompositor {
 
     TextInputManager {}
 
-    function createShellSurfaceItem(shellSurface, output, isPopup) {
+    function createShellSurfaceItem(shellSurface, moveItem, output, isPopup) {
         var parentSurfaceItem = output.viewsBySurface[shellSurface.parentSurface];
         var parent = parentSurfaceItem || output.surfaceArea;
         var item = chromeComponent.createObject(parent, {
             "shellSurface": shellSurface,
+            "moveItem": moveItem,
             "output": output,
             "workspace": output.surfaceArea,
             "isPopup": isPopup
@@ -60,11 +70,12 @@ WaylandCompositor {
         output.viewsBySurface[shellSurface.surface] = item;
     }
 
-    function createToplevelItem(toplevel, shellSurface, output) {
+    function createToplevelItem(toplevel, shellSurface, moveItem, output) {
         var parentSurfaceItem = output.toplevelsBySurface[toplevel.parentToplevel];
         var parent = parentSurfaceItem || output.surfaceArea;
         var item = chromeComponent.createObject(parent, {
             "shellSurface": shellSurface,
+            "moveItem": moveItem,
             "output": output,
             "workspace": output.surfaceArea,
             "isToplevel": true,
@@ -96,14 +107,26 @@ WaylandCompositor {
     }
 
     function handleShellSurfaceCreated(shellSurface, isPopup) {
+        var moveItem = moveItemComponent.createObject(rootItem, {
+                "x": screens.objectAt(0).position.x,
+                "y": screens.objectAt(0).position.y,
+                "width": Qt.binding(function() { return shellSurface.surface.width; }),
+                "height": Qt.binding(function() { return shellSurface.surface.height; })
+            });
         for (var i = 0; i < screens.count; ++i) {
-            createShellSurfaceItem(shellSurface, screens.objectAt(i), isPopup);
+            createShellSurfaceItem(shellSurface, moveItem, screens.objectAt(i), isPopup);
         }
     }
 
     function handleToplevelCreated(toplevel, shellSurface) {
+        var moveItem = moveItemComponent.createObject(rootItem, {
+                "x": screens.objectAt(0).position.x,
+                "y": screens.objectAt(0).position.y,
+                "width": Qt.binding(function() { return shellSurface.surface.width; }),
+                "height": Qt.binding(function() { return shellSurface.surface.height; })
+            });
         for (var i = 0; i < screens.count; ++i) {
-            createToplevelItem(toplevel, shellSurface, screens.objectAt(i));
+            createToplevelItem(toplevel, shellSurface, moveItem, screens.objectAt(i));
         }
     }
 
