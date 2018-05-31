@@ -149,7 +149,7 @@ void ApplicationsModel::stopApplication(const QString &appId)
 void ApplicationsModel::init()
 {
     beginResetModel();
-    for(XdgDesktopFile * desktopFile: XdgDesktopFileCache::getAllFiles()) {
+    for (XdgDesktopFile * desktopFile: XdgDesktopFileCache::getAllFiles()) {
         if (desktopFile->type() == XdgDesktopFile::ApplicationType
                 && desktopFile->isValid()
                 && !desktopFile->value(QStringLiteral("NoDisplay")).toBool()) {

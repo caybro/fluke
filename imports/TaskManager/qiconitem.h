@@ -46,7 +46,7 @@ public:
     Q_ENUM(State)
 
     QIconItem(QQuickItem *parent=nullptr);
-    ~QIconItem() = default;
+    ~QIconItem() override = default;
 
     void setIcon(const QVariant &icon);
     QIcon icon() const;

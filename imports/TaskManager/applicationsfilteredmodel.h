@@ -11,7 +11,7 @@ class ApplicationsFilteredModel : public QSortFilterProxyModel
     Q_PROPERTY(bool showFavoriteAndRunning READ showFavoriteAndRunning WRITE setShowFavoriteAndRunning NOTIFY showFavoriteAndRunningChanged)
 public:
     ApplicationsFilteredModel(QObject *parent = nullptr);
-    ~ApplicationsFilteredModel() = default;
+    ~ApplicationsFilteredModel() override = default;
 
     QString filterString() const;
     void setFilterString(const QString &filterString);
