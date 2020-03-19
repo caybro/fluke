@@ -118,8 +118,8 @@ Pane {
 
         Button {
             Layout.fillHeight: true
-            Layout.topMargin: -12
-            anchors.verticalCenter: parent.verticalCenter
+            Layout.topMargin: -6
+            Layout.alignment: Qt.AlignCenter
             flat: true
             icon.name: "view-app-grid-symbolic"
             icon.height: 32

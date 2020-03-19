@@ -14,7 +14,7 @@ ToolButton {
     font.pixelSize: 16
     down: popupLoader.item && popupLoader.item.visible
 
-    text: "\uf013"
+    text: "\uf0c9"
 
     property bool autohideDock: false
 
@@ -27,7 +27,7 @@ ToolButton {
     signal shutdown()
 
     Component.onCompleted: {
-        indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
+        //indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
     }
 
     Loader {

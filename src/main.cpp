@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
     app.setApplicationDisplayName(QStringLiteral("Fluke"));
     app.setApplicationVersion(QStringLiteral("0.0.1"));
 
-    qputenv("QT_WAYLAND_SHELL_INTEGRATION", QByteArrayLiteral("xdg-shell-v5")); // TODO still at v5 so that Qt 5.9 clients can connect
     qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("wayland"));
     //qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
 

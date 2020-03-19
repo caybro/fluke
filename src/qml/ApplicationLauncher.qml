@@ -70,14 +70,13 @@ Pane {
             contentItem: ColumnLayout {
                 spacing: 0
                 IconItem {
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    Layout.alignment: Qt.AlignHCenter
                     icon: model.icon
                     width: 64
                     height: width
                 }
                 Label {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    Layout.preferredWidth: parent.width
                     text: model.name
                     elide: Text.ElideRight
                     maximumLineCount: 1
@@ -85,8 +84,7 @@ Pane {
                     verticalAlignment: Text.AlignVCenter
                 }
                 Label {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    // @disable-check M306
+                    Layout.alignment: Qt.AlignHCenter
                     text: Array(Math.min(model.instanceCount+1, 4)).join("\uf111\u2009") // up to 3 dots + small space
                     color: Material.accent
                     visible: model.running && !filterModel.showRunning
@@ -136,7 +134,7 @@ Pane {
             id: searchField
             selectByMouse: true
             Layout.preferredWidth: parent.width / 3
-            anchors.horizontalCenter: parent.horizontalCenter
+            Layout.alignment: Qt.AlignHCenter
             focus: true
             placeholderText: qsTr("Type to search...")
             activeFocusOnTab: true
@@ -181,7 +179,7 @@ Pane {
 
         TabBar {
             Layout.preferredWidth: parent.width / 3
-            anchors.horizontalCenter: parent.horizontalCenter
+            Layout.alignment: Qt.AlignHCenter
             activeFocusOnTab: true
             onCurrentIndexChanged: searchField.clear()
             TabButton {

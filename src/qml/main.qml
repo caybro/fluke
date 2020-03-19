@@ -1,6 +1,6 @@
-import QtQuick 2.10
+import QtQuick 2.12
 import QtQml 2.2
-import QtWayland.Compositor 1.1
+import QtWayland.Compositor 1.3
 
 WaylandCompositor {
     id: comp
@@ -47,6 +47,11 @@ WaylandCompositor {
     }
 
     XdgShellV6 {
+        onToplevelCreated: handleToplevelCreated(toplevel, xdgSurface)
+        onPopupCreated: handlePopupCreated(popup)
+    }
+
+    XdgShell {
         onToplevelCreated: handleToplevelCreated(toplevel, xdgSurface)
         onPopupCreated: handlePopupCreated(popup)
     }
