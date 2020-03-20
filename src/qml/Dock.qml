@@ -66,14 +66,13 @@ Pane {
                     anchors.centerIn: parent
                     spacing: 0
                     IconItem {
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        Layout.alignment: Qt.AlignCenter
                         icon: model.icon
                         width: 32
                         height: width
                     }
                     Label {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        // @disable-check M306
+                        Layout.alignment: Qt.AlignCenter
                         text: Array(Math.min(model.instanceCount+1, 4)).join("\uf111\u2009") // up to 3 dots + small space
                         color: Material.accent
                         font.pixelSize: 7
