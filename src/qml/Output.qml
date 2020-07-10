@@ -1,10 +1,10 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.3
-import QtQuick.Window 2.3
-import QtWayland.Compositor 1.1
-import QtQuick.Controls.Material 2.3
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
+import QtWayland.Compositor 1.3
+import QtQuick.Controls.Material 2.12
 
-import Qt.labs.settings 1.0
+import Qt.labs.settings 1.1
 
 import org.fluke.TaskManager 1.0
 import org.fluke.Session 1.0
@@ -335,8 +335,7 @@ WaylandOutput {
 
         Dialog {
             id: systemDialog
-            x: (parent.width - width) / 2
-            y: (parent.height - height) / 2
+            anchors.centerIn: parent
             modal: true
             focus: visible
             visible: false

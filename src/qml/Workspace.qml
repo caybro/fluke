@@ -1,7 +1,7 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.3
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 
-import Qt.labs.platform 1.0 as Platform
+import Qt.labs.platform 1.1 as Platform
 
 Item {
     id: workspace

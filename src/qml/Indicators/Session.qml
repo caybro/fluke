@@ -27,7 +27,7 @@ ToolButton {
     signal shutdown()
 
     Component.onCompleted: {
-        //indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
+        indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
     }
 
     Loader {

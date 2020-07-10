@@ -1,6 +1,6 @@
-import QtQuick 2.10
-import QtQuick.Window 2.2
-import QtWayland.Compositor 1.1
+import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtWayland.Compositor 1.3
 
 import org.fluke.TaskManager 1.0
 
