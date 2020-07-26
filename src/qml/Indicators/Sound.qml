@@ -108,6 +108,7 @@ ToolButton {
                     hoverEnabled: true
                     ToolTip.visible: hovered
                     ToolTip.text: "%1%".arg(Sound.volume)
+                    wheelEnabled: true
                     onMoved: {
                         Sound.volume = valueAt(position);
                     }
