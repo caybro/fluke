@@ -135,8 +135,8 @@ WaylandOutput {
         id: win
         x: Screen.virtualX
         y: Screen.virtualY
-        width: debugMode ? 1024 : screen.width
-        height: debugMode ? 768 : screen.height
+        width: debugMode ? 1024 : Screen.width
+        height: debugMode ? 768 : Screen.height
         visibility: debugMode ? Window.Windowed : Window.FullScreen
         visible: true
 
