@@ -11,9 +11,10 @@
 int main(int argc, char *argv[])
 {
     qputenv("QT_IM_MODULE", QByteArrayLiteral("qtvirtualkeyboard"));
-    //qputenv("QT_XCB_GL_INTEGRATION", QByteArrayLiteral("xcb_egl"));
     //qputenv("QT_WAYLAND_DISABLE_WINDOWDECORATION", QByteArrayLiteral("1")); // TODO own window decoration
     qputenv("QT_QUICK_CONTROLS_STYLE", QByteArrayLiteral("Material"));
+
+    qunsetenv("QT_SCREEN_SCALE_FACTORS");
 
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
