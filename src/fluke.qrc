@@ -33,5 +33,6 @@
         <file>icons/laptop-solid.svg</file>
         <file>icons/sign-out-alt-solid.svg</file>
         <file>icons/sync-solid.svg</file>
+        <file>icons/chevron-left-solid.svg</file>
     </qresource>
 </RCC>
