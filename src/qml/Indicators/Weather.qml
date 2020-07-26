@@ -28,7 +28,7 @@ ToolButton {
 
     function updateWeather() {
         if (GeoLocation.isValid) {
-            console.info("!!! Current GeoLocation:", GeoLocation.latitude, GeoLocation.longitude)
+            //console.debug("Current GeoLocation:", GeoLocation.latitude, GeoLocation.longitude)
             priv.lat = GeoLocation.latitude;
             priv.lon = GeoLocation.longitude;
             currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4&mode=xml"

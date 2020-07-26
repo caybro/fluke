@@ -53,7 +53,7 @@ void GeoLocation::init()
     QDBusReply<QDBusObjectPath> clientPath = m_masterIface.asyncCall("GetClient");
     if (clientPath.isValid()) {
         const QString path = clientPath.value().path();
-        qDebug() << "Got client path" << path;
+        //qDebug() << "Got client path" << path;
         m_clientIface = new QDBusInterface(GEOCLUE_MASTER, path, GEOCLUE_CLIENT_IFACE, QDBusConnection::systemBus());
         m_clientIface->setProperty("DesktopId", "josm"); // FIXME correct id based on .desktop file
         m_clientIface->setProperty("DistanceThreshold", 500); // in meters
