@@ -88,6 +88,7 @@ ToolButton {
                     id: brightnessSlider
                     value: 0.8
                     stepSize: 0.1
+                    hoverEnabled: true
                     ToolTip.visible: hovered
                     ToolTip.text: "%1%".arg(Math.round(value * 100))
                 }

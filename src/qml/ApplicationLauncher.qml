@@ -62,6 +62,7 @@ Pane {
             height: GridView.view.cellHeight
             highlighted: GridView.isCurrentItem
             padding: 0
+            hoverEnabled: true
 
             readonly property string appId: model.appId
             readonly property bool favorite: model.favorite

@@ -52,7 +52,10 @@ ToolButton {
 
                 ToolButton {
                     id: btnPrevMonth
-                    icon.name: "go-previous-symbolic"
+                    icon.source: "qrc:/icons/chevron-left-solid.svg"
+                    icon.width: 16
+                    icon.height: 25
+                    hoverEnabled: true
                     onClicked: {
                         var nextMonth = new Date(calendar.year, calendar.month - 1);
                         calendar.month = nextMonth.getMonth();
@@ -68,13 +71,17 @@ ToolButton {
                         calendar.month = today.getMonth()
                         calendar.year = today.getFullYear()
                     }
+                    hoverEnabled: true
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("Go to today's date")
                 }
 
                 ToolButton {
                     id: btnNextMonth
-                    icon.name: "go-next-symbolic"
+                    icon.source: "qrc:/icons/chevron-right-solid.svg"
+                    icon.width: 16
+                    icon.height: 25
+                    hoverEnabled: true
                     onClicked: {
                         var nextMonth = new Date(calendar.year, calendar.month + 1);
                         calendar.month = nextMonth.getMonth();

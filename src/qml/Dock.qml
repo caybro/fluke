@@ -57,6 +57,7 @@ Pane {
             delegate: ItemDelegate {
                 id: appDelegate
                 highlighted: appId == dock.activeApp
+                hoverEnabled: true
 
                 readonly property string appId: model.appId
                 readonly property bool favorite: model.favorite

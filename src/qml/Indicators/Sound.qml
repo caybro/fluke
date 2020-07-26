@@ -90,6 +90,7 @@ ToolButton {
                     checkable: true
                     checked: Sound.muted
                     onToggled: toggleMute()
+                    hoverEnabled: true
                     ToolTip.visible: hovered
                     ToolTip.text: qsTr("Toggle mute")
                 }
@@ -104,6 +105,7 @@ ToolButton {
                     opacity: enabled ? 1.0 : 0.5
                     value: Sound.volume
                     stepSize: 10
+                    hoverEnabled: true
                     ToolTip.visible: hovered
                     ToolTip.text: "%1%".arg(Sound.volume)
                     onMoved: {
