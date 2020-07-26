@@ -8,6 +8,7 @@ ToolButton {
     id: indicatorDateTime
     font.weight: Font.DemiBold
     down: popup.visible
+    hoverEnabled: true
 
     property bool showDate: false
     property bool showSeconds: false

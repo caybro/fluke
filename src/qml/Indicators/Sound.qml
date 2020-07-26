@@ -8,9 +8,10 @@ ToolButton {
     id: indicatorSound
     font.weight: Font.DemiBold
     down: popup.visible
+    hoverEnabled: true
 
     icon {
-        name: indicatorIcon()
+        source: indicatorIcon()
         height: 16
         width: 16
     }
@@ -20,15 +21,17 @@ ToolButton {
 
     function indicatorIcon() {
         var vol = Sound.volume;
+        var src = "";
 
-        if (vol == 0 || Sound.muted) {
-            return "audio-volume-muted-symbolic";
-        } else if (vol < 33) {
-            return "audio-volume-low-symbolic";
-        } else if (vol < 66) {
-            return "audio-volume-medium-symbolic";
+        if (vol === 0 || Sound.muted) {
+            src = "volume-mute";
+        } else if (vol < 20.0) {
+            src = "volume-off";
+        } else if (vol < 30.0) {
+            src = "volume-down";
         }
-        return "audio-volume-high-symbolic";
+        src = "volume-up";
+        return "qrc:/icons/%1-solid.svg".arg(src);
     }
 
     function indicatorTooltip() {

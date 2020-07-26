@@ -51,7 +51,7 @@ ToolBar {
                 id: dateIndicator
             }
 
-            //Indicators.Weather {}
+            Indicators.Weather {}
         }
 
         RowLayout {

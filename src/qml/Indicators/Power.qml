@@ -8,9 +8,10 @@ ToolButton {
     id: indicatorPower
     font.weight: Font.DemiBold
     down: popup.visible
+    hoverEnabled: true
 
     icon {
-        name: Power.iconName
+        source: indicatorIcon()
         width: 16
         height: 16
     }
@@ -19,9 +20,25 @@ ToolButton {
     ToolTip.text: indicatorTooltip()
     ToolTip.visible: Power.isPresent && hovered && !popup.visible
 
+    function indicatorIcon() {
+        const charge = Power.percentage;
+        var src = "";
+        if (charge < 5)
+            src = "battery-empty";
+        else if (charge < 30)
+            src = "battery-quarter";
+        else if (charge < 60)
+            src = "battery-half";
+        else if (charge < 90)
+            src = "battery-three-quarters";
+        else
+            src = "battery-full";
+        return "qrc:/icons/%1-solid.svg".arg(src);
+    }
+
     function indicatorCaption() {
-        var state = Power.state;
-        var perc = state === Power.FullyCharged ? 100.0 : Power.percentage;
+        const state = Power.state;
+        const perc = state === Power.FullyCharged ? 100.0 : Power.percentage;
 
         var result = "%1%".arg(Math.floor(perc)); // we're being a bit pessimistic here ;)
         if (state === Power.Charging || state === Power.Discharging) {

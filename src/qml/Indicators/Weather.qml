@@ -9,6 +9,7 @@ import org.fluke.Session 1.0
 ToolButton {
     id: root
     down: popup.visible
+    hoverEnabled: true
 
     icon.width: 16
     icon.height: 16

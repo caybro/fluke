@@ -10,11 +10,10 @@ import org.fluke.Session 1.0
 
 ToolButton {
     id: indicatorSession
-    font.weight: Font.DemiBold
-    font.pixelSize: 16
+    icon.width: 16
+    icon.height: 16
     down: popupLoader.item && popupLoader.item.visible
-
-    text: "\uf0c9"
+    hoverEnabled: true
 
     property bool autohideDock: false
 
@@ -27,7 +26,7 @@ ToolButton {
     signal shutdown()
 
     Component.onCompleted: {
-        indicatorSession.text = Platform.chassis == "laptop" ? "\uf109" : "\uf108";
+        indicatorSession.icon.source = Platform.chassis == "laptop" ? "qrc:/icons/laptop-solid.svg" : "qrc:/icons/desktop-solid.svg";
     }
 
     Loader {
@@ -72,7 +71,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Logout")
-                icon.name: "application-exit-symbolic"
+                icon.source: "qrc:/icons/sign-out-alt-solid.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.logout()
@@ -80,7 +79,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Sleep")
-                icon.name: "night-light-symbolic"
+                icon.source: "qrc:/icons/moon-solid.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.suspend()
@@ -89,7 +88,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Restart")
-                icon.name: "view-refresh-symbolic"
+                icon.source: "qrc:/icons/sync-solid.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.reboot()
@@ -98,7 +97,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Shutdown")
-                icon.name: "system-shutdown-symbolic"
+                icon.source: "qrc:/icons/power-off-solid.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.shutdown()

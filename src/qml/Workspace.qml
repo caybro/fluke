@@ -1,5 +1,5 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.12 as QQC
 
 import Qt.labs.platform 1.1 as Platform
 
@@ -40,10 +40,10 @@ Item {
         }
     }
 
-    Menu {
+    QQC.Menu {
         id: shellContextMenu
 
-        MenuItem {
+        QQC.MenuItem {
             icon.name: "preferences-desktop-wallpaper-symbolic"
             icon.height: 16
             icon.width: 16
@@ -51,14 +51,14 @@ Item {
             onTriggered: wallpaperDialog.open()
         }
 
-        MenuItem {
+        QQC.MenuItem {
             icon.name: "view-app-grid-symbolic"
             icon.height: 16
             icon.width: 16
             text: qsTr("Open Launcher")
             onTriggered: workspace.showLauncher()
         }
-        MenuItem {
+        QQC.MenuItem {
             icon.name: "application-exit-symbolic"
             icon.height: 16
             icon.width: 16
