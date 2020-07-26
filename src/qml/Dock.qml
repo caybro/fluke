@@ -121,7 +121,7 @@ Pane {
             Layout.topMargin: -6
             Layout.alignment: Qt.AlignCenter
             flat: true
-            icon.name: "view-app-grid-symbolic"
+            icon.source: "qrc:/icons/th-solid.svg"
             icon.height: 32
             icon.width: 32
             ToolTip.text: qsTr("Applications")

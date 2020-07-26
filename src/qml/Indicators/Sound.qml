@@ -81,7 +81,7 @@ ToolButton {
 
                 ToolButton {
                     icon {
-                        name: "audio-volume-muted-symbolic"
+                        source: "qrc:/icons/volume-mute-solid.svg"
                         color: "red"
                         height: 16
                         width: 16

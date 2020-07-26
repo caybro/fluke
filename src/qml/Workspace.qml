@@ -44,7 +44,7 @@ Item {
         id: shellContextMenu
 
         QQC.MenuItem {
-            icon.name: "preferences-desktop-wallpaper-symbolic"
+            icon.source: "qrc:/icons/image-solid.svg"
             icon.height: 16
             icon.width: 16
             text: qsTr("Select Wallpaper...")
@@ -52,14 +52,14 @@ Item {
         }
 
         QQC.MenuItem {
-            icon.name: "view-app-grid-symbolic"
+            icon.source: "qrc:/icons/th-solid.svg"
             icon.height: 16
             icon.width: 16
             text: qsTr("Open Launcher")
             onTriggered: workspace.showLauncher()
         }
         QQC.MenuItem {
-            icon.name: "application-exit-symbolic"
+            icon.source: "qrc:/icons/sign-out-alt-solid.svg"
             icon.height: 16
             icon.width: 16
             text: qsTr("Logout...")

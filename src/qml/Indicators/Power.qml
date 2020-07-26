@@ -74,8 +74,9 @@ ToolButton {
                 anchors.right: parent.right
 
                 ToolButton {
+                    hoverEnabled: true
                     icon {
-                        name: "display-brightness-symbolic"
+                        source: "qrc:/icons/sun-solid.svg"
                         height: 16
                         width: 16
                     }

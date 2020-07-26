@@ -35,5 +35,8 @@
         <file>icons/sync-solid.svg</file>
         <file>icons/chevron-left-solid.svg</file>
         <file>icons/chevron-right-solid.svg</file>
+        <file>icons/image-solid.svg</file>
+        <file>icons/th-solid.svg</file>
+        <file>icons/sun-solid.svg</file>
     </qresource>
 </RCC>
