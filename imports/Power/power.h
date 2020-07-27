@@ -15,6 +15,8 @@ class Power: public QObject
     Q_PROPERTY(QString remainingTime READ remainingTime NOTIFY remainingTimeChanged)
     Q_PROPERTY(QString iconName READ iconName NOTIFY iconNameChanged)
 
+    Q_PROPERTY(int screenBacklight READ screenBacklight WRITE setScreenBacklight NOTIFY screenBacklightChanged)
+
 public:
     enum State {
         Unknown = 0,
@@ -39,6 +41,9 @@ public:
     QString remainingTime() const;
     QString iconName() const;
 
+    int screenBacklight() const;
+    void setScreenBacklight(int backlight);
+
 Q_SIGNALS:
     void isPresentChanged(bool isPresent);
     void onBatteryChanged(bool onBattery);
@@ -47,6 +52,8 @@ Q_SIGNALS:
     void stateChanged(State state);
     void remainingTimeChanged(const QString &remainingTime);
     void iconNameChanged(const QString &iconName);
+
+    void screenBacklightChanged();
 
 private Q_SLOTS:
     void onUPowerPropertiesChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated);
@@ -65,4 +72,6 @@ private:
     State m_state{Unknown};
     QString m_remainingTime;
     QString m_iconName;
+
+    QDBusInterface m_gsdPowerIface;
 };

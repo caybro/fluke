@@ -81,18 +81,21 @@ ToolButton {
                         width: 16
                     }
 
-                    onClicked: brightnessSlider.value = 0
+                    onClicked: Power.screenBacklight = 0;
                 }
 
                 Slider {
                     Layout.fillWidth: true
                     id: brightnessSlider
-                    value: 0.8
-                    stepSize: 0.1
-                    wheelEnabled: true
+                    from: 0
+                    to: 100
+                    value: Power.screenBacklight
+                    stepSize: 1
                     hoverEnabled: true
+                    snapMode: Slider.SnapAlways
                     ToolTip.visible: hovered
-                    ToolTip.text: "%1%".arg(Math.round(value * 100))
+                    ToolTip.text: "%1%".arg(value)
+                    onMoved: Power.screenBacklight = value;
                 }
             }
         }

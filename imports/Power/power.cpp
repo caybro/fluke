@@ -23,10 +23,15 @@
 #define PROP_TIME_TO_FULL "TimeToFull"
 #define PROP_ICON_NAME "IconName"
 
+#define GSD_POWER_SERVICE QStringLiteral("org.gnome.SettingsDaemon.Power")
+#define GSD_POWER_PATH QStringLiteral("/org/gnome/SettingsDaemon/Power")
+#define GSD_POWER_IFACE QStringLiteral("org.gnome.SettingsDaemon.Power.Screen")
+
 #define DBUS_PROPS_IFACE QStringLiteral("org.freedesktop.DBus.Properties")
 
 Power::Power(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      m_gsdPowerIface(GSD_POWER_SERVICE, GSD_POWER_PATH, GSD_POWER_IFACE)
 {
     qRegisterMetaType<State>("State");
 
@@ -86,6 +91,30 @@ QString Power::remainingTime() const
 QString Power::iconName() const
 {
     return m_iconName;
+}
+
+int Power::screenBacklight() const
+{
+    if (!m_gsdPowerIface.isValid()) {
+        qWarning() << GSD_POWER_IFACE << "iface is not valid, returning default 100% brightness";
+        return 100;
+    }
+
+    bool ok = false;
+    const int brightness = m_gsdPowerIface.property("Brightness").toInt(&ok);
+    if (ok)
+        return brightness;
+
+    return 100;
+}
+
+void Power::setScreenBacklight(int backlight)
+{
+    if (screenBacklight() == backlight || !m_gsdPowerIface.isValid())
+        return;
+
+    m_gsdPowerIface.setProperty("Brightness", backlight);
+    emit screenBacklightChanged();
 }
 
 bool Power::isPresent() const
