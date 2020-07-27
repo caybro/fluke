@@ -21,13 +21,11 @@ public:
 
     /**
      * @return whether the system is capable of hybrid sleep
-     * @since unity8
      */
     Q_SCRIPTABLE bool canHybridSleep() const;
 
     /**
      * @return whether the system is capable of rebooting
-     * @since unity8
      */
     Q_SCRIPTABLE bool canReboot() const;
 
