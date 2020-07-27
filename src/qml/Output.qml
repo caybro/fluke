@@ -140,7 +140,7 @@ WaylandOutput {
         visibility: debugMode ? Window.Windowed : Window.FullScreen
         visible: true
 
-        Material.theme: Material.Dark
+        Material.theme: settings.darkMode ? Material.Dark : Material.Light
         Material.accent: _pal.highlight
 
         background: Image {
@@ -157,6 +157,7 @@ WaylandOutput {
         Settings {
             id: settings
             property alias autohideDock: panel.autohideDock
+            property alias darkMode: panel.darkMode
             property alias showDate: panel.showDate
             property alias showSeconds: panel.showSeconds
             property url wallpaper: "qrc:/images/background.jpg"

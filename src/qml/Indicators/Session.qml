@@ -16,6 +16,7 @@ ToolButton {
     hoverEnabled: true
 
     property bool autohideDock: false
+    property bool darkMode: true
 
     ToolTip.text: qsTr("Session")
     ToolTip.visible: hovered && (!popupLoader.item || !popupLoader.item.visible)
@@ -49,9 +50,9 @@ ToolButton {
 
             MenuItem {
                 checkable: true
-                checked: window.Material.theme === Material.Dark
+                checked: indicatorSession.darkMode
                 onToggled: {
-                    window.Material.theme = checked ? Material.Dark : Material.Light
+                    indicatorSession.darkMode = checked
                 }
                 text: qsTr("Dark Theme")
             }
