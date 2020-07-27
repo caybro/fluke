@@ -27,10 +27,11 @@ ToolButton {
             src = "volume-mute";
         } else if (vol < 20.0) {
             src = "volume-off";
-        } else if (vol < 30.0) {
+        } else if (vol < 50.0) {
             src = "volume-down";
+        } else {
+            src = "volume-up";
         }
-        src = "volume-up";
         return "qrc:/icons/%1-solid.svg".arg(src);
     }
 
