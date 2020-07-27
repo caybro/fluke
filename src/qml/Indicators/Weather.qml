@@ -2,9 +2,8 @@ import QtQuick 2.12
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.12
-import QtQuick.XmlListModel 2.0
-
-import org.fluke.Session 1.0
+import QtQuick.XmlListModel 2.12
+import QtPositioning 5.12
 
 ToolButton {
     id: root
@@ -17,7 +16,8 @@ ToolButton {
     Timer {
         id: timer
         interval: 60 * 1000 * 30 // 30 minutes
-        onTriggered: updateWeather();
+        repeat: true
+        onTriggered: posSource.update(); // triggers updateWeather()
     }
 
     BusyIndicator {
@@ -27,10 +27,7 @@ ToolButton {
     }
 
     function updateWeather() {
-        if (GeoLocation.isValid) {
-            //console.debug("Current GeoLocation:", GeoLocation.latitude, GeoLocation.longitude)
-            priv.lat = GeoLocation.latitude;
-            priv.lon = GeoLocation.longitude;
+        if ( posSource.valid) {
             currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4&mode=xml"
             .arg(priv.lat).arg(priv.lon).arg(priv.owmKey)
             .arg(priv.imperialUnits ? "imperial" : "metric")
@@ -40,13 +37,19 @@ ToolButton {
         }
     }
 
-    Connections {
-        target: GeoLocation
-        onLocationUpdated: {
+    PositionSource {
+        id: posSource
+
+        onPositionChanged: {
+            const coord = position.coordinate;
+            priv.lat = coord.latitude;
+            priv.lon = coord.longitude;
+            //console.debug("Current GeoLocation:", coord);
             updateWeather();
-            timer.restart();
         }
     }
+
+    Component.onCompleted: posSource.update();
 
     QtObject {
         id: priv

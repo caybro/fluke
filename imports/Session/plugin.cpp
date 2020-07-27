@@ -3,7 +3,7 @@
 
 #include "session.h"
 #include "platform.h"
-#include "geolocation.h"
+//#include "geolocation.h"
 
 class SessionPlugin : public QQmlExtensionPlugin
 {
@@ -18,8 +18,8 @@ public:
                 -> QObject* { return new Session; });
         qmlRegisterSingletonType<Platform>(uri, 1, 0, "Platform", [](QQmlEngine*, QJSEngine*)
                 -> QObject* { return new Platform; });
-        qmlRegisterSingletonType<GeoLocation>(uri, 1, 0, "GeoLocation", [](QQmlEngine*, QJSEngine*)
-                -> QObject* { return new GeoLocation; });
+//        qmlRegisterSingletonType<GeoLocation>(uri, 1, 0, "GeoLocation", [](QQmlEngine*, QJSEngine*)
+//                -> QObject* { return new GeoLocation; });
     }
 };
 
