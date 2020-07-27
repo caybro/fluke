@@ -16,8 +16,10 @@ ToolButton {
     Timer {
         id: timer
         interval: 60 * 1000 * 30 // 30 minutes
+        running: true
         repeat: true
-        onTriggered: posSource.update(); // triggers updateWeather()
+        triggeredOnStart: true
+        onTriggered: Qt.callLater(posSource.update); // triggers updateWeather()
     }
 
     BusyIndicator {
@@ -48,8 +50,6 @@ ToolButton {
             updateWeather();
         }
     }
-
-    Component.onCompleted: posSource.update();
 
     QtObject {
         id: priv
