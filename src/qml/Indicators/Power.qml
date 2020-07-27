@@ -49,15 +49,18 @@ ToolButton {
     }
 
     function indicatorTooltip() {
-        var state = Power.state;
+        const state = Power.state;
+        var batteryPart = "";
         if (state === Power.Charging) {
-            return qsTr("Time to charge: %1").arg(Power.remainingTime);
+            batteryPart = qsTr("Time to charge: %1").arg(Power.remainingTime);
         } else if (state === Power.Discharging) {
-            return qsTr("Remaining time: %1").arg(Power.remainingTime);
+            batteryPart = qsTr("Remaining time: %1").arg(Power.remainingTime);
         } else if (state === Power.FullyCharged) {
-            return qsTr("Fully charged");
+            batteryPart = qsTr("Fully charged");
+        } else {
+            batteryPart = qsTr("Battery not charging or discharging");
         }
-        return qsTr("Battery not charging or discharging");
+        return batteryPart + "\n" + qsTr("Screen brightness: %1%".arg(Power.screenBacklight));
     }
 
     Popup {
