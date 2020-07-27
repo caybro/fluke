@@ -10,8 +10,8 @@ ToolButton {
     down: popup.visible
     hoverEnabled: true
 
-    icon.width: 16
-    icon.height: 16
+    icon.width: 32
+    icon.height: 32
 
     Timer {
         id: timer
