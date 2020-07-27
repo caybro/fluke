@@ -21,24 +21,24 @@
         <translation type="vanished">Oblíbená</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="139"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="140"/>
         <source>Type to search...</source>
         <translation>Vyhledávejte psaním...</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="187"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="188"/>
         <source>All</source>
         <comment>all applications</comment>
         <translation>Všechny</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="191"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="192"/>
         <source>Running</source>
         <comment>running applications</comment>
         <translation>Spuštěné</translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="195"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="196"/>
         <source>Favorite</source>
         <comment>favorite applications</comment>
         <translation>Oblíbené</translation>
@@ -73,17 +73,17 @@
 <context>
     <name>DateTime</name>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="72"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="76"/>
         <source>Go to today&apos;s date</source>
         <translation>Přejít na dnešek</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="133"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="140"/>
         <source>Display date in clock</source>
         <translation>Zobrazovat datum</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="143"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="150"/>
         <source>Display seconds in clock</source>
         <translation>Zobrazovat sekundy</translation>
     </message>
@@ -91,7 +91,7 @@
 <context>
     <name>Dock</name>
     <message>
-        <location filename="../qml/Dock.qml" line="126"/>
+        <location filename="../qml/Dock.qml" line="127"/>
         <source>Applications</source>
         <translation>Aplikace</translation>
     </message>
@@ -99,42 +99,42 @@
 <context>
     <name>Output</name>
     <message>
-        <location filename="../qml/Output.qml" line="190"/>
+        <location filename="../qml/Output.qml" line="191"/>
         <source>Log Out</source>
         <translation>Odhlásit se</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="191"/>
+        <location filename="../qml/Output.qml" line="192"/>
         <source>Do you really want to logout?</source>
         <translation>Opravdu se chcete odhlásit?</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="196"/>
+        <location filename="../qml/Output.qml" line="197"/>
         <source>Suspend</source>
         <translation>Uspat</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="197"/>
+        <location filename="../qml/Output.qml" line="198"/>
         <source>Do you really want to suspend the computer?</source>
         <translation>Opravdu chcete počítač uspat?</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="205"/>
+        <location filename="../qml/Output.qml" line="206"/>
         <source>Restart</source>
         <translation>Restartovat</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="206"/>
+        <location filename="../qml/Output.qml" line="207"/>
         <source>Do you really want to restart the computer?</source>
         <translation>Opravdu chcete počítač restartovat?</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="214"/>
+        <location filename="../qml/Output.qml" line="215"/>
         <source>Shutdown</source>
         <translation>Vypnout</translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="215"/>
+        <location filename="../qml/Output.qml" line="216"/>
         <source>Do you really want to turn off the computer?</source>
         <translation>Opravdu chcete počítač vypnout?</translation>
     </message>
@@ -142,7 +142,7 @@
 <context>
     <name>Panel</name>
     <message>
-        <location filename="../qml/Panel.qml" line="44"/>
+        <location filename="../qml/Panel.qml" line="45"/>
         <source>Back</source>
         <translation>Zpět</translation>
     </message>
@@ -154,65 +154,70 @@
 <context>
     <name>Power</name>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="54"/>
+        <location filename="../qml/Indicators/Power.qml" line="55"/>
         <source>Time to charge: %1</source>
         <translation>Čas do nabití: %1</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="56"/>
+        <location filename="../qml/Indicators/Power.qml" line="57"/>
         <source>Remaining time: %1</source>
         <translation>Zbývající čas: %1</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="58"/>
+        <location filename="../qml/Indicators/Power.qml" line="59"/>
         <source>Fully charged</source>
         <translation>Plně nabitá</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="60"/>
+        <location filename="../qml/Indicators/Power.qml" line="61"/>
         <source>Battery not charging or discharging</source>
         <translation>Baterie se nenabíjí ani nevybíjí</translation>
+    </message>
+    <message>
+        <location filename="../qml/Indicators/Power.qml" line="63"/>
+        <source>Screen brightness: %1%</source>
+        <translation>Jas obrazovky: %1%</translation>
     </message>
 </context>
 <context>
     <name>Session</name>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="20"/>
+        <location filename="../qml/Indicators/Session.qml" line="21"/>
         <source>Session</source>
         <translation>Sezení</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="47"/>
+        <location filename="../qml/Indicators/Session.qml" line="48"/>
         <source>Fullscreen</source>
         <translation>Celá obrazovka</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="56"/>
+        <location filename="../qml/Indicators/Session.qml" line="57"/>
         <source>Dark Theme</source>
         <translation>Tmavý motiv</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="67"/>
+        <location filename="../qml/Indicators/Session.qml" line="68"/>
         <source>Autohide Dock</source>
         <translation>Automaticky skrývat Dock</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="73"/>
+        <location filename="../qml/Indicators/Session.qml" line="74"/>
         <source>Logout</source>
         <translation>Odhlásit se</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="81"/>
+        <location filename="../qml/Indicators/Session.qml" line="82"/>
         <source>Sleep</source>
         <translation>Uspat</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="90"/>
+        <location filename="../qml/Indicators/Session.qml" line="91"/>
         <source>Restart</source>
         <translation>Restartovat</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="99"/>
+        <location filename="../qml/Indicators/Session.qml" line="100"/>
         <source>Shutdown</source>
         <translation>Vypnout</translation>
     </message>
@@ -220,17 +225,17 @@
 <context>
     <name>Sound</name>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="39"/>
+        <location filename="../qml/Indicators/Sound.qml" line="40"/>
         <source>Sound muted</source>
         <translation>Zvuk ztlumen</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="41"/>
+        <location filename="../qml/Indicators/Sound.qml" line="42"/>
         <source>Volume: %1%</source>
         <translation>Hlasitost: %1%</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="94"/>
+        <location filename="../qml/Indicators/Sound.qml" line="96"/>
         <source>Toggle mute</source>
         <translation>Přepnout ztlumení</translation>
     </message>
@@ -238,37 +243,37 @@
 <context>
     <name>Weather</name>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="79"/>
+        <location filename="../qml/Indicators/Weather.qml" line="82"/>
         <source>%1°%2 (%3)</source>
         <translation>%1°%2 (%3)</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="81"/>
+        <location filename="../qml/Indicators/Weather.qml" line="84"/>
         <source>Temperature: %1 °%2</source>
         <translation>Teplota: %1 °%2</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="82"/>
+        <location filename="../qml/Indicators/Weather.qml" line="85"/>
         <source>Humidity: %1%</source>
         <translation>Vlhkost: %1%</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="83"/>
+        <location filename="../qml/Indicators/Weather.qml" line="86"/>
         <source>Precipitation: %1</source>
         <translation>Srážky: %1</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="84"/>
+        <location filename="../qml/Indicators/Weather.qml" line="87"/>
         <source>Wind: %1</source>
         <translation>Vítr: %1</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="85"/>
+        <location filename="../qml/Indicators/Weather.qml" line="88"/>
         <source>Location: %1, %2</source>
         <translation>Místo: %1, %2</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="89"/>
+        <location filename="../qml/Indicators/Weather.qml" line="92"/>
         <source>Error getting weather info
 %1</source>
         <translation>Chyba při získávání počasí
