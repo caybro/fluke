@@ -60,7 +60,7 @@ ToolButton {
         } else {
             batteryPart = qsTr("Battery not charging or discharging");
         }
-        return batteryPart + "\n" + qsTr("Screen brightness: %1%".arg(Power.screenBacklight));
+        return batteryPart + "\n" + qsTr("Screen brightness: %1%").arg(Power.screenBacklight);
     }
 
     Popup {
