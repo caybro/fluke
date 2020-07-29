@@ -18,11 +18,6 @@
         <file>qml/DefaultAnimation.qml</file>
         <file>fonts/FontAwesomeSolid5.otf</file>
         <file>qml/Indicators/Weather.qml</file>
-        <file>icons/battery-empty-solid.svg</file>
-        <file>icons/battery-full-solid.svg</file>
-        <file>icons/battery-half-solid.svg</file>
-        <file>icons/battery-quarter-solid.svg</file>
-        <file>icons/battery-three-quarters-solid.svg</file>
         <file>icons/moon-solid.svg</file>
         <file>icons/power-off-solid.svg</file>
         <file>icons/volume-down-solid.svg</file>
@@ -38,5 +33,21 @@
         <file>icons/image-solid.svg</file>
         <file>icons/th-solid.svg</file>
         <file>icons/sun-solid.svg</file>
+        <file>icons/battery/ic_battery_20_18px.svg</file>
+        <file>icons/battery/ic_battery_30_18px.svg</file>
+        <file>icons/battery/ic_battery_50_18px.svg</file>
+        <file>icons/battery/ic_battery_60_18px.svg</file>
+        <file>icons/battery/ic_battery_80_18px.svg</file>
+        <file>icons/battery/ic_battery_90_18px.svg</file>
+        <file>icons/battery/ic_battery_alert_18px.svg</file>
+        <file>icons/battery/ic_battery_charging_20_18px.svg</file>
+        <file>icons/battery/ic_battery_charging_30_18px.svg</file>
+        <file>icons/battery/ic_battery_charging_50_18px.svg</file>
+        <file>icons/battery/ic_battery_charging_60_18px.svg</file>
+        <file>icons/battery/ic_battery_charging_80_18px.svg</file>
+        <file>icons/battery/ic_battery_charging_90_18px.svg</file>
+        <file>icons/battery/ic_battery_charging_full_18px.svg</file>
+        <file>icons/battery/ic_battery_full_18px.svg</file>
+        <file>icons/battery/ic_battery_unknown_18px.svg</file>
     </qresource>
 </RCC>

@@ -12,8 +12,8 @@ ToolButton {
 
     icon {
         source: indicatorIcon()
-        width: 16
-        height: 16
+        width: 18
+        height: 18
     }
     text: indicatorCaption()
 
@@ -22,18 +22,31 @@ ToolButton {
 
     function indicatorIcon() {
         const charge = Power.percentage;
+        const charging = state === Power.Charging;
         var src = "";
-        if (charge < 5)
-            src = "battery-empty";
+
+        if (Power.state === Power.Unknown)
+            src = "unknown"
+        else if (Power.state === Power.Empty || charge < 10)
+            src = "alert"
+        else if (charge < 20)
+            src = "20";
         else if (charge < 30)
-            src = "battery-quarter";
+            src = "30";
+        else if (charge < 50)
+            src = "50";
         else if (charge < 60)
-            src = "battery-half";
+            src = "60";
+        else if (charge < 80)
+            src = "80";
         else if (charge < 90)
-            src = "battery-three-quarters";
+            src = "90";
         else
-            src = "battery-full";
-        return "qrc:/icons/%1-solid.svg".arg(src);
+            src = "full";
+
+        var result = "qrc:/icons/battery/ic_battery%1_%2_18px.svg".arg(charging ? "_charging" : "").arg(src);
+        //console.debug("!!! ICON:", result);
+        return result;
     }
 
     function indicatorCaption() {
