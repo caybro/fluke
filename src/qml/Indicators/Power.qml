@@ -84,7 +84,10 @@ ToolButton {
                         width: 16
                     }
 
-                    onClicked: Power.screenBacklight = 0;
+                    onClicked: {
+                        brightnessSlider.value = 0;
+                        Power.screenBacklight = 0;
+                    }
                 }
 
                 Slider {
@@ -92,9 +95,9 @@ ToolButton {
                     id: brightnessSlider
                     from: 0
                     to: 100
-                    value: Power.screenBacklight
-                    stepSize: 1
+                    stepSize: 5
                     hoverEnabled: true
+                    wheelEnabled: true
                     snapMode: Slider.SnapAlways
                     ToolTip.visible: hovered
                     ToolTip.text: "%1%".arg(value)
@@ -105,6 +108,7 @@ ToolButton {
     }
 
     onClicked: {
+        brightnessSlider.value = Power.screenBacklight; // not a binding due to async value coming from DBUS and never signalling its change
         popup.visible = !popup.visible;
     }
 }

@@ -26,6 +26,7 @@
 #define GSD_POWER_SERVICE QStringLiteral("org.gnome.SettingsDaemon.Power")
 #define GSD_POWER_PATH QStringLiteral("/org/gnome/SettingsDaemon/Power")
 #define GSD_POWER_IFACE QStringLiteral("org.gnome.SettingsDaemon.Power.Screen")
+#define PROP_BRIGHTNESS "Brightness"
 
 #define DBUS_PROPS_IFACE QStringLiteral("org.freedesktop.DBus.Properties")
 
@@ -56,6 +57,11 @@ Power::Power(QObject *parent)
     setState(deviceIface.property(PROP_STATE).toUInt());
     setRemainingTime(deviceIface.property(PROP_TIME_TO_EMPTY).toLongLong(), deviceIface.property(PROP_TIME_TO_FULL).toLongLong());
     m_iconName = deviceIface.property(PROP_ICON_NAME).toString();
+
+    // backlight
+    conn.connect(GSD_POWER_SERVICE, GSD_POWER_PATH, DBUS_PROPS_IFACE,
+                 QStringLiteral("PropertiesChanged"),
+                 this, SLOT(onBacklightPropertyChanged(QString, QVariantMap, QStringList)));
 }
 
 bool Power::onBattery() const
@@ -101,7 +107,7 @@ int Power::screenBacklight() const
     }
 
     bool ok = false;
-    const int brightness = m_gsdPowerIface.property("Brightness").toInt(&ok);
+    const int brightness = m_gsdPowerIface.property(PROP_BRIGHTNESS).toInt(&ok);
     if (ok)
         return brightness;
 
@@ -113,8 +119,7 @@ void Power::setScreenBacklight(int backlight)
     if (screenBacklight() == backlight || !m_gsdPowerIface.isValid())
         return;
 
-    m_gsdPowerIface.setProperty("Brightness", backlight);
-    emit screenBacklightChanged();
+    m_gsdPowerIface.setProperty(PROP_BRIGHTNESS, backlight);
 }
 
 bool Power::isPresent() const
@@ -164,6 +169,19 @@ void Power::onDevicePropertiesChanged(const QString &interface, const QVariantMa
     if (changedProperties.contains(PROP_ICON_NAME)) {
         m_iconName = changedProperties.value(PROP_ICON_NAME).toString();
         Q_EMIT iconNameChanged(m_iconName);
+    }
+}
+
+void Power::onBacklightPropertyChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated)
+{
+    Q_UNUSED(invalidated)
+
+    if (interface != GSD_POWER_IFACE) {
+        return;
+    }
+
+    if (changedProperties.contains(PROP_BRIGHTNESS)) {
+        Q_EMIT screenBacklightChanged();
     }
 }
 

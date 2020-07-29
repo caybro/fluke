@@ -58,6 +58,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void onUPowerPropertiesChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated);
     void onDevicePropertiesChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated);
+    void onBacklightPropertyChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated);
 
 private:
     bool checkUPowerProperty(const QString &name);
