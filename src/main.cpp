@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     app.installTranslator(&qtTranslator);
 
     QTranslator appTrans;
-    appTrans.load(QStringLiteral(":/translations/fluke_") + QLocale::system().name());
+    appTrans.load(QLocale(), QStringLiteral("fluke"), QStringLiteral("_"), QStringLiteral(":/translations/"));
     app.installTranslator(&appTrans);
 
     QFontDatabase fd;
