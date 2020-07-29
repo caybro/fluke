@@ -22,7 +22,7 @@ ToolButton {
 
     function indicatorIcon() {
         const charge = Power.percentage;
-        const charging = state === Power.Charging;
+        const charging = Power.state === Power.Charging;
         var src = "";
 
         if (Power.state === Power.Unknown)
