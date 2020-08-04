@@ -26,8 +26,11 @@ ToolButton {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: indicatorDateTime.text = (dateSwitch.checked ? Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate) + ", " : "") +
-                     (secondsSwitch.checked ? Qt.formatTime(new Date(), "h:mm:ss") : Qt.formatTime(new Date(), "h:mm"))
+        onTriggered: {
+            indicatorDateTime.text = (dateSwitch.checked ? Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate) + ", " : "") +
+                    (secondsSwitch.checked ? Qt.formatTime(new Date(), "h:mm:ss") : Qt.formatTime(new Date(), "h:mm"));
+            longDateLabel.text = Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate);
+        }
     }
 
     ToolTip.text: Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate)
@@ -43,6 +46,13 @@ ToolButton {
         ColumnLayout {
             anchors.fill: parent
 
+            Label {
+                Layout.alignment: Qt.AlignHCenter
+                id: longDateLabel
+                font.pixelSize: 16
+                visible: !dateSwitch.checked
+            }
+
             // calendar navigation
             RowLayout {
                 Layout.fillWidth: true
@@ -57,9 +67,9 @@ ToolButton {
                     icon.height: 25
                     hoverEnabled: true
                     onClicked: {
-                        var nextMonth = new Date(calendar.year, calendar.month - 1);
-                        calendar.month = nextMonth.getMonth();
-                        calendar.year = nextMonth.getFullYear();
+                        var prevMonth = new Date(calendar.year, calendar.month - 1);
+                        calendar.month = prevMonth.getMonth();
+                        calendar.year = prevMonth.getFullYear();
                     }
                 }
 
@@ -68,8 +78,8 @@ ToolButton {
                     text: calendar.title
                     onClicked: {
                         var today = new Date();
-                        calendar.month = today.getMonth()
-                        calendar.year = today.getFullYear()
+                        calendar.month = today.getMonth();
+                        calendar.year = today.getFullYear();
                     }
                     hoverEnabled: true
                     ToolTip.visible: hovered
