@@ -1,6 +1,6 @@
 TEMPLATE = lib
 TARGET  = powerplugin
-QT += qml quick dbus
+QT += qml dbus
 CONFIG += qt plugin c++11
 
 uri = org.fluke.Power

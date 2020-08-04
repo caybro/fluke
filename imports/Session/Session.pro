@@ -1,6 +1,6 @@
 TEMPLATE = lib
 TARGET  = sessionplugin
-QT += qml quick dbus
+QT += qml dbus
 CONFIG += qt plugin c++11
 
 uri = org.fluke.Session

@@ -1,6 +1,6 @@
 TEMPLATE = lib
 TARGET  = taskmanagerplugin
-QT += qml quick waylandcompositor
+QT += qml waylandcompositor
 CONFIG += qt plugin c++14 link_pkgconfig
 PKGCONFIG += Qt5Xdg
 
