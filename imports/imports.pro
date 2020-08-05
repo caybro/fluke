@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS = TaskManager Session Power Sound
+SUBDIRS = TaskManager Session Power Sound Network
