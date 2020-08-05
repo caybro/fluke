@@ -59,9 +59,9 @@ Power::Power(QObject *parent)
     m_iconName = deviceIface.property(PROP_ICON_NAME).toString();
 
     // backlight
-    conn.connect(GSD_POWER_SERVICE, GSD_POWER_PATH, DBUS_PROPS_IFACE,
-                 QStringLiteral("PropertiesChanged"),
-                 this, SLOT(onBacklightPropertyChanged(QString, QVariantMap, QStringList)));
+    QDBusConnection::sessionBus().connect(GSD_POWER_SERVICE, GSD_POWER_PATH, DBUS_PROPS_IFACE,
+                                          QStringLiteral("PropertiesChanged"),
+                                          this, SLOT(onBacklightPropertyChanged(QString, QVariantMap, QStringList)));
 }
 
 bool Power::onBattery() const
