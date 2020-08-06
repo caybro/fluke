@@ -31,6 +31,7 @@ signals:
 private slots:
     void init();
     void onGlobalPropertiesChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated);
+    void onDevicePropertiesChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated);
     void onApPropertiesChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated);
 
 private:
@@ -39,6 +40,7 @@ private:
     void setIsOnline(bool online);
 
     void processPrimaryConnection();
+    void processDevice(const QString &devicePath);
 
     bool m_wifiHWEnabled{false};
     bool m_wifiEnabled{false};

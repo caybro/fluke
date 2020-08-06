@@ -49,5 +49,18 @@
         <file>icons/battery/ic_battery_charging_full_18px.svg</file>
         <file>icons/battery/ic_battery_full_18px.svg</file>
         <file>icons/battery/ic_battery_unknown_18px.svg</file>
+        <file>qml/Indicators/Network.qml</file>
+        <file>icons/network/ic_signal_wifi_off_24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_0_bar_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_1_bar_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_2_bar_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_3_bar_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_4_bar_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_connected_no_internet_0_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_connected_no_internet_1_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_connected_no_internet_2_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_connected_no_internet_3_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_connected_no_internet_4_26x24px.svg</file>
+        <file>icons/network/ic_signal_wifi_statusbar_not_connected_26x24px.svg</file>
     </qresource>
 </RCC>

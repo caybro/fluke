@@ -64,7 +64,8 @@ ToolBar {
             anchors.verticalCenter: parent.verticalCenter
 
             // TODO keyboard switcher
-            // TODO network/wifi
+
+            Indicators.Network {}
 
             Loader {
                 id: soundIndicatorLoader
