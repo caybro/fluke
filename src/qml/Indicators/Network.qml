@@ -48,6 +48,7 @@ ToolButton {
     Connections {
         target: Network
         onStrengthChanged: console.debug("!!! Strength changed:", Network.strength)
+        onAccessPointsChanged: console.debug("!!! APs changed:", Network.accessPoints)
     }
 
     Component.onCompleted: {

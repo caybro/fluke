@@ -101,6 +101,18 @@ void Network::processDevice(const QString &devicePath)
     QDBusInterface deviceIface(NM_SERVICE, devicePath, NM_IFACE_DEVICE_WIFI, QDBusConnection::systemBus());
     const QString activeApPath = deviceIface.property(PROP_ACTIVE_AP).value<QDBusObjectPath>().path();
     qDebug() << "!!! ACTIVE AP:" << activeApPath;
+
+    for (const auto & ap: deviceIface.property("AccessPoints").value<QList<QDBusObjectPath>>()) {
+        m_accessPoints.append(ap.path());
+    }
+    emit accessPointsChanged();
+    QDBusConnection::systemBus().connect(NM_SERVICE, devicePath, NM_IFACE_DEVICE_WIFI,
+                                         QStringLiteral("AccessPointAdded"),
+                                         this, SLOT(addAccessPoint(QDBusObjectPath)));
+    QDBusConnection::systemBus().connect(NM_SERVICE, devicePath, NM_IFACE_DEVICE_WIFI,
+                                         QStringLiteral("AccessPointRemoved"),
+                                         this, SLOT(removeAccessPoint(QDBusObjectPath)));
+
     onDevicePropertiesChanged(NM_IFACE_DEVICE_WIFI, {{PROP_ACTIVE_AP, QDBusObjectPath(activeApPath)}}, {});
 }
 
@@ -187,4 +199,21 @@ void Network::setIsOnline(bool online)
 
     m_online = online;
     emit onlineChanged();
+}
+
+QStringList Network::accessPoints() const
+{
+    return m_accessPoints;
+}
+
+void Network::addAccessPoint(const QDBusObjectPath &ap)
+{
+    m_accessPoints.append(ap.path());
+    emit accessPointsChanged();
+}
+
+void Network::removeAccessPoint(const QDBusObjectPath &ap)
+{
+    m_accessPoints.removeAll(ap.path());
+    emit accessPointsChanged();
 }
