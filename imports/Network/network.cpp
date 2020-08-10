@@ -31,7 +31,7 @@ void Network::init()
 {
     QDBusInterface nmIface(NM_SERVICE, NM_PATH, NM_IFACE, QDBusConnection::systemBus());
     setWifiHWEnabled(nmIface.property(PROP_WIFI_HW_ENABLED).toBool());
-    setWifiEnabled(nmIface.property(PROP_WIFI_ENABLED).toBool());
+    updateWifiEnabled(nmIface.property(PROP_WIFI_ENABLED).toBool());
     setIsOnline(nmIface.property(PROP_STATE).toUInt() == 70);
 
     m_primaryConnectionType = nmIface.property(PROP_PRIMARY_CONNECTION_TYPE).toString();
@@ -57,7 +57,7 @@ void Network::onGlobalPropertiesChanged(const QString &interface, const QVariant
         setWifiHWEnabled(changedProperties.value(PROP_WIFI_HW_ENABLED).toBool());
     }
     if (changedProperties.contains(PROP_WIFI_ENABLED)) {
-        setWifiEnabled(changedProperties.value(PROP_WIFI_ENABLED).toBool());
+        updateWifiEnabled(changedProperties.value(PROP_WIFI_ENABLED).toBool());
     }
     if (changedProperties.contains(PROP_STATE)) {
         setIsOnline(changedProperties.value(PROP_STATE).toUInt() == 70);
@@ -168,13 +168,19 @@ bool Network::isWifiEnabled() const
     return m_wifiEnabled;
 }
 
-void Network::setWifiEnabled(bool enabled)
+void Network::updateWifiEnabled(bool enabled)
 {
     if (enabled == m_wifiEnabled)
         return;
 
     m_wifiEnabled = enabled;
     emit wifiEnabledChanged();
+}
+
+void Network::setWifiEnabled(bool enabled)
+{
+    QDBusInterface nmIface(NM_SERVICE, NM_PATH, NM_IFACE, QDBusConnection::systemBus());
+    nmIface.setProperty(PROP_WIFI_ENABLED, enabled);
 }
 
 bool Network::isOnline() const

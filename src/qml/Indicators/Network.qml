@@ -13,11 +13,11 @@ ToolButton {
         width: 20
         height: 18
     }
-    down: popupLoader.item && popupLoader.item.visible
+    down: popup.visible
     hoverEnabled: true
 
     ToolTip.text: qsTr("Network: %1").arg(Network.online ? Network.ssid : qsTr("Offline"))
-    ToolTip.visible: hovered && (!popupLoader.item || !popupLoader.item.visible)
+    ToolTip.visible: hovered && !popup.visible
 
     function getBars() {
         const strength = Network.strength;
@@ -58,24 +58,28 @@ ToolButton {
         console.debug("!!! Strength:", Network.strength)
     }
 
-    Loader {
-        id: popupLoader
-        active: false
+    Popup {
+        id: popup
         focus: visible
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+        x: (parent.width - implicitWidth) / 2
         y: parent.height
 
-        // TODO list of APs/networks
+        ColumnLayout {
+            anchors.fill: parent
+
+            Switch {
+                text: qsTr("WiFi Enabled")
+                enabled: Network.wifiHWEnabled
+                checked: Network.wifiEnabled
+                onToggled: Network.wifiEnabled = checked
+            }
+
+            // TODO list of APs/networks
+        }
     }
 
     onClicked: {
-        if (!popupLoader.item) {
-            popupLoader.active = true;
-        }
-
-        if (popupLoader.item.visible) {
-            popupLoader.item.close();
-        } else {
-            popupLoader.item.open();
-        }
+        popup.visible = !popup.visible;
     }
 }
