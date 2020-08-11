@@ -56,8 +56,6 @@ ToolButton {
             // calendar navigation
             RowLayout {
                 Layout.fillWidth: true
-                anchors.left: parent.left
-                anchors.right: parent.right
                 spacing: 0
 
                 ToolButton {
@@ -102,8 +100,7 @@ ToolButton {
 
             // calendar
             GridLayout {
-                anchors.left: parent.left
-                anchors.right: parent.right
+                Layout.fillWidth: true
                 columns: 2
 
                 DayOfWeekRow {

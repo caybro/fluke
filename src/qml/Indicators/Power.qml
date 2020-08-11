@@ -86,8 +86,7 @@ ToolButton {
         ColumnLayout {
             anchors.fill: parent
             RowLayout {
-                anchors.left: parent.left
-                anchors.right: parent.right
+                Layout.fillWidth: true
 
                 ToolButton {
                     hoverEnabled: true
