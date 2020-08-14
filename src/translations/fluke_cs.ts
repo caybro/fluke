@@ -73,17 +73,17 @@
 <context>
     <name>DateTime</name>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="86"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="84"/>
         <source>Go to today&apos;s date</source>
         <translation>Přejít na dnešek</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="150"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="147"/>
         <source>Display date in clock</source>
         <translation>Zobrazovat datum</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="160"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="157"/>
         <source>Display seconds in clock</source>
         <translation>Zobrazovat sekundy</translation>
     </message>
@@ -99,14 +99,19 @@
 <context>
     <name>Network</name>
     <message>
-        <location filename="../qml/Indicators/Network.qml" line="19"/>
+        <location filename="../qml/Indicators/Network.qml" line="18"/>
         <source>Network: %1</source>
         <translation>Síť: %1</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Network.qml" line="19"/>
+        <location filename="../qml/Indicators/Network.qml" line="18"/>
         <source>Offline</source>
         <translation>Offline</translation>
+    </message>
+    <message>
+        <location filename="../qml/Indicators/Network.qml" line="62"/>
+        <source>WiFi Enabled</source>
+        <translation>WiFi povolena</translation>
     </message>
 </context>
 <context>
@@ -248,7 +253,7 @@
         <translation>Hlasitost: %1%</translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="96"/>
+        <location filename="../qml/Indicators/Sound.qml" line="95"/>
         <source>Toggle mute</source>
         <translation>Přepnout ztlumení</translation>
     </message>

@@ -44,17 +44,17 @@
 <context>
     <name>DateTime</name>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="86"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="84"/>
         <source>Go to today&apos;s date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="150"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="147"/>
         <source>Display date in clock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="160"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="157"/>
         <source>Display seconds in clock</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70,13 +70,18 @@
 <context>
     <name>Network</name>
     <message>
-        <location filename="../qml/Indicators/Network.qml" line="19"/>
+        <location filename="../qml/Indicators/Network.qml" line="18"/>
         <source>Network: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Network.qml" line="19"/>
+        <location filename="../qml/Indicators/Network.qml" line="18"/>
         <source>Offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Indicators/Network.qml" line="62"/>
+        <source>WiFi Enabled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -215,7 +220,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="96"/>
+        <location filename="../qml/Indicators/Sound.qml" line="95"/>
         <source>Toggle mute</source>
         <translation type="unfinished"></translation>
     </message>
