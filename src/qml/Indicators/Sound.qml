@@ -6,7 +6,6 @@ import org.fluke.Sound 1.0
 
 ToolButton {
     id: indicatorSound
-    font.weight: Font.DemiBold
     down: popup.visible
     hoverEnabled: true
 

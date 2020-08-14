@@ -9,9 +9,17 @@ ToolButton {
     id: root
     down: popup.visible
     hoverEnabled: true
+    font.weight: Font.DemiBold
 
     icon.width: 32
     icon.height: 32
+
+    contentItem: Label { // get rid of the stupid UPPERCASE text :/
+        text: root.text
+        font: root.font
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+    }
 
     Timer {
         id: timer
@@ -41,6 +49,7 @@ ToolButton {
 
     PositionSource {
         id: posSource
+        active: false
 
         onPositionChanged: {
             const coord = position.coordinate;
