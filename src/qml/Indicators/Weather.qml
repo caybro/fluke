@@ -29,7 +29,7 @@ ToolButton {
     }
 
     function updateWeather() {
-        if ( posSource.valid) {
+        if (posSource.valid) {
             currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4&mode=xml"
             .arg(priv.lat).arg(priv.lon).arg(priv.owmKey)
             .arg(priv.imperialUnits ? "imperial" : "metric")

@@ -16,7 +16,7 @@ ToolButton {
     hoverEnabled: true
 
     ToolTip.text: qsTr("Network: %1").arg(Network.online ? Network.ssid : qsTr("Offline"))
-    ToolTip.visible:  hovered && (!popupLoader.item || !popupLoader.item.visible)
+    ToolTip.visible: hovered && (!popupLoader.item || !popupLoader.item.visible)
 
     function getBars(aStrength) {
         const strength = aStrength || Network.strength;
@@ -81,6 +81,7 @@ ToolButton {
                         width: parent.width
                         text: apData.ssid
                         icon.source: indicatorIcon(apData.strength)
+                        font.bold: modelData === Network.activeAp
                     }
                 }
             }
