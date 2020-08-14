@@ -12,6 +12,7 @@ class Network: public QObject
     Q_PROPERTY(QString ssid READ ssid NOTIFY primaryConnectionChanged)
     Q_PROPERTY(uint strength READ strength NOTIFY primaryConnectionChanged)
     Q_PROPERTY(QStringList accessPoints READ accessPoints NOTIFY accessPointsChanged)
+    Q_PROPERTY(QString activeAp READ activeAp NOTIFY primaryConnectionChanged)
 
 public:
     explicit Network(QObject *parent = nullptr);
@@ -23,9 +24,11 @@ public:
     QString ssid() const;
     uint strength() const;
     QStringList accessPoints() const;
+    QString activeAp() const;
 
 public slots:
     void setWifiEnabled(bool enabled);
+    QVariantMap apData(const QString &ap) const;
 
 signals:
     void wifiHWEnabledChanged();
@@ -58,4 +61,5 @@ private:
     QString m_ssid;
     int m_strength{0};
     QStringList m_accessPoints;
+    QString m_activeAp;
 };

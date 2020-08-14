@@ -20,6 +20,7 @@
 #define PROP_PRIMARY_CONNECTION_TYPE "PrimaryConnectionType"
 #define PROP_STRENGTH "Strength"
 #define PROP_ACTIVE_AP "ActiveAccessPoint"
+#define PROP_SSID "Ssid"
 
 Network::Network(QObject *parent)
     : QObject(parent)
@@ -99,13 +100,13 @@ void Network::processPrimaryConnection()
 void Network::processDevice(const QString &devicePath)
 {
     QDBusInterface deviceIface(NM_SERVICE, devicePath, NM_IFACE_DEVICE_WIFI, QDBusConnection::systemBus());
-    const QString activeApPath = deviceIface.property(PROP_ACTIVE_AP).value<QDBusObjectPath>().path();
-    qDebug() << "!!! ACTIVE AP:" << activeApPath;
 
-    for (const auto & ap: deviceIface.property("AccessPoints").value<QList<QDBusObjectPath>>()) {
+    m_accessPoints.clear();
+    for (const auto &ap: deviceIface.property("AccessPoints").value<QList<QDBusObjectPath>>()) {
         m_accessPoints.append(ap.path());
     }
     emit accessPointsChanged();
+
     QDBusConnection::systemBus().connect(NM_SERVICE, devicePath, NM_IFACE_DEVICE_WIFI,
                                          QStringLiteral("AccessPointAdded"),
                                          this, SLOT(addAccessPoint(QDBusObjectPath)));
@@ -113,7 +114,7 @@ void Network::processDevice(const QString &devicePath)
                                          QStringLiteral("AccessPointRemoved"),
                                          this, SLOT(removeAccessPoint(QDBusObjectPath)));
 
-    onDevicePropertiesChanged(NM_IFACE_DEVICE_WIFI, {{PROP_ACTIVE_AP, QDBusObjectPath(activeApPath)}}, {});
+    onDevicePropertiesChanged(NM_IFACE_DEVICE_WIFI, {{PROP_ACTIVE_AP, deviceIface.property(PROP_ACTIVE_AP).value<QDBusObjectPath>()}}, {});
 }
 
 void Network::onDevicePropertiesChanged(const QString &interface, const QVariantMap &changedProperties, const QStringList &invalidated)
@@ -124,11 +125,11 @@ void Network::onDevicePropertiesChanged(const QString &interface, const QVariant
     }
 
     if (changedProperties.contains(PROP_ACTIVE_AP)) {
-        const QString activeApPath = changedProperties.value(PROP_ACTIVE_AP).value<QDBusObjectPath>().path();
-        QDBusInterface apIface(NM_SERVICE, activeApPath, NM_IFACE_AP, QDBusConnection::systemBus());
+        m_activeAp = changedProperties.value(PROP_ACTIVE_AP).value<QDBusObjectPath>().path();
+        QDBusInterface apIface(NM_SERVICE, m_activeAp, NM_IFACE_AP, QDBusConnection::systemBus());
         m_strength = apIface.property(PROP_STRENGTH).toInt();
 
-        QDBusConnection::systemBus().connect(NM_SERVICE, activeApPath, DBUS_PROPS_IFACE,
+        QDBusConnection::systemBus().connect(NM_SERVICE, m_activeAp, DBUS_PROPS_IFACE,
                                              QStringLiteral("PropertiesChanged"),
                                              this, SLOT(onApPropertiesChanged(QString, QVariantMap, QStringList)));
 
@@ -183,6 +184,19 @@ void Network::setWifiEnabled(bool enabled)
     nmIface.setProperty(PROP_WIFI_ENABLED, enabled);
 }
 
+QVariantMap Network::apData(const QString &ap) const
+{
+    QVariantMap result;
+    QDBusInterface apIface(NM_SERVICE, ap, NM_IFACE_AP, QDBusConnection::systemBus());
+
+    if (!apIface.isValid())
+        return result;
+
+    result.insert("ssid", QString::fromUtf8(apIface.property(PROP_SSID).toByteArray()));
+    result.insert("strength", apIface.property(PROP_STRENGTH).toInt());
+    return result;
+}
+
 bool Network::isOnline() const
 {
     return m_online;
@@ -210,6 +224,11 @@ void Network::setIsOnline(bool online)
 QStringList Network::accessPoints() const
 {
     return m_accessPoints;
+}
+
+QString Network::activeAp() const
+{
+    return m_activeAp;
 }
 
 void Network::addAccessPoint(const QDBusObjectPath &ap)
