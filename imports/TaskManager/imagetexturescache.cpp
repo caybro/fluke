@@ -21,7 +21,7 @@
 #include <QSGTexture>
 #include <QDebug>
 
-typedef QHash<qint64, QHash<QWindow*, QWeakPointer<QSGTexture> > > TexturesCache;
+typedef QHash<qint64, QHash<QWindow*, QWeakPointer<QSGTexture>>> TexturesCache;
 
 struct ImageTexturesCachePrivate
 {
@@ -44,7 +44,7 @@ QSharedPointer<QSGTexture> ImageTexturesCache::loadTexture(QQuickWindow *window,
 
     if (!texture) {
         auto cleanAndDelete = [this, window, id](QSGTexture* texture) {
-            QHash<QWindow*, QWeakPointer<QSGTexture> >& textures = (d->cache)[id];
+            QHash<QWindow*, QWeakPointer<QSGTexture>> &textures = (d->cache)[id];
             textures.remove(window);
             if (textures.isEmpty())
                 d->cache.remove(id);

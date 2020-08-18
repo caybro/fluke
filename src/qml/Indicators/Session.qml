@@ -41,7 +41,7 @@ ToolButton {
 
             MenuItem {
                 checkable: true
-                checked: window.visibility == Window.FullScreen
+                checked: window.visibility === Window.FullScreen
                 onToggled: {
                     window.visibility = checked ? Window.FullScreen : Window.Windowed
                 }
@@ -58,7 +58,6 @@ ToolButton {
             }
 
             MenuItem {
-                id: autohideDockCheckbox
                 checkable: true
                 checked: indicatorSession.autohideDock
                 onToggled: {
