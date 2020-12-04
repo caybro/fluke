@@ -72,7 +72,7 @@ Item {
         fileMode: Platform.FileDialog.OpenFile
         folder: "file:///usr/share/wallpapers" //Platform.StandardPaths.standardLocations(Platform.StandardPaths.PicturesLocation)[0]
         title: qsTr("Change Wallpaper")
-        nameFilters: [qsTr("Image files (*.jpg *.png)")]
+        nameFilters: [qsTr("Image files (*.jpg *.png *.jpeg)")]
         onAccepted: workspace.changeWallpaper(file)
     }
 }
