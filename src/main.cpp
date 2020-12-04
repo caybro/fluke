@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 #else
     context->setContextProperty(QStringLiteral("debugMode"), false);
 #endif
-    appEngine.load(QUrl(QStringLiteral("qrc:///qml/main.qml")));
+    appEngine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();
 }

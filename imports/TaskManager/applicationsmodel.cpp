@@ -47,11 +47,10 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
                     return item->name();
                 case ApplicationItem::RoleComment:
                 case Qt::ToolTipRole: {
-                    const QString comment = item->desktopFile()->comment();
-                    if (!comment.isEmpty()) {
-                        return comment;
-                    }
-                    return item->desktopFile()->localizedValue(QStringLiteral("GenericName")).toString();
+                    const QString genericName = item->desktopFile()->localizedValue(QStringLiteral("GenericName")).toString();
+                    if (!genericName.isEmpty())
+                        return genericName;
+                    return item->desktopFile()->comment();
                 }
                 case ApplicationItem::RoleIcon: return item->desktopFile()->iconName();
                 case ApplicationItem::RoleKeywords: return item->desktopFile()->localizedValue(QStringLiteral("Keywords")).toStringList();
@@ -149,17 +148,18 @@ void ApplicationsModel::stopApplication(const QString &appId)
 void ApplicationsModel::init()
 {
     beginResetModel();
-    for (XdgDesktopFile * desktopFile: XdgDesktopFileCache::getAllFiles()) {
+    const auto desktopFiles = XdgDesktopFileCache::getAllFiles();
+    for (XdgDesktopFile * desktopFile: desktopFiles) {
         if (desktopFile->type() == XdgDesktopFile::ApplicationType
                 && desktopFile->isValid()
                 && !desktopFile->value(QStringLiteral("NoDisplay")).toBool()) {
             auto item = new ApplicationItem(desktopFile);
             m_items.append(item);
-            connect(item, &ApplicationItem::surfaceCountChanged, [this, item]() {
+            connect(item, &ApplicationItem::surfaceCountChanged, this, [this, item]() {
                 const QModelIndex idx = index(m_items.indexOf(item));
                 Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleRunning, ApplicationItem::RoleInstanceCount});
             });
-            connect(item, &ApplicationItem::isFavoriteChanged, [this, item]() {
+            connect(item, &ApplicationItem::isFavoriteChanged, this, [this, item]() {
                 const QModelIndex idx = index(m_items.indexOf(item));
                 Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleFavorite});
             });
