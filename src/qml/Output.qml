@@ -20,8 +20,8 @@ WaylandOutput {
 
     property alias screen: win.screen
     readonly property alias surfaceArea: workspace
-    property var viewsBySurface: ({}) // QWaylandSurface -> QWaylandView
-    property var toplevelsBySurface: ({}) // QWaylandXdgToplevelV6 -> QWaylandView
+    property var viewsBySurface: ({}) // QWaylandSurface -> Chrome
+    property var toplevelsBySurface: ({}) // QWaylandXdgToplevel -> Chrome
 
     Component.onCompleted: {
         // TODO make this configurable
