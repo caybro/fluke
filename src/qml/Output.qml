@@ -13,6 +13,8 @@ WaylandOutput {
     id: output
     sizeFollowsWindow: true
 
+    readonly property bool isNestedCompositor: Qt.platform.pluginName.startsWith("wayland") || Qt.platform.pluginName === "xcb"
+
     availableGeometry: settings.autohideDock ? Qt.rect(0, panel.height, win.width, win.height - panel.height)
                                              : Qt.rect(0, panel.height, win.width, win.height - panel.height - dock.height)
 
@@ -135,9 +137,9 @@ WaylandOutput {
         id: win
         x: Screen.virtualX
         y: Screen.virtualY
-        width: debugMode ? 1024 : Screen.width
-        height: debugMode ? 768 : Screen.height
-        visibility: debugMode ? Window.Windowed : Window.FullScreen
+        width: output.isNestedCompositor ? 1024 : Screen.width
+        height: output.isNestedCompositor ? 768 : Screen.height
+        visibility: output.isNestedCompositor ? Window.Windowed : Window.FullScreen
         visible: true
 
         Material.theme: settings.darkMode ? Material.Dark : Material.Light
@@ -198,7 +200,7 @@ WaylandOutput {
                     systemDialog.text = qsTr("Do you really want to suspend the computer?");
                     systemDialog.acceptedFunctionCallback = function() {
                         // @disable-check M127
-                        debugMode ? console.info("SIMULATION: suspend") : Session.suspend();
+                        output.isNestedCompositor ? console.info("SIMULATION: suspend") : Session.suspend();
                     }
                     systemDialog.open();
                 }
@@ -207,7 +209,7 @@ WaylandOutput {
                     systemDialog.text = qsTr("Do you really want to restart the computer?");
                     systemDialog.acceptedFunctionCallback = function() {
                         // @disable-check M127
-                        debugMode ? console.info("SIMULATION: restart") : Session.reboot()
+                        output.isNestedCompositor ? console.info("SIMULATION: restart") : Session.reboot()
                     }
                     systemDialog.open();
                 }
@@ -216,7 +218,7 @@ WaylandOutput {
                     systemDialog.text = qsTr("Do you really want to turn off the computer?");
                     systemDialog.acceptedFunctionCallback = function() {
                         // @disable-check M127
-                        debugMode ? console.info("SIMULATION: shutdown") : Session.shutdown()
+                        output.isNestedCompositor ? console.info("SIMULATION: shutdown") : Session.shutdown()
                     }
                     systemDialog.open();
                 }
@@ -320,14 +322,14 @@ WaylandOutput {
         }
 
         Shortcut {
-            sequence: debugMode ? "Ctrl+Tab" : "Alt+Tab"
+            sequence: output.isNestedCompositor ? "Ctrl+Tab" : "Alt+Tab"
             enabled: dock.activeApp
             context: Qt.ApplicationShortcut
             onActivated: focusNextNonMinimized()
         }
 
         Shortcut {
-            sequence: debugMode ? "Ctrl+Shift+Tab" : "Alt+Shift+Tab"
+            sequence: output.isNestedCompositor ? "Ctrl+Shift+Tab" : "Alt+Shift+Tab"
             enabled: dock.activeApp
             context: Qt.ApplicationShortcut
             onActivated: focusPreviousNonMinimized()
