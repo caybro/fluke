@@ -88,42 +88,42 @@
 <context>
     <name>Output</name>
     <message>
-        <location filename="../qml/Output.qml" line="191"/>
+        <location filename="../qml/Output.qml" line="193"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="192"/>
+        <location filename="../qml/Output.qml" line="194"/>
         <source>Do you really want to logout?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="197"/>
+        <location filename="../qml/Output.qml" line="199"/>
         <source>Suspend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="198"/>
+        <location filename="../qml/Output.qml" line="200"/>
         <source>Do you really want to suspend the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="206"/>
+        <location filename="../qml/Output.qml" line="208"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="207"/>
+        <location filename="../qml/Output.qml" line="209"/>
         <source>Do you really want to restart the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="215"/>
+        <location filename="../qml/Output.qml" line="217"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="216"/>
+        <location filename="../qml/Output.qml" line="218"/>
         <source>Do you really want to turn off the computer?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -139,27 +139,27 @@
 <context>
     <name>Power</name>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="68"/>
+        <location filename="../qml/Indicators/Power.qml" line="67"/>
         <source>Time to charge: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="70"/>
+        <location filename="../qml/Indicators/Power.qml" line="69"/>
         <source>Remaining time: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="72"/>
+        <location filename="../qml/Indicators/Power.qml" line="71"/>
         <source>Fully charged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="74"/>
+        <location filename="../qml/Indicators/Power.qml" line="73"/>
         <source>Battery not charging or discharging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Power.qml" line="76"/>
+        <location filename="../qml/Indicators/Power.qml" line="75"/>
         <source>Screen brightness: %1%</source>
         <translation type="unfinished"></translation>
     </message>
@@ -182,27 +182,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="68"/>
+        <location filename="../qml/Indicators/Session.qml" line="67"/>
         <source>Autohide Dock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="74"/>
+        <location filename="../qml/Indicators/Session.qml" line="73"/>
         <source>Logout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="82"/>
+        <location filename="../qml/Indicators/Session.qml" line="81"/>
         <source>Sleep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="91"/>
+        <location filename="../qml/Indicators/Session.qml" line="90"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="100"/>
+        <location filename="../qml/Indicators/Session.qml" line="99"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -210,17 +210,17 @@
 <context>
     <name>Sound</name>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="40"/>
+        <location filename="../qml/Indicators/Sound.qml" line="39"/>
         <source>Sound muted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="42"/>
+        <location filename="../qml/Indicators/Sound.qml" line="41"/>
         <source>Volume: %1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="95"/>
+        <location filename="../qml/Indicators/Sound.qml" line="94"/>
         <source>Toggle mute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -228,37 +228,37 @@
 <context>
     <name>Weather</name>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="82"/>
-        <source>%1°%2 (%3)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Indicators/Weather.qml" line="84"/>
-        <source>Temperature: %1 °%2</source>
+        <location filename="../qml/Indicators/Weather.qml" line="83"/>
+        <source>%1°&#x2009;%2 (%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Indicators/Weather.qml" line="85"/>
-        <source>Humidity: %1%</source>
+        <source>Temperature: %1&#x2009;°%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Indicators/Weather.qml" line="86"/>
-        <source>Precipitation: %1</source>
+        <source>Humidity: %1&#x2009;%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Indicators/Weather.qml" line="87"/>
-        <source>Wind: %1</source>
+        <source>Precipitation: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Indicators/Weather.qml" line="88"/>
+        <source>Wind: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Indicators/Weather.qml" line="89"/>
         <source>Location: %1, %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="92"/>
+        <location filename="../qml/Indicators/Weather.qml" line="93"/>
         <source>Error getting weather info
 %1</source>
         <translation type="unfinished"></translation>
@@ -288,7 +288,7 @@
     </message>
     <message>
         <location filename="../qml/Workspace.qml" line="75"/>
-        <source>Image files (*.jpg *.png)</source>
+        <source>Image files (*.jpg *.png *.jpeg)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
