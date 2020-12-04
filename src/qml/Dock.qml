@@ -7,9 +7,9 @@ import org.fluke.TaskManager 1.0
 
 Pane {
     id: dock
-    height: 70
+    height: 64
     opacity: visible ? 0.9 : 0.0
-    padding: 3
+    padding: 0
     activeFocusOnTab: false
     enabled: visible
 
@@ -41,7 +41,9 @@ Pane {
     }
 
     RowLayout {
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
         spacing: 3
         ListView {
             id: view
@@ -60,8 +62,6 @@ Pane {
                 hoverEnabled: true
 
                 readonly property string appId: model.appId
-                readonly property bool favorite: model.favorite
-                readonly property bool running: model.running
 
                 contentItem: ColumnLayout {
                     anchors.centerIn: parent
@@ -98,7 +98,7 @@ Pane {
                 }
 
                 onClicked: {
-                    if (!running) {
+                    if (!model.running) {
                         Applications.startApplication(appId);
                     } else {
                         dock.activateApplication(appId);
