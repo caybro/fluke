@@ -271,10 +271,9 @@ WaylandOutput {
                 onShowLauncher: appLauncher.show()
             }
 
-            Keyboard {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
+            Loader {
+                anchors.fill: parent
+                source: "Keyboard.qml"
             }
 
             WaylandCursorItem {
