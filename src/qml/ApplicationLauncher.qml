@@ -144,6 +144,7 @@ Pane {
                     launchApp(gridView.currentItem.appId);
                 }
             }
+            KeyNavigation.down: gridView
         }
 
         GridView {
@@ -176,9 +177,11 @@ Pane {
                     }
                 }
             }
+            KeyNavigation.down: tabBar
         }
 
         TabBar {
+            id: tabBar
             Layout.preferredWidth: parent.width / 3
             Layout.alignment: Qt.AlignHCenter
             activeFocusOnTab: true
