@@ -1,6 +1,6 @@
 import QtQuick 2.12
-import QtQml 2.2
-import QtWayland.Compositor 1.3
+import QtQml 2.12
+import QtWayland.Compositor 1.12
 
 WaylandCompositor {
     id: comp
@@ -35,20 +35,6 @@ WaylandCompositor {
         id: qtWindowManager
         onShowIsFullScreenChanged: console.log("Show is fullscreen hint for Qt applications:", showIsFullScreen)
         onOpenUrl: Qt.openUrlExternally(url)
-    }
-
-    WlShell {
-        onWlShellSurfaceCreated: handleShellSurfaceCreated(shellSurface)
-    }
-
-    XdgShellV5 {
-        onXdgSurfaceCreated: handleShellSurfaceCreated(xdgSurface)
-        onXdgPopupCreated: handleShellSurfaceCreated(xdgPopup, true)
-    }
-
-    XdgShellV6 {
-        onToplevelCreated: handleToplevelCreated(toplevel, xdgSurface)
-        onPopupCreated: handlePopupCreated(popup)
     }
 
     XdgShell {
