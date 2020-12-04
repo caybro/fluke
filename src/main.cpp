@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
     app.setApplicationVersion(QStringLiteral("0.0.1"));
 
     qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("wayland"));
+    qunsetenv("QT_IM_MODULE");
     //qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
 
     QIcon::setThemeName("Adwaita");
