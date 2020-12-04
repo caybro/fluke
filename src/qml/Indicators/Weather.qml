@@ -1,5 +1,5 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.3
+import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.12
 import QtQuick.XmlListModel 2.12
@@ -14,19 +14,11 @@ ToolButton {
     icon.width: 32
     icon.height: 32
 
-    contentItem: Label { // get rid of the stupid UPPERCASE text :/
-        text: root.text
-        font: root.font
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-    }
-
     Timer {
         id: timer
         interval: 60 * 1000 * 30 // 30 minutes
         running: true
         repeat: true
-        triggeredOnStart: true
         onTriggered: Qt.callLater(posSource.update); // triggers updateWeather()
     }
 
@@ -38,9 +30,10 @@ ToolButton {
 
     function updateWeather() {
         if (posSource.valid) {
-            currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4&mode=xml"
+            currentWeather.source = "http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4&mode=xml&lang=%5"
             .arg(priv.lat).arg(priv.lon).arg(priv.owmKey)
             .arg(priv.imperialUnits ? "imperial" : "metric")
+            .arg(Qt.locale().name)
             if (currentWeather.status !== XmlListModel.Loading) {
                 currentWeather.reload();
             }
@@ -55,7 +48,6 @@ ToolButton {
             const coord = position.coordinate;
             priv.lat = coord.latitude;
             priv.lon = coord.longitude;
-            //console.debug("Current GeoLocation:", coord);
             updateWeather();
         }
     }
@@ -86,12 +78,12 @@ ToolButton {
                 var result = get(0);
                 var temperature = Math.round(result.temperature);
 
-                root.icon.source = "http://openweathermap.org/img/w/%1.png".arg(result.iconID);
+                root.icon.source = "http://openweathermap.org/img/wn/%1@2x.png".arg(result.iconID);
 
-                root.text = qsTr("%1°%2 (%3)").arg(temperature).arg(priv.imperialUnits ? "F" : "C").arg(result.weatherInfo);
+                root.text = qsTr("%1° %2 (%3)").arg(temperature).arg(priv.imperialUnits ? "F" : "C").arg(result.weatherInfo);
 
-                weather.text = qsTr("Temperature: %1 °%2").arg(temperature).arg(priv.imperialUnits ? "F" : "C");
-                weather.append(qsTr("Humidity: %1%").arg(result.humidity));
+                weather.text = qsTr("Temperature: %1 °%2").arg(temperature).arg(priv.imperialUnits ? "F" : "C");
+                weather.append(qsTr("Humidity: %1 %").arg(result.humidity));
                 weather.append(qsTr("Precipitation: %1").arg(result.precipitation));
                 weather.append(qsTr("Wind: %1").arg(result.wind));
                 weather.append(qsTr("Location: %1, %2").arg(result.city).arg(result.country));
