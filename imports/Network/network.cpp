@@ -192,8 +192,8 @@ QVariantMap Network::apData(const QString &ap) const
     if (!apIface.isValid())
         return result;
 
-    result.insert("ssid", QString::fromUtf8(apIface.property(PROP_SSID).toByteArray()));
-    result.insert("strength", apIface.property(PROP_STRENGTH).toInt());
+    result.insert(QStringLiteral("ssid"), QString::fromUtf8(apIface.property(PROP_SSID).toByteArray()));
+    result.insert(QStringLiteral("strength"), apIface.property(PROP_STRENGTH).toInt());
     return result;
 }
 
