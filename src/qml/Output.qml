@@ -50,10 +50,6 @@ WaylandOutput {
         }
     }
 
-    readonly property SystemPalette _pal: SystemPalette {
-        colorGroup: SystemPalette.Active
-    }
-
     function activateView(view) {
         view.takeFocus();
         view.raise();
@@ -143,7 +139,6 @@ WaylandOutput {
         visible: true
 
         Material.theme: settings.darkMode ? Material.Dark : Material.Light
-        Material.accent: _pal.highlight
 
         background: Image {
             fillMode: Image.PreserveAspectFit
