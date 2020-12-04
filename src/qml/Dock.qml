@@ -12,6 +12,7 @@ Pane {
     padding: 0
     activeFocusOnTab: false
     enabled: visible
+    hoverEnabled: true
 
     readonly property int count: view.count + 1
     property string activeApp
@@ -59,7 +60,6 @@ Pane {
             delegate: ItemDelegate {
                 id: appDelegate
                 highlighted: appId == dock.activeApp
-                hoverEnabled: true
 
                 readonly property string appId: model.appId
 
