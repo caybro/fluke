@@ -102,7 +102,8 @@ void Network::processDevice(const QString &devicePath)
     QDBusInterface deviceIface(NM_SERVICE, devicePath, NM_IFACE_DEVICE_WIFI, QDBusConnection::systemBus());
 
     m_accessPoints.clear();
-    for (const auto &ap: deviceIface.property("AccessPoints").value<QList<QDBusObjectPath>>()) {
+    const auto aps = deviceIface.property("AccessPoints").value<QList<QDBusObjectPath>>();
+    for (const auto &ap: aps) {
         m_accessPoints.append(ap.path());
     }
     emit accessPointsChanged();
