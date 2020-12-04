@@ -7,13 +7,14 @@ import org.fluke.TaskManager 1.0
 ShellSurfaceItem {
     id: rootChrome
 
+    autoCreatePopupItems: true
+
     readonly property bool isChild: !!parentSurfaceItem
     readonly property alias appId: priv.appId
     readonly property bool activated: xdgSurface && xdgSurface.activated
     readonly property bool fullscreen: xdgSurface && xdgSurface.fullscreen
 
-    property bool isToplevel
-    property bool isPopup
+    readonly property bool isPopup: false
     property bool minimized
     property Workspace workspace
 
