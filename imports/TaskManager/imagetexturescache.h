@@ -25,7 +25,7 @@
 
 class QImage;
 class QSGTexture;
-class ImageTexturesCachePrivate;
+struct ImageTexturesCachePrivate;
 
 /**
  * @class ImageTexturesCache imagetexturescache.h KQuickAddons/ImageTexturesCache
