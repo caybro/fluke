@@ -220,7 +220,6 @@ void Power::setState(uint state)
 void Power::setRemainingTime(qint64 timeToEmpty, qint64 timeToFull)
 {
     qint64 seconds;
-    int minutes, hours;
 
     if (m_state == Discharging) {
         seconds = timeToEmpty;
@@ -228,6 +227,7 @@ void Power::setRemainingTime(qint64 timeToEmpty, qint64 timeToFull)
         seconds = timeToFull;
     } else return;
 
+    int minutes, hours;
     minutes = seconds / 60;
     hours = minutes / 60;
     minutes %= 60;

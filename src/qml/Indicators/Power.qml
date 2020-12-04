@@ -45,7 +45,6 @@ ToolButton {
             src = "full";
 
         var result = "qrc:/icons/battery/ic_battery%1_%2_18px.svg".arg(charging ? "_charging" : "").arg(src);
-        //console.debug("!!! ICON:", result);
         return result;
     }
 
@@ -54,7 +53,7 @@ ToolButton {
         const perc = state === Power.FullyCharged ? 100.0 : Power.percentage;
 
         var result = "%1%".arg(Math.floor(perc)); // we're being a bit pessimistic here ;)
-        if (state === Power.Charging || state === Power.Discharging) {
+        if ((state === Power.Charging || state === Power.Discharging) && perc !== 100) {
             result += ", %1".arg(Power.remainingTime);
         }
 
