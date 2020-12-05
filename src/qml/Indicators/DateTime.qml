@@ -60,9 +60,7 @@ ToolButton {
 
                 ToolButton {
                     id: btnPrevMonth
-                    icon.source: "qrc:/icons/chevron-left-solid.svg"
-                    icon.width: 16
-                    icon.height: 25
+                    icon.source: "qrc:/icons/material/chevron_left-24px.svg"
                     hoverEnabled: true
                     onClicked: {
                         var prevMonth = new Date(calendar.year, calendar.month - 1);
@@ -86,9 +84,7 @@ ToolButton {
 
                 ToolButton {
                     id: btnNextMonth
-                    icon.source: "qrc:/icons/chevron-right-solid.svg"
-                    icon.width: 16
-                    icon.height: 25
+                    icon.source: "qrc:/icons/material/chevron_right-24px.svg"
                     hoverEnabled: true
                     onClicked: {
                         var nextMonth = new Date(calendar.year, calendar.month + 1);

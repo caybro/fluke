@@ -18,21 +18,10 @@
         <file>qml/DefaultAnimation.qml</file>
         <file>fonts/FontAwesomeSolid5.otf</file>
         <file>qml/Indicators/Weather.qml</file>
-        <file>icons/moon-solid.svg</file>
-        <file>icons/power-off-solid.svg</file>
         <file>icons/volume-down-solid.svg</file>
         <file>icons/volume-mute-solid.svg</file>
         <file>icons/volume-off-solid.svg</file>
         <file>icons/volume-up-solid.svg</file>
-        <file>icons/desktop-solid.svg</file>
-        <file>icons/laptop-solid.svg</file>
-        <file>icons/sign-out-alt-solid.svg</file>
-        <file>icons/sync-solid.svg</file>
-        <file>icons/chevron-left-solid.svg</file>
-        <file>icons/chevron-right-solid.svg</file>
-        <file>icons/image-solid.svg</file>
-        <file>icons/th-solid.svg</file>
-        <file>icons/sun-solid.svg</file>
         <file>icons/battery/ic_battery_20_18px.svg</file>
         <file>icons/battery/ic_battery_30_18px.svg</file>
         <file>icons/battery/ic_battery_50_18px.svg</file>
@@ -62,5 +51,17 @@
         <file>icons/network/ic_signal_wifi_statusbar_connected_no_internet_3_26x24px.svg</file>
         <file>icons/network/ic_signal_wifi_statusbar_connected_no_internet_4_26x24px.svg</file>
         <file>icons/network/ic_signal_wifi_statusbar_not_connected_26x24px.svg</file>
+        <file>icons/material/apps-24px.svg</file>
+        <file>icons/material/autorenew-24px.svg</file>
+        <file>icons/material/brightness_low-24px.svg</file>
+        <file>icons/material/chevron_left-24px.svg</file>
+        <file>icons/material/chevron_right-24px.svg</file>
+        <file>icons/material/desktop_windows-24px.svg</file>
+        <file>icons/material/laptop-24px.svg</file>
+        <file>icons/material/login-24px.svg</file>
+        <file>icons/material/power_settings_new-24px.svg</file>
+        <file>icons/material/brightness_3-24px.svg</file>
+        <file>icons/material/fullscreen-24px.svg</file>
+        <file>icons/material/wallpaper-24px.svg</file>
     </qresource>
 </RCC>

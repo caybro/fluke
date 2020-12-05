@@ -27,7 +27,8 @@ ToolButton {
     signal shutdown()
 
     Component.onCompleted: {
-        indicatorSession.icon.source = Platform.chassis == "laptop" ? "qrc:/icons/laptop-solid.svg" : "qrc:/icons/desktop-solid.svg";
+        indicatorSession.icon.source = Platform.chassis == "laptop" ? "qrc:/icons/material/laptop-24px.svg"
+                                                                    : "qrc:/icons/material/desktop_windows-24px.svg";
     }
 
     Loader {
@@ -71,7 +72,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Logout")
-                icon.source: "qrc:/icons/sign-out-alt-solid.svg"
+                icon.source: "qrc:/icons/material/login-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.logout()
@@ -79,7 +80,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Sleep")
-                icon.source: "qrc:/icons/moon-solid.svg"
+                icon.source: "qrc:/icons/material/brightness_3-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.suspend()
@@ -88,7 +89,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Restart")
-                icon.source: "qrc:/icons/sync-solid.svg"
+                icon.source: "qrc:/icons/material/autorenew-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.reboot()
@@ -97,7 +98,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Shutdown")
-                icon.source: "qrc:/icons/power-off-solid.svg"
+                icon.source: "qrc:/icons/material/power_settings_new-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.shutdown()

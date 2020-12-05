@@ -90,9 +90,9 @@ ToolButton {
                 ToolButton {
                     hoverEnabled: true
                     icon {
-                        source: "qrc:/icons/sun-solid.svg"
                         height: 16
                         width: 16
+                        source: "qrc:/icons/material/brightness_low-24px.svg"
                     }
 
                     onClicked: {

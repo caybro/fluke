@@ -44,24 +44,18 @@ Item {
         id: shellContextMenu
 
         QQC.MenuItem {
-            icon.source: "qrc:/icons/image-solid.svg"
-            icon.height: 16
-            icon.width: 16
+            icon.source: "qrc:/icons/material/wallpaper-24px.svg"
             text: qsTr("Select Wallpaper...")
             onTriggered: wallpaperDialog.open()
         }
 
         QQC.MenuItem {
-            icon.source: "qrc:/icons/th-solid.svg"
-            icon.height: 16
-            icon.width: 16
+            icon.source: "qrc:/icons/material/apps-24px.svg"
             text: qsTr("Open Launcher")
             onTriggered: workspace.showLauncher()
         }
         QQC.MenuItem {
-            icon.source: "qrc:/icons/sign-out-alt-solid.svg"
-            icon.height: 16
-            icon.width: 16
+            icon.source: "qrc:/icons/material/login-24px.svg"
             text: qsTr("Logout...")
             onTriggered: workspace.logout()
         }

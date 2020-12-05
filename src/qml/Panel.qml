@@ -39,9 +39,7 @@ ToolBar {
         ToolButton {
             visible: appLauncherVisible
             hoverEnabled: visible
-            icon.source: "qrc:/icons/chevron-left-solid.svg"
-            icon.width: 16
-            icon.height: 25
+            icon.source: "qrc:/icons/material/chevron_left-24px.svg"
             ToolTip.text: qsTr("Back")
             ToolTip.visible: hovered
             onClicked: panel.hideLauncher()
