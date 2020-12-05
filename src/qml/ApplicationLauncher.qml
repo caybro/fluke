@@ -24,6 +24,8 @@ Pane {
         hide();
     }
 
+    signal activateApplication(string appId)
+
     Behavior on opacity { DefaultAnimation {} }
 
     Keys.onEscapePressed: hide()
@@ -111,7 +113,12 @@ Pane {
             }
 
             onClicked: {
-                launchApp(appId);
+                if (!running) {
+                    launchApp(appId);
+                } else {
+                    root.activateApplication(appId);
+                    hide();
+                }
             }
 
             GridView.onRemove: SequentialAnimation {

@@ -24,7 +24,7 @@ WaylandOutput {
     property var toplevelsBySurface: ({}) // QWaylandXdgToplevel -> Chrome
 
     Component.onCompleted: {
-        // TODO make this configurable
+        // FIXME make this configurable
         compositor.defaultSeat.keymap.layout = "cz";
         compositor.defaultSeat.keymap.variant = "qwerty";
     }
@@ -247,6 +247,7 @@ WaylandOutput {
                 id: appLauncher
                 anchors.fill: workspace
                 opacity: 0.0
+                onActivateApplication: output.activateApplication(appId);
             }
 
             Dock {

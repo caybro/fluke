@@ -37,6 +37,7 @@ ToolBar {
         anchors.rightMargin: 5
 
         ToolButton {
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             visible: appLauncherVisible
             hoverEnabled: visible
             icon.source: "qrc:/icons/material/chevron_left-24px.svg"
@@ -46,8 +47,8 @@ ToolBar {
         }
 
         RowLayout {
-            id: centerSection
             anchors.centerIn: parent
+            //Layout.alignment: Qt.AlignCenter // FIXME doesn't work :/
 
             Indicators.DateTime {
                 id: dateIndicator
@@ -57,9 +58,7 @@ ToolBar {
         }
 
         RowLayout {
-            id: rightSection
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
             // TODO keyboard switcher
 
