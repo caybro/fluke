@@ -12,11 +12,12 @@ import org.fluke.Session 1.0
 WaylandOutput {
     id: output
     sizeFollowsWindow: true
+    scaleFactor: Screen.devicePixelRatio
 
     readonly property bool isNestedCompositor: Qt.platform.pluginName.startsWith("wayland") || Qt.platform.pluginName === "xcb"
 
-    availableGeometry: settings.autohideDock ? Qt.rect(0, panel.height, win.width, win.height - panel.height)
-                                             : Qt.rect(0, panel.height, win.width, win.height - panel.height - dock.height)
+    availableGeometry: settings.autohideDock ? Qt.rect(0, 0, win.width, win.height - panel.height)
+                                             : Qt.rect(0, 0, win.width, win.height - panel.height - dock.height)
 
     property alias screen: win.screen
     readonly property alias surfaceArea: workspace

@@ -15,6 +15,8 @@ int main(int argc, char *argv[])
     qputenv("QT_QUICK_CONTROLS_MATERIAL_ACCENT", QByteArrayLiteral("Blue"));
 
     qunsetenv("QT_SCREEN_SCALE_FACTORS");
+    qunsetenv("QT_SCALE_FACTOR");
+    qunsetenv("QT_AUTO_SCREEN_SCALE_FACTOR");
 
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
