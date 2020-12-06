@@ -1,5 +1,5 @@
 import QtQuick 2.12
-import QtQml 2.12
+import QtQml.Models 2.14
 import QtWayland.Compositor 1.12
 
 WaylandCompositor {
@@ -67,7 +67,7 @@ WaylandCompositor {
                 "y": screens.objectAt(0).position.y,
                 "width": Qt.binding(function() { return shellSurface.surface.width; }),
                 "height": Qt.binding(function() { return shellSurface.surface.height; })
-            });
+        });
         for (var i = 0; i < screens.count; ++i) {
             createToplevelItem(toplevel, shellSurface, moveItem, screens.objectAt(i));
         }
