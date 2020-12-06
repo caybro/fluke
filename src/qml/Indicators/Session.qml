@@ -12,6 +12,8 @@ ToolButton {
     id: indicatorSession
     icon.width: 16
     icon.height: 16
+    icon.source: Platform.chassis == "laptop" ? "qrc:/icons/material/laptop-24px.svg"
+                                              : "qrc:/icons/material/desktop_windows-24px.svg";
     down: popupLoader.item && popupLoader.item.visible
     hoverEnabled: true
 
@@ -25,11 +27,6 @@ ToolButton {
     signal suspend()
     signal reboot()
     signal shutdown()
-
-    Component.onCompleted: {
-        indicatorSession.icon.source = Platform.chassis == "laptop" ? "qrc:/icons/material/laptop-24px.svg"
-                                                                    : "qrc:/icons/material/desktop_windows-24px.svg";
-    }
 
     Loader {
         id: popupLoader
@@ -59,13 +56,12 @@ ToolButton {
             }
 
             MenuItem {
+                text: qsTr("Autohide Dock")
                 checkable: true
                 checked: indicatorSession.autohideDock
                 onToggled: {
                     indicatorSession.autohideDock = checked
                 }
-
-                text: qsTr("Autohide Dock")
             }
 
             MenuSeparator {}
