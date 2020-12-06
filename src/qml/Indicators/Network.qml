@@ -9,8 +9,8 @@ ToolButton {
     id: root
     icon {
         source: indicatorIcon()
-        width: 20
-        height: 18
+        width: 16
+        height: 16
     }
     down: popupLoader.item && popupLoader.item.visible
     hoverEnabled: true
@@ -81,6 +81,8 @@ ToolButton {
                         width: parent.width
                         text: apData.ssid
                         icon.source: indicatorIcon(apData.strength)
+                        icon.width: 16
+                        icon.height: 16
                         font.bold: modelData === Network.activeAp
                     }
                 }
