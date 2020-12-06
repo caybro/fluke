@@ -71,9 +71,8 @@ ToolButton {
                 }
 
                 ListView {
-                    Layout.fillWidth: true
                     Layout.preferredWidth: 300
-                    Layout.preferredHeight: 300
+                    Layout.preferredHeight: 250
                     model: Network.accessPoints
                     clip: true
                     delegate: ItemDelegate {
@@ -85,6 +84,8 @@ ToolButton {
                         icon.height: 16
                         font.bold: modelData === Network.activeAp
                     }
+
+                    ScrollIndicator.vertical: ScrollIndicator { }
                 }
             }
         }
