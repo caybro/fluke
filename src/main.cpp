@@ -18,6 +18,9 @@ int main(int argc, char *argv[])
     qunsetenv("QT_SCALE_FACTOR");
     qunsetenv("QT_AUTO_SCREEN_SCALE_FACTOR");
 
+    // ShareOpenGLContexts is needed for using the threaded renderer
+    // on Nvidia EGLStreams
+    QGuiApplication::setAttribute(Qt::AA_ShareOpenGLContexts, true);
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QGuiApplication app(argc, argv);
