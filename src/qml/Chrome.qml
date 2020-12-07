@@ -24,8 +24,8 @@ ShellSurfaceItem {
     opacity: !minimized && !workspace.appLauncherVisible ? 1 : 0
     visible: opacity > 0
 
-    x: moveItem.x - output.geometry.x
-    y: moveItem.y - output.geometry.y
+    x: moveItem.x - output.availableGeometry.x
+    y: moveItem.y - output.availableGeometry.y
 
     onXChanged: updatePrimary()
     onYChanged: updatePrimary()
@@ -180,24 +180,25 @@ ShellSurfaceItem {
         id: maximizeAnimation
         readonly property int duration: 150
         ParallelAnimation {
-            PropertyAnimation { target: rootChrome; properties: "x"; duration: maximizeAnimation.duration; to: rootChrome.output.geometry.left }
-            PropertyAnimation { target: rootChrome; properties: "y"; duration: maximizeAnimation.duration; to: rootChrome.output.geometry.top }
+            PropertyAnimation { target: rootChrome; properties: "x"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.left }
+            PropertyAnimation { target: rootChrome; properties: "y"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.top }
             PropertyAnimation { target: rootChrome; property: "width"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.width }
             PropertyAnimation { target: rootChrome; property: "height"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.height }
         }
-        ScriptAction { script: { rootChrome.bufferLocked = false; rootChrome.updatePrimary() } }
+        ScriptAction { script: { rootChrome.xdgSurface.sendMaximized(Qt.size(rootChrome.output.availableGeometry.width, rootChrome.output.availableGeometry.height));
+                rootChrome.bufferLocked = false } }
     }
 
     SequentialAnimation {
         id: unmaximizeAnimation
         readonly property int duration: 150
+        ScriptAction { script: { rootChrome.xdgSurface.sendUnmaximized(); rootChrome.bufferLocked = false } }
         ParallelAnimation {
-            PropertyAnimation { target: rootChrome; properties: "x"; duration: maximizeAnimation.duration; from: rootChrome.output.geometry.left }
-            PropertyAnimation { target: rootChrome; properties: "y"; duration: maximizeAnimation.duration; from: rootChrome.output.geometry.top }
+            PropertyAnimation { target: rootChrome; properties: "x"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.left }
+            PropertyAnimation { target: rootChrome; properties: "y"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.top }
             PropertyAnimation { target: rootChrome; property: "width"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.width }
             PropertyAnimation { target: rootChrome; property: "height"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.height }
         }
-        ScriptAction { script: { rootChrome.bufferLocked = false; rootChrome.updatePrimary() } }
     }
 
     SequentialAnimation {
