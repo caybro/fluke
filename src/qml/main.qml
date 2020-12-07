@@ -22,11 +22,6 @@ WaylandCompositor {
         Chrome {}
     }
 
-    Component {
-        id: moveItemComponent
-        Item {}
-    }
-
     Item {
         id: rootItem
     }
@@ -43,12 +38,11 @@ WaylandCompositor {
 
     TextInputManager {}
 
-    function createToplevelItem(toplevel, shellSurface, moveItem, output) {
+    function createToplevelItem(toplevel, shellSurface, output) {
         var parentSurfaceItem = output.toplevelsBySurface[toplevel.parentToplevel];
         var parent = parentSurfaceItem || output.surfaceArea;
         var item = chromeComponent.createObject(parent, {
             "shellSurface": shellSurface,
-            "moveItem": moveItem,
             "output": output,
             "workspace": output.surfaceArea,
             "xdgSurface": toplevel
@@ -62,14 +56,8 @@ WaylandCompositor {
     }
 
     function handleToplevelCreated(toplevel, shellSurface) {
-        var moveItem = moveItemComponent.createObject(rootItem, {
-                "x": screens.objectAt(0).position.x,
-                "y": screens.objectAt(0).position.y,
-                "width": Qt.binding(function() { return shellSurface.surface.width; }),
-                "height": Qt.binding(function() { return shellSurface.surface.height; })
-        });
         for (var i = 0; i < screens.count; ++i) {
-            createToplevelItem(toplevel, shellSurface, moveItem, screens.objectAt(i));
+            createToplevelItem(toplevel, shellSurface, screens.objectAt(i));
         }
     }
 }
