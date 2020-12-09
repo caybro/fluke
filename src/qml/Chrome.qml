@@ -129,7 +129,7 @@ ShellSurfaceItem {
         }
         onUnsetFullscreen: {
             workspace.exitFullscreen(rootChrome.appId);
-            rootChrome.xdgSurface.sendUnmaximized(); // FIXME sendExitFullscreen() missing in QtWayland
+            rootChrome.xdgSurface.sendUnmaximized();
             rootChrome.bufferLocked = true;
             exitFullscreenAnimation.start();
         }

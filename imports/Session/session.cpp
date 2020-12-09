@@ -19,7 +19,6 @@ Session::Session(QObject *parent)
 {
 }
 
-
 bool Session::checkLogin1Call(const QString &method) const
 {
     QDBusMessage msg = QDBusMessage::createMethodCall(LOGIN1_SERVICE, LOGIN1_PATH, LOGIN1_IFACE, method);
@@ -64,7 +63,7 @@ bool Session::canShutdown() const
 
 bool Session::canLock() const
 {
-    // FIXME
+    // FIXME real locking
     return true;
 }
 
