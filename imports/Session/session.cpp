@@ -11,9 +11,6 @@
 #define LOGIN1_IFACE QStringLiteral("org.freedesktop.login1.Manager")
 #define LOGIN1_SESSION_IFACE QStringLiteral("org.freedesktop.login1.Session")
 
-#define ACTIVE_KEY QStringLiteral("Active")
-#define IDLE_SINCE_KEY QStringLiteral("IdleSinceHint")
-
 Session::Session(QObject *parent)
     : QObject(parent)
 {
