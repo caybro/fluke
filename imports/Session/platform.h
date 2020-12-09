@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDBusInterface>
+#include <QmlTypeAndRevisionsRegistration>
 
 /**
  * @brief The Platform class
@@ -10,6 +11,9 @@
 class Platform: public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
+
     /**
      * The chassis property
      *

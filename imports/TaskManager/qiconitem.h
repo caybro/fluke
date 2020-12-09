@@ -23,10 +23,12 @@
 #include <QIcon>
 #include <QQuickItem>
 #include <QVariant>
+#include <QmlTypeAndRevisionsRegistration>
 
 class QIconItem : public QQuickItem
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(IconItem)
 
     Q_PROPERTY(QVariant icon READ icon WRITE setIcon NOTIFY iconChanged)
     Q_PROPERTY(bool smooth READ smooth WRITE setSmooth NOTIFY smoothChanged)

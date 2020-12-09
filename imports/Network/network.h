@@ -1,10 +1,13 @@
 #pragma once
 
 #include <QDBusInterface>
+#include <QmlTypeAndRevisionsRegistration>
 
 class Network: public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
     Q_PROPERTY(bool wifiHWEnabled READ isWifiHWEnabled NOTIFY wifiHWEnabledChanged)
     Q_PROPERTY(bool wifiEnabled READ isWifiEnabled WRITE setWifiEnabled NOTIFY wifiEnabledChanged)

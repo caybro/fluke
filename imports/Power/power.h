@@ -1,10 +1,14 @@
 #pragma once
 
 #include <QDBusInterface>
+#include <QmlTypeAndRevisionsRegistration>
 
 class Power: public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
+
     Q_PROPERTY(bool isPresent READ isPresent NOTIFY isPresentChanged)
     Q_PROPERTY(bool onBattery READ onBattery NOTIFY onBatteryChanged)
     Q_PROPERTY(bool hasLid READ hasLid CONSTANT)

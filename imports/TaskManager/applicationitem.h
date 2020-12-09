@@ -2,12 +2,15 @@
 
 #include <QObject>
 #include <QWaylandSurface>
+#include <QmlTypeAndRevisionsRegistration>
 
 #include <XdgDesktopFile>
 
 class ApplicationItem: public QObject
 {
     Q_OBJECT
+    QML_ANONYMOUS
+
     Q_PROPERTY(bool running READ isRunning NOTIFY surfaceCountChanged)
     Q_PROPERTY(int surfaceCount READ surfaceCount NOTIFY surfaceCountChanged)
     Q_PROPERTY(bool favorite READ isFavorite WRITE setFavorite NOTIFY isFavoriteChanged)

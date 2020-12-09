@@ -1,20 +1,9 @@
-#include <QQmlExtensionPlugin>
-#include <QtQml>
+#include <QQmlEngineExtensionPlugin>
 
-#include "sound.h"
-
-class SoundPlugin : public QQmlExtensionPlugin
+class SoundPlugin : public QQmlEngineExtensionPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
-public:
-    void registerTypes(const char *uri) override
-    {
-        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.fluke.Sound"));
-
-        qmlRegisterSingletonType<Sound>(uri, 1, 0, "Sound", [](QQmlEngine*, QJSEngine*)
-                -> QObject* { return new Sound; });
-    }
+    Q_PLUGIN_METADATA(IID QQmlEngineExtensionInterface_iid)
 };
 
 #include "plugin.moc"

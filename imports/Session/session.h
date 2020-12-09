@@ -1,10 +1,14 @@
 #pragma once
 
 #include <QObject>
+#include <QmlTypeAndRevisionsRegistration>
 
 class Session: public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
+
 public:
     explicit Session(QObject * parent = nullptr);
     ~Session() = default;

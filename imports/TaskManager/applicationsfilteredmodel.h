@@ -1,10 +1,13 @@
 #pragma once
 
 #include <QSortFilterProxyModel>
+#include <QmlTypeAndRevisionsRegistration>
 
 class ApplicationsFilteredModel : public QSortFilterProxyModel
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(QString filterString READ filterString WRITE setFilterString NOTIFY filterStringChanged)
     Q_PROPERTY(bool showRunning READ showRunning WRITE setShowRunning NOTIFY showRunningChanged)
     Q_PROPERTY(bool showFavorite READ showFavorite WRITE setShowFavorite NOTIFY showFavoriteChanged)

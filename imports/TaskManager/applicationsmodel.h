@@ -1,14 +1,17 @@
 #pragma once
 
+#include "applicationitem.h"
+
 #include <QAbstractListModel>
 #include <QWaylandSurface>
 #include <QSettings>
-
-#include "applicationitem.h"
+#include <QmlTypeAndRevisionsRegistration>
 
 class ApplicationsModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Applications)
+    QML_SINGLETON
 public:
     ApplicationsModel(QObject *parent = nullptr);
     ~ApplicationsModel() override;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QmlTypeAndRevisionsRegistration>
 
 #include "device.hh"
 #include "pulseaudio.hh"
@@ -8,6 +9,9 @@
 class Sound: public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
+
     Q_PROPERTY(bool available READ available NOTIFY availableChanged)
     Q_PROPERTY(int volume READ volume WRITE setVolume NOTIFY volumeChanged)
     Q_PROPERTY(bool muted READ isMuted WRITE setMuted NOTIFY isMutedChanged)
