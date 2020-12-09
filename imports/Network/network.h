@@ -20,15 +20,14 @@ public:
 
     bool isWifiHWEnabled() const;
     bool isWifiEnabled() const;
+    void setWifiEnabled(bool enabled);
     bool isOnline() const;
     QString ssid() const;
     uint strength() const;
     QStringList accessPoints() const;
     QString activeAp() const;
 
-public slots:
-    void setWifiEnabled(bool enabled);
-    QVariantMap apData(const QString &ap) const;
+    Q_INVOKABLE QVariantMap apData(const QString &ap) const;
 
 signals:
     void wifiHWEnabledChanged();
