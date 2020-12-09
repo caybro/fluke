@@ -49,7 +49,7 @@ Q_SIGNALS:
     void onBatteryChanged(bool onBattery);
     void isLidClosedChanged(bool isLidClosed);
     void percentageChanged(double percentage);
-    void stateChanged(State state);
+    void stateChanged(Power::State state);
     void remainingTimeChanged(const QString &remainingTime);
     void iconNameChanged(const QString &iconName);
 

@@ -66,7 +66,7 @@ public:
 Q_SIGNALS:
     void iconChanged();
     void smoothChanged();
-    void stateChanged(State state);
+    void stateChanged(QIconItem::State state);
 
 protected:
     QSGNode* updatePaintNode(QSGNode* node, UpdatePaintNodeData* data) override;
