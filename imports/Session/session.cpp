@@ -1,7 +1,6 @@
 #include <QDebug>
 
 #include <QDBusConnection>
-#include <QDBusMessage>
 #include <QDBusReply>
 
 #include "session.h"
