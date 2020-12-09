@@ -121,15 +121,11 @@ ShellSurfaceItem {
             workspace.minimized(rootChrome.appId);
         }
         onSetFullscreen: {
-            workspace.fullscreen(rootChrome.appId);
-            rootChrome.xdgSurface.sendFullscreen(output ? Qt.size(output.geometry.width, output.geometry.height)
-                                                        : Qt.size(rootChrome.Window.width, rootChrome.Window.height));
             rootChrome.bufferLocked = true;
             fullscreenAnimation.start();
         }
         onUnsetFullscreen: {
             workspace.exitFullscreen(rootChrome.appId);
-            rootChrome.xdgSurface.sendUnmaximized();
             rootChrome.bufferLocked = true;
             exitFullscreenAnimation.start();
         }
@@ -208,17 +204,19 @@ ShellSurfaceItem {
             PropertyAnimation { target: rootChrome; property: "width"; duration: 80; to: rootChrome.Window.width }
             PropertyAnimation { target: rootChrome; property: "height"; duration: 80; to: rootChrome.Window.height }
         }
-        ScriptAction { script: { rootChrome.bufferLocked = false; } }
+        ScriptAction { script: { rootChrome.xdgSurface.sendFullscreen(Qt.size(rootChrome.Window.width, rootChrome.Window.height));
+                workspace.fullscreen(rootChrome.appId);
+                rootChrome.bufferLocked = false; } }
     }
 
     SequentialAnimation {
         id: exitFullscreenAnimation
+        ScriptAction { script: { rootChrome.xdgSurface.sendUnmaximized(); rootChrome.bufferLocked = false; } }
         ParallelAnimation {
             PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; from: 0 }
             PropertyAnimation { target: rootChrome; property: "width"; duration: 80; from: rootChrome.Window.width }
             PropertyAnimation { target: rootChrome; property: "height"; duration: 80; from: rootChrome.Window.height }
         }
-        ScriptAction { script: { rootChrome.bufferLocked = false; } }
     }
 
     transform: [
