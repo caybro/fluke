@@ -62,6 +62,8 @@ Pane {
                 highlighted: appId == dock.activeApp
 
                 readonly property string appId: model.appId
+                readonly property bool favorite: model.favorite
+                readonly property bool running: model.running
 
                 contentItem: ColumnLayout {
                     anchors.centerIn: parent
