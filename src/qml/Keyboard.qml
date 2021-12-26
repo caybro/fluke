@@ -1,5 +1,6 @@
-import QtQuick 2.12
-import QtQuick.VirtualKeyboard 2.12
+import QtQuick 2.15
+import QtQuick.VirtualKeyboard 2.15
+import QtQuick.VirtualKeyboard.Settings 2.15
 
 import org.fluke.Session 1.0
 

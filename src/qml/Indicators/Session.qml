@@ -33,6 +33,7 @@ ToolButton {
         active: false
         focus: visible
         y: parent.height
+        width: 300
 
         sourceComponent: Menu {
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent

@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQml.Models 2.14
-import QtWayland.Compositor 1.12
+import QtWayland.Compositor 1.15
 
 WaylandCompositor {
     id: comp

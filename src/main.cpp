@@ -1,12 +1,12 @@
-#include <QUrl>
 #include <QDebug>
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
 #include <QFontDatabase>
-#include <QTranslator>
-#include <QLibraryInfo>
+#include <QGuiApplication>
 #include <QIcon>
+#include <QLibraryInfo>
+#include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QTranslator>
+#include <QUrl>
 
 int main(int argc, char *argv[])
 {
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     qunsetenv("QT_IM_MODULE");
     //qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
 
-    QIcon::setThemeName("Adwaita");
+    QIcon::setThemeName(QStringLiteral("Adwaita"));
 
     QTranslator qtTranslator;
     qtTranslator.load(QLocale::system(), QStringLiteral("qt_"), QString(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));

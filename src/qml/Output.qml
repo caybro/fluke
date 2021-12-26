@@ -32,18 +32,18 @@ WaylandOutput {
 
     readonly property Connections _compConn: Connections {
         target: compositor
-        onSurfaceAboutToBeDestroyed: {
+        function onSurfaceAboutToBeDestroyed(surface) {
             delete viewsBySurface[surface];
         }
     }
 
     readonly property Connections _appConn: Connections {
         target: Applications
-        onApplicationQuit: {
-            if (appId == dock.activeApp) {
+        function onApplicationQuit(appId) {
+            if (appId === dock.activeApp) {
                 dock.activeApp = "";
             }
-            if (appId == workspace.fullscreenAppId) {
+            if (appId === workspace.fullscreenAppId) {
                 workspace.fullscreenAppId = "";
             }
 
@@ -293,7 +293,7 @@ WaylandOutput {
         }
 
         Shortcut {
-            sequence: "Ctrl+Alt+T"
+            sequences: ["Meta+T","Ctrl+Alt+T"]
             context: Qt.ApplicationShortcut
             onActivated: {
                 Runner.runCommand("konsole");

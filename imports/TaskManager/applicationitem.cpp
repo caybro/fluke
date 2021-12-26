@@ -54,7 +54,7 @@ void ApplicationItem::launch(const QStringList &urls)
     if (Q_LIKELY(m_desktopFile)) {
         QStringList execLine = m_desktopFile->expandExecString(urls);
 
-        QProcess *proc = new QProcess(this);
+        auto proc = new QProcess(this);
         connect(proc, &QProcess::started, this, [this, proc]() {
             if (proc->state() == QProcess::Running) {
                 proc->setProperty("pid", proc->processId());
