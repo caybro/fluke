@@ -80,9 +80,10 @@ ToolButton {
 
                 root.icon.source = "http://openweathermap.org/img/wn/%1@2x.png".arg(result.iconID);
 
-                root.text = qsTr("%1° %2 (%3)").arg(temperature).arg(priv.imperialUnits ? "F" : "C").arg(result.weatherInfo);
+                root.text = qsTr("%1° %2").arg(temperature).arg(priv.imperialUnits ? "F" : "C")
 
-                weather.text = qsTr("Temperature: %1 °%2").arg(temperature).arg(priv.imperialUnits ? "F" : "C");
+                weather.append(qsTr("Info: %1").arg(result.weatherInfo));
+                weather.append(qsTr("Temperature: %1 °%2").arg(temperature).arg(priv.imperialUnits ? "F" : "C"));
                 weather.append(qsTr("Humidity: %1 %").arg(result.humidity));
                 weather.append(qsTr("Precipitation: %1").arg(result.precipitation));
                 weather.append(qsTr("Wind: %1").arg(result.wind));
