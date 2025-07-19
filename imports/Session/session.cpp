@@ -5,10 +5,10 @@
 
 #include "session.h"
 
-#define LOGIN1_SERVICE QStringLiteral("org.freedesktop.login1")
-#define LOGIN1_PATH QStringLiteral("/org/freedesktop/login1")
-#define LOGIN1_IFACE QStringLiteral("org.freedesktop.login1.Manager")
-#define LOGIN1_SESSION_IFACE QStringLiteral("org.freedesktop.login1.Session")
+constexpr auto LOGIN1_SERVICE = "org.freedesktop.login1";
+constexpr auto LOGIN1_PATH = "/org/freedesktop/login1";
+constexpr auto LOGIN1_IFACE = "org.freedesktop.login1.Manager";
+constexpr auto LOGIN1_SESSION_AUTO_PATH = "/org/freedesktop/login1/session/auto";
 
 Session::Session(QObject *parent)
     : QObject(parent)
@@ -61,6 +61,11 @@ bool Session::canLock() const
 {
     // FIXME real locking
     return true;
+}
+
+void Session::logout()
+{
+    makeLogin1Call(QStringLiteral("TerminateSession"), {LOGIN1_SESSION_AUTO_PATH});
 }
 
 void Session::reboot()

@@ -1,5 +1,5 @@
-
 #include "callbacks.hh"
+#include "pulseaudio.hh"
 
 void state_cb(pa_context* context, void* raw) {
     Pulseaudio* pulse = (Pulseaudio*) raw;

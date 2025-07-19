@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QDBusInterface>
-#include <QmlTypeAndRevisionsRegistration>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 /**
  * @brief The Platform class

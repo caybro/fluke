@@ -1,9 +1,8 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
-import QtQuick.Controls.Material 2.12
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.fluke.Network 1.0
+import org.fluke.Network
 
 ToolButton {
     id: root
@@ -33,15 +32,21 @@ ToolButton {
     }
 
     function indicatorIcon(strength) {
-        if (!Network.wifiEnabled)
+        if (Network.ssid === "ethernet")
+            return "qrc:/icons/network/ic_ethernet.svg"
+        else if (!Network.wifiEnabled)
             return "qrc:/icons/network/ic_signal_wifi_off_24px.svg"
         else if (Network.wifiEnabled && !Network.ssid)
             return "qrc:/icons/network/ic_signal_wifi_statusbar_not_connected_26x24px.svg"
-        else if (Network.ssid && !Network.online) {
+        else if (Network.ssid && !Network.online)
             return "qrc:/icons/network/ic_signal_wifi_statusbar_connected_no_internet_%1_26x24px.svg".arg(getBars(strength));
-        } else if (Network.ssid && Network.online) {
+        else if (Network.ssid && Network.online)
             return "qrc:/icons/network/ic_signal_wifi_statusbar_%1_bar_26x24px.svg".arg(getBars(strength));
-        }
+    }
+
+    QtObject {
+        id: d
+        readonly property int popupWidth: 300
     }
 
     Loader {
@@ -49,6 +54,7 @@ ToolButton {
         active: false
         focus: visible
         y: parent.height
+        x: parent.width - d.popupWidth
 
         sourceComponent: Popup {
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
@@ -71,7 +77,7 @@ ToolButton {
                 }
 
                 ListView {
-                    Layout.preferredWidth: 300
+                    Layout.preferredWidth: d.popupWidth
                     Layout.preferredHeight: 250
                     model: Network.accessPoints
                     clip: true

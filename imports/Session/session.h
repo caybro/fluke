@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include <QmlTypeAndRevisionsRegistration>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 class Session: public QObject
 {
@@ -42,6 +42,11 @@ public:
      * @return whether the system is capable of locking the session
      */
     Q_INVOKABLE bool canLock() const;
+
+    /**
+     * Logout/terminate the current session
+     */
+    Q_INVOKABLE void logout();
 
     /**
      * Reboot the system.

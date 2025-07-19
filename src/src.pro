@@ -3,7 +3,7 @@ TARGET = fluke
 
 QT += gui qml waylandcompositor
 QT -= widgets
-CONFIG += c++14 qtquickcompiler lrelease embed_translations
+CONFIG += c++17 qtquickcompiler lrelease embed_translations
 
 SOURCES += main.cpp
 

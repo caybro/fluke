@@ -5,7 +5,7 @@
 #include <QAbstractListModel>
 #include <QWaylandSurface>
 #include <QSettings>
-#include <QmlTypeAndRevisionsRegistration>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 class ApplicationsModel : public QAbstractListModel
 {
@@ -13,7 +13,7 @@ class ApplicationsModel : public QAbstractListModel
     QML_NAMED_ELEMENT(Applications)
     QML_SINGLETON
 public:
-    ApplicationsModel(QObject *parent = nullptr);
+    explicit ApplicationsModel(QObject *parent = nullptr);
     ~ApplicationsModel() override;
 
 protected:

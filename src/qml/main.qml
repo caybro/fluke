@@ -1,14 +1,16 @@
-import QtQuick 2.12
-import QtQml.Models 2.14
-import QtWayland.Compositor 1.15
+import QtQuick
+
+import QtWayland.Compositor
+import QtWayland.Compositor.XdgShell
 
 WaylandCompositor {
     id: comp
     useHardwareIntegrationExtension: true
+    socketName: "wayland-fluke"
 
     Instantiator {
         id: screens
-        model: Qt.application.screens
+        model: debugMode ? Qt.application.screens[0] : Qt.application.screens
         delegate: Output {
             compositor: comp
             screen: modelData

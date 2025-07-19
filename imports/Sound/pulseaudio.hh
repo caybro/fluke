@@ -1,5 +1,4 @@
-#ifndef PULSEAUDIO_H
-#define PULSEAUDIO_H
+#pragma once
 
 /*
  * Copyright (C) 2011 Clément Démoulins <clement@archivel.fr>
@@ -24,8 +23,6 @@
 #include <list>
 
 #include "device.hh"
-#include "callbacks.hh"
-
 
 class ServerInfo {
 public:
@@ -128,5 +125,3 @@ public:
      */
     void set_mute(Device& device, bool mute);
 };
-
-#endif

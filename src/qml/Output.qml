@@ -1,13 +1,12 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Window 2.12
-import QtWayland.Compositor 1.3
-import QtQuick.Controls.Material 2.12
+import QtCore
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
-import Qt.labs.settings 1.1
+import QtWayland.Compositor
 
-import org.fluke.TaskManager 1.0
-import org.fluke.Session 1.0
+import org.fluke.TaskManager
+import org.fluke.Session
 
 WaylandOutput {
     id: output
@@ -188,7 +187,10 @@ WaylandOutput {
                 onLogout: {
                     systemDialog.title = qsTr("Log Out");
                     systemDialog.text = qsTr("Do you really want to logout?");
-                    systemDialog.acceptedFunctionCallback = function() { Qt.quit() } // TODO also quit the session
+                    systemDialog.acceptedFunctionCallback = function() {
+                        // @disable-check M127
+                        output.isNestedCompositor ? Qt.quit() : Session.logout()
+                    }
                     systemDialog.open();
                 }
                 onSuspend: {
@@ -270,9 +272,13 @@ WaylandOutput {
                 onShowLauncher: appLauncher.show()
             }
 
-            Loader {
-                anchors.fill: parent
-                source: "Keyboard.qml"
+            // Loader {
+            //     anchors.fill: parent
+            //     source: "Keyboard.qml"
+            // }
+
+            Keyboard {
+
             }
 
             WaylandCursorItem {

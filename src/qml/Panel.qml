@@ -1,11 +1,11 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Controls.Material 2.12
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
 import "Indicators" as Indicators
 
-import org.fluke.Sound 1.0
+import org.fluke.Sound
 
 ToolBar {
     id: panel
@@ -33,8 +33,8 @@ ToolBar {
     RowLayout {
         id: layout
         anchors.fill: parent
-        anchors.leftMargin: 5
-        anchors.rightMargin: 5
+        anchors.leftMargin: 6
+        anchors.rightMargin: 6
 
         ToolButton {
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter

@@ -1,4 +1,4 @@
 TEMPLATE = subdirs
 SUBDIRS += imports src
-CONFIG += ordered
+src.depends = imports # build plugins/libs first
 DEFINES *= QT_USE_QSTRINGBUILDER

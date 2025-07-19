@@ -1,10 +1,10 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12 as QQC
-
-import Qt.labs.platform 1.1 as Platform
+import QtCore
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Dialogs
 
 Item {
-    id: workspace
+    id: root
 
     property bool appLauncherVisible
     property string fullscreenAppId
@@ -30,43 +30,30 @@ Item {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.RightButton
-        onClicked: {
-            shellContextMenu.x = mouse.x;
-            shellContextMenu.y = mouse.y;
-            shellContextMenu.open();
-        }
-    }
-
-    QQC.Menu {
-        id: shellContextMenu
-
-        QQC.MenuItem {
+    ContextMenu.menu: Menu {
+        MenuItem {
             icon.source: "qrc:/icons/material/wallpaper-24px.svg"
             text: qsTr("Select Wallpaper...")
             onTriggered: wallpaperDialog.open()
         }
 
-        QQC.MenuItem {
+        MenuItem {
             icon.source: "qrc:/icons/material/apps-24px.svg"
             text: qsTr("Open Launcher")
-            onTriggered: workspace.showLauncher()
+            onTriggered: root.showLauncher()
         }
-        QQC.MenuItem {
-            icon.source: "qrc:/icons/material/login-24px.svg"
+        MenuItem {
+            icon.source: "qrc:/icons/material/logout-24px.svg"
             text: qsTr("Logout...")
-            onTriggered: workspace.logout()
+            onTriggered: root.logout()
         }
     }
 
-    Platform.FileDialog {
+    FileDialog {
         id: wallpaperDialog
-        fileMode: Platform.FileDialog.OpenFile
-        folder: "file:///usr/share/wallpapers" //Platform.StandardPaths.standardLocations(Platform.StandardPaths.PicturesLocation)[0]
+        currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
         title: qsTr("Change Wallpaper")
         nameFilters: [qsTr("Image files (*.jpg *.png *.jpeg)")]
-        onAccepted: workspace.changeWallpaper(file)
+        onAccepted: root.changeWallpaper(selectedFile)
     }
 }

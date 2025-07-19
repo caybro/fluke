@@ -23,7 +23,7 @@
 #include <QIcon>
 #include <QQuickItem>
 #include <QVariant>
-#include <QmlTypeAndRevisionsRegistration>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 class QIconItem : public QQuickItem
 {
@@ -72,7 +72,7 @@ Q_SIGNALS:
 
 protected:
     QSGNode* updatePaintNode(QSGNode* node, UpdatePaintNodeData* data) override;
-    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
+    void geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry) override;
 
 private:
     QIcon m_icon;

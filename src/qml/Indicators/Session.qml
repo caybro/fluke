@@ -1,19 +1,15 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
-import QtQuick.Window 2.2
-import QtQuick.Controls.Material 2.12
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import Qt.labs.settings 1.0
-
-import org.fluke.Session 1.0
+import org.fluke.Session
 
 ToolButton {
     id: indicatorSession
     icon.width: 16
     icon.height: 16
-    icon.source: Platform.chassis == "laptop" ? "qrc:/icons/material/laptop-24px.svg"
-                                              : "qrc:/icons/material/desktop_windows-24px.svg";
+    icon.source: Platform.chassis === "laptop" ? "qrc:/icons/material/laptop-24px.svg"
+                                               : "qrc:/icons/material/desktop_windows-24px.svg";
     down: popupLoader.item && popupLoader.item.visible
     hoverEnabled: true
 
@@ -33,10 +29,10 @@ ToolButton {
         active: false
         focus: visible
         y: parent.height
-        width: 300
 
         sourceComponent: Menu {
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+            width: 280
 
             MenuItem {
                 checkable: true
@@ -69,7 +65,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Logout")
-                icon.source: "qrc:/icons/material/login-24px.svg"
+                icon.source: "qrc:/icons/material/logout-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.logout()
@@ -86,7 +82,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Restart")
-                icon.source: "qrc:/icons/material/autorenew-24px.svg"
+                icon.source: "qrc:/icons/material/restart-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.reboot()
@@ -95,7 +91,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Shutdown")
-                icon.source: "qrc:/icons/material/power_settings_new-24px.svg"
+                icon.source: "qrc:/icons/material/shutdown-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.shutdown()

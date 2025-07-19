@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QSortFilterProxyModel>
-#include <QmlTypeAndRevisionsRegistration>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 class ApplicationsFilteredModel : public QSortFilterProxyModel
 {

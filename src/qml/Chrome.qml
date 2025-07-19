@@ -1,8 +1,8 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtWayland.Compositor 1.3
+import QtQuick
+import QtQuick.Window
+import QtWayland.Compositor
 
-import org.fluke.TaskManager 1.0
+import org.fluke.TaskManager
 
 ShellSurfaceItem {
     id: rootChrome

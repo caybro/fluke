@@ -10,7 +10,6 @@
 
 int main(int argc, char *argv[])
 {
-    qputenv("QT_IM_MODULE", QByteArrayLiteral("qtvirtualkeyboard"));
     qputenv("QT_QUICK_CONTROLS_STYLE", QByteArrayLiteral("Material"));
     qputenv("QT_QUICK_CONTROLS_MATERIAL_ACCENT", QByteArrayLiteral("Blue"));
 
@@ -21,42 +20,53 @@ int main(int argc, char *argv[])
     // ShareOpenGLContexts is needed for using the threaded renderer
     // on Nvidia EGLStreams
     QGuiApplication::setAttribute(Qt::AA_ShareOpenGLContexts, true);
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QGuiApplication app(argc, argv);
     app.setOrganizationName(QStringLiteral("caybro"));
     app.setApplicationDisplayName(QStringLiteral("Fluke"));
-    app.setApplicationVersion(QStringLiteral("0.0.1"));
+    app.setApplicationVersion(QStringLiteral("0.0.2"));
+
+    qputenv("QT_IM_MODULES", QByteArrayLiteral("qtvirtualkeyboard"));
+
+    qputenv("XDG_CURRENT_DESKTOP", QByteArrayLiteral("fluke"));
+    qputenv("QT_IM_MODULES", "qtvirtualkeyboard");
 
     qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("wayland"));
     qunsetenv("QT_IM_MODULE");
-    //qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
+    qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
 
     QIcon::setThemeName(QStringLiteral("Adwaita"));
 
     QTranslator qtTranslator;
-    qtTranslator.load(QLocale::system(), QStringLiteral("qt_"), QString(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    app.installTranslator(&qtTranslator);
+    if (qtTranslator.load(QLocale::system(), QStringLiteral("qt_"), QString(), QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+      app.installTranslator(&qtTranslator);
 
     QTranslator appTrans;
-    appTrans.load(QLocale(), QStringLiteral("fluke"), QStringLiteral("_"), QStringLiteral(":/translations/"));
-    app.installTranslator(&appTrans);
+    if (appTrans.load(QLocale(), QStringLiteral("fluke"), QStringLiteral("_"), QStringLiteral(":/translations/")))
+      app.installTranslator(&appTrans);
 
-    QFontDatabase fd;
-    if (!fd.families().contains(QLatin1String("FontAwesomeSolid5"))) {
+    if (!QFontDatabase::families().contains(QLatin1String("FontAwesomeSolid5"))) {
         if (QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/FontAwesomeSolid5.otf")) == -1) {
             qWarning("Failed to load FontAwesome from resources");
         }
     }
 
     QQmlApplicationEngine appEngine;
-    QQmlContext *context = appEngine.rootContext();
+    auto context = appEngine.rootContext();
 #ifdef QT_QML_DEBUG
     context->setContextProperty(QStringLiteral("debugMode"), true);
 #else
     context->setContextProperty(QStringLiteral("debugMode"), false);
 #endif
-    appEngine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+
+    const auto url = QUrl(QStringLiteral("qrc:/qml/main.qml"));
+
+    QObject::connect(&appEngine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url](QObject *obj, const QUrl &objUrl) {
+                       if (!obj && url == objUrl)
+                         QCoreApplication::exit(EXIT_FAILURE);
+                     }, Qt::QueuedConnection);
+
+    appEngine.load(url);
 
     return app.exec();
 }

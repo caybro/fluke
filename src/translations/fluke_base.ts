@@ -4,57 +4,43 @@
 <context>
     <name>ApplicationLauncher</name>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="140"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="134"/>
         <source>Type to search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="188"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="185"/>
         <source>All</source>
         <comment>all applications</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="192"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="189"/>
         <source>Running</source>
         <comment>running applications</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="196"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="193"/>
         <source>Favorite</source>
         <comment>favorite applications</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ContextMenu</name>
-    <message>
-        <location filename="../qml/ContextMenu.qml" line="15"/>
-        <source>Favorite</source>
-        <comment>favorite application</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/ContextMenu.qml" line="25"/>
-        <source>Quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DateTime</name>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="84"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="74"/>
         <source>Go to today&apos;s date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="147"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="135"/>
         <source>Display date in clock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/DateTime.qml" line="157"/>
+        <location filename="../qml/Indicators/DateTime.qml" line="145"/>
         <source>Display seconds in clock</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62,25 +48,39 @@
 <context>
     <name>Dock</name>
     <message>
-        <location filename="../qml/Dock.qml" line="127"/>
+        <location filename="../qml/Dock.qml" line="116"/>
         <source>Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LauncherContextMenu</name>
+    <message>
+        <location filename="../qml/LauncherContextMenu.qml" line="15"/>
+        <source>Favorite</source>
+        <comment>favorite application</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/LauncherContextMenu.qml" line="25"/>
+        <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Network</name>
     <message>
-        <location filename="../qml/Indicators/Network.qml" line="18"/>
+        <location filename="../qml/Indicators/Network.qml" line="17"/>
         <source>Network: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Network.qml" line="18"/>
+        <location filename="../qml/Indicators/Network.qml" line="17"/>
         <source>Offline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Network.qml" line="62"/>
+        <location filename="../qml/Indicators/Network.qml" line="68"/>
         <source>WiFi Enabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -88,42 +88,42 @@
 <context>
     <name>Output</name>
     <message>
-        <location filename="../qml/Output.qml" line="193"/>
+        <location filename="../qml/Output.qml" line="188"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="194"/>
+        <location filename="../qml/Output.qml" line="189"/>
         <source>Do you really want to logout?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="199"/>
+        <location filename="../qml/Output.qml" line="197"/>
         <source>Suspend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="200"/>
+        <location filename="../qml/Output.qml" line="198"/>
         <source>Do you really want to suspend the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="208"/>
+        <location filename="../qml/Output.qml" line="206"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="209"/>
+        <location filename="../qml/Output.qml" line="207"/>
         <source>Do you really want to restart the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="217"/>
+        <location filename="../qml/Output.qml" line="215"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="218"/>
+        <location filename="../qml/Output.qml" line="216"/>
         <source>Do you really want to turn off the computer?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -131,7 +131,7 @@
 <context>
     <name>Panel</name>
     <message>
-        <location filename="../qml/Panel.qml" line="45"/>
+        <location filename="../qml/Panel.qml" line="44"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -167,42 +167,42 @@
 <context>
     <name>Session</name>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="21"/>
+        <location filename="../qml/Indicators/Session.qml" line="19"/>
         <source>Session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="48"/>
+        <location filename="../qml/Indicators/Session.qml" line="43"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="57"/>
+        <location filename="../qml/Indicators/Session.qml" line="52"/>
         <source>Dark Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="67"/>
+        <location filename="../qml/Indicators/Session.qml" line="56"/>
         <source>Autohide Dock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="73"/>
+        <location filename="../qml/Indicators/Session.qml" line="67"/>
         <source>Logout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="81"/>
+        <location filename="../qml/Indicators/Session.qml" line="75"/>
         <source>Sleep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="90"/>
+        <location filename="../qml/Indicators/Session.qml" line="84"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Session.qml" line="99"/>
+        <location filename="../qml/Indicators/Session.qml" line="93"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -220,7 +220,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Sound.qml" line="94"/>
+        <location filename="../qml/Indicators/Sound.qml" line="97"/>
         <source>Toggle mute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -228,37 +228,42 @@
 <context>
     <name>Weather</name>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="83"/>
-        <source>%1°&#x2009;%2 (%3)</source>
+        <location filename="../qml/Indicators/Weather.qml" line="94"/>
+        <source>%1°&#x2009;%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="85"/>
+        <location filename="../qml/Indicators/Weather.qml" line="96"/>
+        <source>Info: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Indicators/Weather.qml" line="97"/>
         <source>Temperature: %1&#x2009;°%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="86"/>
+        <location filename="../qml/Indicators/Weather.qml" line="98"/>
         <source>Humidity: %1&#x2009;%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="87"/>
+        <location filename="../qml/Indicators/Weather.qml" line="99"/>
         <source>Precipitation: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="88"/>
+        <location filename="../qml/Indicators/Weather.qml" line="100"/>
         <source>Wind: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="89"/>
+        <location filename="../qml/Indicators/Weather.qml" line="101"/>
         <source>Location: %1, %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="93"/>
+        <location filename="../qml/Indicators/Weather.qml" line="105"/>
         <source>Error getting weather info
 %1</source>
         <translation type="unfinished"></translation>
@@ -267,27 +272,27 @@
 <context>
     <name>Workspace</name>
     <message>
-        <location filename="../qml/Workspace.qml" line="50"/>
+        <location filename="../qml/Workspace.qml" line="36"/>
         <source>Select Wallpaper...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Workspace.qml" line="58"/>
+        <location filename="../qml/Workspace.qml" line="42"/>
         <source>Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Workspace.qml" line="65"/>
+        <location filename="../qml/Workspace.qml" line="47"/>
         <source>Logout...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Workspace.qml" line="74"/>
+        <location filename="../qml/Workspace.qml" line="55"/>
         <source>Change Wallpaper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Workspace.qml" line="75"/>
+        <location filename="../qml/Workspace.qml" line="56"/>
         <source>Image files (*.jpg *.png *.jpeg)</source>
         <translation type="unfinished"></translation>
     </message>

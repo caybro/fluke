@@ -2,7 +2,7 @@
 
 #include <QObject>
 #include <QWaylandSurface>
-#include <QmlTypeAndRevisionsRegistration>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 #include <XdgDesktopFile>
 

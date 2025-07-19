@@ -1,7 +1,7 @@
 TEMPLATE = lib
 TARGET  = soundplugin
 QT += qml
-CONFIG += qt plugin c++11 link_pkgconfig
+CONFIG += qt plugin c++17 link_pkgconfig
 PKGCONFIG += libpulse libpulse-mainloop-glib
 
 CONFIG += qmltypes

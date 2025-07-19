@@ -1,7 +1,7 @@
 TEMPLATE = lib
 TARGET  = sessionplugin
 QT += qml dbus
-CONFIG += qt plugin c++11
+CONFIG += qt plugin c++17
 
 CONFIG += qmltypes
 QML_IMPORT_NAME = org.fluke.Session

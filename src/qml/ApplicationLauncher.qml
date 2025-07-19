@@ -1,9 +1,9 @@
-import QtQuick 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.Material 2.12
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
-import org.fluke.TaskManager 1.0
+import org.fluke.TaskManager
 
 Pane {
     id: root
@@ -98,18 +98,9 @@ Pane {
             ToolTip.text: model.comment
             ToolTip.visible: hovered && model.comment
             ToolTip.delay: 500
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.RightButton | Qt.LeftButton
-                onPressed: {
-                    if (mouse.buttons == Qt.RightButton) {
-                        contextMenu.currentItem = appDelegate;
-                        contextMenu.open();
-                        mouse.accepted = true;
-                    } else {
-                        mouse.accepted = false;
-                    }
-                }
+
+            ContextMenu.menu: LauncherContextMenu {
+                currentItem: appDelegate
             }
 
             onClicked: {
@@ -127,10 +118,6 @@ Pane {
                 PropertyAction { target: appDelegate; property: "GridView.delayRemove"; value: false }
             }
         }
-    }
-
-    ContextMenu {
-        id: contextMenu
     }
 
     ColumnLayout {

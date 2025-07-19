@@ -1,5 +1,7 @@
 #include <QDebug>
 
+#include <XdgMimeApps>
+
 #include "applicationsmodel.h"
 
 ApplicationsModel::ApplicationsModel(QObject *parent)
@@ -52,7 +54,9 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
                         return genericName;
                     return item->desktopFile()->comment();
                 }
-                case ApplicationItem::RoleIcon: return item->desktopFile()->iconName();
+                case ApplicationItem::RoleIcon:
+                case Qt::DecorationRole:
+                  return item->desktopFile()->iconName();
                 case ApplicationItem::RoleKeywords: return item->desktopFile()->localizedValue(QStringLiteral("Keywords")).toStringList();
                 case ApplicationItem::RoleRunning: return item->isRunning();
                 case ApplicationItem::RoleFavorite: return item->isFavorite();
@@ -148,8 +152,9 @@ void ApplicationsModel::stopApplication(const QString &appId)
 void ApplicationsModel::init()
 {
     beginResetModel();
-    const auto desktopFiles = XdgDesktopFileCache::getAllFiles();
-    for (XdgDesktopFile * desktopFile: desktopFiles) {
+    XdgMimeApps apps;
+    const auto desktopFiles = apps.allApps();
+    for (auto desktopFile: desktopFiles) {
         if (desktopFile->type() == XdgDesktopFile::ApplicationType
                 && desktopFile->isValid()
                 && !desktopFile->value(QStringLiteral("NoDisplay")).toBool()) {

@@ -1,8 +1,8 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.fluke.Sound 1.0
+import org.fluke.Sound
 
 ToolButton {
     id: indicatorSound
@@ -35,7 +35,7 @@ ToolButton {
     }
 
     function indicatorTooltip() {
-        if (Sound.volume == 0 || Sound.muted) {
+        if (Sound.volume === 0 || Sound.muted) {
             return qsTr("Sound muted")
         } else {
             return qsTr("Volume: %1%").arg(Sound.volume)
@@ -60,9 +60,12 @@ ToolButton {
         onClicked: {
             toggleMute();
         }
-        onWheel: {
-            wheel.angleDelta.y > 0 ? increaseVolume() : decreaseVolume();
-            wheel.accepted = true;
+        onWheel: function(wheel) {
+            if (wheel.angleDelta.y > 0)
+                increaseVolume()
+            else
+                decreaseVolume()
+            wheel.accepted = true
         }
     }
 

@@ -1,9 +1,12 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.13
-import QtQuick.Layouts 1.3
-import QtQuick.Controls.Material 2.12
-import QtQuick.XmlListModel 2.12
-import QtPositioning 5.12
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+
+import QtQml.XmlListModel
+
+import QtPositioning
+
+import org.fluke.TaskManager
 
 ToolButton {
     id: root
@@ -19,8 +22,10 @@ ToolButton {
         interval: 60 * 1000 * 30 // 30 minutes
         running: true
         repeat: true
-        onTriggered: Qt.callLater(posSource.update); // triggers updateWeather()
+        onTriggered: updateWeather()
     }
+
+    Component.onCompleted: Qt.callLater(posSource.update) // triggers updateWeather()
 
     BusyIndicator {
         anchors.fill: parent
@@ -34,6 +39,7 @@ ToolButton {
             .arg(priv.lat).arg(priv.lon).arg(priv.owmKey)
             .arg(priv.imperialUnits ? "imperial" : "metric")
             .arg(Qt.locale().name)
+            console.warn("!!! W API:", currentWeather.source)
             if (currentWeather.status !== XmlListModel.Loading) {
                 currentWeather.reload();
             }
@@ -46,9 +52,13 @@ ToolButton {
 
         onPositionChanged: {
             const coord = position.coordinate;
-            priv.lat = coord.latitude;
-            priv.lon = coord.longitude;
-            updateWeather();
+            if (coord.isValid && coord.latitude !== priv.lat && coord.longitude !== priv.lon) {
+                priv.lat = coord.latitude;
+                priv.lon = coord.longitude;
+                console.warn("!!! POS CHANGED:", priv.lat, priv.lon)
+                updateWeather();
+            } else
+                console.warn("!!! Acquired invalid position")
         }
     }
 
@@ -56,26 +66,26 @@ ToolButton {
         id: priv
         readonly property string owmKey: "6cb9a165bb3bf6147795a3dfab474b59"
         readonly property bool imperialUnits: Qt.locale().measurementSystem === Locale.ImperialUSSystem
-        property real lat
-        property real lon
+        property double lat
+        property double lon
     }
 
     XmlListModel {
         id: currentWeather
         query: "/current"
 
-        XmlRole { name: "city"; query: "city/@name/string()" }
-        XmlRole { name: "country"; query: "city/country/string()" }
-        XmlRole { name: "temperature"; query: "temperature/@value/string()" }
-        XmlRole { name: "weatherInfo"; query: "weather/@value/string()" }
-        XmlRole { name: "humidity"; query: "humidity/@value/string()" }
-        XmlRole { name: "precipitation"; query: "precipitation/@mode/string()" }
-        XmlRole { name: "wind"; query: "wind/speed/@name/string()" }
-        XmlRole { name: "iconID"; query: "weather/@icon/string()" }
+        XmlListModelRole { name: "city"; elementName: "city"; attributeName: "name" }
+        XmlListModelRole { name: "country"; elementName: "city/country" }
+        XmlListModelRole { name: "temperature"; elementName: "temperature"; attributeName: "value" }
+        XmlListModelRole { name: "weatherInfo"; elementName: "weather"; attributeName: "value" }
+        XmlListModelRole { name: "humidity"; elementName: "humidity"; attributeName: "value" }
+        XmlListModelRole { name: "precipitation"; elementName: "precipitation"; attributeName: "mode" }
+        XmlListModelRole { name: "wind"; elementName: "wind/speed"; attributeName: "name" }
+        XmlListModelRole { name: "iconID"; elementName: "weather"; attributeName: "icon" }
 
         onStatusChanged: {
             if (status === XmlListModel.Ready && count > 0) {
-                var result = get(0);
+                var result = ModelUtils.get(currentWeather, 0);
                 var temperature = Math.round(result.temperature);
 
                 root.icon.source = "http://openweathermap.org/img/wn/%1@2x.png".arg(result.iconID);
@@ -107,10 +117,12 @@ ToolButton {
             anchors.fill: parent
 
             // weather
-            TextEdit {
+            TextArea {
+                Layout.fillWidth: true
+                Layout.topMargin: 8
                 id: weather
                 readOnly: true
-                color: Material.foreground
+                background: null
             }
         }
     }

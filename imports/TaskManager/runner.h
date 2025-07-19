@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include <QmlTypeAndRevisionsRegistration>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 class Runner: public QObject
 {

@@ -158,11 +158,11 @@ QSGNode* QIconItem::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeDa
     return node;
 }
 
-void QIconItem::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+void QIconItem::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     if (newGeometry.size() != oldGeometry.size()) {
         m_changed = true;
         update();
     }
-    QQuickItem::geometryChanged(newGeometry, oldGeometry);
+    QQuickItem::geometryChange(newGeometry, oldGeometry);
 }

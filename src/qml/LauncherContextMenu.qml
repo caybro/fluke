@@ -1,7 +1,7 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick
+import QtQuick.Controls
 
-import org.fluke.TaskManager 1.0
+import org.fluke.TaskManager
 
 Menu {
     id: contextMenu
@@ -23,17 +23,19 @@ Menu {
     MenuItem {
         id: quitItem
         text: qsTr("Quit")
-        visible: contextMenu.visible && contextMenu.currentItem && contextMenu.currentItem.running
+        enabled: contextMenu.visible && contextMenu.currentItem && contextMenu.currentItem.running
+        //height: visible ? implicitHeight : 0
         onClicked: {
             Applications.stopApplication(contextMenu.currentItem.appId);
         }
     }
 
-    onAboutToShow: {
-        if (currentItem.running) {
-            addItem(quitItem);
-        } else {
-            removeItem(contextMenu.contentChildren.length - 1);
-        }
-    }
+    // FIXME hide disabled items?
+    // onAboutToShow: {
+    //     if (currentItem.running) {
+    //         addItem(quitItem);
+    //     } else {
+    //         removeItem(contextMenu.contentChildren.length - 1);
+    //     }
+    // }
 }

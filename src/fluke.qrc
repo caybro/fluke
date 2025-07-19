@@ -13,7 +13,7 @@
         <file>qml/Indicators/Sound.qml</file>
         <file>translations/fluke_cs.qm</file>
         <file>qml/ApplicationLauncher.qml</file>
-        <file>qml/ContextMenu.qml</file>
+        <file>qml/LauncherContextMenu.qml</file>
         <file>qml/Workspace.qml</file>
         <file>qml/DefaultAnimation.qml</file>
         <file>fonts/FontAwesomeSolid5.otf</file>
@@ -52,16 +52,17 @@
         <file>icons/network/ic_signal_wifi_statusbar_connected_no_internet_4_26x24px.svg</file>
         <file>icons/network/ic_signal_wifi_statusbar_not_connected_26x24px.svg</file>
         <file>icons/material/apps-24px.svg</file>
-        <file>icons/material/autorenew-24px.svg</file>
+        <file>icons/material/restart-24px.svg</file>
         <file>icons/material/brightness_low-24px.svg</file>
         <file>icons/material/chevron_left-24px.svg</file>
         <file>icons/material/chevron_right-24px.svg</file>
         <file>icons/material/desktop_windows-24px.svg</file>
         <file>icons/material/laptop-24px.svg</file>
-        <file>icons/material/login-24px.svg</file>
-        <file>icons/material/power_settings_new-24px.svg</file>
+        <file>icons/material/logout-24px.svg</file>
+        <file>icons/material/shutdown-24px.svg</file>
         <file>icons/material/brightness_3-24px.svg</file>
         <file>icons/material/fullscreen-24px.svg</file>
         <file>icons/material/wallpaper-24px.svg</file>
+        <file>icons/network/ic_ethernet.svg</file>
     </qresource>
 </RCC>

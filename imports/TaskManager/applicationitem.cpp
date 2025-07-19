@@ -1,8 +1,5 @@
 #include <QDebug>
-#include <QFileInfo>
 #include <QProcess>
-
-#include <QWaylandClient>
 
 #include "applicationitem.h"
 
@@ -10,18 +7,17 @@ ApplicationItem::ApplicationItem(const QString &appId, QObject *parent)
     : QObject(parent),
       m_appId(appId)
 {
-    m_desktopFile = XdgDesktopFileCache::getFile(appId + QStringLiteral(".desktop"));
-    if (!m_desktopFile) {
-        qWarning() << "Could not find desktop file with appId:" << appId;
-    }
+  m_desktopFile = new XdgDesktopFile(XdgDesktopFile::ApplicationType, appId);
+  if (!m_desktopFile->isValid()) {
+    qWarning() << "Could not find desktop file with appId:" << appId;
+  }
 }
 
 ApplicationItem::ApplicationItem(XdgDesktopFile *desktopFile, QObject *parent)
     : QObject(parent),
       m_desktopFile(desktopFile)
 {
-    QFileInfo fi(m_desktopFile->fileName());
-    m_appId = fi.completeBaseName();
+  m_appId = XdgDesktopFile::id(m_desktopFile->fileName());
 }
 
 QString ApplicationItem::appId() const

@@ -1,8 +1,8 @@
-import QtQuick 2.15
-import QtQuick.VirtualKeyboard 2.15
-import QtQuick.VirtualKeyboard.Settings 2.15
+import QtQuick
+import QtQuick.VirtualKeyboard
+import QtQuick.VirtualKeyboard.Settings
 
-import org.fluke.Session 1.0
+import org.fluke.Session
 
 InputPanel {
     opacity: active ? 1.0 : 0.0

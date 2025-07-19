@@ -1,8 +1,7 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
-import Qt.labs.calendar 1.0
-import QtQuick.Controls.Material 2.12
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
 ToolButton {
     id: indicatorDateTime
@@ -13,13 +12,6 @@ ToolButton {
     property bool showDate: false
     property bool showSeconds: false
 
-    contentItem: Label { // get rid of the stupid UPPERCASE text :/
-        text: indicatorDateTime.text
-        font: indicatorDateTime.font
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-    }
-
     Timer {
         id: timer
         interval: 1000
@@ -27,13 +19,13 @@ ToolButton {
         repeat: true
         triggeredOnStart: true
         onTriggered: {
-            indicatorDateTime.text = (dateSwitch.checked ? Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate) + ", " : "") +
+            indicatorDateTime.text = (dateSwitch.checked ? Qt.formatDate(new Date(), Qt.locale(), Locale.NarrowFormat) + ", " : "") +
                     (secondsSwitch.checked ? Qt.formatTime(new Date(), "h:mm:ss") : Qt.formatTime(new Date(), "h:mm"));
-            longDateLabel.text = Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate);
+            longDateLabel.text = Qt.formatDate(new Date(), Qt.locale(), Locale.LongFormat);
         }
     }
 
-    ToolTip.text: Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate)
+    ToolTip.text: Qt.formatDate(new Date(), Qt.locale(), Locale.LongFormat)
     ToolTip.visible: hovered && !popup.visible
 
     Popup {

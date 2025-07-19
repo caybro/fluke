@@ -63,7 +63,7 @@ void Sound::init()
         return;
     }
     m_available = true;
-    Q_EMIT availableChanged(true);
+    Q_EMIT availableChanged(m_available);
 }
 
 Device Sound::get_selected_device(bool source) const

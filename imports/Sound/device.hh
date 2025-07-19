@@ -1,5 +1,4 @@
-#ifndef DEVICE_H
-#define DEVICE_H
+#pragma once
 
 /*
  * Copyright (C) 2011 Clément Démoulins <clement@archivel.fr>
@@ -53,5 +52,3 @@ public:
 private:
     void setVolume(const pa_cvolume* v);
 };
-
-#endif
