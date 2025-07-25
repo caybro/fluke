@@ -101,6 +101,7 @@ Pane {
 
             ContextMenu.menu: LauncherContextMenu {
                 currentItem: appDelegate
+                onClosed: searchField.forceActiveFocus()
             }
 
             onClicked: {

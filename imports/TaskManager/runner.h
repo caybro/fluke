@@ -13,4 +13,5 @@ public:
     ~Runner() = default;
 
     Q_INVOKABLE void runCommand(const QString &command, const QStringList &args = {});
+    Q_INVOKABLE void runDefaultTerminal();
 };

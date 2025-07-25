@@ -232,12 +232,8 @@ WaylandOutput {
 
                 appLauncherVisible: appLauncher.visible // used in Chrome.qml
 
-                onActivated: (appId) => {
-                    dock.activeApp = appId;
-                }
-                onMinimized: (appId) => {
-                    output.activateNextApplication(appId);
-                }
+                onActivated: (appId) => dock.activeApp = appId
+                onMinimized: (appId) => output.activateNextApplication(appId)
                 onActivateView: (view) => output.activateView(view)
 
                 onChangeWallpaper: (fileUrl) => win.background.source = fileUrl
@@ -249,7 +245,7 @@ WaylandOutput {
                 id: appLauncher
                 anchors.fill: workspace
                 opacity: 0.0
-                onActivateApplication: output.activateApplication(appId);
+                onActivateApplication: (appId) => output.activateApplication(appId)
             }
 
             Dock {
@@ -267,7 +263,7 @@ WaylandOutput {
                     }
                 }
 
-                onActivateApplication: output.activateApplication(appId);
+                onActivateApplication: (appId) => output.activateApplication(appId)
                 onShowLauncher: appLauncher.show()
             }
 
@@ -290,9 +286,7 @@ WaylandOutput {
         Shortcut {
             sequences: ["Meta+T","Ctrl+Alt+T"]
             context: Qt.ApplicationShortcut
-            onActivated: {
-                Runner.runCommand("konsole");
-            }
+            onActivated: Runner.runDefaultTerminal()
         }
 
         Shortcut {
