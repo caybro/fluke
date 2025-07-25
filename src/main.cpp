@@ -8,6 +8,10 @@
 #include <QTranslator>
 #include <QUrl>
 
+namespace {
+constexpr auto waylandDisplayEnvVar = "WAYLAND_DISPLAY";
+}
+
 int main(int argc, char *argv[])
 {
     qputenv("QT_QUICK_CONTROLS_STYLE", QByteArrayLiteral("Material"));
@@ -16,6 +20,8 @@ int main(int argc, char *argv[])
     qunsetenv("QT_SCREEN_SCALE_FACTORS");
     qunsetenv("QT_SCALE_FACTOR");
     qunsetenv("QT_AUTO_SCREEN_SCALE_FACTOR");
+
+    qunsetenv(waylandDisplayEnvVar); // force QWaylandCompositor to find a free socket for us
 
     // ShareOpenGLContexts is needed for using the threaded renderer
     // on Nvidia EGLStreams
@@ -26,18 +32,17 @@ int main(int argc, char *argv[])
     app.setApplicationVersion(QStringLiteral("0.0.2"));
 
     qputenv("QT_IM_MODULES", QByteArrayLiteral("qtvirtualkeyboard"));
+    qunsetenv("QT_IM_MODULE");
 
     qputenv("XDG_CURRENT_DESKTOP", QByteArrayLiteral("fluke"));
-    qputenv("QT_IM_MODULES", "qtvirtualkeyboard");
 
     qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("wayland"));
-    qunsetenv("QT_IM_MODULE");
     qputenv("GDK_BACKEND", QByteArrayLiteral("wayland"));
 
     QIcon::setThemeName(QStringLiteral("Adwaita"));
 
     QTranslator qtTranslator;
-    if (qtTranslator.load(QLocale::system(), QStringLiteral("qt_"), QString(), QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+    if (qtTranslator.load(QLocale::system(), QStringLiteral("qt_"), {}, QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
       app.installTranslator(&qtTranslator);
 
     QTranslator appTrans;
@@ -61,10 +66,16 @@ int main(int argc, char *argv[])
     const auto url = QUrl(QStringLiteral("qrc:/qml/main.qml"));
 
     QObject::connect(&appEngine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-                       if (!obj && url == objUrl)
-                         QCoreApplication::exit(EXIT_FAILURE);
+                     &app, [url](QObject *obj, const QUrl &) {
+                       if (obj) {
+                         const auto socketName = obj->property("socketName").toByteArray();
+                         if (!socketName.isEmpty())
+                           qputenv(waylandDisplayEnvVar, socketName); // for the clients to connect to
+                         qInfo() << "Fluke compositor started; socket:" << socketName;
+                       }
                      }, Qt::QueuedConnection);
+    QObject::connect(&appEngine, &QQmlApplicationEngine::objectCreationFailed,
+                     &app, []() { QCoreApplication::exit(EXIT_FAILURE); }, Qt::QueuedConnection);
 
     appEngine.load(url);
 

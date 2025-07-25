@@ -6,7 +6,6 @@ import QtWayland.Compositor.XdgShell
 WaylandCompositor {
     id: comp
     useHardwareIntegrationExtension: true
-    socketName: "wayland-fluke"
 
     Instantiator {
         id: screens
