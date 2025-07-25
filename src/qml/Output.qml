@@ -161,9 +161,8 @@ WaylandOutput {
         }
 
         WaylandMouseTracker {
-            id: mouseTracker
             anchors.fill: parent
-            windowSystemCursorEnabled: false
+            windowSystemCursorEnabled: output.isNestedCompositor
 
             onMouseYChanged: {
                 if (dock.autohide && !workspace.fullscreenAppId) {
@@ -272,23 +271,13 @@ WaylandOutput {
                 onShowLauncher: appLauncher.show()
             }
 
-            // Loader {
-            //     anchors.fill: parent
-            //     source: "Keyboard.qml"
-            // }
-
-            Keyboard {
-
+            Loader {
+                anchors.fill: parent
+                source: "Keyboard.qml"
             }
 
             WaylandCursorItem {
-                id: cursor
-                inputEventsEnabled: false
-                x: mouseTracker.mouseX
-                y: mouseTracker.mouseY
-
                 seat: output.compositor.defaultSeat
-                visible: mouseTracker.containsMouse
             }
         }
 
