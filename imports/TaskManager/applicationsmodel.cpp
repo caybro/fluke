@@ -130,6 +130,8 @@ void ApplicationsModel::setApplicationFavorite(const QString &appId, bool favori
         } else {
             m_favoriteAppIds.removeAll(appId);
         }
+
+        saveSettings();
     }
 }
 
