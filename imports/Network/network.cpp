@@ -4,23 +4,23 @@
 
 #include "network.h"
 
-#define NM_SERVICE QStringLiteral("org.freedesktop.NetworkManager")
-#define NM_PATH QStringLiteral("/org/freedesktop/NetworkManager")
-#define NM_IFACE QStringLiteral("org.freedesktop.NetworkManager")
-#define NM_IFACE_CONNECTION_ACTIVE QStringLiteral("org.freedesktop.NetworkManager.Connection.Active")
-#define NM_IFACE_AP QStringLiteral("org.freedesktop.NetworkManager.AccessPoint")
-#define NM_IFACE_DEVICE_WIFI QStringLiteral("org.freedesktop.NetworkManager.Device.Wireless")
-
-#define DBUS_PROPS_IFACE QStringLiteral("org.freedesktop.DBus.Properties")
-
-#define PROP_WIFI_HW_ENABLED "WirelessHardwareEnabled"
-#define PROP_WIFI_ENABLED "WirelessEnabled"
-#define PROP_STATE "State"
-#define PROP_PRIMARY_CONNECTION "PrimaryConnection"
-#define PROP_PRIMARY_CONNECTION_TYPE "PrimaryConnectionType"
-#define PROP_STRENGTH "Strength"
-#define PROP_ACTIVE_AP "ActiveAccessPoint"
-#define PROP_SSID "Ssid"
+namespace {
+constexpr auto NM_SERVICE = "org.freedesktop.NetworkManager";
+constexpr auto NM_PATH = "/org/freedesktop/NetworkManager";
+constexpr auto NM_IFACE = "org.freedesktop.NetworkManager";
+constexpr auto NM_IFACE_CONNECTION_ACTIVE = "org.freedesktop.NetworkManager.Connection.Active";
+constexpr auto NM_IFACE_AP = "org.freedesktop.NetworkManager.AccessPoint";
+constexpr auto NM_IFACE_DEVICE_WIFI = "org.freedesktop.NetworkManager.Device.Wireless";
+constexpr auto DBUS_PROPS_IFACE = "org.freedesktop.DBus.Properties";
+constexpr auto PROP_WIFI_HW_ENABLED = "WirelessHardwareEnabled";
+constexpr auto PROP_WIFI_ENABLED = "WirelessEnabled";
+constexpr auto PROP_STATE = "State";
+constexpr auto PROP_PRIMARY_CONNECTION = "PrimaryConnection";
+constexpr auto PROP_PRIMARY_CONNECTION_TYPE = "PrimaryConnectionType";
+constexpr auto PROP_STRENGTH = "Strength";
+constexpr auto PROP_ACTIVE_AP = "ActiveAccessPoint";
+constexpr auto PROP_SSID = "Ssid";
+}
 
 Network::Network(QObject *parent)
     : QObject(parent)
@@ -42,7 +42,7 @@ void Network::init()
 
     QDBusConnection::systemBus().connect(NM_SERVICE, NM_PATH, DBUS_PROPS_IFACE,
                                          QStringLiteral("PropertiesChanged"),
-                                         this, SLOT(onGlobalPropertiesChanged(QString, QVariantMap, QStringList)));
+                                         this, SLOT(onGlobalPropertiesChanged(QString,QVariantMap,QStringList)));
 
     processPrimaryConnection();
 }
@@ -132,7 +132,7 @@ void Network::onDevicePropertiesChanged(const QString &interface, const QVariant
 
         QDBusConnection::systemBus().connect(NM_SERVICE, m_activeAp, DBUS_PROPS_IFACE,
                                              QStringLiteral("PropertiesChanged"),
-                                             this, SLOT(onApPropertiesChanged(QString, QVariantMap, QStringList)));
+                                             this, SLOT(onApPropertiesChanged(QString,QVariantMap,QStringList)));
 
         emit primaryConnectionChanged();
     }
@@ -187,15 +187,14 @@ void Network::setWifiEnabled(bool enabled)
 
 QVariantMap Network::apData(const QString &ap) const
 {
-    QVariantMap result;
     QDBusInterface apIface(NM_SERVICE, ap, NM_IFACE_AP, QDBusConnection::systemBus());
-
     if (!apIface.isValid())
-        return result;
+      return {};
 
-    result.insert(QStringLiteral("ssid"), QString::fromUtf8(apIface.property(PROP_SSID).toByteArray()));
-    result.insert(QStringLiteral("strength"), apIface.property(PROP_STRENGTH).toInt());
-    return result;
+    return {
+        {QStringLiteral("ssid"), QString::fromUtf8(apIface.property(PROP_SSID).toByteArray())},
+        {QStringLiteral("strength"), apIface.property(PROP_STRENGTH).toInt()}
+    };
 }
 
 bool Network::isOnline() const

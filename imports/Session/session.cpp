@@ -5,10 +5,12 @@
 
 #include "session.h"
 
+namespace {
 constexpr auto LOGIN1_SERVICE = "org.freedesktop.login1";
 constexpr auto LOGIN1_PATH = "/org/freedesktop/login1";
 constexpr auto LOGIN1_IFACE = "org.freedesktop.login1.Manager";
 constexpr auto LOGIN1_SESSION_AUTO_PATH = "/org/freedesktop/login1/session/auto";
+}
 
 Session::Session(QObject *parent)
     : QObject(parent)
