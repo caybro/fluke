@@ -29,6 +29,10 @@ WaylandCompositor {
         onOpenUrl: Qt.openUrlExternally(url)
     }
 
+    TextInputManager {}
+    QtTextInputMethodManager {}
+    IdleInhibitManagerV1 {}
+
     XdgShell {
         onToplevelCreated: (toplevel, xdgSurface) => handleToplevelCreated(toplevel, xdgSurface)
     }
