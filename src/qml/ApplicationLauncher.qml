@@ -35,7 +35,7 @@ Pane {
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.BackButton
-        onClicked: {
+        onClicked: function(mouse) {
             if (mouse.button === Qt.BackButton) {
                 hide();
             }

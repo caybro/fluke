@@ -24,10 +24,6 @@ WaylandCompositor {
         Chrome {}
     }
 
-    Item {
-        id: rootItem
-    }
-
     QtWindowManager {
         id: qtWindowManager
         onShowIsFullScreenChanged: console.log("Show is fullscreen hint for Qt applications:", showIsFullScreen)
@@ -35,7 +31,7 @@ WaylandCompositor {
     }
 
     XdgShell {
-        onToplevelCreated: handleToplevelCreated(toplevel, xdgSurface)
+        onToplevelCreated: (toplevel, xdgSurface) => handleToplevelCreated(toplevel, xdgSurface)
     }
 
     TextInputManager {}

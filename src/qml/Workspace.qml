@@ -19,13 +19,13 @@ Item {
     signal showLauncher()
     signal logout()
 
-    onFullscreen: {
+    onFullscreen: function(appId) {
         if (appId) {
             fullscreenAppId = appId;
         }
     }
-    onExitFullscreen: {
-        if (fullscreenAppId == appId) {
+    onExitFullscreen: function(appId) {
+        if (fullscreenAppId === appId) {
             fullscreenAppId = "";
         }
     }

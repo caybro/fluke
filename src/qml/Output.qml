@@ -233,15 +233,15 @@ WaylandOutput {
 
                 appLauncherVisible: appLauncher.visible // used in Chrome.qml
 
-                onActivated: {
+                onActivated: (appId) => {
                     dock.activeApp = appId;
                 }
-                onMinimized: {
+                onMinimized: (appId) => {
                     output.activateNextApplication(appId);
                 }
-                onActivateView: output.activateView(view)
+                onActivateView: (view) => output.activateView(view)
 
-                onChangeWallpaper: win.background.source = fileUrl
+                onChangeWallpaper: (fileUrl) => win.background.source = fileUrl
                 onShowLauncher: appLauncher.show()
                 onLogout: panel.logout()
             }

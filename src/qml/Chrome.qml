@@ -82,7 +82,7 @@ ShellSurfaceItem {
     Connections {
         target: compositor
         ignoreUnknownSignals: true
-        onSurfaceAboutToBeDestroyed: {
+        function onSurfaceAboutToBeDestroyed(surface) {
             if (!rootChrome.isPopup) {
                 Applications.setSurfaceVanished(priv.pid, surface);
             }
