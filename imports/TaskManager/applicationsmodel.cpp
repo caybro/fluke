@@ -65,7 +65,7 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
             }
         }
     }
-    return QVariant();
+    return {};
 }
 
 bool ApplicationsModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -88,28 +88,31 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
 
 QString ApplicationsModel::setSurfaceAppeared(qint64 pid, QWaylandSurface *surface, const QString &fallbackAppId)
 {
-    //qDebug() << "!!! Surface appeared" << pid << surface << surface->client()->processId();
+    //qWarning() << "!!! Surface appeared" << pid << surface << surface->client()->processId() << "; fallbackAppId:" << fallbackAppId;
     if (pid == 0)
         return QString();
 
     auto appItem = findAppItem(pid);
     if (appItem) {
         appItem->incrementSurfaceCount(pid, surface);
+        //qWarning() << "!!! Found appItem:" << appItem->appId();
         return appItem->appId();
     } else { // use the fallback, something started not by us
+        //qWarning() << "!!! Trying to find app by fallbackAppId:" << fallbackAppId;
         appItem = findAppItem(fallbackAppId);
         if (appItem) {
             appItem->incrementSurfaceCount(pid, surface);
+            //qWarning() << "!!! Found fallback appItem:" << appItem->appId();
             return appItem->appId();
         }
     }
 
-    return QString();
+    return {};
 }
 
 void ApplicationsModel::setSurfaceVanished(qint64 pid, QWaylandSurface *surface)
 {
-    //qDebug() << "!!! Surface vanished" << pid << surface;
+    //qWarning() << "!!! Surface vanished" << pid << surface;
     if (pid == 0)
         return;
 
@@ -164,17 +167,17 @@ void ApplicationsModel::init()
             m_items.append(item);
             connect(item, &ApplicationItem::surfaceCountChanged, this, [this, item]() {
                 const QModelIndex idx = index(m_items.indexOf(item));
-                Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleRunning, ApplicationItem::RoleInstanceCount});
+                emit dataChanged(idx, idx, {ApplicationItem::RoleRunning, ApplicationItem::RoleInstanceCount});
             });
             connect(item, &ApplicationItem::isFavoriteChanged, this, [this, item]() {
                 const QModelIndex idx = index(m_items.indexOf(item));
-                Q_EMIT dataChanged(idx, idx, {ApplicationItem::RoleFavorite});
+                emit dataChanged(idx, idx, {ApplicationItem::RoleFavorite});
             });
             connect(item, &ApplicationItem::applicationQuit, this, &ApplicationsModel::applicationQuit);
             item->setFavorite(m_favoriteAppIds.contains(item->appId()));
 
-//            qDebug() << "!!! Inserted application item" << item->appId() << item->desktopFile()->name() <<
-//                        item->desktopFile()->iconName();
+            qWarning() << "!!! Inserted application item" << item->appId() << item->desktopFile()->name() <<
+                item->desktopFile()->iconName();
         }
     }
     endResetModel();
@@ -210,5 +213,5 @@ void ApplicationsModel::loadSettings()
 void ApplicationsModel::saveSettings()
 {
     m_favoriteAppIds.removeDuplicates();
-    m_settings.setValue(QStringLiteral("Favorites"), QVariant(m_favoriteAppIds));
+    m_settings.setValue(QStringLiteral("Favorites"), m_favoriteAppIds);
 }

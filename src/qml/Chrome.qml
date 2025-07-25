@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Window
 import QtWayland.Compositor
+import QtWayland.Compositor.XdgShell
 
 import org.fluke.TaskManager
 
@@ -14,7 +15,7 @@ ShellSurfaceItem {
     readonly property bool activated: xdgSurface && xdgSurface.activated
     readonly property bool fullscreen: xdgSurface && xdgSurface.fullscreen
 
-    readonly property bool isPopup: false
+    readonly property bool isPopup: !!xdgSurface && (xdgSurface.windowType === Qt.Popup || xdgSurface.windowType === Qt.Dialog)
     property bool minimized
     property Workspace workspace
 
@@ -76,6 +77,7 @@ ShellSurfaceItem {
     onShellSurfaceChanged: {
         if (shellSurface && !rootChrome.isPopup) {
             priv.appId = Applications.setSurfaceAppeared(priv.pid, shellSurface.surface, priv.appId);
+            //console.warn("!!! SHELL SURFACE CHANGED; APPID:", priv.appId)
         }
     }
 
@@ -96,40 +98,32 @@ ShellSurfaceItem {
         ignoreUnknownSignals: true
 
         // xdg_shell only
-        onAppIdChanged: {
+        function onAppIdChanged() {
+            //console.warn("!!! APPID CHANGED:", rootChrome.xdgSurface.appId)
             if (!priv.appId) { // fallback, something appeared but not started by us
-                priv.appId = Applications.setSurfaceAppeared(priv.pid, shellSurface.surface, xdgSurface.appId);
+                priv.appId = Applications.setSurfaceAppeared(priv.pid, shellSurface.surface, rootChrome.xdgSurface.appId);
             }
+            //console.warn("!!! APPID INTERNAL:", priv.appId)
         }
 
-        onActivatedChanged: {
+        function onActivatedChanged() {
             if (rootChrome.activated && !rootChrome.isPopup) {
                 workspace.activated(rootChrome.appId);
                 receivedFocusAnimation.start();
             }
         }
-        onSetMaximized: {
-            rootChrome.bufferLocked = true;
-            maximizeAnimation.start();
-        }
-        onUnsetMaximized: {
-            rootChrome.bufferLocked = true;
-            unmaximizeAnimation.start();
-        }
-        onSetMinimized: {
+        function onSetMinimized() {
             rootChrome.minimized = true;
             workspace.minimized(rootChrome.appId);
         }
-        onSetFullscreen: {
-            rootChrome.bufferLocked = true;
-            fullscreenAnimation.start();
+        function onSetFullscreen() {
+            workspace.fullscreen(rootChrome.appId);
         }
-        onUnsetFullscreen: {
+        function onUnsetFullscreen() {
             workspace.exitFullscreen(rootChrome.appId);
-            rootChrome.bufferLocked = true;
-            exitFullscreenAnimation.start();
         }
-        onParentSurfaceChanged: {
+
+        function onParentSurfaceChanged() {
             var parentSurfaceItem = output.viewsBySurface[xdgSurface.parentSurface.surface];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parentSurfaceItem = parentSurfaceItem;
@@ -139,7 +133,7 @@ ShellSurfaceItem {
                 parentSurfaceItem.inputEventsEnabled = false;
             }
         }
-        onParentToplevelChanged: {
+        function onParentToplevelChanged() {
             var parentSurfaceItem = output.toplevelsBySurface[xdgSurface.parentToplevel];
             if (parentSurfaceItem && rootChrome.parent !== parentSurfaceItem) {
                 rootChrome.parentSurfaceItem = parentSurfaceItem;
@@ -170,53 +164,6 @@ ShellSurfaceItem {
             easing.type: Easing.OutQuad }
         NumberAnimation { target: scaleTransform; properties: "xScale,yScale"; to: 1; duration: receivedFocusAnimation.duration;
             easing.type: Easing.InOutQuad }
-    }
-
-    SequentialAnimation {
-        id: maximizeAnimation
-        readonly property int duration: 150
-        ParallelAnimation {
-            PropertyAnimation { target: rootChrome; properties: "x"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.left }
-            PropertyAnimation { target: rootChrome; properties: "y"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.top }
-            PropertyAnimation { target: rootChrome; property: "width"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.width }
-            PropertyAnimation { target: rootChrome; property: "height"; duration: maximizeAnimation.duration; to: rootChrome.output.availableGeometry.height }
-        }
-        ScriptAction { script: { rootChrome.xdgSurface.sendMaximized(Qt.size(rootChrome.output.availableGeometry.width, rootChrome.output.availableGeometry.height));
-                rootChrome.bufferLocked = false } }
-    }
-
-    SequentialAnimation {
-        id: unmaximizeAnimation
-        readonly property int duration: 150
-        ScriptAction { script: { rootChrome.xdgSurface.sendUnmaximized(); rootChrome.bufferLocked = false } }
-        ParallelAnimation {
-            PropertyAnimation { target: rootChrome; properties: "x"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.left }
-            PropertyAnimation { target: rootChrome; properties: "y"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.top }
-            PropertyAnimation { target: rootChrome; property: "width"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.width }
-            PropertyAnimation { target: rootChrome; property: "height"; duration: unmaximizeAnimation.duration; from: rootChrome.output.availableGeometry.height }
-        }
-    }
-
-    SequentialAnimation {
-        id: fullscreenAnimation
-        ParallelAnimation {
-            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; to: 0 }
-            PropertyAnimation { target: rootChrome; property: "width"; duration: 80; to: rootChrome.Window.width }
-            PropertyAnimation { target: rootChrome; property: "height"; duration: 80; to: rootChrome.Window.height }
-        }
-        ScriptAction { script: { rootChrome.xdgSurface.sendFullscreen(Qt.size(rootChrome.Window.width, rootChrome.Window.height));
-                workspace.fullscreen(rootChrome.appId);
-                rootChrome.bufferLocked = false; } }
-    }
-
-    SequentialAnimation {
-        id: exitFullscreenAnimation
-        ScriptAction { script: { rootChrome.xdgSurface.sendUnmaximized(); rootChrome.bufferLocked = false; } }
-        ParallelAnimation {
-            PropertyAnimation { target: rootChrome; properties: "x,y"; duration: 80; from: 0 }
-            PropertyAnimation { target: rootChrome; property: "width"; duration: 80; from: rootChrome.Window.width }
-            PropertyAnimation { target: rootChrome; property: "height"; duration: 80; from: rootChrome.Window.height }
-        }
     }
 
     transform: [

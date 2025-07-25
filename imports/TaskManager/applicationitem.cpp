@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QFileInfo>
 #include <QProcess>
 
 #include "applicationitem.h"
@@ -17,7 +18,8 @@ ApplicationItem::ApplicationItem(XdgDesktopFile *desktopFile, QObject *parent)
     : QObject(parent),
       m_desktopFile(desktopFile)
 {
-  m_appId = XdgDesktopFile::id(m_desktopFile->fileName());
+  QFileInfo fi(m_desktopFile->fileName());
+  m_appId = fi.completeBaseName();
 }
 
 QString ApplicationItem::appId() const
@@ -53,13 +55,15 @@ void ApplicationItem::launch(const QStringList &urls)
         auto proc = new QProcess(this);
         connect(proc, &QProcess::started, this, [this, proc]() {
             if (proc->state() == QProcess::Running) {
+                //qWarning() << "!!! Start app" << m_appId << "; PID:" << proc->processId();
                 proc->setProperty("pid", proc->processId());
                 m_surfaces.insert(proc->processId(), nullptr);
             }
         });
         connect(proc, qOverload<int, QProcess::ExitStatus>(&QProcess::finished), this, [this, proc]() {
+            //qWarning() << "!!! Quit app" << m_appId << "; PID:" << proc->property("pid").toLongLong();
             m_surfaces.remove(proc->property("pid").toLongLong());
-            Q_EMIT this->surfaceCountChanged(this->surfaceCount());
+            emit surfaceCountChanged(this->surfaceCount());
         });
         proc->start(execLine.takeFirst(), execLine);
     }
@@ -78,7 +82,7 @@ void ApplicationItem::setFavorite(bool favorite)
         return;
 
     m_favorite = favorite;
-    Q_EMIT isFavoriteChanged(m_favorite);
+    emit isFavoriteChanged(m_favorite);
 }
 
 bool ApplicationItem::isFavorite() const
@@ -103,15 +107,15 @@ void ApplicationItem::incrementSurfaceCount(qint64 pid, QWaylandSurface *surface
     } else {
         m_surfaces.insert(pid, surface);
     }
-    Q_EMIT surfaceCountChanged(surfaceCount());
+    emit surfaceCountChanged(surfaceCount());
 }
 
 void ApplicationItem::decrementSurfaceCount(qint64 pid, QWaylandSurface *surface)
 {
     m_surfaces.remove(pid, surface);
 
-    Q_EMIT surfaceCountChanged(surfaceCount());
+    emit surfaceCountChanged(surfaceCount());
     if (!m_surfaces.contains(pid)) {
-        Q_EMIT applicationQuit(m_appId);
+        emit applicationQuit(m_appId);
     }
 }

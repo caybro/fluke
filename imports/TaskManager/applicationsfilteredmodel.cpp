@@ -28,7 +28,7 @@ void ApplicationsFilteredModel::setFilterString(const QString &filterString)
 
     m_filterString = filterString;
     invalidateFilter();
-    Q_EMIT filterStringChanged(m_filterString);
+    emit filterStringChanged(m_filterString);
 }
 
 bool ApplicationsFilteredModel::showRunning() const
@@ -43,7 +43,7 @@ void ApplicationsFilteredModel::setShowRunning(bool showRunning)
 
     m_showRunning = showRunning;
     invalidateFilter();
-    Q_EMIT showRunningChanged(m_showRunning);
+    emit showRunningChanged(m_showRunning);
 }
 
 bool ApplicationsFilteredModel::showFavorite() const
@@ -58,7 +58,7 @@ void ApplicationsFilteredModel::setShowFavorite(bool showFavorite)
 
     m_showFavorite = showFavorite;
     invalidateFilter();
-    Q_EMIT showFavoriteChanged(m_showFavorite);
+    emit showFavoriteChanged(m_showFavorite);
 }
 
 bool ApplicationsFilteredModel::showFavoriteAndRunning() const
@@ -73,7 +73,7 @@ void ApplicationsFilteredModel::setShowFavoriteAndRunning(bool showFavoriteAndRu
 
     m_showFavoriteAndRunning = showFavoriteAndRunning;
     invalidateFilter();
-    Q_EMIT showFavoriteAndRunningChanged(m_showFavoriteAndRunning);
+    emit showFavoriteAndRunningChanged(m_showFavoriteAndRunning);
 }
 
 bool ApplicationsFilteredModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
