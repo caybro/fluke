@@ -6,7 +6,7 @@ import org.fluke.Session
 
 InputPanel {
     opacity: active ? 1.0 : 0.0
-    visible: opacity != 0.0
+    visible: opacity !== 0.0
     y: !Platform.isPC && active ? parent.height - height : parent.height // TODO make the OSK configurable
     anchors.left: parent.left
     anchors.right: parent.right

@@ -24,18 +24,10 @@ Menu {
         id: quitItem
         text: qsTr("Quit")
         enabled: contextMenu.visible && contextMenu.currentItem && contextMenu.currentItem.running
-        //height: visible ? implicitHeight : 0
+        visible: enabled
+        height: visible ? implicitHeight : 0
         onClicked: {
             Applications.stopApplication(contextMenu.currentItem.appId);
         }
     }
-
-    // FIXME hide disabled items?
-    // onAboutToShow: {
-    //     if (currentItem.running) {
-    //         addItem(quitItem);
-    //     } else {
-    //         removeItem(contextMenu.contentChildren.length - 1);
-    //     }
-    // }
 }
