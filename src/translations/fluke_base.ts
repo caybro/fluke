@@ -4,24 +4,24 @@
 <context>
     <name>ApplicationLauncher</name>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="134"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="135"/>
         <source>Type to search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="185"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="186"/>
         <source>All</source>
         <comment>all applications</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="189"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="190"/>
         <source>Running</source>
         <comment>running applications</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/ApplicationLauncher.qml" line="193"/>
+        <location filename="../qml/ApplicationLauncher.qml" line="194"/>
         <source>Favorite</source>
         <comment>favorite applications</comment>
         <translation type="unfinished"></translation>
@@ -88,42 +88,42 @@
 <context>
     <name>Output</name>
     <message>
-        <location filename="../qml/Output.qml" line="188"/>
+        <location filename="../qml/Output.qml" line="187"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="189"/>
+        <location filename="../qml/Output.qml" line="188"/>
         <source>Do you really want to logout?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="197"/>
+        <location filename="../qml/Output.qml" line="196"/>
         <source>Suspend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="198"/>
+        <location filename="../qml/Output.qml" line="197"/>
         <source>Do you really want to suspend the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="206"/>
+        <location filename="../qml/Output.qml" line="205"/>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="207"/>
+        <location filename="../qml/Output.qml" line="206"/>
         <source>Do you really want to restart the computer?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="215"/>
+        <location filename="../qml/Output.qml" line="214"/>
         <source>Shutdown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Output.qml" line="216"/>
+        <location filename="../qml/Output.qml" line="215"/>
         <source>Do you really want to turn off the computer?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -228,42 +228,42 @@
 <context>
     <name>Weather</name>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="94"/>
+        <location filename="../qml/Indicators/Weather.qml" line="93"/>
         <source>%1°&#x2009;%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="96"/>
+        <location filename="../qml/Indicators/Weather.qml" line="95"/>
         <source>Info: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="97"/>
+        <location filename="../qml/Indicators/Weather.qml" line="96"/>
         <source>Temperature: %1&#x2009;°%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="98"/>
+        <location filename="../qml/Indicators/Weather.qml" line="97"/>
         <source>Humidity: %1&#x2009;%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="99"/>
+        <location filename="../qml/Indicators/Weather.qml" line="98"/>
         <source>Precipitation: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="100"/>
+        <location filename="../qml/Indicators/Weather.qml" line="99"/>
         <source>Wind: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="101"/>
+        <location filename="../qml/Indicators/Weather.qml" line="100"/>
         <source>Location: %1, %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Indicators/Weather.qml" line="105"/>
+        <location filename="../qml/Indicators/Weather.qml" line="104"/>
         <source>Error getting weather info
 %1</source>
         <translation type="unfinished"></translation>

@@ -40,7 +40,7 @@ ToolBar {
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             visible: appLauncherVisible
             hoverEnabled: visible
-            icon.source: "qrc:/icons/material/chevron_left-24px.svg"
+            icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/chevron_left-24px.svg"
             ToolTip.text: qsTr("Back")
             ToolTip.visible: hovered
             onClicked: panel.hideLauncher()

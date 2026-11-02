@@ -12,18 +12,15 @@
 
 # Qt-es
 
-/.qmake.cache
-/.qmake.stash
 *.pro.user
 *.pro.user.*
-*.qbs.user
-*.qbs.user.*
 *.moc
 moc_*.cpp
 moc_*.h
 qrc_*.cpp
 ui_*.h
 Makefile*
+build/
 *build-*
 *.qm
 
@@ -37,4 +34,3 @@ Makefile*
 
 # QtCtreator CMake
 CMakeLists.txt.user*
-

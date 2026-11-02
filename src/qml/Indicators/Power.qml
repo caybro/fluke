@@ -44,7 +44,7 @@ ToolButton {
         else
             src = "full";
 
-        var result = "qrc:/icons/battery/ic_battery%1_%2_18px.svg".arg(charging ? "_charging" : "").arg(src);
+        var result = "qrc:/qt/qml/org/fluke/Shell/icons/battery/ic_battery%1_%2_18px.svg".arg(charging ? "_charging" : "").arg(src);
         return result;
     }
 
@@ -92,7 +92,7 @@ ToolButton {
                     icon {
                         height: 16
                         width: 16
-                        source: "qrc:/icons/material/brightness_low-24px.svg"
+                        source: "qrc:/qt/qml/org/fluke/Shell/icons/material/brightness_low-24px.svg"
                     }
 
                     onClicked: {

@@ -1,3 +1,0 @@
-module org.fluke.Power
-plugin powerplugin
-classname PowerPlugin

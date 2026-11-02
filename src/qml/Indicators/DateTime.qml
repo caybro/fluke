@@ -52,7 +52,7 @@ ToolButton {
 
                 ToolButton {
                     id: btnPrevMonth
-                    icon.source: "qrc:/icons/material/chevron_left-24px.svg"
+                    icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/chevron_left-24px.svg"
                     hoverEnabled: true
                     onClicked: {
                         var prevMonth = new Date(calendar.year, calendar.month - 1);
@@ -76,7 +76,7 @@ ToolButton {
 
                 ToolButton {
                     id: btnNextMonth
-                    icon.source: "qrc:/icons/material/chevron_right-24px.svg"
+                    icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/chevron_right-24px.svg"
                     hoverEnabled: true
                     onClicked: {
                         var nextMonth = new Date(calendar.year, calendar.month + 1);

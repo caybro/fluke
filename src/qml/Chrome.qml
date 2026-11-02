@@ -112,15 +112,15 @@ ShellSurfaceItem {
                 receivedFocusAnimation.start();
             }
         }
-        function onSetMinimized() {
+        function onSetMinimized() { // FIXME
             rootChrome.minimized = true;
             workspace.minimized(rootChrome.appId);
         }
-        function onSetFullscreen() {
-            workspace.fullscreen(rootChrome.appId);
-        }
-        function onUnsetFullscreen() {
-            workspace.exitFullscreen(rootChrome.appId);
+        function onFullscreenChanged() {
+            if (xdgSurface.fullscreen)
+                workspace.fullscreen(rootChrome.appId);
+            else
+                workspace.exitFullscreen(rootChrome.appId);
         }
 
         function onParentSurfaceChanged() {

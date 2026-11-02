@@ -33,15 +33,15 @@ ToolButton {
 
     function indicatorIcon(strength) {
         if (Network.ssid === "ethernet")
-            return "qrc:/icons/network/ic_ethernet.svg"
+            return "qrc:/qt/qml/org/fluke/Shell/icons/network/ic_ethernet.svg"
         else if (!Network.wifiEnabled)
-            return "qrc:/icons/network/ic_signal_wifi_off_24px.svg"
+            return "qrc:/qt/qml/org/fluke/Shell/icons/network/ic_signal_wifi_off_24px.svg"
         else if (Network.wifiEnabled && !Network.ssid)
-            return "qrc:/icons/network/ic_signal_wifi_statusbar_not_connected_26x24px.svg"
+            return "qrc:/qt/qml/org/fluke/Shell/icons/network/ic_signal_wifi_statusbar_not_connected_26x24px.svg"
         else if (Network.ssid && !Network.online)
-            return "qrc:/icons/network/ic_signal_wifi_statusbar_connected_no_internet_%1_26x24px.svg".arg(getBars(strength));
+            return "qrc:/qt/qml/org/fluke/Shell/icons/network/ic_signal_wifi_statusbar_connected_no_internet_%1_26x24px.svg".arg(getBars(strength));
         else if (Network.ssid && Network.online)
-            return "qrc:/icons/network/ic_signal_wifi_statusbar_%1_bar_26x24px.svg".arg(getBars(strength));
+            return "qrc:/qt/qml/org/fluke/Shell/icons/network/ic_signal_wifi_statusbar_%1_bar_26x24px.svg".arg(getBars(strength));
     }
 
     QtObject {

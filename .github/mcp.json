@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "qt-documentation": {
+      "type": "http",
+      "url": "https://qt-docs-mcp.qt.io/mcp",
+      "tools": [
+        "qt_documentation_search",
+        "qt_documentation_read"
+      ]
+    }
+  }
+}

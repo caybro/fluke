@@ -32,18 +32,18 @@ Item {
 
     ContextMenu.menu: Menu {
         MenuItem {
-            icon.source: "qrc:/icons/material/wallpaper-24px.svg"
+            icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/wallpaper-24px.svg"
             text: qsTr("Select Wallpaper...")
             onTriggered: wallpaperDialog.open()
         }
 
         MenuItem {
-            icon.source: "qrc:/icons/material/apps-24px.svg"
+            icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/apps-24px.svg"
             text: qsTr("Open Launcher")
             onTriggered: root.showLauncher()
         }
         MenuItem {
-            icon.source: "qrc:/icons/material/logout-24px.svg"
+            icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/logout-24px.svg"
             text: qsTr("Logout...")
             onTriggered: root.logout()
         }

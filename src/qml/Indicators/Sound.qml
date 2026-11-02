@@ -31,7 +31,7 @@ ToolButton {
         } else {
             src = "volume-up";
         }
-        return "qrc:/icons/%1-solid.svg".arg(src);
+        return "qrc:/qt/qml/org/fluke/Shell/icons/%1-solid.svg".arg(src);
     }
 
     function indicatorTooltip() {
@@ -83,7 +83,7 @@ ToolButton {
 
                 ToolButton {
                     icon {
-                        source: "qrc:/icons/volume-mute-solid.svg"
+                        source: "qrc:/qt/qml/org/fluke/Shell/icons/volume-mute-solid.svg"
                         color: "red"
                         height: 16
                         width: 16

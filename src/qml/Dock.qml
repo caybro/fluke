@@ -110,7 +110,7 @@ Pane {
             Layout.topMargin: -6
             Layout.alignment: Qt.AlignCenter
             flat: true
-            icon.source: "qrc:/icons/material/apps-24px.svg"
+            icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/apps-24px.svg"
             icon.height: 32
             icon.width: 32
             ToolTip.text: qsTr("Applications")

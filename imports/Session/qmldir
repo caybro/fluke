@@ -1,3 +1,0 @@
-module org.fluke.Session
-plugin sessionplugin
-classname SessionPlugin

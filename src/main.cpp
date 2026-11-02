@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
       app.installTranslator(&appTrans);
 
     if (!QFontDatabase::families().contains(QLatin1String("FontAwesomeSolid5"))) {
-        if (QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/FontAwesomeSolid5.otf")) == -1) {
+        if (QFontDatabase::addApplicationFont(QStringLiteral(":/qt/qml/org/fluke/Shell/fonts/FontAwesomeSolid5.otf")) == -1) {
             qWarning("Failed to load FontAwesome from resources");
         }
     }
@@ -63,10 +63,8 @@ int main(int argc, char *argv[])
     context->setContextProperty(QStringLiteral("debugMode"), false);
 #endif
 
-    const auto url = QUrl(QStringLiteral("qrc:/qml/main.qml"));
-
     QObject::connect(&appEngine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &) {
+                     &app, [](QObject *obj, const QUrl &) {
                        if (obj) {
                          const auto socketName = obj->property("socketName").toByteArray();
                          if (!socketName.isEmpty())
@@ -77,7 +75,7 @@ int main(int argc, char *argv[])
     QObject::connect(&appEngine, &QQmlApplicationEngine::objectCreationFailed,
                      &app, []() { QCoreApplication::exit(EXIT_FAILURE); }, Qt::QueuedConnection);
 
-    appEngine.load(url);
+    appEngine.loadFromModule(QStringLiteral("org.fluke.Shell"), QStringLiteral("Main"));
 
     return app.exec();
 }

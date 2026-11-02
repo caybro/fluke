@@ -1,0 +1,5 @@
+add_subdirectory(Network)
+add_subdirectory(Power)
+add_subdirectory(Session)
+add_subdirectory(Sound)
+add_subdirectory(TaskManager)

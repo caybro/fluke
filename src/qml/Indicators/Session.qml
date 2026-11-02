@@ -8,8 +8,8 @@ ToolButton {
     id: indicatorSession
     icon.width: 16
     icon.height: 16
-    icon.source: Platform.chassis === "laptop" ? "qrc:/icons/material/laptop-24px.svg"
-                                               : "qrc:/icons/material/desktop_windows-24px.svg";
+    icon.source: Platform.chassis === "laptop" ? "qrc:/qt/qml/org/fluke/Shell/icons/material/laptop-24px.svg"
+                                               : "qrc:/qt/qml/org/fluke/Shell/icons/material/desktop_windows-24px.svg";
     down: popupLoader.item && popupLoader.item.visible
     hoverEnabled: true
 
@@ -65,7 +65,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Logout")
-                icon.source: "qrc:/icons/material/logout-24px.svg"
+                icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/logout-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.logout()
@@ -73,7 +73,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Sleep")
-                icon.source: "qrc:/icons/material/brightness_3-24px.svg"
+                icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/brightness_3-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.suspend()
@@ -82,7 +82,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Restart")
-                icon.source: "qrc:/icons/material/restart-24px.svg"
+                icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/restart-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.reboot()
@@ -91,7 +91,7 @@ ToolButton {
 
             MenuItem {
                 text: qsTr("Shutdown")
-                icon.source: "qrc:/icons/material/shutdown-24px.svg"
+                icon.source: "qrc:/qt/qml/org/fluke/Shell/icons/material/shutdown-24px.svg"
                 icon.height: 16
                 icon.width: 16
                 onClicked: indicatorSession.shutdown()

@@ -1,3 +1,0 @@
-module org.fluke.Network
-plugin networkplugin
-classname NetworkPlugin

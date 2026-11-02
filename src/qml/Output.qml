@@ -10,7 +10,7 @@ import org.fluke.Session
 
 WaylandOutput {
     id: output
-    sizeFollowsWindow: true
+    sizeFollowsWindow: isNestedCompositor
     scaleFactor: Screen.devicePixelRatio
 
     readonly property bool isNestedCompositor: Qt.platform.pluginName.startsWith("wayland") || Qt.platform.pluginName === "xcb"
@@ -157,7 +157,7 @@ WaylandOutput {
             property alias darkMode: panel.darkMode
             property alias showDate: panel.showDate
             property alias showSeconds: panel.showSeconds
-            property url wallpaper: "qrc:/images/background.jpg"
+            property url wallpaper: "qrc:/qt/qml/org/fluke/Shell/images/background.jpg"
         }
 
         WaylandMouseTracker {
